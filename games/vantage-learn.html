@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn: Vantage</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f1e7;
+    --bg-sidebar: #2a2318;
+    --bg-dark: #1a1612;
+    --text: #2c2418;
+    --text-light: #f5efe0;
+    --text-muted: rgba(44,36,24,0.55);
+    --gold: #c9a94e;
+    --red: #b93e3e;
+    --green: #4a7c59;
+    --blue: #4a6fa5;
+    --purple: #7a5195;
+    --orange: #d4802a;
+    --yellow: #c4a72e;
+    --border: rgba(44,36,24,0.1);
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Crimson Pro', serif;
+    --font-ui: 'DM Sans', sans-serif;
+    --main-width: 560px;
+    --sidebar-width: 320px;
+    --gap: 48px;
+    /* Vantage skill colors */
+    --sk-move: #4a8fbf;
+    --sk-look: #8a5fb5;
+    --sk-engage: #d4802a;
+    --sk-help: #4a9e62;
+    --sk-take: #c4a72e;
+    --sk-overpower: #c94444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    overflow-x: hidden;
+  }
+
+  /* ===================== HERO ===================== */
+  .hero {
+    background: var(--bg-dark);
+    padding: 3.5rem 2rem 2rem;
+    text-align: center;
+    color: var(--text-light);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 120%, rgba(74,143,191,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-fade {
+    height: 60px;
+    background: linear-gradient(to bottom, var(--bg-dark), var(--bg));
+    margin-top: -1px;
+  }
+  .hero-badge {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--gold);
+    border: 1.5px solid var(--gold);
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 2px;
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    line-height: 1.15;
+    margin-bottom: 0.8rem;
+  }
+  .hero h1 em { color: var(--gold); font-style: italic; }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: rgba(245,239,224,0.6);
+    max-width: 520px;
+    margin: 0 auto 1.2rem;
+    font-style: italic;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: rgba(245,239,224,0.45);
+  }
+
+  /* ===================== LAYOUT ===================== */
+  .page-wrap {
+    max-width: calc(var(--main-width) + var(--gap) + var(--sidebar-width) + 80px);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: var(--main-width) var(--sidebar-width);
+    gap: var(--gap);
+    align-items: start;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .row:last-of-type { border-bottom: none; }
+  .row.full-width { display: block; }
+
+  /* MAIN COLUMN */
+  .main { }
+  .step-tag {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+  .main h2 {
+    font-family: var(--font-display);
+    font-size: 1.65rem;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+  .main h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    margin: 1.4rem 0 0.5rem;
+  }
+  .main p { margin-bottom: 0.8rem; }
+  .main ul, .main ol {
+    margin: 0.5rem 0 1rem 1.2rem;
+  }
+  .main li { margin-bottom: 0.3rem; }
+
+  /* SIDEBAR COLUMN */
+  .side {
+    position: sticky;
+    top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .side-card {
+    background: var(--bg-sidebar);
+    color: var(--text-light);
+    border-radius: 10px;
+    padding: 1.2rem 1.3rem;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    font-family: var(--font-ui);
+  }
+  .side-card p { margin-bottom: 0.5rem; }
+  .side-card p:last-child { margin-bottom: 0; }
+  .side-card-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .side-card-label.gold { color: var(--gold); }
+  .side-card-label.red { color: #e87070; }
+  .side-card-label.green { color: #7cc98e; }
+  .side-card-label.blue { color: #7eaee0; }
+  .side-card-label.purple { color: #b899d4; }
+
+  .side-card a { color: var(--gold); }
+  .side-card strong { color: var(--gold); font-weight: 600; }
+  .side-card em { color: rgba(245,239,224,0.7); }
+
+  /* ===================== SKILL TOKENS INLINE ===================== */
+  .sk {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 5px;
+    border-radius: 4px;
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+    margin: 0 1px;
+    color: #fff;
+  }
+  .sk-move { background: var(--sk-move); }
+  .sk-look { background: var(--sk-look); }
+  .sk-engage { background: var(--sk-engage); }
+  .sk-help { background: var(--sk-help); }
+  .sk-take { background: var(--sk-take); color: #2c2418; }
+  .sk-overpower { background: var(--sk-overpower); }
+
+  /* Tracker icons */
+  .tr {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 12px;
+    vertical-align: middle;
+    margin: 0 2px;
+  }
+  .tr-time { color: var(--sk-move); }
+  .tr-morale { color: var(--sk-engage); }
+  .tr-health { color: var(--sk-overpower); }
+
+  /* Dice icon */
+  .die {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    background: #2c2c2c;
+    color: #fff;
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 11px;
+    vertical-align: middle;
+    margin: 0 1px;
+    border: 1.5px solid rgba(255,255,255,0.1);
+  }
+  .die-challenge { background: #1a1a1a; }
+
+  /* Boost cube */
+  .boost {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    background: var(--gold);
+    vertical-align: middle;
+    margin: 0 2px;
+    border: 1px solid rgba(0,0,0,0.15);
+  }
+
+  /* ===================== MEDIA PLACEHOLDERS ===================== */
+  .media-ph {
+    background: #eae4d5;
+    border: 2px dashed rgba(44,36,24,0.18);
+    border-radius: 10px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    min-height: 120px;
+  }
+  .media-ph.tall { min-height: 200px; }
+  .media-ph .mp-icon { font-size: 2rem; opacity: 0.35; }
+  .media-ph .mp-type {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(44,36,24,0.35);
+  }
+  .media-ph .mp-desc {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--text-muted);
+    max-width: 360px;
+  }
+  .media-ph.anim { border-color: var(--blue); }
+  .media-ph.anim .mp-type { color: var(--blue); }
+  .media-ph.video { border-color: var(--red); }
+  .media-ph.video .mp-type { color: var(--red); }
+
+  .media-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin: 1rem 0;
+  }
+  .media-row .media-ph { min-height: 100px; }
+
+  /* ===================== RULE BOX ===================== */
+  .rule-box {
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    background: rgba(201,169,78,0.05);
+  }
+  .rule-box p { margin-bottom: 0.4rem; }
+  .rule-box p:last-child { margin-bottom: 0; }
+
+  .rule-box.danger {
+    border-color: var(--red);
+    background: rgba(185,62,62,0.04);
+  }
+
+  /* ===================== FLOW ===================== */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+  }
+  .fb {
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .fb-dark { background: var(--bg-dark); color: var(--gold); }
+  .fb-gold { background: var(--gold); color: var(--bg-dark); }
+  .fb-red { background: var(--red); color: #fff; }
+  .fb-green { background: var(--green); color: #fff; }
+  .fb-blue { background: var(--blue); color: #fff; }
+  .fa { color: var(--gold); font-weight: 700; font-size: 16px; }
+
+  /* ===================== TURN STEPS STRIP ===================== */
+  .turn-strip {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 3px;
+    margin: 1rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .ts {
+    background: var(--bg-dark);
+    color: var(--text-light);
+    text-align: center;
+    padding: 0.6rem 0.3rem;
+    font-family: var(--font-ui);
+    font-size: 9px;
+    line-height: 1.3;
+  }
+  .ts .ts-num {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 2px;
+  }
+
+  /* ===================== GRID VISUAL ===================== */
+  .grid-vis {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    max-width: 220px;
+    margin: 1rem auto;
+  }
+  .grid-cell {
+    aspect-ratio: 3/4;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.2;
+    padding: 4px;
+  }
+  .gc-char {
+    background: var(--gold);
+    color: var(--bg-dark);
+  }
+  .gc-empty {
+    background: rgba(44,36,24,0.06);
+    border: 1.5px dashed rgba(44,36,24,0.15);
+    color: var(--text-muted);
+  }
+  .gc-filled {
+    background: rgba(74,143,191,0.12);
+    border: 1.5px solid rgba(74,143,191,0.25);
+    color: var(--sk-move);
+  }
+
+  /* ===================== KNOWLEDGE CHECK ===================== */
+  .kcheck {
+    background: var(--bg-dark);
+    color: var(--text-light);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .kcheck h4 {
+    font-family: var(--font-display);
+    color: var(--gold);
+    font-size: 1.05rem;
+    margin-bottom: 0.8rem;
+  }
+  .kc-q {
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+  }
+  .kc-opts { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.8rem; }
+  .kc-opt {
+    background: rgba(245,239,224,0.06);
+    border: 1.5px solid rgba(245,239,224,0.12);
+    border-radius: 5px;
+    padding: 0.5rem 0.9rem;
+    cursor: pointer;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: var(--text-light);
+    transition: all 0.2s;
+  }
+  .kc-opt:hover { border-color: var(--gold); background: rgba(201,169,78,0.08); }
+  .kc-opt.right { border-color: var(--green); background: rgba(74,124,89,0.2); pointer-events:none; }
+  .kc-opt.wrong { border-color: var(--red); background: rgba(185,62,62,0.12); opacity:0.5; pointer-events:none; }
+  .kc-opt.dim { opacity: 0.3; pointer-events:none; }
+  .kc-fb {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    padding: 0.6rem 0.8rem;
+    border-radius: 5px;
+    display: none;
+    line-height: 1.5;
+  }
+  .kc-fb.show { display: block; }
+  .kc-fb.ok { background: rgba(74,124,89,0.12); color: #8fcfa0; }
+  .kc-fb.no { background: rgba(185,62,62,0.1); color: #e8a0a0; }
+
+  /* ===================== TABLE ===================== */
+  .rtable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.8rem 0;
+    font-size: 0.92rem;
+  }
+  .rtable th {
+    background: var(--bg-dark);
+    color: var(--gold);
+    padding: 0.5rem 0.7rem;
+    text-align: left;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .rtable td {
+    padding: 0.5rem 0.7rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    font-size: 0.88rem;
+  }
+  .rtable tr:nth-child(even) td { background: rgba(44,36,24,0.02); }
+
+  /* ===================== FOOTER ===================== */
+  .footer {
+    background: var(--bg-dark);
+    color: rgba(245,239,224,0.35);
+    padding: 2rem;
+    text-align: center;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    line-height: 1.8;
+    margin-top: 1rem;
+  }
+  .footer a { color: var(--gold); text-decoration: none; }
+
+  /* ===================== FOOTNOTES ===================== */
+  .fn-ref {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold);
+    cursor: pointer;
+    text-decoration: none;
+    vertical-align: super;
+    line-height: 0;
+    margin: 0 1px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .fn-ref:hover { opacity: 1; }
+
+  .fn-section {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    margin-top: 0.5rem;
+  }
+  .fn-section.open { max-height: 600px; }
+
+  .fn-toggle {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: var(--text-muted);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 10px;
+    cursor: pointer;
+    margin-top: 0.8rem;
+    transition: all 0.2s;
+  }
+  .fn-toggle:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .fn-item {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    padding: 0.2rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .fn-item:first-child { border-top: none; }
+  .fn-item .fn-num {
+    color: var(--gold);
+    font-weight: 600;
+    margin-right: 0.3rem;
+  }
+  .fn-item a {
+    color: var(--gold);
+    text-decoration: none;
+    opacity: 0.8;
+  }
+  .fn-item a:hover { opacity: 1; text-decoration: underline; }
+
+  /* ===================== QUICK REFERENCE ===================== */
+  .qref-toggle {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--bg-dark);
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    font-family: var(--font-ui);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    transition: all 0.2s;
+  }
+  .qref-toggle:hover { transform: scale(1.08); background: #2a2318; }
+
+  .qref-panel {
+    position: fixed;
+    bottom: 5rem;
+    right: 1.5rem;
+    width: 340px;
+    max-height: 70vh;
+    background: var(--bg-dark);
+    border: 1.5px solid rgba(201,169,78,0.3);
+    border-radius: 12px;
+    padding: 0;
+    z-index: 999;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+    overflow: hidden;
+    display: none;
+  }
+  .qref-panel.open { display: flex; flex-direction: column; }
+  .qref-header {
+    padding: 1rem 1.2rem 0.6rem;
+    border-bottom: 1px solid rgba(245,239,224,0.08);
+  }
+  .qref-header h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .qref-search {
+    width: 100%;
+    padding: 0.4rem 0.7rem;
+    border-radius: 5px;
+    border: 1px solid rgba(245,239,224,0.12);
+    background: rgba(245,239,224,0.06);
+    color: var(--text-light);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    outline: none;
+  }
+  .qref-search::placeholder { color: rgba(245,239,224,0.3); }
+  .qref-search:focus { border-color: var(--gold); }
+  .qref-body {
+    overflow-y: auto;
+    padding: 0.6rem 0;
+    flex: 1;
+  }
+  .qref-item {
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .qref-item:hover { background: rgba(201,169,78,0.08); }
+  .qref-term {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold);
+  }
+  .qref-def {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: rgba(245,239,224,0.55);
+    line-height: 1.4;
+    margin-top: 2px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .qref-item.expanded .qref-def {
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+  .qref-step {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    color: rgba(245,239,224,0.3);
+    float: right;
+    margin-top: 2px;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .qref-step:hover { color: var(--gold); }
+  .qref-item.hidden { display: none; }
+
+  /* ===================== RESPONSIVE ===================== */
+  @media (min-width: 1280px) {
+    :root {
+      --main-width: 680px;
+      --sidebar-width: 380px;
+      --gap: 56px;
+    }
+  }
+  @media (min-width: 1600px) {
+    :root {
+      --main-width: 760px;
+      --sidebar-width: 420px;
+      --gap: 64px;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .row {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .side {
+      position: static;
+    }
+    .turn-strip { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .hero { padding: 2.5rem 1.5rem 1.5rem; }
+    .turn-strip { grid-template-columns: repeat(4, 1fr); }
+    .media-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ██████████████████ HERO ██████████████████ -->
+<header class="hero">
+  <div class="hero-badge">Interactive Lesson</div>
+  <h1>Learn to Play <em>Vantage</em></h1>
+  <p class="hero-sub">An open-world cooperative adventure — crash-land on an alien planet and explore its mysteries together</p>
+  <div class="hero-meta">
+    <span>1–6 Players</span>
+    <span>120–180 Min</span>
+    <span>Age 14+</span>
+    <span>Designer: Jamey Stegmaier</span>
+    <span>Publisher: Stonemaier Games</span>
+  </div>
+</header>
+<div class="hero-fade"></div>
+
+<div class="page-wrap">
+
+<!-- ██████████████████ STEP 1: THE GOAL ██████████████████ -->
+<section class="row" id="step-1">
+  <div class="main">
+    <div class="step-tag">Step 1</div>
+    <h2>The Goal</h2>
+    <p>You and your fellow players are crew members on an intergalactic vessel heading toward an uncharted planet. After a malfunction, you crash-land in different locations — separated, but connected by intercom.</p>
+    <p>You see the world from a <strong>first-person perspective</strong>. Only you can see your location card. You can describe what you see to other players, but you can't show them.<sup class="fn-ref" onclick="toggleFn(this)">1</sup></p>
+
+    <div class="rule-box">
+      <p><strong>Vantage is a cooperative, open-world exploration game.</strong> Your group shares a mission. Explore the planet, gain cards, discover resources, and work together — even though you're physically apart in the game world.</p>
+    </div>
+
+    <p>There are no set paths. You have complete freedom to explore, interact, and discover in whatever order you choose. The planet has nearly 800 interconnected locations and over 900 discoverable cards.<sup class="fn-ref" onclick="toggleFn(this)">2</sup></p>
+
+    <div class="diagram" style="background:#eae4d5;border-radius:10px;padding:1.5rem;margin:1rem 0;">
+  <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+    <!-- Center board -->
+    <rect x="220" y="20" width="280" height="140" rx="12" fill="#1a1612" stroke="#c9a94e" stroke-width="2"/>
+    <text x="360" y="62" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="18" font-weight="700">CENTER BOARD</text>
+    <text x="360" y="92" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="14">Dice Pool · Trackers</text>
+    <text x="360" y="116" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="14">Mission · Penalties</text>
+    <!-- Storybooks -->
+    <rect x="540" y="30" width="160" height="100" rx="8" fill="#2a2318" opacity="0.7"/>
+    <text x="620" y="70" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="15">📖 Storybooks</text>
+    <text x="620" y="96" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="13">7,000+ entries</text>
+    <!-- Connection lines -->
+    <line x1="360" y1="160" x2="120" y2="230" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+    <line x1="360" y1="160" x2="360" y2="230" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+    <line x1="360" y1="160" x2="600" y2="230" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+    <!-- Player 1 -->
+    <rect x="20" y="230" width="200" height="110" rx="10" fill="#2a2318"/>
+    <rect x="35" y="248" width="46" height="62" rx="5" fill="#c9a94e" opacity="0.3"/>
+    <text x="58" y="284" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">CHAR</text>
+    <rect x="92" y="248" width="36" height="48" rx="4" fill="#4a8fbf" opacity="0.2" stroke="#4a8fbf" stroke-width="1"/>
+    <rect x="134" y="248" width="36" height="48" rx="4" fill="#4a9e62" opacity="0.2" stroke="#4a9e62" stroke-width="1"/>
+    <rect x="176" y="248" width="36" height="48" rx="4" fill="#8a5fb5" opacity="0.2" stroke="#8a5fb5" stroke-width="1"/>
+    <text x="120" y="328" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="15">Player 1</text>
+    <!-- Player 2 -->
+    <rect x="260" y="230" width="200" height="110" rx="10" fill="#2a2318"/>
+    <rect x="275" y="248" width="46" height="62" rx="5" fill="#c9a94e" opacity="0.3"/>
+    <text x="298" y="284" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">CHAR</text>
+    <rect x="332" y="248" width="36" height="48" rx="4" fill="#d4802a" opacity="0.2" stroke="#d4802a" stroke-width="1"/>
+    <rect x="374" y="248" width="36" height="48" rx="4" fill="#c94444" opacity="0.2" stroke="#c94444" stroke-width="1"/>
+    <rect x="416" y="248" width="36" height="48" rx="4" fill="#c4a72e" opacity="0.2" stroke="#c4a72e" stroke-width="1"/>
+    <text x="360" y="328" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="15">Player 2</text>
+    <!-- Player 3 -->
+    <rect x="500" y="230" width="200" height="110" rx="10" fill="#2a2318"/>
+    <rect x="515" y="248" width="46" height="62" rx="5" fill="#c9a94e" opacity="0.3"/>
+    <text x="538" y="284" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">CHAR</text>
+    <rect x="572" y="248" width="36" height="48" rx="4" fill="#4a8fbf" opacity="0.2" stroke="#4a8fbf" stroke-width="1"/>
+    <rect x="614" y="248" width="36" height="48" rx="4" fill="#4a9e62" opacity="0.2" stroke="#4a9e62" stroke-width="1"/>
+    <rect x="656" y="248" width="36" height="48" rx="4" fill="#d4802a" opacity="0.2" stroke="#d4802a" stroke-width="1"/>
+    <text x="600" y="328" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="15">Player 3</text>
+    <!-- Caption -->
+    <text x="360" y="380" text-anchor="middle" fill="rgba(44,36,24,0.5)" font-family="DM Sans,sans-serif" font-size="15" font-style="italic">Each player explores separately, connected by intercom</text>
+  </svg>
+</div>
+
+    <button class="fn-toggle" onclick="toggleFnSection(this)">Sources &#9656;</button>
+    <div class="fn-section">
+      <div class="fn-item"><span class="fn-num">1.</span> Official Rulebook, "Communication" section: Players may describe but not show their location cards to other players.</div>
+      <div class="fn-item"><span class="fn-num">2.</span> <a href="https://stonemaiergames.com/games/vantage/">Stonemaier Games product page</a>: "nearly 800 unique locations" and "900+ discoverable cards."</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label blue">Like a Video Game</span>
+      <p>Jamey Stegmaier cites <strong>Breath of the Wild</strong>, <strong>Elden Ring</strong>, and <strong>Stardew Valley</strong> as inspirations. Think of Vantage as a tabletop open-world RPG — you explore, discover, and interact with the world at your own pace.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label gold">Not a Campaign</span>
+      <p>Each game is a standalone session — there are no legacy components, no unlocking boxes across sessions. But <em>knowledge</em> persists. What you learn about the planet helps in future games.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ██████████████████ STEP 2: YOUR TURN ██████████████████ -->
+<section class="row" id="step-2">
+  <div class="main">
+    <div class="step-tag">Step 2</div>
+    <h2>Your Turn — Choose an Action</h2>
+    <p>On your turn, you choose <strong>one action</strong> from three types:</p>
+
+    <div class="flow">
+      <span class="fb fb-blue">Location Action</span>
+      <span style="color:var(--text-muted);font-family:var(--font-ui);font-size:12px;">or</span>
+      <span class="fb fb-gold">Card Action</span>
+      <span style="color:var(--text-muted);font-family:var(--font-ui);font-size:12px;">or</span>
+      <span class="fb fb-green">Depart</span>
+    </div>
+
+    <h3>Location Actions</h3>
+    <p>Each location card lists up to 6 actions, one in each skill category: <span class="sk sk-move">Move</span> <span class="sk sk-look">Look</span> <span class="sk sk-engage">Engage</span> <span class="sk sk-help">Help</span> <span class="sk sk-take">Take</span> <span class="sk sk-overpower">Overpower</span>. Choose one, then look up the result in the matching storybook.</p>
+
+    <div class="rule-box danger">
+      <p><strong>One location action per visit.</strong> Once you perform any location action at your current location, you cannot perform another location action there — even on a future turn.<sup class="fn-ref" onclick="toggleFn(this)">1</sup> You must depart or take a card action instead.</p>
+    </div>
+
+    <h3>Card Actions</h3>
+    <p>Many cards in your grid, supply, or the center have actions printed on them. You can perform these instead of a location action.</p>
+
+    <h3>Depart</h3>
+    <p>Move to an adjacent location in one of four cardinal directions (north is always "forward"). Each location shows a compass rose with numbered destinations or stars (*) that require a Depart storybook lookup.</p>
+
+    <div class="rule-box">
+      <p><strong>You choose without knowing the cost or outcome.</strong> You always succeed at your chosen action — the challenge is what it costs you.<sup class="fn-ref" onclick="toggleFn(this)">2</sup> You may not change your mind after reading the cost.<sup class="fn-ref" onclick="toggleFn(this)">3</sup></p>
+    </div>
+
+    <div class="diagram" style="background:#eae4d5;border-radius:10px;padding:1.5rem;margin:1rem 0;">
+  <svg viewBox="0 0 680 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+    <!-- Card outline -->
+    <rect x="60" y="10" width="340" height="490" rx="16" fill="#1a1612" stroke="#c9a94e" stroke-width="2"/>
+    <!-- Artwork area -->
+    <rect x="78" y="28" width="304" height="170" rx="8" fill="#2a3a4a"/>
+    <text x="230" y="110" text-anchor="middle" fill="rgba(245,239,224,0.35)" font-family="DM Sans,sans-serif" font-size="18">First-Person Artwork</text>
+    <text x="230" y="138" text-anchor="middle" fill="rgba(245,239,224,0.22)" font-family="DM Sans,sans-serif" font-size="14">Only you can see this card</text>
+    <!-- Compass rose -->
+    <circle cx="348" cy="68" r="32" fill="rgba(0,0,0,0.3)" stroke="#c9a94e" stroke-width="1.5" opacity="0.6"/>
+    <text x="348" y="58" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14" font-weight="700">N</text>
+    <text x="348" y="76" text-anchor="middle" fill="rgba(201,169,78,0.6)" font-family="DM Sans,sans-serif" font-size="10">S</text>
+    <text x="335" y="68" text-anchor="middle" fill="rgba(201,169,78,0.5)" font-family="DM Sans,sans-serif" font-size="9">W</text>
+    <text x="362" y="68" text-anchor="middle" fill="rgba(201,169,78,0.5)" font-family="DM Sans,sans-serif" font-size="9">E</text>
+    <!-- Skill actions -->
+    <rect x="86" y="216" width="138" height="34" rx="6" fill="#4a8fbf"/>
+    <text x="155" y="238" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">MOVE</text>
+    <rect x="234" y="216" width="138" height="34" rx="6" fill="#8a5fb5"/>
+    <text x="303" y="238" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">LOOK</text>
+    <rect x="86" y="260" width="138" height="34" rx="6" fill="#d4802a"/>
+    <text x="155" y="282" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">ENGAGE</text>
+    <rect x="234" y="260" width="138" height="34" rx="6" fill="#4a9e62"/>
+    <text x="303" y="282" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">HELP</text>
+    <rect x="86" y="304" width="138" height="34" rx="6" fill="#c4a72e"/>
+    <text x="155" y="326" text-anchor="middle" fill="#2c2418" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">TAKE</text>
+    <rect x="234" y="304" width="138" height="34" rx="6" fill="#c94444"/>
+    <text x="303" y="326" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">OVERPOWER</text>
+    <!-- Location number -->
+    <text x="230" y="380" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="18" font-weight="700">Location #247</text>
+    <!-- Depart info -->
+    <text x="230" y="420" text-anchor="middle" fill="rgba(245,239,224,0.55)" font-family="DM Sans,sans-serif" font-size="16">N: 302   E: ★   S: 198   W: ★</text>
+    <text x="230" y="452" text-anchor="middle" fill="rgba(245,239,224,0.35)" font-family="DM Sans,sans-serif" font-size="13">★ = check Depart storybook for destination</text>
+    <!-- Annotations -->
+    <line x1="378" y1="270" x2="440" y2="240" stroke="#c9a94e" stroke-width="1.5"/>
+    <text x="448" y="234" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">← 6 Skill Actions</text>
+    <text x="448" y="256" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="13">Choose ONE per visit</text>
+    <line x1="378" y1="420" x2="440" y2="430" stroke="#c9a94e" stroke-width="1.5"/>
+    <text x="448" y="426" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">← Compass Rose</text>
+    <text x="448" y="448" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="13">Depart destinations</text>
+    <line x1="378" y1="68" x2="440" y2="68" stroke="#c9a94e" stroke-width="1.5"/>
+    <text x="448" y="64" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">← Direction Indicator</text>
+    <text x="448" y="86" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="13">North is always "forward"</text>
+  </svg>
+</div>
+
+    <button class="fn-toggle" onclick="toggleFnSection(this)">Sources &#9656;</button>
+    <div class="fn-section">
+      <div class="fn-item"><span class="fn-num">1.</span> Official Rulebook, "Location Actions": "Once you perform a location action, you may not perform another location action at that location."</div>
+      <div class="fn-item"><span class="fn-num">2.</span> Official Rulebook, "Actions": "You always succeed at your action — the question is what it costs you."</div>
+      <div class="fn-item"><span class="fn-num">3.</span> Official Rulebook, "Turn Sequence": The active player may not change their action choice after the cost is read.</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label red">Common Mistake</span>
+      <p>There are <strong>two different blue storybooks</strong> — one for Move actions and one for Depart actions. They are separate books. Don't mix them up!</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label green">First Game Tip</span>
+      <p>The designer recommends ignoring the mission on your first game. Instead, just explore freely and try to fill your grid with 8 cards from different locations. Focus on learning the actions, not "winning."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ██████████████████ STEP 3: COST & CHALLENGE DICE ██████████████████ -->
+<section class="row" id="step-3">
+  <div class="main">
+    <div class="step-tag">Step 3</div>
+    <h2>Challenge Dice — The Core Tension</h2>
+    <p>Every action has a <strong>cost</strong> — a number representing its difficulty. You roll that many black <strong>challenge dice</strong> <span class="die die-challenge">?</span> from the shared pool on the center board.</p>
+    <p>For example, a cost of 3 means you roll 3 challenge dice. Higher costs mean harder actions with more potential consequences.</p>
+
+    <h3>What the Dice Show</h3>
+    <p>Each challenge die has six faces. The possible results are:</p>
+
+    <table class="rtable">
+      <thead><tr><th>Face</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Time</strong> ⏱</td><td>Lose 1 time if unplaced — find a matching slot or suffer the penalty</td></tr>
+        <tr><td><strong>Morale</strong> ❤</td><td>Lose 1 morale if unplaced — find a matching slot or suffer the penalty</td></tr>
+        <tr><td><strong>Health</strong> 🛡</td><td>Lose 1 health if unplaced — find a matching slot or suffer the penalty</td></tr>
+        <tr><td><strong>Setback</strong></td><td>Must be placed on a setback slot — or suffer a penalty</td></tr>
+        <tr><td><strong>Blank</strong></td><td>No effect — return to the center. The best result you can roll!</td></tr>
+      </tbody>
+    </table>
+
+    <p>The dice are generous: roughly half the faces are blanks. But the other faces create the game's tension — you need somewhere to put them, or you lose resources.</p>
+
+    <div class="diagram dice-demo" style="background:var(--bg-dark);border-radius:10px;padding:2rem;margin:1rem 0;text-align:center;">
+  <div style="font-family:var(--font-ui);font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:1.2rem;">Interactive: Challenge Dice Roll</div>
+  <div id="dice-area" style="display:flex;justify-content:center;gap:1rem;margin-bottom:1.5rem;min-height:72px;align-items:center;flex-wrap:wrap;">
+    <div class="demo-die" style="width:68px;height:68px;border-radius:10px;background:#2c2c2c;border:2.5px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:28px;color:rgba(245,239,224,0.4);">?</div>
+    <div class="demo-die" style="width:68px;height:68px;border-radius:10px;background:#2c2c2c;border:2.5px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:28px;color:rgba(245,239,224,0.4);">?</div>
+    <div class="demo-die" style="width:68px;height:68px;border-radius:10px;background:#2c2c2c;border:2.5px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:28px;color:rgba(245,239,224,0.4);">?</div>
+  </div>
+  <button onclick="rollDice()" style="font-family:var(--font-ui);font-size:14px;font-weight:600;padding:0.6rem 1.8rem;border-radius:6px;border:2px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer;transition:all 0.2s;">Roll 3 Dice</button>
+  <div id="dice-result" style="font-family:var(--font-ui);font-size:14px;color:rgba(245,239,224,0.6);margin-top:1rem;min-height:24px;line-height:1.5;"></div>
+</div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label blue">Like One Deck Dungeon</span>
+      <p>If you've played One Deck Dungeon, the challenge dice work similarly — you roll dice against a challenge and place them on available spaces. Unplaced dice mean penalties. Your card collection determines how many dice you can absorb.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label gold">Refreshing Dice</span>
+      <p>If there aren't enough dice in the pool when you need to roll, <strong>refresh all dice</strong> — return every challenge die from all player grids and the center penalty section back to the pool. Then roll.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ██████████████████ STEP 4: SLOTS — PLACING DICE ██████████████████ -->
+<section class="row" id="step-4">
+  <div class="main">
+    <div class="step-tag">Step 4</div>
+    <h2>Slots — Where Dice Go</h2>
+    <p>Cards in your grid have <strong>slots</strong> — spaces where you can place challenge dice to absorb their results. Each slot accepts a specific type of result (a skill color or setback).</p>
+    <p>When you place a die on a slot, you avoid the penalty AND often gain a bonus — like 1 boost token on that card.</p>
+
+    <h3>Impact Slots</h3>
+    <p>Some slots are marked as <strong>impact</strong> slots. These are special: <em>any player</em> can place a matching die there, not just the card's owner. This is one of the strongest cooperative tools in the game.</p>
+
+    <div class="rule-box">
+      <p><strong>You can only place challenge dice on cards in your grid.</strong> Reserved cards and cards in your supply do not have active slots. Impact slots on any player's grid are available to everyone.</p>
+    </div>
+
+    <div class="diagram" style="background:#eae4d5;border-radius:10px;padding:1.5rem;margin:1rem 0;">
+  <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+    <!-- Character card -->
+    <rect x="15" y="15" width="195" height="285" rx="12" fill="#1a1612" stroke="#c9a94e" stroke-width="2"/>
+    <text x="112" y="48" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">CHARACTER</text>
+    <!-- Slots on character -->
+    <circle cx="62" cy="90" r="18" fill="none" stroke="#4a8fbf" stroke-width="2" stroke-dasharray="5,3"/>
+    <text x="62" y="96" text-anchor="middle" fill="#4a8fbf" font-family="DM Sans,sans-serif" font-size="14">⏱</text>
+    <circle cx="112" cy="90" r="18" fill="none" stroke="#d4802a" stroke-width="2" stroke-dasharray="5,3"/>
+    <text x="112" y="96" text-anchor="middle" fill="#d4802a" font-family="DM Sans,sans-serif" font-size="14">❤</text>
+    <circle cx="162" cy="90" r="18" fill="none" stroke="#c94444" stroke-width="2" stroke-dasharray="5,3"/>
+    <text x="162" y="96" text-anchor="middle" fill="#c94444" font-family="DM Sans,sans-serif" font-size="14">🛡</text>
+    <!-- Empty slot labels -->
+    <text x="112" y="128" text-anchor="middle" fill="rgba(245,239,224,0.35)" font-family="DM Sans,sans-serif" font-size="11">Empty slots (dashed)</text>
+    <!-- Boost cubes -->
+    <rect x="55" y="152" width="18" height="18" rx="3" fill="#c9a94e"/>
+    <rect x="80" y="152" width="18" height="18" rx="3" fill="#c9a94e"/>
+    <rect x="105" y="152" width="18" height="18" rx="3" fill="rgba(201,169,78,0.2)" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
+    <rect x="130" y="152" width="18" height="18" rx="3" fill="rgba(201,169,78,0.2)" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="112" y="192" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="12">Boost: 2 of 4</text>
+    <!-- Boost power -->
+    <rect x="35" y="212" width="155" height="52" rx="6" fill="rgba(201,169,78,0.15)" stroke="#c9a94e" stroke-width="1"/>
+    <text x="112" y="238" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="13" font-weight="600">2 boost → Gain Move token</text>
+    <text x="112" y="256" text-anchor="middle" fill="rgba(245,239,224,0.4)" font-family="DM Sans,sans-serif" font-size="11">Boost Power</text>
+    <!-- Grid card -->
+    <rect x="250" y="15" width="195" height="285" rx="12" fill="#1a1612" stroke="rgba(245,239,224,0.25)" stroke-width="1.5"/>
+    <text x="347" y="48" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="16" font-weight="600">Grid Card</text>
+    <!-- Regular slot (empty) -->
+    <circle cx="302" cy="95" r="20" fill="none" stroke="#4a8fbf" stroke-width="2"/>
+    <text x="302" y="101" text-anchor="middle" fill="#4a8fbf" font-family="DM Sans,sans-serif" font-size="14">⏱</text>
+    <!-- Die placed on morale slot -->
+    <circle cx="392" cy="95" r="20" fill="rgba(212,128,42,0.15)" stroke="#d4802a" stroke-width="2"/>
+    <rect x="372" y="75" width="40" height="40" rx="6" fill="#2c2c2c" stroke="#d4802a" stroke-width="2"/>
+    <text x="392" y="100" text-anchor="middle" fill="#d4802a" font-family="DM Sans,sans-serif" font-size="18">❤</text>
+    <!-- Impact slot -->
+    <circle cx="302" cy="175" r="20" fill="none" stroke="#c94444" stroke-width="2"/>
+    <text x="302" y="181" text-anchor="middle" fill="#c94444" font-family="DM Sans,sans-serif" font-size="14">🛡</text>
+    <rect x="278" y="200" width="48" height="20" rx="3" fill="rgba(201,169,78,0.25)"/>
+    <text x="302" y="214" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="10" font-weight="700">IMPACT</text>
+    <!-- Setback slot -->
+    <rect x="372" y="155" width="40" height="40" rx="6" fill="none" stroke="rgba(245,239,224,0.3)" stroke-width="2" stroke-dasharray="5,3"/>
+    <text x="392" y="180" text-anchor="middle" fill="rgba(245,239,224,0.45)" font-family="DM Sans,sans-serif" font-size="12">SET</text>
+    <!-- Annotations -->
+    <line x1="455" y1="95" x2="500" y2="72" stroke="#c9a94e" stroke-width="1.5"/>
+    <text x="508" y="66" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14" font-weight="600">Die placed on slot</text>
+    <text x="508" y="86" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="12">No penalty + often a bonus</text>
+    <line x1="455" y1="175" x2="500" y2="158" stroke="#c9a94e" stroke-width="1.5"/>
+    <text x="508" y="152" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14" font-weight="600">Impact slot</text>
+    <text x="508" y="172" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="12">Any player can place here!</text>
+    <line x1="455" y1="240" x2="500" y2="240" stroke="#c9a94e" stroke-width="1.5"/>
+    <text x="508" y="236" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14" font-weight="600">Setback slot</text>
+    <text x="508" y="256" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="12">Absorbs setback dice results</text>
+    <line x1="325" y1="95" x2="370" y2="95" stroke="#c9a94e" stroke-width="1.5"/>
+    <text x="508" y="310" fill="rgba(44,36,24,0.4)" font-family="DM Sans,sans-serif" font-size="12" font-style="italic">More cards in your grid = more slots = fewer penalties</text>
+  </svg>
+</div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label green">Strategy: Expand Your Grid</span>
+      <p>More cards in your grid means more slots. Gaining new cards is one of the best ways to improve survivability — every new slot is insurance against future dice penalties.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label gold">Impact is Cooperative</span>
+      <p>Offering your impact slots proactively is one of the most impactful (pun intended) things you can do. Keep an eye on what slots you have open and communicate them to teammates.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ██████████████████ STEP 5: PENALTIES ██████████████████ -->
+<section class="row" id="step-5">
+  <div class="main">
+    <div class="step-tag">Step 5</div>
+    <h2>Penalties — Time, Morale, Health</h2>
+    <p>Any challenge die that you <em>cannot</em> place on a slot causes a <strong>penalty</strong>. You lose the resource shown on that die:</p>
+
+    <div class="flow">
+      <span class="fb fb-blue">⏱ Time</span>
+      <span class="fb" style="background:var(--sk-engage);color:#fff;">❤ Morale</span>
+      <span class="fb fb-red">🛡 Health</span>
+    </div>
+
+    <p>Each player tracks these three resources on the center board, on a scale of 0 to 6. Unplaced dice go to the penalty section of the center board.</p>
+
+    <div class="rule-box danger">
+      <p><strong>If any tracker reaches 0, the game can end.</strong> There is a one-time reprieve option presented by the mission card<sup class="fn-ref" onclick="toggleFn(this)">1</sup> — but after that, hitting 0 means defeat. Watch the shared stats closely: it's often better to help a struggling teammate than to push your own exploration.</p>
+    </div>
+
+    <h3>Damage</h3>
+    <p>Some locations also cause <strong>damage</strong> (heat, cold, or hypoxia) when you arrive. For each point of damage, you lose either 1 <span class="tr tr-health">🛡 health</span>, or <em>both</em> 1 <span class="tr tr-time">⏱ time</span> and 1 <span class="tr tr-morale">❤ morale</span>. You choose which.<sup class="fn-ref" onclick="toggleFn(this)">2</sup></p>
+
+    <button class="fn-toggle" onclick="toggleFnSection(this)">Sources &#9656;</button>
+    <div class="fn-section">
+      <div class="fn-item"><span class="fn-num">1.</span> Official Rulebook, "Losing the Game": The mission card provides a one-time option when a tracker first reaches 0.</div>
+      <div class="fn-item"><span class="fn-num">2.</span> Official Rulebook, "Damage": "For each damage, lose 1 health OR lose both 1 time and 1 morale."</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label red">Any Player Hits 0 = Danger</span>
+      <p>This is cooperative — if <em>any</em> player's tracker reaches 0, it threatens the whole group. The game ends for everyone, not just that player. Keep communicating about your status.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label green">Difficulty Scaling</span>
+      <p>Starting tracker positions control difficulty. "Daring" (4) is recommended for first games. Higher values (5–6) give a more relaxed experience; lower values (3) are for experienced players seeking a challenge.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ██████████████████ STEP 6: SKILL TOKENS ██████████████████ -->
+<section class="row" id="step-6">
+  <div class="main">
+    <div class="step-tag">Step 6</div>
+    <h2>Skill Tokens — Reducing the Cost</h2>
+    <p>Before rolling challenge dice, you may spend <strong>skill tokens</strong> to reduce the cost. Each matching skill token spent removes 1 die from the roll.</p>
+    <p>There are 6 types of skill tokens, one per action category:</p>
+
+    <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin:0.8rem 0;">
+      <span class="sk sk-move">Move</span>
+      <span class="sk sk-look">Look</span>
+      <span class="sk sk-engage">Engage</span>
+      <span class="sk sk-help">Help</span>
+      <span class="sk sk-take">Take</span>
+      <span class="sk sk-overpower">Overpower</span>
+    </div>
+
+    <p>If an action costs 3 <span class="sk sk-look">Look</span> and you spend 1 look skill token, you only roll 2 dice. If you reduce the cost to 0, you don't roll any dice at all — the action is free.</p>
+
+    <div class="rule-box danger">
+      <p><strong>Skill tokens are never required to take an action.</strong><sup class="fn-ref" onclick="toggleFn(this)">1</sup> You don't need a blue token to move, or a green token to help. Tokens only reduce cost. This is the most common mistake new players make.</p>
+    </div>
+
+    <h3>Earning Skill Tokens</h3>
+    <p>You gain skill tokens from action results, boost powers on your character, and by rolling skill dice. When the game says "gain a random skill," you roll a skill die and take the matching token.</p>
+    <p>You can also gain random skills when your <span class="tr tr-time">⏱ time</span>, <span class="tr tr-morale">❤ morale</span>, or <span class="tr tr-health">🛡 health</span> is already at 6 and you would gain more — instead, you gain a random skill token.<sup class="fn-ref" onclick="toggleFn(this)">2</sup></p>
+
+    <button class="fn-toggle" onclick="toggleFnSection(this)">Sources &#9656;</button>
+    <div class="fn-section">
+      <div class="fn-item"><span class="fn-num">1.</span> <a href="https://stonemaiergames.com/games/vantage/rules-faq/">Stonemaier FAQ</a>: Designer Jamey Stegmaier: "Please follow the action steps on the player aids verbatim. There is no mention of paying a skill token to perform an action."</div>
+      <div class="fn-item"><span class="fn-num">2.</span> Official Rulebook, "Gaining Resources": When a tracker is already at maximum (6) and you would gain more, gain a random skill token instead.</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label red">The #1 Common Mistake</span>
+      <p>From the designer directly: "Please follow the action steps on the player aids verbatim. There is <strong>no mention</strong> of paying a skill token to perform an action, as that is not a rule in Vantage." Tokens reduce cost. That's it.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label green">Skill Economy</span>
+      <p>Early in the game, skill tokens are your main way to make actions safer. As your grid fills with slots, dice placement becomes more reliable and skill tokens become less critical.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ██████████████████ STEP 7: YOUR GRID ██████████████████ -->
+<section class="row" id="step-7">
+  <div class="main">
+    <div class="step-tag">Step 7</div>
+    <h2>Your Grid — Building Your Abilities</h2>
+    <p>Each player builds a <strong>3×3 grid</strong> of cards with their character card at the center. The 8 surrounding spaces are filled with cards you discover through exploration — items, animals, abilities, and more.</p>
+
+    <div class="grid-vis">
+      <div class="grid-cell gc-empty">?</div>
+      <div class="grid-cell gc-filled">Item</div>
+      <div class="grid-cell gc-empty">?</div>
+      <div class="grid-cell gc-filled">Animal</div>
+      <div class="grid-cell gc-char">You</div>
+      <div class="grid-cell gc-empty">?</div>
+      <div class="grid-cell gc-empty">?</div>
+      <div class="grid-cell gc-filled">Ability</div>
+      <div class="grid-cell gc-empty">?</div>
+    </div>
+
+    <p>Every card you add to your grid provides new <strong>slots</strong> for placing dice, <strong>boost powers</strong> to use, and sometimes new <strong>actions</strong> you can take.</p>
+
+    <h3>Reserve</h3>
+    <p>If your grid is full and you gain a new card, it goes to your <strong>reserve</strong>. Your character starts with a reserve capacity of 1 (some cards increase this).<sup class="fn-ref" onclick="toggleFn(this)">1</sup> You can pay 1 boost from your character to swap a reserved card into your grid.</p>
+
+    <div class="rule-box">
+      <p><strong>Reserved cards cannot use slots, abilities, or boost powers.</strong> They retain any boost tokens on them, and their challenge dice are refreshed, but they are inactive until placed in your grid.</p>
+    </div>
+
+    <h3>"When Placed" Benefits</h3>
+    <p>Many cards have a "when placed" benefit — a one-time bonus you gain the first time you place that card into your grid (like gaining 2 boost). This triggers only on the initial placement.<sup class="fn-ref" onclick="toggleFn(this)">2</sup></p>
+
+    <button class="fn-toggle" onclick="toggleFnSection(this)">Sources &#9656;</button>
+    <div class="fn-section">
+      <div class="fn-item"><span class="fn-num">1.</span> Official Rulebook, "Reserve": Default reserve capacity is 1. Some cards grant additional reserve capacity.</div>
+      <div class="fn-item"><span class="fn-num">2.</span> Official Rulebook, "When Placed": "When placed" benefits trigger once — when the card is first placed into the grid. Swapping a card out and back in does not re-trigger it.</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label gold">Grid = Your Character Sheet</span>
+      <p>Think of the grid as your evolving character sheet. Your starting character is generic — the cards you collect define who you become. An animal companion, a crafted weapon, a learned ability. Every game builds a different character.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label green">Fill It Up</span>
+      <p>The game gives you a "destiny" reward when you first complete your grid with 8 surrounding cards. Prioritize gaining cards early — it's both mechanically powerful and narratively rewarding.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ██████████████████ STEP 8: BOOST ██████████████████ -->
+<section class="row" id="step-8">
+  <div class="main">
+    <div class="step-tag">Step 8</div>
+    <h2>Boost — Knowledge and Power</h2>
+    <p><strong>Boost</strong> <span class="boost"></span> represents knowledge you've gained through exploration. Boost tokens are small cubes placed on your cards, and you spend them to activate powerful abilities.</p>
+
+    <h3>Where Boost Lives</h3>
+    <p>Boost from <strong>location actions and departing</strong> goes on your character card. Boost from all other sources goes on the specific card that generated it.<sup class="fn-ref" onclick="toggleFn(this)">1</sup> Each card has a limited capacity for boost.</p>
+
+    <h3>Boost Powers</h3>
+    <p>Cards in your grid have <strong>boost powers</strong> — abilities you activate by spending boost from that card. For example, your starting character lets you pay 2 <span class="boost"></span> to gain a <span class="sk sk-move">Move</span> skill token, or pay 1 <span class="boost"></span> to reroll a challenge die.</p>
+
+    <div class="rule-box">
+      <p><strong>Boost powers can be used at any time — even during another player's turn.</strong><sup class="fn-ref" onclick="toggleFn(this)">2</sup> Their effects last until the end of the current turn. If a boost power has an "impact" icon, it can benefit any player.</p>
+    </div>
+
+    <button class="fn-toggle" onclick="toggleFnSection(this)">Sources &#9656;</button>
+    <div class="fn-section">
+      <div class="fn-item"><span class="fn-num">1.</span> Official Rulebook, "Boost": "Boost gained from location actions or departing goes on your character card. Boost gained from other sources goes on the card that generated it."</div>
+      <div class="fn-item"><span class="fn-num">2.</span> Official Rulebook, "Boost Powers": Boost powers may be activated at any time, including during other players' turns. Effects persist until end of the current turn.</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label gold">Boost Placement Matters</span>
+      <p>Location boost always goes on your character. Card boost goes on that card. This matters because boost powers spend boost <em>from that specific card</em>. Having boost spread across multiple cards gives you more options.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label red">"Place in the Center"</span>
+      <p>If a challenge die ability says "place them in the center," it means the <strong>penalty section</strong> of the center board. If it meant the pool, it would say "refresh." This trips people up.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ██████████████████ STEP 9: STORYBOOKS ██████████████████ -->
+<section class="row" id="step-9">
+  <div class="main">
+    <div class="step-tag">Step 9</div>
+    <h2>Storybooks — Discovering the World</h2>
+    <p>Vantage includes <strong>8 storybooks</strong> that contain over 7,000 action results. When you take an action, another player reads the relevant entry aloud to you.</p>
+    <p>There's one storybook for each action category (<span class="sk sk-move">Move</span>, <span class="sk sk-look">Look</span>, <span class="sk sk-engage">Engage</span>, <span class="sk sk-help">Help</span>, <span class="sk sk-take">Take</span>, <span class="sk sk-overpower">Overpower</span>), plus a separate <strong>Depart</strong> storybook and the <strong>Book of Secrets</strong> (referenced only when instructed).</p>
+
+    <h3>The Discovery Rule</h3>
+    <p>You may <strong>describe</strong> what you see on your location card and what happens in storybook results, but you may not <strong>show</strong> other players your card. This preserves the first-person perspective — they might visit that location later.</p>
+
+    <div class="rule-box">
+      <p><strong>In multi-option lists, choose before reading the outcome.</strong> If a storybook says "choose to go to location 259 or 310," you commit to one before seeing what's there. A big part of the game is intuiting, discussing, and learning by trying.</p>
+    </div>
+
+    <div class="diagram" style="background:#eae4d5;border-radius:10px;padding:1.5rem;margin:1rem 0;">
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:520px;margin:0 auto;">
+    <div style="background:var(--sk-move);color:#fff;border-radius:8px;padding:1rem 0.5rem;text-align:center;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.6;"><span style="font-size:24px;">📖</span><br>Move</div>
+    <div style="background:var(--sk-look);color:#fff;border-radius:8px;padding:1rem 0.5rem;text-align:center;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.6;"><span style="font-size:24px;">📖</span><br>Look</div>
+    <div style="background:var(--sk-engage);color:#fff;border-radius:8px;padding:1rem 0.5rem;text-align:center;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.6;"><span style="font-size:24px;">📖</span><br>Engage</div>
+    <div style="background:var(--sk-help);color:#fff;border-radius:8px;padding:1rem 0.5rem;text-align:center;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.6;"><span style="font-size:24px;">📖</span><br>Help</div>
+    <div style="background:var(--sk-take);color:#2c2418;border-radius:8px;padding:1rem 0.5rem;text-align:center;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.6;"><span style="font-size:24px;">📖</span><br>Take</div>
+    <div style="background:var(--sk-overpower);color:#fff;border-radius:8px;padding:1rem 0.5rem;text-align:center;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.6;"><span style="font-size:24px;">📖</span><br>Overpower</div>
+    <div style="background:#4a6fa5;color:#fff;border-radius:8px;padding:1rem 0.5rem;text-align:center;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.6;"><span style="font-size:24px;">📖</span><br>Depart</div>
+    <div style="background:#2a2318;color:#c9a94e;border-radius:8px;padding:1rem 0.5rem;text-align:center;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.6;border:1.5px solid #c9a94e;"><span style="font-size:24px;">🔒</span><br>Secrets</div>
+  </div>
+  <div style="font-family:var(--font-ui);font-size:13px;color:var(--text-muted);text-align:center;margin-top:0.8rem;">8 books · 7,000+ entries · One per action category + Depart + Book of Secrets</div>
+</div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label blue">Like a Choose-Your-Own-Adventure</span>
+      <p>The storybooks are your game master. Each entry is a brief narrative that reveals costs, outcomes, and new cards. It's the same "read aloud" pattern as games like <strong>The 7th Continent</strong> or <strong>Sleeping Gods</strong>.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label gold">Rulepop Web App</span>
+      <p>The official Rulepop web app at <strong>vantage.rulepop.com</strong> has a digital version of all storybooks, works offline, and includes the latest errata. Consider using it alongside the physical books.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ██████████████████ STEP 10: COOPERATION ██████████████████ -->
+<section class="row" id="step-10">
+  <div class="main">
+    <div class="step-tag">Step 10</div>
+    <h2>Cooperation — Separated but Together</h2>
+    <p>Each player explores a different part of the planet. You cannot see each other's locations. But you are connected by intercom and work together in several ways:</p>
+
+    <h3>Sharing Information</h3>
+    <p>You can freely describe what you see at your location — the landscape, creatures, available actions, resources — in your own words. Share what you've learned about the world. What you discover benefits everyone.</p>
+
+    <h3>Impact Slots</h3>
+    <p>When any player rolls challenge dice, <em>all</em> players can offer their impact slots. If a teammate rolls a <span class="sk sk-help">Help</span> result and you have an unused help impact slot on one of your grid cards, that die can go there. This is the game's primary cooperative mechanism.</p>
+
+    <h3>Thematic Consistency</h3>
+    <p>If a player burned a bridge at a location, another player who later visits that same location cannot cross the bridge. The game trusts players to remember their collective actions and maintain thematic consistency.</p>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label green">Communication is Key</span>
+      <p>Experienced players recommend actively communicating: what resources you have, what actions you've taken, what slots are open, and where you might go next. Vantage rewards coordination even across vast distances.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label gold">Remote Play</span>
+      <p>If both groups own a copy of Vantage, you can play remotely with only audio. The first-person perspective and verbal description model means it's naturally suited to this.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ██████████████████ STEP 11: WINNING & LOSING ██████████████████ -->
+<section class="row" id="step-11">
+  <div class="main">
+    <div class="step-tag">Step 11</div>
+    <h2>Missions, Destinies & Endgame</h2>
+    <p>At the start of each game, the group receives a <strong>mission</strong> — one of 21 possible objectives that represents why you traveled to this planet. Completing the mission is the primary way to "win."</p>
+
+    <h3>Destinies</h3>
+    <p>Along the way, you may discover <strong>destiny</strong> cards — personal objectives that represent how you choose to respond to being stranded. Completing your first grid of 8 cards is one way to earn a destiny.</p>
+
+    <h3>How the Game Ends</h3>
+    <div class="flow">
+      <span class="fb fb-green">Mission Complete → Win!</span>
+      <span class="fa">|</span>
+      <span class="fb fb-red">Any tracker hits 0 → Danger</span>
+    </div>
+    <p>When a tracker first reaches 0, the mission card presents a one-time reprieve option. After that, hitting 0 again means the game ends. The group decides together whether they've accomplished enough to feel satisfied.</p>
+
+    <div class="rule-box">
+      <p><strong>Victory is partly self-defined.</strong> The mission is the structured win condition. But many players also set personal goals — exploring a specific region, solving a puzzle, finding a companion. The game explicitly supports intrinsic motivation alongside the mission.</p>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label gold">Roguelike Spirit</span>
+      <p>Like a roguelike video game, you won't see everything in one session. You're meant to play, explore, lose, learn, and try again. Each playthrough reveals new corners of the world.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label green">21 Missions</span>
+      <p>Mission difficulty varies. Missions assigned by rolling doubles on the skill dice are harder. The game recommends rerolling doubles for your first game.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ██████████████████ KNOWLEDGE CHECK ██████████████████ -->
+<section class="row full-width">
+  <div class="main" style="max-width:calc(var(--main-width) + var(--gap) + var(--sidebar-width));">
+    <div class="step-tag">Quick Check</div>
+    <h2>Test Your Knowledge</h2>
+
+    <div class="kcheck">
+      <h4>🧭 Question 1</h4>
+      <div class="kc-q">You want to take the <span class="sk sk-help" style="font-size:11px;">Help</span> action at your current location, but you don't have any green skill tokens. What happens?</div>
+      <div class="kc-opts" id="q1o">
+        <div class="kc-opt" onclick="ans(this,'q1',1)">You take the action normally — skill tokens only reduce cost, they're never required</div>
+        <div class="kc-opt" onclick="ans(this,'q1',0)">You can't take the help action without a green skill token</div>
+        <div class="kc-opt" onclick="ans(this,'q1',0)">You must pay 1 boost instead of a skill token</div>
+      </div>
+      <div class="kc-fb ok" id="q1y">✅ Correct! Skill tokens are never required to perform any action. They only reduce cost. This is the most common mistake new players make (Step 6).</div>
+      <div class="kc-fb no" id="q1n">❌ Not quite. Skill tokens only reduce the number of challenge dice you roll — they are never required to take an action. You can always take any action. (Step 6)</div>
+    </div>
+
+    <div class="kcheck">
+      <h4>🧭 Question 2</h4>
+      <div class="kc-q">You roll 3 challenge dice. One is a miss, one shows a blue move result, and one shows a health result. You have no matching open slots. What happens to the move and health dice?</div>
+      <div class="kc-opts" id="q2o">
+        <div class="kc-opt" onclick="ans(this,'q2',0)">You reroll them until they show misses</div>
+        <div class="kc-opt" onclick="ans(this,'q2',1)">They go to the penalty section of the center — you lose the matching resources</div>
+        <div class="kc-opt" onclick="ans(this,'q2',0)">You can place them on any empty slot regardless of type</div>
+      </div>
+      <div class="kc-fb ok" id="q2y">✅ Correct! Unplaced dice go to the penalty section and you lose the matching time (move icon) and health. This is why filling your grid with more slots is so important (Steps 4 & 5).</div>
+      <div class="kc-fb no" id="q2n">❌ Dice must match the slot type. If no matching slot is available (including impact slots offered by teammates), the dice go to the penalty section and you lose the indicated resource. (Steps 4 & 5)</div>
+    </div>
+
+    <div class="kcheck">
+      <h4>🧭 Question 3</h4>
+      <div class="kc-q">You already performed a <span class="sk sk-look" style="font-size:11px;">Look</span> action at your current location two turns ago. On this turn, can you do the <span class="sk sk-engage" style="font-size:11px;">Engage</span> action at the same location?</div>
+      <div class="kc-opts" id="q3o">
+        <div class="kc-opt" onclick="ans(this,'q3',0)">Yes — you only can't repeat the same specific action</div>
+        <div class="kc-opt" onclick="ans(this,'q3',1)">No — once you perform any location action, no other location actions are available there</div>
+        <div class="kc-opt" onclick="ans(this,'q3',0)">Yes — the restriction only applies to the current turn</div>
+      </div>
+      <div class="kc-fb ok" id="q3y">✅ Correct! Once you perform any location action at a location, you cannot perform another location action there — even on a future turn. You'd need to depart or take a card action. (Step 2)</div>
+      <div class="kc-fb no" id="q3n">❌ The restriction is broader than that. Once you've performed any location action at a location (even on a previous turn), all location actions at that location are unavailable to you. Depart or take a card action instead. (Step 2)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ██████████████████ STEP 12: SETUP ██████████████████ -->
+<section class="row" id="step-12">
+  <div class="main">
+    <div class="step-tag">Step 12</div>
+    <h2>Setup</h2>
+    <p>Now that you understand how the game works, here's how to set it up:</p>
+
+    <h3>1. The Center</h3>
+    <p>Place the game board in the center (either side — they offer the same gameplay, different layout). Place all storybooks, skill tokens, coins, boost tokens (cubes), and skill dice in a shared supply nearby.</p>
+
+    <h3>2. Challenge Dice Pool</h3>
+    <p>Seed the pool with <strong>8 dice + 2 per player</strong>.<sup class="fn-ref" onclick="toggleFn(this)">1</sup> For a 3-player game, that's 14 dice. Return excess dice to the box.</p>
+
+    <h3>3. Book of Vantages</h3>
+    <p>Place the Book of Vantages face-up showing <strong>location 000</strong>. This starts the game's narrative and guides the rest of setup.</p>
+
+    <h3>4. Follow Location 000</h3>
+    <p>Read the back of the Book of Vantages (sections 1–4). These instructions walk you through:</p>
+    <ul>
+      <li>Each player chooses a <strong>character</strong> (or rolls a skill die for random selection)</li>
+      <li>Take the matching skill token and place 2 boost on your character</li>
+      <li>Each player gains a <strong>card holder</strong> for their location card</li>
+      <li>Set <span class="tr tr-time">⏱ time</span>, <span class="tr tr-morale">❤ morale</span>, and <span class="tr tr-health">🛡 health</span> trackers — the recommended starting level is <strong>4 ("Daring")</strong></li>
+      <li>The first player rolls 2 skill dice to determine the group's <strong>mission</strong> (reroll doubles for an easier start)</li>
+      <li>Each player determines their starting <strong>escape pod</strong> and crash location</li>
+    </ul>
+
+    <div class="diagram" style="background:var(--bg-dark);border-radius:10px;padding:1.8rem 2rem;margin:1rem 0;">
+  <div style="font-family:var(--font-ui);font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:1.2rem;">Setup at a Glance</div>
+  <div style="display:grid;grid-template-columns:auto 1fr;gap:0.7rem 1.2rem;font-family:var(--font-ui);font-size:15px;color:var(--text-light);line-height:1.5;">
+    <span style="color:var(--gold);font-weight:700;font-size:18px;">①</span><span>Place center board + storybooks nearby</span>
+    <span style="color:var(--gold);font-weight:700;font-size:18px;">②</span><span>Seed dice pool: <strong style="color:var(--gold);">8 + 2 per player</strong></span>
+    <span style="color:var(--gold);font-weight:700;font-size:18px;">③</span><span>Open Book of Vantages to location 000</span>
+    <span style="color:var(--gold);font-weight:700;font-size:18px;">④</span><span>Each player: choose character + card holder</span>
+    <span style="color:var(--gold);font-weight:700;font-size:18px;">⑤</span><span>Place 2 boost on character, take matching skill token</span>
+    <span style="color:var(--gold);font-weight:700;font-size:18px;">⑥</span><span>Set trackers: ⏱ ❤ 🛡 all to <strong style="color:var(--gold);">4</strong> (Daring)</span>
+    <span style="color:var(--gold);font-weight:700;font-size:18px;">⑦</span><span>Roll 2 skill dice → determine mission</span>
+    <span style="color:var(--gold);font-weight:700;font-size:18px;">⑧</span><span>Each player: determine escape pod + crash location</span>
+  </div>
+</div>
+
+    <button class="fn-toggle" onclick="toggleFnSection(this)">Sources &#9656;</button>
+    <div class="fn-section">
+      <div class="fn-item"><span class="fn-num">1.</span> Official Rulebook, "Setup": Challenge dice pool = 8 + (2 × number of players). Excess dice are returned to the box.</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label gold">Setup IS the First Scene</span>
+      <p>Vantage's setup is designed to feel like the game has already begun. Reading the Book of Vantages, choosing your character, and crash-landing — it's all part of the narrative. Lean into it.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label red">Duplicates on Random Selection</span>
+      <p>If multiple players roll the same result when randomly selecting characters or escape pods, reroll until everyone has a unique selection. Players cannot share a character or escape pod.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ██████████████████ STEP 13: COMPLETE TURN SUMMARY ██████████████████ -->
+<section class="row full-width">
+  <div class="main" style="max-width:calc(var(--main-width) + var(--gap) + var(--sidebar-width));">
+    <div class="step-tag">Step 13</div>
+    <h2>Complete Turn Summary</h2>
+
+    <div class="turn-strip">
+      <div class="ts"><span class="ts-num">1</span>Choose Action</div>
+      <div class="ts"><span class="ts-num">2</span>Read Cost</div>
+      <div class="ts"><span class="ts-num">3</span>Spend Skills</div>
+      <div class="ts"><span class="ts-num">4</span>Roll Dice</div>
+      <div class="ts"><span class="ts-num">5</span>Place Dice</div>
+      <div class="ts"><span class="ts-num">6</span>Suffer Penalties</div>
+      <div class="ts"><span class="ts-num">7</span>Gain Result</div>
+      <div class="ts"><span class="ts-num">8</span>End Turn</div>
+    </div>
+
+    <div style="background:var(--bg-dark);color:var(--text-light);border-radius:10px;padding:1.3rem 1.5rem;margin-top:1rem;">
+      <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+        <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">1.</span>
+        <span><strong>Choose one action</strong> — a location action, a card action, or depart in a cardinal direction. You choose without knowing the cost.</span>
+      </div>
+      <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+        <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">2.</span>
+        <span><strong>Read the cost and action</strong> — another player looks up the storybook entry and reads the cost and action (not the result yet). You may not change your mind.</span>
+      </div>
+      <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+        <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">3.</span>
+        <span><strong>Optionally spend skill tokens</strong> — each matching token removes 1 die from the roll.</span>
+      </div>
+      <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+        <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">4.</span>
+        <span><strong>Roll challenge dice</strong> — roll dice equal to remaining cost from the shared pool.</span>
+      </div>
+      <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+        <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">5.</span>
+        <span><strong>Place dice on slots</strong> — put matching results on card slots in any player's grid (impact slots). Blanks go to the center (no penalty).</span>
+      </div>
+      <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+        <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">6.</span>
+        <span><strong>Suffer penalties</strong> — unplaced dice go to the penalty section. Lose the matching <span class="tr tr-time">⏱</span> <span class="tr tr-morale">❤</span> <span class="tr tr-health">🛡</span> resources.</span>
+      </div>
+      <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+        <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">7.</span>
+        <span><strong>Gain the result</strong> — the storybook reader reveals the outcome. Gain cards, boost, coins, or other rewards.</span>
+      </div>
+      <div style="display:flex;gap:0.8rem;align-items:baseline;">
+        <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">8.</span>
+        <span><strong>End your turn</strong> — or, if the result says "continue," perform an additional action (a rare bonus). Next player goes.</span>
+      </div>
+    </div>
+
+    <p style="text-align:center;margin-top:1.5rem;font-family:var(--font-display);font-size:1.2rem;color:var(--gold);">You're ready to explore. Good luck on the planet. 🌍</p>
+  </div>
+</section>
+
+
+</div><!-- /page-wrap -->
+
+<!-- ██████████████████ FOOTER ██████████████████ -->
+<footer class="footer">
+  <strong>Vantage</strong> is designed by Jamey Stegmaier. Art by Valentina Filić, Sören Meding, and Emilien Rotival.<br>
+  Published by <a href="https://stonemaiergames.com">Stonemaier Games</a>. © 2025 Stonemaier LLC. All rights reserved.<br>
+  This is an independent educational resource and is not affiliated with or endorsed by Stonemaier Games.
+</footer>
+
+<!-- ██████████████████ QUICK REFERENCE ██████████████████ -->
+<button class="qref-toggle" onclick="toggleQref()" title="Quick Reference">📖</button>
+<div class="qref-panel" id="qref">
+  <div class="qref-header">
+    <h3>Quick Reference</h3>
+    <input type="text" class="qref-search" id="qref-search" placeholder="Search terms..." oninput="filterQref(this.value)">
+  </div>
+  <div class="qref-body" id="qref-body">
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="action location card depart turn">
+      <span class="qref-term">Action Types</span><a class="qref-step" href="#step-2" onclick="jumpToStep(event)">Step 2 ↗</a>
+      <div class="qref-def">On your turn, choose ONE: a <strong>location action</strong> (6 skill categories), a <strong>card action</strong> (from your grid/supply), or <strong>depart</strong> (move to adjacent location).</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="blank dice">
+      <span class="qref-term">Blank (Dice Face)</span><a class="qref-step" href="#step-3" onclick="jumpToStep(event)">Step 3 ↗</a>
+      <div class="qref-def">A challenge die face with no effect. Return to center — no penalty. The best result you can roll.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="boost cube knowledge power">
+      <span class="qref-term">Boost</span><a class="qref-step" href="#step-8" onclick="jumpToStep(event)">Step 8 ↗</a>
+      <div class="qref-def">Small cubes representing knowledge. Placed on cards, spent to activate boost powers. Location/depart boost → character card. All other boost → source card.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="boost power ability activate">
+      <span class="qref-term">Boost Power</span><a class="qref-step" href="#step-8" onclick="jumpToStep(event)">Step 8 ↗</a>
+      <div class="qref-def">An ability on a grid card activated by spending boost from that card. Usable at any time, even on other players' turns. Effects last until end of current turn.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="challenge dice pool roll cost">
+      <span class="qref-term">Challenge Dice</span><a class="qref-step" href="#step-3" onclick="jumpToStep(event)">Step 3 ↗</a>
+      <div class="qref-def">Black dice rolled from the shared pool. Roll a number equal to the action's cost (minus skill tokens spent). Faces: time, morale, health, setback, or blank.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="compass rose depart direction north">
+      <span class="qref-term">Compass Rose</span><a class="qref-step" href="#step-2" onclick="jumpToStep(event)">Step 2 ↗</a>
+      <div class="qref-def">On each location card — shows 4 cardinal directions for departing. Numbers = known destinations. Stars (★) = check Depart storybook.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="cost difficulty action">
+      <span class="qref-term">Cost</span><a class="qref-step" href="#step-3" onclick="jumpToStep(event)">Step 3 ↗</a>
+      <div class="qref-def">A number on each action representing difficulty. Determines how many challenge dice you roll. Reduced by spending matching skill tokens.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="damage heat cold hypoxia">
+      <span class="qref-term">Damage</span><a class="qref-step" href="#step-5" onclick="jumpToStep(event)">Step 5 ↗</a>
+      <div class="qref-def">Heat, cold, or hypoxia damage from locations. For each point: lose 1 health OR lose both 1 time and 1 morale. Your choice.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="depart move travel adjacent">
+      <span class="qref-term">Depart</span><a class="qref-step" href="#step-2" onclick="jumpToStep(event)">Step 2 ↗</a>
+      <div class="qref-def">Action to move to an adjacent location via compass rose. Uses the separate Depart storybook (not the Move storybook!).</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="destiny personal objective reward grid">
+      <span class="qref-term">Destiny</span><a class="qref-step" href="#step-11" onclick="jumpToStep(event)">Step 11 ↗</a>
+      <div class="qref-def">Personal objective cards. Earned by completing your grid (8 cards) or through discovery. Represents how you respond to being stranded.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="grid 3x3 character card tableau">
+      <span class="qref-term">Grid (3×3)</span><a class="qref-step" href="#step-7" onclick="jumpToStep(event)">Step 7 ↗</a>
+      <div class="qref-def">Your personal 3×3 tableau with character at center. 8 surrounding spaces for discovered cards. More cards = more slots = better survivability.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="health tracker resource shield">
+      <span class="qref-term">Health</span><a class="qref-step" href="#step-5" onclick="jumpToStep(event)">Step 5 ↗</a>
+      <div class="qref-def">🛡 One of three tracked resources (0–6). Lost from unplaced health dice or damage. If any player hits 0, the game is in danger.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="impact slot cooperative any player">
+      <span class="qref-term">Impact Slot</span><a class="qref-step" href="#step-4" onclick="jumpToStep(event)">Step 4 ↗</a>
+      <div class="qref-def">A special slot on grid cards usable by ANY player — the primary cooperative mechanic. Communicate your open impact slots to teammates.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="location action one per visit">
+      <span class="qref-term">Location Action</span><a class="qref-step" href="#step-2" onclick="jumpToStep(event)">Step 2 ↗</a>
+      <div class="qref-def">An action from one of 6 skill categories on your location card. ONE per location visit — once you perform any, all others at that location are locked.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="mission objective win goal">
+      <span class="qref-term">Mission</span><a class="qref-step" href="#step-11" onclick="jumpToStep(event)">Step 11 ↗</a>
+      <div class="qref-def">Group objective (1 of 21). Determined by rolling 2 skill dice at setup. Completing it = win. Reroll doubles for easier missions on first game.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="morale tracker resource heart">
+      <span class="qref-term">Morale</span><a class="qref-step" href="#step-5" onclick="jumpToStep(event)">Step 5 ↗</a>
+      <div class="qref-def">❤ One of three tracked resources (0–6). Lost from unplaced morale dice or damage. If any player hits 0, the game is in danger.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="penalty unplaced dice lose">
+      <span class="qref-term">Penalty</span><a class="qref-step" href="#step-5" onclick="jumpToStep(event)">Step 5 ↗</a>
+      <div class="qref-def">When a challenge die can't be placed on any slot (including impact slots), it goes to the penalty section. You lose the matching resource.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="refresh dice pool empty">
+      <span class="qref-term">Refresh (Dice)</span><a class="qref-step" href="#step-3" onclick="jumpToStep(event)">Step 3 ↗</a>
+      <div class="qref-def">When the pool has fewer dice than needed: return ALL challenge dice from all grids and the penalty section to the pool, then roll.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="reserve capacity swap grid full">
+      <span class="qref-term">Reserve</span><a class="qref-step" href="#step-7" onclick="jumpToStep(event)">Step 7 ↗</a>
+      <div class="qref-def">Holds cards when your grid is full. Starting capacity: 1. Pay 1 boost from character to swap a reserved card into grid. Reserved cards are inactive.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="setback dice slot">
+      <span class="qref-term">Setback</span><a class="qref-step" href="#step-3" onclick="jumpToStep(event)">Step 3 ↗</a>
+      <div class="qref-def">A challenge die face. Must be placed on a setback slot or suffer a penalty. Some grid cards have setback slots to absorb these.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="skill token reduce cost move look engage help take overpower">
+      <span class="qref-term">Skill Token</span><a class="qref-step" href="#step-6" onclick="jumpToStep(event)">Step 6 ↗</a>
+      <div class="qref-def">6 types (one per action category). Spend before rolling to reduce cost by 1 per token. NEVER required to take an action — only reduce cost.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="slot dice placement card">
+      <span class="qref-term">Slot</span><a class="qref-step" href="#step-4" onclick="jumpToStep(event)">Step 4 ↗</a>
+      <div class="qref-def">Spaces on grid cards where challenge dice are placed. Each accepts a specific result type. Placing a die = no penalty + often a bonus. More cards = more slots.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="storybook read entry result">
+      <span class="qref-term">Storybook</span><a class="qref-step" href="#step-9" onclick="jumpToStep(event)">Step 9 ↗</a>
+      <div class="qref-def">8 books with 7,000+ entries. Another player reads your action result aloud. One book per skill category + Depart + Book of Secrets.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="time tracker resource clock">
+      <span class="qref-term">Time</span><a class="qref-step" href="#step-5" onclick="jumpToStep(event)">Step 5 ↗</a>
+      <div class="qref-def">⏱ One of three tracked resources (0–6). Lost from unplaced time dice or damage. If any player hits 0, the game is in danger.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="when placed benefit trigger initial">
+      <span class="qref-term">When Placed</span><a class="qref-step" href="#step-7" onclick="jumpToStep(event)">Step 7 ↗</a>
+      <div class="qref-def">One-time bonus gained when a card is first placed into your grid. Does not re-trigger if swapped out and back in.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== QUIZ & FOOTNOTES JS ===================== -->
+<script>
+function toggleFnSection(btn) {
+  const section = btn.nextElementSibling;
+  const isOpen = section.classList.toggle('open');
+  btn.textContent = isOpen ? 'Sources \u25BE' : 'Sources \u25B8';
+}
+
+function toggleFn(ref) {
+  const step = ref.closest('.main');
+  const section = step.querySelector('.fn-section');
+  const toggle = step.querySelector('.fn-toggle');
+  if (section && !section.classList.contains('open')) {
+    section.classList.add('open');
+    if (toggle) toggle.textContent = 'Sources \u25BE';
+  }
+}
+
+function ans(el, qid, correct) {
+  const opts = document.querySelectorAll('#' + qid + 'o .kc-opt');
+  opts.forEach(o => {
+    if (o === el) {
+      o.classList.add(correct ? 'right' : 'wrong');
+    } else {
+      o.classList.add('dim');
+    }
+  });
+  const yEl = document.getElementById(qid + 'y');
+  const nEl = document.getElementById(qid + 'n');
+  if (correct) { yEl.classList.add('show', 'ok'); }
+  else { nEl.classList.add('show', 'no'); }
+}
+
+function toggleQref() {
+  document.getElementById('qref').classList.toggle('open');
+}
+
+function jumpToStep(e) {
+  e.stopPropagation();
+  document.getElementById('qref').classList.remove('open');
+}
+
+function filterQref(query) {
+  const items = document.querySelectorAll('.qref-item');
+  const q = query.toLowerCase();
+  items.forEach(item => {
+    const terms = (item.dataset.terms + ' ' + item.querySelector('.qref-term').textContent).toLowerCase();
+    item.classList.toggle('hidden', q.length > 0 && !terms.includes(q));
+  });
+}
+
+function rollDice() {
+  const faces = [
+    { icon: '⏱', label: 'Time', color: '#4a8fbf' },
+    { icon: '❤', label: 'Morale', color: '#d4802a' },
+    { icon: '🛡', label: 'Health', color: '#c94444' },
+    { icon: '⚠', label: 'Setback', color: '#888' },
+    { icon: '·', label: 'Blank', color: '#555' },
+    { icon: '·', label: 'Blank', color: '#555' }
+  ];
+  const area = document.getElementById('dice-area');
+  const result = document.getElementById('dice-result');
+  const dice = area.querySelectorAll('.demo-die');
+  const rolls = [];
+  dice.forEach(die => {
+    const face = faces[Math.floor(Math.random() * faces.length)];
+    die.style.borderColor = face.color;
+    die.style.color = face.color;
+    die.textContent = face.icon;
+    die.title = face.label;
+    rolls.push(face);
+  });
+  result.innerHTML = '';
+  rolls.forEach(face => {
+    const span = document.createElement('span');
+    span.style.marginRight = '1em';
+    if (face.label === 'Blank') {
+      span.style.color = '#888';
+      span.textContent = face.icon + ' Blank — no effect, discard this die';
+    } else if (face.label === 'Setback') {
+      span.style.color = face.color;
+      span.textContent = face.icon + ' Setback — must place on a setback slot';
+    } else {
+      span.style.color = face.color;
+      span.textContent = face.icon + ' ' + face.label + ' — place on a slot or lose 1 ' + face.label.toLowerCase();
+    }
+    result.appendChild(span);
+    result.appendChild(document.createElement('br'));
+  });
+}
+</script>
+</body>
+</html>
