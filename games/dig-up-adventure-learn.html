@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn to Play — DIG UP Adventure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+/* ===================== RESET & BASE ===================== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:18px;scroll-behavior:smooth}
+body{font-family:'Crimson Pro',Georgia,serif;background:var(--bg);color:var(--text);line-height:1.7}
+
+/* ===================== CUSTOM PROPERTIES ===================== */
+:root{
+  --bg:#f4ede0;
+  --bg-sidebar:#2a1f14;
+  --bg-dark:#1a1410;
+  --text:#2c2418;
+  --text-light:#f5efe0;
+  --text-muted:rgba(44,36,24,0.55);
+  --gold:#c4882d;
+  --red:#b93e3e;
+  --green:#4a7c59;
+  --blue:#4a6fa5;
+  --purple:#7a5195;
+  --orange:#d4802a;
+  --teal:#3a8a7a;
+  --border:rgba(44,36,24,0.1);
+  --font-display:'Fraunces',Georgia,serif;
+  --font-body:'Crimson Pro',Georgia,serif;
+  --font-ui:'DM Sans',system-ui,sans-serif;
+}
+
+/* ===================== LAYOUT ===================== */
+.page-wrap{max-width:1008px;margin:0 auto;padding:0 2rem}
+.row{display:grid;grid-template-columns:560px 1fr;gap:48px;padding:2.5rem 0;border-bottom:1px solid var(--border);align-items:start}
+.main{min-width:0}
+.side{position:sticky;top:1.5rem;display:flex;flex-direction:column;gap:1rem}
+
+/* ===================== HERO ===================== */
+.hero{background:var(--bg-dark);color:var(--text-light);padding:3rem 0 2.5rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,20,16,0.85) 0%,rgba(26,20,16,0.7) 100%);z-index:1}
+.hero-bg{position:absolute;inset:0;background:url('https://cdn.1j1ju.com/thumbs/cover/medias/bb/bb/a5-dig-up-adventure-eclate.jpg') center/cover no-repeat;filter:blur(2px) brightness(0.6);z-index:0}
+.hero-content{position:relative;z-index:2}
+.hero-badge{display:inline-block;font-family:var(--font-ui);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--gold);border:1px solid rgba(196,136,45,0.4);border-radius:20px;padding:4px 14px;margin-bottom:1rem}
+.hero h1{font-family:var(--font-display);font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;line-height:1.15;margin-bottom:0.4rem}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero-sub{font-family:var(--font-body);font-size:1.05rem;font-weight:400;font-style:italic;color:rgba(245,239,224,0.6);margin-bottom:1rem}
+.hero-meta{display:flex;justify-content:center;gap:2rem;font-family:var(--font-ui);font-size:12px;color:rgba(245,239,224,0.45)}
+.hero-meta span::before{content:'';display:inline-block;width:4px;height:4px;background:var(--gold);border-radius:50%;margin-right:6px;vertical-align:middle}
+.hero-photo{margin:1.5rem auto 0;max-width:480px;border-radius:10px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.4)}
+.hero-photo img{width:100%;height:auto;display:block}
+
+/* ===================== TYPOGRAPHY ===================== */
+.step-tag{font-family:var(--font-ui);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--gold);margin-bottom:0.3rem}
+h2{font-family:var(--font-display);font-size:1.65rem;font-weight:700;line-height:1.2;margin-bottom:1rem;color:var(--text)}
+h3{font-family:var(--font-display);font-size:1.15rem;font-weight:700;margin:1.4rem 0 0.5rem;color:var(--text)}
+p{margin-bottom:0.8rem}
+strong{font-weight:700}
+
+/* ===================== RULE BOX ===================== */
+.rule-box{border:2px solid var(--gold);background:rgba(196,136,45,0.06);border-radius:8px;padding:0.8rem 1.1rem;margin:1rem 0}
+.rule-box.danger{border-color:var(--red);background:rgba(185,62,62,0.04)}
+.rule-box p{margin-bottom:0}
+
+/* ===================== SIDEBAR CARD ===================== */
+.side-card{background:var(--bg-sidebar);border-radius:10px;padding:1.2rem 1.3rem;color:var(--text-light)}
+.side-card p{font-family:var(--font-ui);font-size:0.88rem;line-height:1.6;margin-bottom:0.3rem;color:rgba(245,239,224,0.85)}
+.side-card p:last-child{margin-bottom:0}
+.side-card-label{display:block;font-family:var(--font-ui);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:0.5rem}
+.side-card-label.gold{color:#c9a94e}
+.side-card-label.red{color:#e87070}
+.side-card-label.green{color:#7cc98e}
+.side-card-label.blue{color:#7eaee0}
+.side-card-label.purple{color:#b899d4}
+
+/* ===================== FLOW DIAGRAM ===================== */
+.flow{display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap;margin:1rem 0}
+.fb{font-family:var(--font-ui);font-size:12px;font-weight:600;padding:6px 14px;border-radius:6px;white-space:nowrap}
+.fb-dark{background:var(--bg-dark);color:var(--gold)}
+.fb-gold{background:var(--gold);color:var(--bg-dark)}
+.fb-red{background:var(--red);color:#fff}
+.fb-green{background:var(--green);color:#fff}
+.fb-teal{background:var(--teal);color:#fff}
+.fa{color:var(--gold);font-weight:700;font-family:var(--font-ui);font-size:14px}
+
+/* ===================== TABLES ===================== */
+.rtable{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem}
+.rtable thead{background:var(--bg-dark)}
+.rtable th{font-family:var(--font-ui);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--gold);padding:8px 12px;text-align:left}
+.rtable td{padding:8px 12px;border-bottom:1px solid var(--border);font-family:var(--font-ui)}
+.rtable tbody tr:nth-child(even){background:rgba(44,36,24,0.03)}
+
+/* ===================== INLINE CARD TOKENS ===================== */
+.gem{display:inline-flex;align-items:center;justify-content:center;width:28px;height:38px;border-radius:5px;font-family:var(--font-ui);font-size:11px;font-weight:700;color:#fff;vertical-align:middle;margin:0 2px;line-height:1;text-shadow:0 1px 2px rgba(0,0,0,0.4)}
+.gem-red{background:linear-gradient(135deg,#c0392b,#e74c3c)}
+.gem-blue{background:linear-gradient(135deg,#2471a3,#3498db)}
+.gem-green{background:linear-gradient(135deg,#1e8449,#27ae60)}
+.gem-yellow{background:linear-gradient(135deg,#b7950b,#f1c40f);color:#5d4e0e;text-shadow:none}
+.gem-purple{background:linear-gradient(135deg,#6c3483,#8e44ad)}
+.gem-orange{background:linear-gradient(135deg,#ba6516,#e67e22)}
+.gem-adventure{background:linear-gradient(135deg,#6d4c2a,#8d6e4a);border:1.5px dashed rgba(255,255,255,0.4)}
+.gem-idol{background:linear-gradient(135deg,#b7950b,#d4ac0d);border:2px solid #8b7209}
+.gem-skeleton{background:linear-gradient(135deg,#566573,#839192);border:1.5px solid #4a5568}
+.gem-facedown{background:linear-gradient(135deg,#5d4e37,#7d6e57);border:1.5px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.3)}
+
+/* ===================== PHOTO / IMAGE ===================== */
+.photo-block{margin:1.2rem 0;border-radius:10px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.12);background:var(--bg-dark)}
+.photo-block img{width:100%;height:auto;display:block}
+.photo-caption{font-family:var(--font-ui);font-size:11px;color:var(--text-muted);text-align:center;padding:6px;background:rgba(44,36,24,0.04)}
+
+/* ===================== DIAGRAM CONTAINER ===================== */
+.diagram{background:var(--bg-dark);border-radius:10px;padding:1.2rem;margin:1rem 0;text-align:center}
+.diagram-title{font-family:var(--font-ui);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:0.8rem}
+
+/* ===================== INTERACTIVE DEMO ===================== */
+.demo{background:var(--bg-dark);border-radius:10px;padding:1.4rem;margin:1rem 0}
+.demo-title{font-family:var(--font-ui);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:0.8rem;text-align:center}
+.demo-btn{font-family:var(--font-ui);font-size:13px;font-weight:600;background:transparent;color:var(--gold);border:1.5px solid var(--gold);border-radius:6px;padding:6px 18px;cursor:pointer;transition:all 0.2s}
+.demo-btn:hover{background:var(--gold);color:var(--bg-dark)}
+.demo-result{font-family:var(--font-ui);font-size:13px;color:var(--text-light);margin-top:0.8rem;min-height:1.4rem;text-align:center}
+
+/* ===================== KNOWLEDGE CHECK ===================== */
+.kcheck{background:var(--bg-dark);border-radius:10px;padding:1.5rem;margin:1.5rem 0}
+.kcheck h4{font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:var(--gold);margin-bottom:1rem}
+.kc-q{font-family:var(--font-ui);font-size:0.88rem;color:var(--text-light);margin-bottom:0.7rem;line-height:1.6}
+.kc-opts{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:0.3rem}
+.kc-opt{font-family:var(--font-ui);font-size:13px;color:var(--text-light);padding:8px 14px;border:1px solid rgba(245,239,224,0.12);border-radius:6px;cursor:pointer;transition:all 0.2s}
+.kc-opt:hover{border-color:var(--gold);color:var(--gold)}
+.kc-opt.correct{border-color:var(--green);background:rgba(74,124,89,0.2);color:#7cc98e}
+.kc-opt.wrong{border-color:var(--red);background:rgba(185,62,62,0.15);color:#e87070;opacity:0.6}
+.kc-opt.dim{opacity:0.35;pointer-events:none}
+.kc-fb{font-family:var(--font-ui);font-size:12px;line-height:1.5;padding:8px 0;display:none}
+.kc-fb.show{display:block}
+.kc-fb.yes{color:#7cc98e}
+.kc-fb.no{color:#e87070}
+.kc-divider{height:1px;background:rgba(245,239,224,0.08);margin:1.2rem 0}
+
+/* ===================== DARK SUMMARY PANEL ===================== */
+.summary-panel{background:var(--bg-dark);color:var(--text-light);border-radius:10px;padding:1.3rem 1.5rem;margin:1rem 0}
+.sp-item{display:flex;gap:0.8rem;align-items:baseline;padding:0.3rem 0}
+.sp-num{color:var(--gold);font-weight:700;font-family:var(--font-ui);font-size:14px;min-width:20px}
+.sp-text{font-family:var(--font-ui);font-size:0.88rem;line-height:1.6}
+
+/* ===================== SETUP CHECKLIST ===================== */
+.setup-list{list-style:none;counter-reset:setup}
+.setup-list li{counter-increment:setup;display:flex;gap:0.8rem;align-items:baseline;padding:0.4rem 0;border-bottom:1px solid var(--border)}
+.setup-list li::before{content:counter(setup);font-family:var(--font-ui);font-size:12px;font-weight:700;color:var(--gold);background:rgba(196,136,45,0.1);border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* ===================== FOOTNOTES ===================== */
+.fn-ref{font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--gold);cursor:pointer;text-decoration:none;vertical-align:super;line-height:0;margin:0 1px;opacity:0.7;transition:opacity 0.2s}
+.fn-ref:hover{opacity:1}
+.fn-section{max-height:0;overflow:hidden;transition:max-height 0.4s ease;margin-top:0.5rem}
+.fn-section.open{max-height:600px}
+.fn-toggle{font-family:var(--font-ui);font-size:11px;color:var(--text-muted);background:none;border:1px solid var(--border);border-radius:4px;padding:3px 10px;cursor:pointer;margin-top:0.8rem;transition:all 0.2s}
+.fn-toggle:hover{color:var(--gold);border-color:var(--gold)}
+.fn-item{font-family:var(--font-ui);font-size:12px;color:var(--text-muted);line-height:1.5;padding:0.2rem 0;border-top:1px solid var(--border)}
+.fn-item:first-child{border-top:none}
+.fn-item .fn-num{color:var(--gold);font-weight:600;margin-right:0.3rem}
+.fn-item a{color:var(--gold);text-decoration:none;opacity:0.8}
+.fn-item a:hover{opacity:1;text-decoration:underline}
+
+/* ===================== QUICK REFERENCE ===================== */
+.qref-toggle{position:fixed;bottom:1.5rem;right:1.5rem;width:48px;height:48px;border-radius:50%;background:var(--bg-dark);border:2px solid var(--gold);color:var(--gold);font-family:var(--font-ui);font-size:18px;font-weight:700;cursor:pointer;z-index:1000;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,0.3);transition:all 0.2s}
+.qref-toggle:hover{transform:scale(1.08)}
+.qref-panel{position:fixed;bottom:5rem;right:1.5rem;width:340px;max-height:70vh;background:var(--bg-dark);border:1.5px solid rgba(196,136,45,0.3);border-radius:12px;z-index:999;box-shadow:0 8px 40px rgba(0,0,0,0.4);overflow:hidden;display:none}
+.qref-panel.open{display:flex;flex-direction:column}
+.qref-header{padding:1rem 1.2rem 0.7rem;border-bottom:1px solid rgba(245,239,224,0.08)}
+.qref-header h3{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--gold);margin-bottom:0.5rem}
+.qref-search{width:100%;padding:0.4rem 0.7rem;border-radius:5px;border:1px solid rgba(245,239,224,0.12);background:rgba(245,239,224,0.06);color:var(--text-light);font-family:var(--font-ui);font-size:13px}
+.qref-search::placeholder{color:rgba(245,239,224,0.3)}
+.qref-body{overflow-y:auto;flex:1;padding:0.3rem 0}
+.qref-item{padding:0.5rem 1.2rem;cursor:pointer;border-bottom:1px solid rgba(245,239,224,0.04);transition:background 0.15s}
+.qref-item:hover{background:rgba(245,239,224,0.04)}
+.qref-term{font-family:var(--font-ui);font-size:13px;font-weight:600;color:var(--gold)}
+.qref-step{font-family:var(--font-ui);font-size:10px;color:rgba(245,239,224,0.35);margin-left:0.5rem}
+.qref-def{font-family:var(--font-ui);font-size:11px;color:rgba(245,239,224,0.55);display:none;margin-top:0.3rem;line-height:1.5}
+.qref-item.expanded .qref-def{display:block}
+
+/* ===================== FOOTER ===================== */
+footer{background:var(--bg-dark);color:rgba(245,239,224,0.35);padding:2rem;text-align:center;font-family:var(--font-ui);font-size:11px;line-height:1.6;margin-top:2rem}
+footer a{color:var(--gold);text-decoration:none;opacity:0.7}
+footer a:hover{opacity:1}
+
+/* ===================== EVAL STRIP ===================== */
+.eval-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin:1rem 0;border-radius:8px;overflow:hidden}
+.es{background:var(--bg-dark);padding:10px 8px;text-align:center;font-family:var(--font-ui);font-size:11px;color:var(--text-light)}
+.es-letter{display:block;font-size:16px;font-weight:700;color:var(--gold);margin-bottom:2px}
+
+/* ===================== RESPONSIVE ===================== */
+@media(max-width:960px){
+  .row{grid-template-columns:1fr;gap:1.5rem}
+  .side{position:static;flex-direction:row;flex-wrap:wrap;gap:0.8rem}
+  .side-card{flex:1;min-width:250px}
+}
+@media(max-width:600px){
+  html{font-size:16px}
+  .page-wrap{padding:0 1rem}
+  .hero h1{font-size:1.8rem}
+  .eval-strip{grid-template-columns:repeat(2,1fr)}
+  .hero-meta{flex-wrap:wrap;gap:0.8rem;justify-content:center}
+  .qref-panel{width:calc(100vw - 2rem);right:1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ======================== HERO ======================== -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-badge">Interactive Lesson</span>
+    <h1>Learn to Play <em>DIG UP Adventure</em></h1>
+    <p class="hero-sub">A treasure-hunting card game by Babel Dread &amp; Régis Torres</p>
+    <div class="hero-meta">
+      <span>2–4 Players</span>
+      <span>15–30 Min</span>
+      <span>Ages 8+</span>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+<!-- ======================== STEP 1: THE GOAL ======================== -->
+<div class="row">
+  <div class="main">
+    <div class="step-tag">Step 1</div>
+    <h2>The Goal</h2>
+    <p>You are an adventurer digging for gems in an ancient mine. Your <strong>mine</strong> is a 3&times;3 grid of nine cards. At the start, eight of these are face-down&mdash;you don't know what's buried there.</p>
+    <p>Your goal is simple: fill all nine slots of your mine with cards that score the most points. When any player reveals all nine of their cards, the game ends and scores are tallied.</p>
+
+    <div class="rule-box">
+      <p><strong>You win by having the highest score when the game ends.</strong> Finishing first doesn't guarantee victory&mdash;it just triggers the end.</p>
+    </div>
+
+    <!-- Photo: component spread -->
+    <div class="photo-block">
+      <img src="https://www.neoludis.com/wp-content/uploads/2022/08/JDPAZG001_3-600x600.png" alt="DIG UP Adventure game components spread" loading="lazy">
+      <div class="photo-caption">DIG UP Adventure &mdash; game components. Photo: Neo Ludis</div>
+    </div>
+
+    <button class="fn-toggle" onclick="toggleFnSection(this)">Sources &#9656;</button>
+    <div class="fn-section">
+      <div class="fn-item"><span class="fn-num">1.</span> Official Rulebook: "The goal is to fill the 9 slots of your mine with cards granting you the most points."</div>
+      <div class="fn-item"><span class="fn-num">2.</span> <a href="https://en.boardgamearena.com/gamepanel?game=digupadventure">Board Game Arena</a>: "As soon as a Mine is entirely revealed, the game comes to an end."</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label blue">Game Comparison</span>
+      <p>If you've played <strong>Skyjo</strong> or the card game <strong>Golf</strong>, you'll feel right at home. Dig Up Adventure uses the same hidden-grid-of-cards concept, but adds adventure cards for more player interaction.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label red">Common Mistake</span>
+      <p>Don't race to reveal all your cards first! Completing your mine triggers the end, but the <em>highest score</em> wins. A mine full of bad cards loses to one with carefully placed gems.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== STEP 2: SCORING ======================== -->
+<div class="row">
+  <div class="main">
+    <div class="step-tag">Step 2</div>
+    <h2>How Scoring Works</h2>
+    <p>Before learning what to <em>do</em> on your turn, you need to understand what you're optimizing for. Every card in your mine scores based on two factors: <strong>color</strong> and <strong>position</strong>.</p>
+
+    <h3>Your Favorite Color</h3>
+    <p>At the start of the game, you receive a <strong>Player Card</strong> that assigns you a <strong>favorite color</strong>. Gems matching your favorite color are worth more.</p>
+
+    <h3>Position Numbering</h3>
+    <p>Each slot in your mine is numbered 1 through 9. Each <strong>gem card</strong> is also numbered 1–9. When a gem's number matches the slot it's placed in, you score a position bonus.</p>
+
+    <!-- SVG: Mine position grid -->
+    <div class="diagram">
+      <div class="diagram-title">Mine Position Numbering</div>
+      <svg viewBox="0 0 300 300" style="width:100%;max-width:300px;height:auto;">
+        <!-- Grid cells -->
+        <rect x="10" y="10" width="86" height="86" rx="8" fill="#3a2f22" stroke="#c4882d" stroke-width="1.5"/>
+        <rect x="107" y="10" width="86" height="86" rx="8" fill="#3a2f22" stroke="#c4882d" stroke-width="1.5"/>
+        <rect x="204" y="10" width="86" height="86" rx="8" fill="#3a2f22" stroke="#c4882d" stroke-width="1.5"/>
+        <rect x="10" y="107" width="86" height="86" rx="8" fill="#3a2f22" stroke="#c4882d" stroke-width="1.5"/>
+        <rect x="107" y="107" width="86" height="86" rx="8" fill="#c4882d" stroke="#c4882d" stroke-width="1.5" opacity="0.3"/>
+        <rect x="204" y="107" width="86" height="86" rx="8" fill="#3a2f22" stroke="#c4882d" stroke-width="1.5"/>
+        <rect x="10" y="204" width="86" height="86" rx="8" fill="#3a2f22" stroke="#c4882d" stroke-width="1.5"/>
+        <rect x="107" y="204" width="86" height="86" rx="8" fill="#3a2f22" stroke="#c4882d" stroke-width="1.5"/>
+        <rect x="204" y="204" width="86" height="86" rx="8" fill="#3a2f22" stroke="#c4882d" stroke-width="1.5"/>
+        <!-- Numbers -->
+        <text x="53" y="62" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">1</text>
+        <text x="150" y="62" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">2</text>
+        <text x="247" y="62" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">3</text>
+        <text x="53" y="159" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">4</text>
+        <text x="150" y="159" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">5</text>
+        <text x="247" y="159" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">6</text>
+        <text x="53" y="256" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">7</text>
+        <text x="150" y="256" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">8</text>
+        <text x="247" y="256" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">9</text>
+        <!-- Center label -->
+        <text x="150" y="182" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" text-transform="uppercase" letter-spacing="1">STARTS FACE-UP</text>
+      </svg>
+    </div>
+
+    <h3>Scoring Table</h3>
+    <table class="rtable">
+      <thead><tr><th>Condition</th><th>Points</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>Favorite color + correct position</td><td><strong>3 pts</strong></td><td>Your color is red; <span class="gem gem-red">5</span> in slot 5</td></tr>
+        <tr><td>Favorite color + wrong position</td><td><strong>2 pts</strong></td><td>Your color is red; <span class="gem gem-red">3</span> in slot 7</td></tr>
+        <tr><td>Other color + correct position</td><td><strong>1 pt</strong></td><td>Your color is red; <span class="gem gem-blue">5</span> in slot 5</td></tr>
+        <tr><td>Other color + wrong position</td><td><strong>0 pts</strong></td><td>Your color is red; <span class="gem gem-blue">3</span> in slot 7</td></tr>
+        <tr><td>Idol card (any position)</td><td><strong>2 pts</strong></td><td><span class="gem gem-idol">&#9733;</span> in any slot</td></tr>
+        <tr><td>Skeleton card (any position)</td><td><strong>0 pts</strong></td><td><span class="gem gem-skeleton">&#9760;</span> in any slot</td></tr>
+      </tbody>
+    </table>
+
+    <div class="rule-box">
+      <p><strong>The maximum score for a single card is 3 points</strong> &mdash; your favorite color in its matching numbered position. A perfect mine of all 9 favorite-color gems in the right spots would score 27 points.</p>
+    </div>
+
+    <button class="fn-toggle" onclick="toggleFnSection(this)">Sources &#9656;</button>
+    <div class="fn-section">
+      <div class="fn-item"><span class="fn-num">1.</span> <a href="https://en.boardgamearena.com/gamepanel?game=digupadventure">BGA Rules</a>: "Favorite color in correct position = 3 points, favorite color incorrect position = 2 points, non-favorite color correct position = 1 point."</div>
+      <div class="fn-item"><span class="fn-num">2.</span> <a href="https://www.philibertnet.com/en/amazing-game/113341-dig-up-adventure-3770027401001.html">Philibert product page</a>: "Idol cards = 2 points. Skeleton cards = no points."</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label red">Common Mistake</span>
+      <p>Many new players focus only on color and ignore the position numbers entirely. A gem of your color in the right slot is worth <strong>50% more</strong> than one in the wrong slot (3 vs 2). Always check the number!</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label green">Strategy Tip</span>
+      <p>A non-favorite gem in its correct position (1 pt) is better than nothing. If you can't find your color, position-matching is your fallback plan.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== STEP 3: YOUR TURN ======================== -->
+<div class="row">
+  <div class="main">
+    <div class="step-tag">Step 3</div>
+    <h2>What You Do on Your Turn</h2>
+    <p>Your turn has three phases, always in this order:</p>
+
+    <div class="eval-strip">
+      <div class="es"><span class="es-letter">1</span>Play Cards</div>
+      <div class="es"><span class="es-letter">2</span>Discard</div>
+      <div class="es"><span class="es-letter">3</span>Draw</div>
+      <div class="es"><span class="es-letter">&circlearrowright;</span>Next Player</div>
+    </div>
+
+    <h3>Phase 1: Play Up to 2 Cards</h3>
+    <p>You may play <strong>0, 1, or 2 cards</strong> from your hand. You can play any combination of gem cards and adventure cards.</p>
+
+    <h3>Phase 2: Discard (Optional)</h3>
+    <p>After playing, you may discard any unwanted cards from your hand to the discard pile.</p>
+
+    <h3>Phase 3: Draw Back to 3</h3>
+    <p>Refill your hand to <strong>3 cards</strong> from the draw pile. Your hand size is always 3 at the start of your next turn.</p>
+
+    <div class="rule-box">
+      <p><strong>Your hand limit is 3 cards.</strong> You always draw back up to 3 at the end of your turn, regardless of how many you played or discarded.</p>
+    </div>
+
+    <button class="fn-toggle" onclick="toggleFnSection(this)">Sources &#9656;</button>
+    <div class="fn-section">
+      <div class="fn-item"><span class="fn-num">1.</span> <a href="https://en.boardgamearena.com/gamepanel?game=digupadventure">BGA Rules</a>: "On your turn, you can play up to 2 cards from your hand."</div>
+      <div class="fn-item"><span class="fn-num">2.</span> <a href="https://en.boardgamearena.com/gamepanel?game=digupadventure">BGA Rules</a>: "Hand limit is 3. Your hand will automatically be filled back up to 3."</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label gold">Key Insight</span>
+      <p>You don't <em>have</em> to play any cards. Sometimes it's better to discard a bad hand and draw fresh. Playing a card just to play one can backfire.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label red">Common Mistake</span>
+      <p>Some players try to draw cards mid-turn. Drawing <strong>only</strong> happens at the end, after you've played and discarded.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== STEP 4: PLAYING GEM CARDS ======================== -->
+<div class="row">
+  <div class="main">
+    <div class="step-tag">Step 4</div>
+    <h2>Playing Gem Cards</h2>
+    <p>Gem cards are the foundation of your mine. When you play a gem card from your hand, you place it into a slot in your mine. The result depends on whether the target slot is face-down or face-up.</p>
+
+    <h3>Onto a Face-Down Slot</h3>
+    <p>When you play a gem onto a <strong>face-down card</strong>, the two cards <strong>swap</strong>. Your gem goes into the mine (face-up), and the face-down card comes into your hand &mdash; now revealed to you.</p>
+
+    <div class="flow">
+      <span class="fb fb-gold">Gem from hand</span>
+      <span class="fa">&rarr;</span>
+      <span class="fb fb-dark">Swap</span>
+      <span class="fa">&rarr;</span>
+      <span class="fb fb-teal">Old card to hand</span>
+    </div>
+
+    <h3>Onto a Face-Up Slot</h3>
+    <p>When you play a gem onto a slot that already has a <strong>face-up card</strong>, you replace it. The old card goes to the <strong>discard pile</strong> (not your hand).</p>
+
+    <div class="flow">
+      <span class="fb fb-gold">Gem from hand</span>
+      <span class="fa">&rarr;</span>
+      <span class="fb fb-dark">Replace</span>
+      <span class="fa">&rarr;</span>
+      <span class="fb fb-red">Old card to discard</span>
+    </div>
+
+    <div class="rule-box danger">
+      <p><strong>You cannot peek at your own face-down cards.</strong> The only way to see what's hidden in your mine is to swap a gem into that slot, or use an adventure card that lets you peek or reveal.</p>
+    </div>
+
+    <button class="fn-toggle" onclick="toggleFnSection(this)">Sources &#9656;</button>
+    <div class="fn-section">
+      <div class="fn-item"><span class="fn-num">1.</span> <a href="https://en.boardgamearena.com/news?id=712">BGA News</a>: "Deploy Gem cards into their mines and utilize Adventure cards for strategic advantages."</div>
+      <div class="fn-item"><span class="fn-num">2.</span> <a href="https://www.meepleqc.ca/2023/08/28/dig-up-adventure-avis-critique-et-test-de-jeu/">Meeple QC Review</a>: Confirmed swap mechanic and discard behavior for face-up replacements.</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label red">Common Mistake</span>
+      <p>New players often think swapping a face-down card discards it. <strong>It goes to your hand!</strong> This is a key tactical difference &mdash; you now know that card and can plan around it.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label blue">Game Comparison</span>
+      <p>This swap-and-reveal mechanic is almost identical to <strong>Skyjo</strong> and <strong>Golf</strong>. The twist is that Dig Up Adventure cares about <em>which slot</em> a card lands in, not just its value.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label green">Strategy Tip</span>
+      <p>Early game, swap into face-down slots to <em>discover</em> what's hidden. Later, replace face-up cards to <em>optimize</em> your score. The swap phase is intel-gathering; the replace phase is fine-tuning.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== STEP 5: ADVENTURE CARDS ======================== -->
+<div class="row">
+  <div class="main">
+    <div class="step-tag">Step 5</div>
+    <h2>Adventure Cards</h2>
+    <p><strong>Adventure cards</strong> are action cards with special effects. When you play one, you apply its effect immediately, then discard it. Adventure cards never go into your mine&mdash;they're single-use tools.</p>
+
+    <h3>What Adventure Cards Do</h3>
+    <p>Adventure cards let you manipulate the game state in ways gem cards can't. Their effects fall into five categories:</p>
+
+    <table class="rtable">
+      <thead><tr><th>Action</th><th>Effect</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Reveal</strong></td><td>Flip a face-down card in any player's mine face-up</td></tr>
+        <tr><td><strong>Peek</strong></td><td>Secretly look at a face-down card (yours or an opponent's) without revealing it to others</td></tr>
+        <tr><td><strong>Swap</strong></td><td>Exchange cards between mines &mdash; yours or between opponents</td></tr>
+        <tr><td><strong>Steal</strong></td><td>Take a card from an opponent's mine and replace it with one from yours</td></tr>
+        <tr><td><strong>Draw</strong></td><td>Draw extra cards from the draw pile</td></tr>
+      </tbody>
+    </table>
+
+    <p>Each adventure card describes its specific effect. Read the card text carefully when you play it.</p>
+
+    <div class="rule-box">
+      <p><strong>Adventure cards are discarded after use.</strong> They never occupy a mine slot. Play them for their effect, then put them in the discard pile.</p>
+    </div>
+
+    <button class="fn-toggle" onclick="toggleFnSection(this)">Sources &#9656;</button>
+    <div class="fn-section">
+      <div class="fn-item"><span class="fn-num">1.</span> <a href="https://en.boardgamearena.com/news?id=712">BGA News</a>: "Use Adventure cards to your advantage to reveal, swap or steal cards in play."</div>
+      <div class="fn-item"><span class="fn-num">2.</span> <a href="https://en.1jour-1jeu.com/cardgame/2022-dig-up-adventure">1jour-1jeu</a>: "Action cards help you progress or even trouble your adversaries, and are discarded immediately."</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label blue">Game Comparison</span>
+      <p>Adventure cards serve a similar role to <strong>action cards in Uno</strong>&mdash;they let you mess with opponents or give yourself an advantage beyond just playing gems.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label green">Strategy Tip</span>
+      <p>Peek cards are underrated. Knowing what's face-down in your mine lets you make smarter swaps later. Information is power!</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== STEP 6: IDOLS & SKELETONS ======================== -->
+<div class="row">
+  <div class="main">
+    <div class="step-tag">Step 6</div>
+    <h2>Idols &amp; Skeletons</h2>
+    <p>Two special card types can appear in your mine alongside gems.</p>
+
+    <h3>Idol Cards <span class="gem gem-idol">&#9733;</span></h3>
+    <p><strong>Idols</strong> are golden treasures worth <strong>2 points</strong> in any position. They ignore the position-numbering system&mdash;an idol scores 2 points no matter where it sits.</p>
+    <p>You may play an idol from your hand into your mine, but only if you <strong>don't already have one</strong> in your mine. However, adventure card effects (like swaps or steals) can result in multiple idols in your mine.</p>
+
+    <h3>Skeleton Cards <span class="gem gem-skeleton">&#9760;</span></h3>
+    <p><strong>Skeletons</strong> are duds worth <strong>0 points</strong>. They occupy a mine slot without contributing to your score. If one turns up in your mine, try to replace it as soon as possible.</p>
+
+    <div class="rule-box danger">
+      <p><strong>You can only play 1 idol from your hand into your mine.</strong> If your mine already contains an idol (even one placed by a card effect), you cannot play another from your hand. Multiple idols only happen through adventure card effects.</p>
+    </div>
+
+    <button class="fn-toggle" onclick="toggleFnSection(this)">Sources &#9656;</button>
+    <div class="fn-section">
+      <div class="fn-item"><span class="fn-num">1.</span> <a href="https://en.boardgamearena.com/gamepanel?game=digupadventure">BGA Rules</a>: "Idol cards = 2 points." and "You can't play an idol card from your hand if there is already one in your mine."</div>
+      <div class="fn-item"><span class="fn-num">2.</span> <a href="https://en.boardgamearena.com/gamepanel?game=digupadventure">BGA Rules</a>: "Skeleton cards = no points."</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label red">Common Mistake</span>
+      <p>Players sometimes think you can never have more than one idol. You can&mdash;just not from your hand. Swaps and steals can land extra idols in your mine, and that's perfectly legal.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label green">Strategy Tip</span>
+      <p>An idol at 2 pts is better than a wrong-color gem in the wrong slot (0 pts), but worse than your favorite color in any position (2–3 pts). Use idols to plug gaps, not as a primary strategy.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== STEP 7: GAME END & TIEBREAKER ======================== -->
+<div class="row">
+  <div class="main">
+    <div class="step-tag">Step 7</div>
+    <h2>Game End &amp; Winning</h2>
+    <p>The game ends the moment <strong>any player has all 9 cards in their mine face-up</strong>. This can happen through gem swaps, adventure card reveals, or any combination.</p>
+    <p>Once triggered, all players flip their remaining face-down cards and calculate their scores.</p>
+
+    <div class="flow">
+      <span class="fb fb-gold">Mine complete</span>
+      <span class="fa">&rarr;</span>
+      <span class="fb fb-dark">All mines revealed</span>
+      <span class="fa">&rarr;</span>
+      <span class="fb fb-teal">Tally scores</span>
+      <span class="fa">&rarr;</span>
+      <span class="fb fb-green">Highest wins!</span>
+    </div>
+
+    <h3>Tiebreaker</h3>
+    <p>If two or more players tie on points, the player with the <strong>most consecutive cards of their favorite color</strong> in their mine wins. Count adjacent slots (reading left-to-right, top-to-bottom) that contain your color.</p>
+
+    <div class="rule-box">
+      <p><strong>When any mine is fully revealed, the game ends immediately.</strong> Every remaining face-down card in all mines is flipped and scores are tallied. You don't get extra turns.</p>
+    </div>
+
+    <!-- Photo: box cover showing theme -->
+    <div class="photo-block">
+      <img src="https://cdn.1j1ju.com/thumbs/game-lg/medias/45/cc/a5-dig-up-adventure-cover.jpg" alt="DIG UP Adventure box cover art" loading="lazy">
+      <div class="photo-caption">DIG UP Adventure &mdash; box art by Régis Torres. Photo: 1jour-1jeu</div>
+    </div>
+
+    <button class="fn-toggle" onclick="toggleFnSection(this)">Sources &#9656;</button>
+    <div class="fn-section">
+      <div class="fn-item"><span class="fn-num">1.</span> <a href="https://en.boardgamearena.com/news?id=712">BGA News</a>: "As soon as a Mine is entirely revealed, the game comes to an end and the player with the most points wins!"</div>
+      <div class="fn-item"><span class="fn-num">2.</span> <a href="https://en.boardgamearena.com/gamepanel?game=digupadventure">BGA Rules</a>: "Tie breaker: the person with the most consecutive cards of their favorite color wins."</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label red">Common Mistake</span>
+      <p>Rushing to reveal all 9 cards is tempting, but dangerous. If your mine is full of skeletons and wrong-color gems, you're handing the win to opponents who took time to optimize.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label gold">Key Insight</span>
+      <p>The endgame trigger creates a fascinating tension: you want to optimize your mine, but if you wait too long, an opponent might end the game before you're ready.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== KNOWLEDGE CHECK ======================== -->
+<div class="row" style="grid-template-columns:1fr;border-bottom:none">
+  <div class="main" style="max-width:700px;margin:0 auto">
+    <div class="kcheck">
+      <h4>&#x1F48E; Quick Check</h4>
+
+      <div class="kc-q"><strong>Q1:</strong> Your favorite color is red. You place a <span class="gem gem-red">5</span> in slot 5 of your mine. How many points is this worth?</div>
+      <div class="kc-opts" id="q1o">
+        <div class="kc-opt" onclick="ans(this,'q1',1)">3 points (favorite color + correct position)</div>
+        <div class="kc-opt" onclick="ans(this,'q1',0)">2 points (favorite color only)</div>
+        <div class="kc-opt" onclick="ans(this,'q1',0)">1 point (correct position only)</div>
+      </div>
+      <div class="kc-fb yes" id="q1y">&#10003; Correct! Favorite color in the matching position scores the maximum 3 points. (Step 2)</div>
+      <div class="kc-fb no" id="q1n">&#10007; Not quite. Color AND position both match here, so it's 3 points &mdash; the maximum. Review Step 2.</div>
+
+      <div class="kc-divider"></div>
+
+      <div class="kc-q"><strong>Q2:</strong> You play a gem card onto a face-down slot in your mine. What happens to the face-down card?</div>
+      <div class="kc-opts" id="q2o">
+        <div class="kc-opt" onclick="ans(this,'q2',0)">It goes to the discard pile</div>
+        <div class="kc-opt" onclick="ans(this,'q2',1)">It goes to your hand (now revealed to you)</div>
+        <div class="kc-opt" onclick="ans(this,'q2',0)">It stays face-down in the same slot</div>
+      </div>
+      <div class="kc-fb yes" id="q2y">&#10003; Correct! It's a swap &mdash; the face-down card comes to your hand, and you now know what it is. (Step 4)</div>
+      <div class="kc-fb no" id="q2n">&#10007; It's a swap, not a discard. The old card goes to your hand, revealed. This is one of the most commonly misunderstood rules! (Step 4)</div>
+
+      <div class="kc-divider"></div>
+
+      <div class="kc-q"><strong>Q3:</strong> What triggers the end of the game?</div>
+      <div class="kc-opts" id="q3o">
+        <div class="kc-opt" onclick="ans(this,'q3',0)">The draw pile runs out</div>
+        <div class="kc-opt" onclick="ans(this,'q3',1)">Any player reveals all 9 cards in their mine</div>
+        <div class="kc-opt" onclick="ans(this,'q3',0)">A set number of rounds are completed</div>
+      </div>
+      <div class="kc-fb yes" id="q3y">&#10003; Correct! The instant any player's mine is fully face-up, the game ends and scores are tallied. (Step 7)</div>
+      <div class="kc-fb no" id="q3n">&#10007; The game ends when any player has all 9 mine cards face-up. It's not about rounds or the draw pile. (Step 7)</div>
+
+      <div class="kc-divider"></div>
+
+      <div class="kc-q"><strong>Q4:</strong> Can you have 2 idol cards in your mine?</div>
+      <div class="kc-opts" id="q4o">
+        <div class="kc-opt" onclick="ans(this,'q4',0)">No, never &mdash; one idol maximum</div>
+        <div class="kc-opt" onclick="ans(this,'q4',1)">Yes, but only through adventure card effects (not from your hand)</div>
+        <div class="kc-opt" onclick="ans(this,'q4',0)">Yes, you can play as many as you like</div>
+      </div>
+      <div class="kc-fb yes" id="q4y">&#10003; Correct! You can only <em>play</em> one idol from your hand, but swaps and steals can result in multiple idols in your mine. (Step 6)</div>
+      <div class="kc-fb no" id="q4n">&#10007; You can only play one from your hand, but adventure effects can add more. You can't freely play multiples, but multiples <em>can</em> happen. (Step 6)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== STEP 8: SETUP ======================== -->
+<div class="row">
+  <div class="main">
+    <div class="step-tag">Step 8</div>
+    <h2>Setup</h2>
+    <p>Now that you understand how the game works, setup is straightforward.</p>
+
+    <ol class="setup-list">
+      <li>Give each player a <strong>Player Card</strong> that shows their <strong>favorite color</strong>. Keep it visible.</li>
+      <li>Shuffle all <strong>Gem Cards</strong> into one deck and all <strong>Adventure Cards</strong> into a separate deck. Place both as face-down draw piles in the center.</li>
+      <li>Deal <strong>9 cards</strong> face-down from the Gem deck to each player.</li>
+      <li>Each player arranges their 9 cards into a <strong>3&times;3 grid</strong> &mdash; this is their <strong>Mine</strong>. All cards stay face-down.</li>
+      <li>Each player <strong>flips their center card</strong> (position 5) face-up.</li>
+      <li>Each player draws <strong>3 cards</strong> to form their starting hand.</li>
+      <li>Choose a starting player. Play clockwise.</li>
+    </ol>
+
+    <!-- SVG: Setup diagram -->
+    <div class="diagram">
+      <div class="diagram-title">Starting Player Setup</div>
+      <svg viewBox="0 0 440 260" style="width:100%;max-width:440px;height:auto;">
+        <!-- Mine grid -->
+        <text x="110" y="18" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">YOUR MINE</text>
+        <!-- Face-down cards -->
+        <rect x="30" y="30" width="50" height="65" rx="6" fill="#5d4e37" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <text x="55" y="67" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="10">?</text>
+        <rect x="85" y="30" width="50" height="65" rx="6" fill="#5d4e37" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <text x="110" y="67" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="10">?</text>
+        <rect x="140" y="30" width="50" height="65" rx="6" fill="#5d4e37" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <text x="165" y="67" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="10">?</text>
+        <rect x="30" y="100" width="50" height="65" rx="6" fill="#5d4e37" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <text x="55" y="137" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="10">?</text>
+        <!-- Center card face-up -->
+        <rect x="85" y="100" width="50" height="65" rx="6" fill="#c0392b" stroke="#c4882d" stroke-width="2"/>
+        <text x="110" y="137" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">5</text>
+        <text x="110" y="155" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="DM Sans,sans-serif" font-size="7">FACE UP</text>
+        <rect x="140" y="100" width="50" height="65" rx="6" fill="#5d4e37" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <text x="165" y="137" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="10">?</text>
+        <rect x="30" y="170" width="50" height="65" rx="6" fill="#5d4e37" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <text x="55" y="207" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="10">?</text>
+        <rect x="85" y="170" width="50" height="65" rx="6" fill="#5d4e37" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <text x="110" y="207" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="10">?</text>
+        <rect x="140" y="170" width="50" height="65" rx="6" fill="#5d4e37" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <text x="165" y="207" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="10">?</text>
+
+        <!-- Hand -->
+        <text x="325" y="18" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">YOUR HAND</text>
+        <rect x="270" y="30" width="40" height="55" rx="5" fill="#2471a3" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+        <text x="290" y="62" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">3</text>
+        <rect x="315" y="30" width="40" height="55" rx="5" fill="#6d4c2a" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="335" y="55" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="DM Sans,sans-serif" font-size="8">ADV</text>
+        <rect x="360" y="30" width="40" height="55" rx="5" fill="#1e8449" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+        <text x="380" y="62" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">7</text>
+
+        <!-- Player card -->
+        <text x="325" y="115" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">PLAYER CARD</text>
+        <rect x="290" y="125" width="70" height="45" rx="6" fill="#c0392b" stroke="#c4882d" stroke-width="1.5"/>
+        <text x="325" y="152" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="9" font-weight="600">FAV: RED</text>
+
+        <!-- Arrow showing "3 cards" -->
+        <text x="325" y="198" text-anchor="middle" fill="rgba(245,239,224,0.4)" font-family="DM Sans,sans-serif" font-size="9">3 cards in hand</text>
+        <text x="325" y="215" text-anchor="middle" fill="rgba(245,239,224,0.4)" font-family="DM Sans,sans-serif" font-size="9">9 cards in mine</text>
+        <text x="325" y="232" text-anchor="middle" fill="rgba(245,239,224,0.4)" font-family="DM Sans,sans-serif" font-size="9">Center card revealed</text>
+      </svg>
+    </div>
+
+    <button class="fn-toggle" onclick="toggleFnSection(this)">Sources &#9656;</button>
+    <div class="fn-section">
+      <div class="fn-item"><span class="fn-num">1.</span> <a href="https://en.boardgamearena.com/gamepanel?game=digupadventure">BGA Rules</a>: "Each player receives 9 unknown cards and set up their Mine by placing them face down in a 3x3 square."</div>
+      <div class="fn-item"><span class="fn-num">2.</span> <a href="https://en.boardgamearena.com/gamepanel?game=digupadventure">BGA Rules</a>: "They flip the center card face up and the game can begin."</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label gold">Key Insight</span>
+      <p>Notice that setup comes <em>after</em> understanding the rules. By now, you know that position 5 is the center and why seeing that card matters &mdash; it's your first piece of information about your mine.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label green">Speed Tip</span>
+      <p>Deal 9 cards to each player in a row, then let each person arrange their own grid. It's faster than dealing one card at a time into a grid formation.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== STEP 9: COMPLETE TURN SUMMARY ======================== -->
+<div class="row" style="border-bottom:none">
+  <div class="main">
+    <div class="step-tag">Step 9</div>
+    <h2>Complete Turn Summary</h2>
+    <p>Here's everything in one place. You're ready to play!</p>
+
+    <div class="summary-panel">
+      <div class="sp-item">
+        <span class="sp-num">1.</span>
+        <span class="sp-text"><strong>Play up to 2 cards</strong> &mdash; Gem cards go into your mine (swap with face-down or replace face-up). Adventure cards apply their effect and are discarded. Idols fill slots for 2 pts each.</span>
+      </div>
+      <div class="sp-item">
+        <span class="sp-num">2.</span>
+        <span class="sp-text"><strong>Discard</strong> &mdash; Optionally discard any unwanted cards from your hand.</span>
+      </div>
+      <div class="sp-item">
+        <span class="sp-num">3.</span>
+        <span class="sp-text"><strong>Draw back to 3</strong> &mdash; Refill your hand to 3 cards from the draw pile.</span>
+      </div>
+      <div class="sp-item">
+        <span class="sp-num">4.</span>
+        <span class="sp-text"><strong>Next player</strong> &mdash; Play passes clockwise. When any mine is fully revealed, the game ends.</span>
+      </div>
+    </div>
+
+    <h3>Scoring Recap</h3>
+    <div class="summary-panel">
+      <div class="sp-item">
+        <span class="sp-num">3</span>
+        <span class="sp-text">Favorite color + correct position</span>
+      </div>
+      <div class="sp-item">
+        <span class="sp-num">2</span>
+        <span class="sp-text">Favorite color + wrong position</span>
+      </div>
+      <div class="sp-item">
+        <span class="sp-num">2</span>
+        <span class="sp-text">Idol card (any position)</span>
+      </div>
+      <div class="sp-item">
+        <span class="sp-num">1</span>
+        <span class="sp-text">Other color + correct position</span>
+      </div>
+      <div class="sp-item">
+        <span class="sp-num">0</span>
+        <span class="sp-text">Other color + wrong position / Skeleton cards</span>
+      </div>
+    </div>
+
+    <!-- Interactive scoring demo -->
+    <div class="demo">
+      <div class="demo-title">Interactive: Score a Card</div>
+      <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;align-items:center">
+        <div style="text-align:center">
+          <div style="font-family:var(--font-ui);font-size:10px;color:rgba(245,239,224,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Favorite Color</div>
+          <select id="demo-fav" style="font-family:var(--font-ui);font-size:13px;padding:4px 8px;border-radius:5px;border:1px solid rgba(245,239,224,0.15);background:rgba(245,239,224,0.08);color:var(--text-light)">
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+            <option value="yellow">Yellow</option>
+            <option value="purple">Purple</option>
+            <option value="orange">Orange</option>
+          </select>
+        </div>
+        <div style="text-align:center">
+          <div style="font-family:var(--font-ui);font-size:10px;color:rgba(245,239,224,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Card Color</div>
+          <select id="demo-card" style="font-family:var(--font-ui);font-size:13px;padding:4px 8px;border-radius:5px;border:1px solid rgba(245,239,224,0.15);background:rgba(245,239,224,0.08);color:var(--text-light)">
+            <option value="red">Red Gem</option>
+            <option value="blue">Blue Gem</option>
+            <option value="green">Green Gem</option>
+            <option value="yellow">Yellow Gem</option>
+            <option value="purple">Purple Gem</option>
+            <option value="orange">Orange Gem</option>
+            <option value="idol">Idol</option>
+            <option value="skeleton">Skeleton</option>
+          </select>
+        </div>
+        <div style="text-align:center">
+          <div style="font-family:var(--font-ui);font-size:10px;color:rgba(245,239,224,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Card Number</div>
+          <select id="demo-num" style="font-family:var(--font-ui);font-size:13px;padding:4px 8px;border-radius:5px;border:1px solid rgba(245,239,224,0.15);background:rgba(245,239,224,0.08);color:var(--text-light)">
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+            <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+            <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+          </select>
+        </div>
+        <div style="text-align:center">
+          <div style="font-family:var(--font-ui);font-size:10px;color:rgba(245,239,224,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Mine Slot</div>
+          <select id="demo-slot" style="font-family:var(--font-ui);font-size:13px;padding:4px 8px;border-radius:5px;border:1px solid rgba(245,239,224,0.15);background:rgba(245,239,224,0.08);color:var(--text-light)">
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+            <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+            <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+          </select>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:1rem">
+        <button class="demo-btn" onclick="calcScore()">Calculate Score</button>
+      </div>
+      <div class="demo-result" id="demo-result"></div>
+    </div>
+
+    <p style="text-align:center;font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:var(--gold);margin-top:1.5rem">You're ready to play DIG UP Adventure!</p>
+
+    <button class="fn-toggle" onclick="toggleFnSection(this)">Sources &#9656;</button>
+    <div class="fn-section">
+      <div class="fn-item"><span class="fn-num">1.</span> All rules summarized from the <a href="https://en.boardgamearena.com/gamepanel?game=digupadventure">official BGA implementation</a> and <a href="https://en.boardgamearena.com/news?id=712">BGA news article</a>.</div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="side-card">
+      <span class="side-card-label green">First Game Tip</span>
+      <p>For your first game, focus on learning your mine's hidden cards through swaps. Don't worry about perfect placement yet &mdash; just get a feel for the rhythm of play-discard-draw.</p>
+    </div>
+    <div class="side-card">
+      <span class="side-card-label purple">Variant: Shorter Game</span>
+      <p>For younger or new players, try playing with a 2&times;2 mine (4 slots) using only gem cards numbered 1–4. It's a great way to learn scoring before introducing the full game.</p>
+    </div>
+  </div>
+</div>
+
+</div><!-- end page-wrap -->
+
+<!-- ======================== QUICK REFERENCE GLOSSARY ======================== -->
+<button class="qref-toggle" onclick="toggleQref()" title="Quick Reference">&#128214;</button>
+<div class="qref-panel" id="qref">
+  <div class="qref-header">
+    <h3>Quick Reference</h3>
+    <input type="text" class="qref-search" placeholder="Search terms..." oninput="filterQref(this.value)">
+  </div>
+  <div class="qref-body">
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="adventure action card effect discard">
+      <span class="qref-term">Adventure Card</span><span class="qref-step">Step 5</span>
+      <div class="qref-def">Action card with a special effect (reveal, peek, swap, steal, or draw). Played from hand, applied immediately, then discarded. Never placed in your mine.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="consecutive tiebreak tie break">
+      <span class="qref-term">Consecutive Cards</span><span class="qref-step">Step 7</span>
+      <div class="qref-def">Adjacent slots in your mine (reading L-R, top-bottom) containing your favorite color. Used as the tiebreaker when scores are equal.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="discard pile remove throw away">
+      <span class="qref-term">Discard Pile</span><span class="qref-step">Step 3</span>
+      <div class="qref-def">Where used adventure cards and replaced face-up gems go. Also where you can voluntarily discard unwanted hand cards during phase 2 of your turn.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="draw pile deck refill hand">
+      <span class="qref-term">Draw Pile</span><span class="qref-step">Step 3</span>
+      <div class="qref-def">The face-down deck you draw from at the end of your turn to refill your hand to 3 cards.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="face down hidden unknown card">
+      <span class="qref-term">Face-Down Card</span><span class="qref-step">Step 4</span>
+      <div class="qref-def">A card in your mine that hasn't been revealed yet. You cannot peek at your own face-down cards unless a card effect allows it.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="favorite preferred chosen assigned player">
+      <span class="qref-term">Favorite Color</span><span class="qref-step">Step 2</span>
+      <div class="qref-def">The gem color assigned to you by your Player Card. Gems of this color score 2–3 points (vs 0–1 for other colors).</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="end finish complete trigger over">
+      <span class="qref-term">Game End</span><span class="qref-step">Step 7</span>
+      <div class="qref-def">Triggered when any player has all 9 mine cards face-up. All remaining face-down cards are flipped and scores tallied.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="gem jewel crystal colored numbered">
+      <span class="qref-term">Gem Card</span><span class="qref-step">Step 4</span>
+      <div class="qref-def">Numbered 1–9 in various colors. Placed in mine slots. Scores based on color match (to your favorite) and position match (card number = slot number).</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="hand cards hold three limit">
+      <span class="qref-term">Hand</span><span class="qref-step">Step 3</span>
+      <div class="qref-def">Your personal cards (max 3). You play from your hand and refill to 3 at the end of each turn.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="idol treasure golden special two points">
+      <span class="qref-term">Idol Card</span><span class="qref-step">Step 6</span>
+      <div class="qref-def">Special card worth 2 points in any position. Max 1 can be played from your hand; additional idols only enter through adventure card effects.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="mine grid tableau board 3x3 nine slots">
+      <span class="qref-term">Mine</span><span class="qref-step">Step 1</span>
+      <div class="qref-def">Your personal 3×3 grid of 9 cards. Slots are numbered 1–9 (top-left to bottom-right). Center card (slot 5) starts face-up; the rest start face-down.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="peek spy look secret hidden">
+      <span class="qref-term">Peek</span><span class="qref-step">Step 5</span>
+      <div class="qref-def">An adventure card action that lets you secretly look at a face-down card without flipping it face-up for others to see.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="player card identity role color assignment">
+      <span class="qref-term">Player Card</span><span class="qref-step">Step 2</span>
+      <div class="qref-def">Card dealt at setup that assigns your favorite color for scoring purposes. Keep it visible throughout the game.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="position slot number placement grid location">
+      <span class="qref-term">Position</span><span class="qref-step">Step 2</span>
+      <div class="qref-def">Each mine slot is numbered 1–9. When a gem's number matches its slot number, you earn a position bonus (+1 point).</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="replace cover overwrite face up">
+      <span class="qref-term">Replace</span><span class="qref-step">Step 4</span>
+      <div class="qref-def">Playing a gem onto a face-up slot. The old card goes to the discard pile (not your hand). Used to upgrade your mine.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="reveal flip show uncover turn over">
+      <span class="qref-term">Reveal</span><span class="qref-step">Step 5</span>
+      <div class="qref-def">An adventure card action that flips a face-down card face-up for all players to see.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="score points tally count total">
+      <span class="qref-term">Scoring</span><span class="qref-step">Step 2</span>
+      <div class="qref-def">3 pts = fav color + right slot. 2 pts = fav color wrong slot, or idol. 1 pt = other color right slot. 0 pts = other color wrong slot, or skeleton.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="skeleton skull bones dud zero worthless bad">
+      <span class="qref-term">Skeleton Card</span><span class="qref-step">Step 6</span>
+      <div class="qref-def">A dud card worth 0 points. Takes up a mine slot with no benefit. Replace it as soon as possible.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="steal take rob opponent thief">
+      <span class="qref-term">Steal</span><span class="qref-step">Step 5</span>
+      <div class="qref-def">An adventure card action that takes a card from an opponent's mine and replaces it with one from yours.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="swap exchange trade face down">
+      <span class="qref-term">Swap</span><span class="qref-step">Step 4</span>
+      <div class="qref-def">When you play a gem onto a face-down slot, the cards exchange: your gem goes in face-up, the old card goes to your hand. Also an adventure card action type.</div>
+    </div>
+    <div class="qref-item" onclick="this.classList.toggle('expanded')" data-terms="tiebreaker tie break winner equal">
+      <span class="qref-term">Tiebreaker</span><span class="qref-step">Step 7</span>
+      <div class="qref-def">If scores are tied, the player with the most consecutive cards of their favorite color wins.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== FOOTER ======================== -->
+<footer>
+  <p><strong>DIG UP Adventure</strong> &copy; 2022 Amazing Game. Designed by Babel Dread. Illustrated by Régis Torres.</p>
+  <p>Distributed by <a href="https://www.neoludis.com/produit/dig-up-adventure/">Neo Ludis</a>. Play online at <a href="https://en.boardgamearena.com/gamepanel?game=digupadventure">Board Game Arena</a>.</p>
+  <p style="margin-top:0.5rem">This is an independent educational resource, not affiliated with or endorsed by the publisher.<br>
+  Rules sourced from the official rulebook and <a href="https://boardgamegeek.com/boardgame/370139/dig-up-adventure">BoardGameGeek</a>.</p>
+</footer>
+
+<script>
+/* ===================== QUIZ ===================== */
+function ans(el, qid, correct) {
+  const opts = document.querySelectorAll('#' + qid + 'o .kc-opt');
+  opts.forEach(o => {
+    if (o === el) {
+      o.classList.add(correct ? 'correct' : 'wrong');
+    } else {
+      o.classList.add('dim');
+    }
+    o.style.pointerEvents = 'none';
+  });
+  const yFb = document.getElementById(qid + 'y');
+  const nFb = document.getElementById(qid + 'n');
+  if (correct) { yFb.classList.add('show'); }
+  else { nFb.classList.add('show'); }
+}
+
+/* ===================== FOOTNOTES ===================== */
+function toggleFnSection(btn) {
+  const section = btn.nextElementSibling;
+  const isOpen = section.classList.toggle('open');
+  btn.innerHTML = isOpen ? 'Sources &#9662;' : 'Sources &#9656;';
+}
+function toggleFn(ref) {
+  const step = ref.closest('.main');
+  const section = step.querySelector('.fn-section');
+  const toggle = step.querySelector('.fn-toggle');
+  if (section && !section.classList.contains('open')) {
+    section.classList.add('open');
+    if (toggle) toggle.innerHTML = 'Sources &#9662;';
+  }
+}
+
+/* ===================== QUICK REFERENCE ===================== */
+function toggleQref() {
+  document.getElementById('qref').classList.toggle('open');
+}
+function filterQref(query) {
+  const q = query.toLowerCase();
+  document.querySelectorAll('.qref-item').forEach(item => {
+    const terms = (item.getAttribute('data-terms') || '') + ' ' + item.querySelector('.qref-term').textContent;
+    item.style.display = terms.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+
+/* ===================== SCORING DEMO ===================== */
+function calcScore() {
+  const fav = document.getElementById('demo-fav').value;
+  const card = document.getElementById('demo-card').value;
+  const num = document.getElementById('demo-num').value;
+  const slot = document.getElementById('demo-slot').value;
+  const res = document.getElementById('demo-result');
+
+  if (card === 'idol') {
+    res.innerHTML = '<span style="color:#c4882d;font-size:20px;font-weight:700">2 points</span><br>Idols always score 2 points, regardless of position.';
+    return;
+  }
+  if (card === 'skeleton') {
+    res.innerHTML = '<span style="color:#e87070;font-size:20px;font-weight:700">0 points</span><br>Skeletons are always worth nothing. Replace them!';
+    return;
+  }
+
+  const colorMatch = (card === fav);
+  const posMatch = (num === slot);
+  let pts = 0;
+  let reason = '';
+
+  if (colorMatch && posMatch) {
+    pts = 3;
+    reason = 'Favorite color + correct position = maximum score!';
+  } else if (colorMatch && !posMatch) {
+    pts = 2;
+    reason = 'Favorite color, but card #' + num + ' is in slot ' + slot + ' (not matching).';
+  } else if (!colorMatch && posMatch) {
+    pts = 1;
+    reason = 'Not your color, but position matches (card #' + num + ' in slot ' + slot + ').';
+  } else {
+    pts = 0;
+    reason = 'Wrong color and wrong position. No points!';
+  }
+
+  const color = pts === 3 ? '#7cc98e' : pts === 2 ? '#c4882d' : pts === 1 ? '#7eaee0' : '#e87070';
+  res.innerHTML = '<span style="color:' + color + ';font-size:20px;font-weight:700">' + pts + ' point' + (pts !== 1 ? 's' : '') + '</span><br>' + reason;
+}
+</script>
+</body>
+</html>
