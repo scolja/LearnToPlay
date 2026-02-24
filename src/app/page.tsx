@@ -18,12 +18,20 @@ export default function Home() {
           <div className="game-grid">
             {games.map(({ slug, frontmatter }) => (
               <Link key={slug} href={`/games/${slug}`} className="game-card">
-                <h2>{frontmatter.title}</h2>
-                <p>{frontmatter.subtitle}</p>
-                <div className="game-meta">
-                  <span>{frontmatter.players} Players</span>
-                  <span>{frontmatter.time}</span>
-                  <span>Ages {frontmatter.age}</span>
+                {frontmatter.heroImage && (
+                  <div className="game-card-image">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={frontmatter.heroImage} alt={`${frontmatter.title} box art`} />
+                  </div>
+                )}
+                <div className="game-card-body">
+                  <h2>{frontmatter.title}</h2>
+                  <p>{frontmatter.subtitle}</p>
+                  <div className="game-meta">
+                    <span>{frontmatter.players} Players</span>
+                    <span>{frontmatter.time}</span>
+                    <span>Ages {frontmatter.age}</span>
+                  </div>
                 </div>
               </Link>
             ))}
