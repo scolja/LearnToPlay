@@ -15,7 +15,7 @@ export function generateMetadata({ params }: { params: Promise<{ slug: string }>
     try {
       const { frontmatter } = getGameBySlug(slug);
       return {
-        title: `Learn: ${frontmatter.title} — Board Game Teacher`,
+        title: `${frontmatter.title} — Learn to Play`,
         description: frontmatter.subtitle,
       };
     } catch {
@@ -39,7 +39,6 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
   return (
     <>
       <Hero {...frontmatter} />
-      <div className="hero-fade" />
       <div className="page-wrap">
         <MDXRemote source={content} components={mdxComponents} />
       </div>

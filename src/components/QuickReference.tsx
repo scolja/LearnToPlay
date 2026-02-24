@@ -7,6 +7,11 @@ interface QuickReferenceProps {
   entries: GlossaryEntry[];
 }
 
+function stepToId(step: string): string | null {
+  const match = step.match(/step\s+(\d+)/i);
+  return match ? `step-${match[1]}` : null;
+}
+
 export function QuickReference({ entries }: QuickReferenceProps) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
@@ -18,11 +23,22 @@ export function QuickReference({ entries }: QuickReferenceProps) {
     return (e.term + ' ' + e.searchTerms).toLowerCase().includes(q);
   });
 
-  function toggleEntry(i: number) {
+  function toggleEntry(i: number, step: string) {
     setExpanded(prev => {
       const next = new Set(prev);
-      if (next.has(i)) next.delete(i);
-      else next.add(i);
+      const wasExpanded = next.has(i);
+      if (wasExpanded) {
+        next.delete(i);
+      } else {
+        next.add(i);
+        const id = stepToId(step);
+        if (id) {
+          const el = document.getElementById(id);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }
       return next;
     });
   }
@@ -48,10 +64,12 @@ export function QuickReference({ entries }: QuickReferenceProps) {
             <div
               key={i}
               className={`qref-item${expanded.has(i) ? ' expanded' : ''}`}
-              onClick={() => toggleEntry(i)}
+              onClick={() => toggleEntry(i, entry.step)}
             >
-              <span className="qref-term">{entry.term}</span>
-              <span className="qref-step">{entry.step}</span>
+              <div className="qref-term-row">
+                <span className="qref-term">{entry.term}</span>
+                <span className="qref-step">{entry.step}</span>
+              </div>
               <div className="qref-def">{entry.definition}</div>
             </div>
           ))}

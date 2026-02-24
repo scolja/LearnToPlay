@@ -7,8 +7,8 @@ export default function Home() {
   return (
     <div className="homepage">
       <div className="hero">
-        <div className="hero-badge">Board Game Teacher</div>
-        <h1>Learn to Play</h1>
+        <div className="hero-badge">Learn to Play</div>
+        <h1>Pick a Game</h1>
         <p className="hero-sub">Interactive teaching guides for board games</p>
       </div>
       <div className="hero-fade" />

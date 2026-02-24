@@ -1,10 +1,11 @@
+import Link from 'next/link';
 import { GameFrontmatter } from '@/lib/types';
 
 export function Hero({ title, subtitle, players, time, age }: GameFrontmatter) {
   return (
     <>
       <div className="hero">
-        <div className="hero-badge">Interactive Lesson</div>
+        <Link href="/" className="hero-badge">Learn to Play</Link>
         <h1>Learn to Play <em>{title}</em></h1>
         <p className="hero-sub">{subtitle}</p>
         <div className="hero-meta">

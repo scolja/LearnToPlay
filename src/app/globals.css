@@ -18,8 +18,8 @@
   --font-display: var(--font-fraunces), Georgia, serif;
   --font-body: var(--font-crimson-pro), Georgia, serif;
   --font-ui: var(--font-dm-sans), system-ui, sans-serif;
-  --main-width: 560px;
-  --sidebar-width: 320px;
+  --main-width: 680px;
+  --sidebar-width: 360px;
   --gap: 48px;
 }
 
@@ -55,8 +55,8 @@ strong { font-weight: 700; }
   pointer-events: none;
 }
 .hero-fade {
-  height: 60px;
-  background: linear-gradient(to bottom, var(--bg-dark), var(--bg));
+  height: 100px;
+  background: linear-gradient(to bottom, var(--bg-dark) 0%, color-mix(in srgb, var(--bg-dark) 60%, var(--bg)) 40%, var(--bg) 100%);
   margin-top: -1px;
 }
 .hero-badge {
@@ -71,6 +71,12 @@ strong { font-weight: 700; }
   padding: 4px 14px;
   border-radius: 2px;
   margin-bottom: 1.2rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.hero-badge:hover {
+  background: var(--gold);
+  color: var(--bg-dark);
 }
 .hero h1 {
   font-family: var(--font-display);
@@ -119,7 +125,7 @@ strong { font-weight: 700; }
 
 .row {
   display: grid;
-  grid-template-columns: var(--main-width) var(--sidebar-width);
+  grid-template-columns: 1fr minmax(auto, var(--sidebar-width));
   gap: var(--gap);
   align-items: start;
   padding: 2.5rem 0;
@@ -633,6 +639,11 @@ strong { font-weight: 700; }
   transition: background 0.15s;
 }
 .qref-item:hover { background: rgba(245,239,224,0.04); }
+.qref-term-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
 .qref-term {
   font-family: var(--font-ui);
   font-size: 13px;
@@ -643,7 +654,8 @@ strong { font-weight: 700; }
   font-family: var(--font-ui);
   font-size: 10px;
   color: rgba(245,239,224,0.35);
-  margin-left: 0.5rem;
+  margin-left: auto;
+  white-space: nowrap;
 }
 .qref-def {
   font-family: var(--font-ui);

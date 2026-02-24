@@ -9,9 +9,11 @@ interface StepRowProps {
 }
 
 export function StepRow({ step, title, sidebar, children, fullWidth }: StepRowProps) {
+  const id = step ? `step-${step}` : undefined;
+
   if (fullWidth) {
     return (
-      <div className="row full-width">
+      <div className="row full-width" id={id}>
         <div className="main">
           {step && <div className="step-tag">Step {step}</div>}
           {title && <h2>{title}</h2>}
@@ -21,7 +23,7 @@ export function StepRow({ step, title, sidebar, children, fullWidth }: StepRowPr
     );
   }
   return (
-    <div className="row">
+    <div className="row" id={id}>
       <div className="main">
         {step && <div className="step-tag">Step {step}</div>}
         {title && <h2>{title}</h2>}

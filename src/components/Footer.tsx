@@ -9,20 +9,20 @@ interface FooterProps {
 }
 
 export function Footer({ title, year, designer, artist, publisher, publisherUrl, bggUrl }: FooterProps) {
+  const publisherName = publisherUrl
+    ? <a href={publisherUrl} target="_blank" rel="noopener noreferrer">{publisher}</a>
+    : publisher;
+
   return (
     <footer>
       <p>
-        <strong>{title}</strong> © {year} {publisher}. Designed by {designer}.
-        {artist && ` Illustrated by ${artist}.`}
+        <strong>{title}</strong> ({year}) is designed by {designer}
+        {artist && <>, illustrated by {artist}</>}
+        , and published by {publisherName}.
+        {bggUrl && <>{' '}<a href={bggUrl} target="_blank" rel="noopener noreferrer">View on BoardGameGeek</a>.</>}
       </p>
-      {publisherUrl && (
-        <p>
-          Published by <a href={publisherUrl} target="_blank" rel="noopener noreferrer">{publisher}</a>.
-          {bggUrl && <>{' '}View on <a href={bggUrl} target="_blank" rel="noopener noreferrer">BoardGameGeek</a>.</>}
-        </p>
-      )}
       <p style={{ marginTop: '0.5rem' }}>
-        This is an independent educational resource, not affiliated with or endorsed by the publisher.
+        This guide is an independent fan-made resource. It is not affiliated with or endorsed by {publisher}.
       </p>
     </footer>
   );

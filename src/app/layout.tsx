@@ -26,8 +26,8 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Board Game Teacher',
-  description: 'Interactive "Learn to Play" teaching guides for board games.',
+  title: 'Learn to Play',
+  description: 'Interactive teaching guides for board games.',
 };
 
 export default function RootLayout({
