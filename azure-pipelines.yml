@@ -40,6 +40,11 @@ stages:
           - script: npm run build
             displayName: "Build static site"
 
+          - script: |
+              cp server.js out/server.js
+              echo '{"scripts":{"start":"node server.js"}}' > out/package.json
+            displayName: "Add static file server"
+
           - task: ArchiveFiles@2
             displayName: "Archive static site"
             inputs:
