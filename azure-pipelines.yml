@@ -3,6 +3,8 @@ trigger:
     include:
       - main
 
+pr: none
+
 variables:
   nodeVersion: "24.x"
 
