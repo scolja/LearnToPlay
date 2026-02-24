@@ -39,6 +39,12 @@ stages:
 
           - script: npm run build
             displayName: "Build standalone app"
+            env:
+              NEXT_PUBLIC_GOOGLE_CLIENT_ID: $(NEXT_PUBLIC_GOOGLE_CLIENT_ID)
+              DB_SERVER: $(DB_SERVER)
+              DB_DATABASE: $(DB_DATABASE)
+              DB_USER: $(DB_USER)
+              DB_PASSWORD: $(DB_PASSWORD)
 
           - script: |
               cp -r public .next/standalone/public
