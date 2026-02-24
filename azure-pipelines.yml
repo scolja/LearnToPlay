@@ -3,46 +3,79 @@ trigger:
     include:
       - main
 
-pool:
-  vmImage: 'ubuntu-latest'
-
 variables:
-  nodeVersion: '22.x'
+  nodeVersion: "24.x"
 
-steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '$(nodeVersion)'
-    displayName: 'Install Node.js $(nodeVersion)'
+stages:
+  - stage: Build
+    displayName: "Build"
+    pool:
+      vmImage: "ubuntu-latest"
+    jobs:
+      - job: Build
+        displayName: "Build Static Site"
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: "$(nodeVersion)"
+            displayName: "Install Node.js $(nodeVersion)"
 
-  - task: Cache@2
-    inputs:
-      key: 'npm | "$(Agent.OS)" | package-lock.json'
-      path: '$(Pipeline.Workspace)/.npm'
-    displayName: 'Cache npm packages'
+          - task: Cache@2
+            inputs:
+              key: 'npm | "$(Agent.OS)" | package-lock.json'
+              path: "$(Pipeline.Workspace)/.npm"
+            displayName: "Cache npm packages"
 
-  - task: Cache@2
-    inputs:
-      key: 'nextjs | "$(Agent.OS)" | package-lock.json'
-      path: '.next/cache'
-    displayName: 'Cache Next.js build'
+          - task: Cache@2
+            inputs:
+              key: 'nextjs | "$(Agent.OS)" | package-lock.json'
+              path: ".next/cache"
+            displayName: "Cache Next.js build"
 
-  - script: npm ci
-    displayName: 'Install dependencies'
+          - script: npm ci
+            displayName: "Install dependencies"
 
-  - script: npm run build
-    displayName: 'Build static site'
+          - script: npm run build
+            displayName: "Build static site"
 
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathToPublish: 'out'
-      artifactName: 'static-site'
-    displayName: 'Publish static site artifact'
+          - task: ArchiveFiles@2
+            displayName: "Archive static site"
+            inputs:
+              rootFolderOrFile: "out"
+              includeRootFolder: false
+              archiveType: "zip"
+              archiveFile: "$(Build.ArtifactStagingDirectory)/static-site.zip"
 
-  # Uncomment and configure to deploy to Azure Web App:
-  # - task: AzureWebApp@1
-  #   inputs:
-  #     azureSubscription: '$(azureSubscription)'
-  #     appName: '$(webAppName)'
-  #     package: 'out'
-  #   displayName: 'Deploy to Azure Web App'
+          - task: PublishPipelineArtifact@1
+            displayName: "Publish static site artifact"
+            inputs:
+              targetPath: "$(Build.ArtifactStagingDirectory)/static-site.zip"
+              artifactName: "static-site"
+
+  - stage: Deploy
+    displayName: "Deploy"
+    dependsOn: Build
+    condition: succeeded()
+    pool:
+      vmImage: "ubuntu-latest"
+    jobs:
+      - deployment: DeployWeb
+        displayName: "Deploy to Azure Web App"
+        environment: "production"
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: DownloadPipelineArtifact@2
+                  displayName: "Download static site artifact"
+                  inputs:
+                    artifactName: "static-site"
+                    targetPath: "$(Pipeline.Workspace)"
+
+                - task: AzureWebApp@1
+                  displayName: "Deploy to Azure Web App"
+                  inputs:
+                    azureSubscription: "Pay-As-You-Go - SSI"
+                    appType: "webAppLinux"
+                    appName: "LearnToPlay"
+                    package: "$(Pipeline.Workspace)/static-site.zip"
