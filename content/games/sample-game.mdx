@@ -1,0 +1,144 @@
+---
+title: "Sample Game"
+slug: "sample-game"
+subtitle: "A demonstration of the Board Game Teacher component system"
+designer: "Example Designer"
+publisher: "Example Publisher"
+year: 2024
+players: "2-4"
+time: "30-60 Min"
+age: "10+"
+draft: true
+glossary:
+  - term: "Action Point"
+    definition: "A unit of currency you spend to take actions on your turn."
+    step: "Step 1"
+    searchTerms: "action point AP spend cost"
+  - term: "Victory Points"
+    definition: "The main scoring currency. The player with the most VP at game end wins."
+    step: "Step 2"
+    searchTerms: "victory points VP score winning"
+  - term: "Hand Limit"
+    definition: "The maximum number of cards you can hold at the end of your turn."
+    step: "Step 3"
+    searchTerms: "hand limit cards maximum hold"
+---
+
+<StepRow step={1} title="The Goal" sidebar={<>
+  <SideCard label="Game Comparison" color="blue">
+    <p>If you've played <strong>Ticket to Ride</strong> or <strong>Catan</strong>, you'll recognize the core loop: collect resources, then spend them to score points.</p>
+  </SideCard>
+  <SideCard label="Common Mistake" color="red">
+    <p>New players often forget that the game ends <em>immediately</em> when the trigger condition is met. Plan ahead!</p>
+  </SideCard>
+</>}>
+
+You are competing to earn the most **Victory Points (VP)** by the end of the game. Each turn, you spend **Action Points** to collect resources, build structures, or advance on the scoring track.
+
+The game ends when any player reaches **20 VP**. At that point, all players tally their final scores.
+
+<RuleBox>
+**The player with the most Victory Points wins.** Reaching 20 VP triggers the end, but other players may score more through bonuses.
+</RuleBox>
+
+<Footnotes entries={[
+  { num: 1, text: "Rulebook p.3: \"The game ends immediately when any player reaches 20 Victory Points.\"" },
+  { num: 2, text: "FAQ: All end-game bonuses are calculated after the trigger." }
+]} />
+
+</StepRow>
+
+<StepRow step={2} title="Your Turn" sidebar={<>
+  <SideCard label="Key Insight" color="gold">
+    <p>The order in which you take your actions matters. Always collect resources <em>before</em> building.</p>
+  </SideCard>
+</>}>
+
+On your turn, you have **3 Action Points** to spend. Each action costs 1 AP unless noted otherwise.
+
+<FlowDiagram steps={[
+  { label: "Collect", variant: "gold" },
+  { label: "Build", variant: "dark" },
+  { label: "Score", variant: "green" },
+  { label: "Draw", variant: "blue" }
+]} />
+
+### Collect Resources
+
+Take one resource card from the open market or draw blind from the deck.
+
+### Build Structures
+
+Spend resource cards to place a structure on the board. Each structure is worth VP at game end.
+
+<EvalStrip steps={[
+  { num: "1", label: "Collect" },
+  { num: "2", label: "Build" },
+  { num: "3", label: "Score" },
+  { num: "→", label: "Next Player" }
+]} />
+
+<RuleBox danger>
+**You cannot save unspent Action Points.** Use them or lose them each turn.
+</RuleBox>
+
+<Footnotes entries={[
+  { num: 1, text: "Rulebook p.5: \"Each player receives 3 Action Points at the start of their turn.\"" }
+]} />
+
+</StepRow>
+
+<StepRow step={3} title="Scoring" sidebar={<>
+  <SideCard label="Strategy Tip" color="green">
+    <p>Focus on <strong>combos</strong> — structures that score bonus VP when placed adjacent to each other.</p>
+  </SideCard>
+  <SideCard label="Designer Note" color="purple">
+    <p>The scoring system rewards both short-term tactical play and long-term strategic planning.</p>
+  </SideCard>
+</>}>
+
+Points come from three sources:
+
+<GameTable
+  headers={["Source", "Points", "When"]}
+  rows={[
+    ["Structures", "1-5 VP each", "End of game"],
+    ["Adjacency Bonuses", "+2 VP per pair", "End of game"],
+    ["Milestone Cards", "3 VP each", "Immediately when claimed"]
+  ]}
+/>
+
+<SummaryPanel items={[
+  { num: "1", text: "<strong>Structures</strong> — Each building scores its printed VP value." },
+  { num: "2", text: "<strong>Adjacency</strong> — +2 VP for each pair of matching buildings next to each other." },
+  { num: "3", text: "<strong>Milestones</strong> — First player to achieve a goal claims 3 VP immediately." }
+]} />
+
+<Footnotes entries={[
+  { num: 1, text: "Rulebook p.8: Scoring summary table." }
+]} />
+
+</StepRow>
+
+<KnowledgeCheck questions={[
+  {
+    question: "How many Action Points do you get each turn?",
+    options: [
+      { text: "3 Action Points", correct: true },
+      { text: "2 Action Points", correct: false },
+      { text: "As many as you want", correct: false }
+    ],
+    correctFeedback: "Correct! You get exactly 3 AP each turn, and they don't carry over. (Step 2)",
+    incorrectFeedback: "Not quite — you get 3 Action Points each turn. Review Step 2."
+  },
+  {
+    question: "What triggers the end of the game?",
+    options: [
+      { text: "Running out of cards", correct: false },
+      { text: "Any player reaching 20 VP", correct: true },
+      { text: "Completing 10 rounds", correct: false }
+    ],
+    correctFeedback: "Correct! The game ends when any player hits 20 Victory Points. (Step 1)",
+    incorrectFeedback: "The game ends when someone reaches 20 VP, not by rounds or cards. Review Step 1."
+  }
+]} />
