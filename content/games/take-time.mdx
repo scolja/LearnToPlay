@@ -92,39 +92,6 @@ glossary:
     --tt-clock-rim: #c9a94e;
     --tt-segment: rgba(201,169,78,0.08);
   }
-  .tt-card {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 44px;
-    border-radius: 5px;
-    font-family: var(--font-ui);
-    font-size: 16px;
-    font-weight: 700;
-    margin: 0 2px;
-    vertical-align: middle;
-  }
-  .tt-card.solar {
-    background: linear-gradient(135deg, #f5c842, #e8a524);
-    color: #2c1a00;
-    box-shadow: 0 1px 3px rgba(232,165,36,0.3);
-  }
-  .tt-card.lunar {
-    background: linear-gradient(135deg, #8b9fd4, #6b7fb8);
-    color: #fff;
-    box-shadow: 0 1px 3px rgba(107,127,184,0.3);
-  }
-  .tt-card.back-solar {
-    background: repeating-linear-gradient(45deg, #f5c842, #f5c842 3px, #e8a524 3px, #e8a524 6px);
-    color: transparent;
-    border: 2px solid #e8a524;
-  }
-  .tt-card.back-lunar {
-    background: repeating-linear-gradient(45deg, #8b9fd4, #8b9fd4 3px, #6b7fb8 3px, #6b7fb8 6px);
-    color: transparent;
-    border: 2px solid #6b7fb8;
-  }
 `}</style>
 
 <StepRow step={1} title="The Goal" sidebar={<>
@@ -138,7 +105,7 @@ glossary:
 
 Take Time is a **cooperative** card puzzle. You and your teammates work together to solve clock challenges — placing numbered cards around a circular clock divided into **6 segments**.
 
-The twist: you plan your strategy together *before* seeing your cards, then play them in **complete silence**.
+You plan your strategy together *before* seeing your cards, then play them in **complete silence**.
 
 <RuleBox>
 **Your team wins a test when every card is placed and all rules are satisfied.** There are 40 tests across 10 chapters. Each chapter introduces new rules that build on what you've already learned.
@@ -148,7 +115,7 @@ Every clock enforces three **universal rules**:
 
 1. Each of the 6 segments must have **at least 1 card**
 2. Segment totals must be in **ascending order** (or equal) clockwise from the clock hand
-3. No segment may total **more than 24**
+3. No segment may total **more than 24** (this limit is waived for the first 3 clocks of Chapter 1)<sup>1</sup>
 
 <RawHTML html={`<div class="diagram" style="background:#eae4d5;border-radius:10px;padding:1.5rem;margin:1rem 0;">
   <svg viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
@@ -193,8 +160,13 @@ Every clock enforces three **universal rules**:
   </svg>
 </div>`} />
 
+<RawHTML html={`<div style="margin:1.5rem 0;text-align:center;">
+  <img src="/images/take-time/box-back.jpg" alt="Take Time box back showing the three phases: Collaborate, Place, and Reveal, with the clock and cards in play" style="width:100%;max-width:520px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.15);" />
+  <p style="font-family:var(--font-ui);font-size:11px;color:var(--text-muted);margin-top:0.5rem;">The three phases: Collaborate, Place, Reveal. Image courtesy of Libellud.</p>
+</div>`} />
+
 <Footnotes entries={[
-  { num: 1, text: 'Official Rulebook: "Each segment must contain at least 1 card, values must be ascending (or equal) clockwise from the clock hand, and no segment may exceed 24."', url: 'https://cdn.svc.asmodee.net/production-libellud/uploads/2025/09/TT_RULES_EN_WEB.pdf' }
+  { num: 1, text: 'Official Rulebook, p. 8: "The value of each segment must be less than or equal to 24. Note that this limit does not apply to the first 3 clocks from Chapter 1."', url: 'https://cdn.svc.asmodee.net/production-libellud/uploads/2025/09/TT_RULES_EN_WEB.pdf' }
 ]} />
 
 </StepRow>
@@ -213,56 +185,20 @@ The deck has **24 cards** divided into two suits:
 - **12 Solar cards** (numbered 1–12) — warm-colored sun backs
 - **12 Lunar cards** (numbered 1–12) — cool-colored moon backs
 
-<RawHTML html={`<div class="diagram" style="background:#eae4d5;border-radius:10px;padding:1.5rem;margin:1rem 0;">
-  <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
-    <!-- Solar cards -->
-    <text x="20" y="30" fill="#2c2418" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" text-transform="uppercase" letter-spacing="2">SOLAR CARDS</text>
-    <rect x="20" y="45" width="36" height="50" rx="4" fill="url(#sunGrad)" stroke="#e8a524" stroke-width="1.5"/>
-    <text x="38" y="76" text-anchor="middle" fill="#2c1a00" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">1</text>
-    <rect x="62" y="45" width="36" height="50" rx="4" fill="url(#sunGrad)" stroke="#e8a524" stroke-width="1.5"/>
-    <text x="80" y="76" text-anchor="middle" fill="#2c1a00" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">2</text>
-    <rect x="104" y="45" width="36" height="50" rx="4" fill="url(#sunGrad)" stroke="#e8a524" stroke-width="1.5"/>
-    <text x="122" y="76" text-anchor="middle" fill="#2c1a00" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">3</text>
-    <text x="152" y="76" text-anchor="middle" fill="rgba(44,36,24,0.4)" font-family="DM Sans,sans-serif" font-size="16">…</text>
-    <rect x="170" y="45" width="36" height="50" rx="4" fill="url(#sunGrad)" stroke="#e8a524" stroke-width="1.5"/>
-    <text x="188" y="76" text-anchor="middle" fill="#2c1a00" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">12</text>
-    <!-- Lunar cards -->
-    <text x="20" y="130" fill="#2c2418" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" text-transform="uppercase" letter-spacing="2">LUNAR CARDS</text>
-    <rect x="20" y="145" width="36" height="50" rx="4" fill="url(#moonGrad)" stroke="#6b7fb8" stroke-width="1.5"/>
-    <text x="38" y="176" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">1</text>
-    <rect x="62" y="145" width="36" height="50" rx="4" fill="url(#moonGrad)" stroke="#6b7fb8" stroke-width="1.5"/>
-    <text x="80" y="176" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">2</text>
-    <rect x="104" y="145" width="36" height="50" rx="4" fill="url(#moonGrad)" stroke="#6b7fb8" stroke-width="1.5"/>
-    <text x="122" y="176" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">3</text>
-    <text x="152" y="176" text-anchor="middle" fill="rgba(44,36,24,0.4)" font-family="DM Sans,sans-serif" font-size="16">…</text>
-    <rect x="170" y="145" width="36" height="50" rx="4" fill="url(#moonGrad)" stroke="#6b7fb8" stroke-width="1.5"/>
-    <text x="188" y="176" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">12</text>
-    <!-- Card backs -->
-    <text x="340" y="30" fill="#2c2418" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" text-transform="uppercase" letter-spacing="2">CARD BACKS (WHAT YOU SEE)</text>
-    <rect x="340" y="45" width="36" height="50" rx="4" fill="#e8a524" opacity="0.7" stroke="#e8a524" stroke-width="1.5"/>
-    <text x="358" y="66" text-anchor="middle" fill="#2c1a00" font-family="DM Sans,sans-serif" font-size="18">☀</text>
-    <text x="358" y="84" text-anchor="middle" fill="#2c1a00" font-family="DM Sans,sans-serif" font-size="9" font-weight="600">SOLAR</text>
-    <rect x="388" y="45" width="36" height="50" rx="4" fill="#6b7fb8" opacity="0.7" stroke="#6b7fb8" stroke-width="1.5"/>
-    <text x="406" y="66" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="18">☽</text>
-    <text x="406" y="84" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="9" font-weight="600">LUNAR</text>
-    <text x="340" y="125" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="12">During discussion: you only see backs</text>
-    <text x="340" y="142" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="12">You know the type, not the number</text>
-    <!-- Total note -->
-    <text x="340" y="180" fill="#2c2418" font-family="DM Sans,sans-serif" font-size="13" font-weight="600">24 total cards = 12 dealt per test</text>
-    <text x="340" y="198" fill="rgba(44,36,24,0.4)" font-family="DM Sans,sans-serif" font-size="11">Remaining 12 not used this test</text>
-    <!-- Gradient defs -->
-    <defs>
-      <linearGradient id="sunGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f5c842"/><stop offset="100%" stop-color="#e8a524"/></linearGradient>
-      <linearGradient id="moonGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#8b9fd4"/><stop offset="100%" stop-color="#6b7fb8"/></linearGradient>
-    </defs>
-  </svg>
+<RawHTML html={`<div style="margin:1.2rem 0;text-align:center;">
+  <img src="/images/take-time/cards.png" alt="Take Time cards: Solar card 1 (light, warm tones), Solar card back (sun design), Lunar card 10 (dark navy), Lunar card back (moon design)" style="width:100%;max-width:480px;border-radius:8px;" />
+  <p style="font-family:var(--font-ui);font-size:11px;color:var(--text-muted);margin-top:0.5rem;">Left to right: Solar 1 (front), Solar back, Lunar back, Lunar 10 (front). Image courtesy of Libellud.</p>
 </div>`} />
 
-For each test, shuffle all 24 cards together and deal **12 cards** to the players. The remaining 12 are not used. The number of cards per player depends on player count — covered in the Setup step.
+For each test, shuffle all 24 cards together and deal **12 cards** to the players. The remaining 12 are not used. The number of cards per player depends on player count — covered in the Setup step.<sup>1</sup>
+
+<Footnotes entries={[
+  { num: 1, text: 'Official Rulebook, p. 3: "Shuffle the Lunar and Solar cards together to form a single deck, then deal 12 cards facedown to the players."', url: 'https://cdn.svc.asmodee.net/production-libellud/uploads/2025/09/TT_RULES_EN_WEB.pdf' }
+]} />
 
 </StepRow>
 
-<StepRow step={3} title="Discussion Phase — Plan Without Looking" sidebar={<>
+<StepRow step={3} title="Discussion Phase" sidebar={<>
   <SideCard label="Common Mistake" color="red">
     <p>Players instinctively look at their cards when they're dealt. <strong>Don't!</strong> During Discussion, cards stay face down in front of you. You can only see the backs — which tell you the Sun/Moon split in each player's hand.</p>
   </SideCard>
@@ -290,13 +226,16 @@ The catch: **you cannot look at your cards.** Cards have been dealt to you, but 
 
 Once all discussion is finished, the group agrees to move on. Players then **pick up and look at their cards** — and from this moment, all communication ends.
 
+If a player picks up their cards before others have finished discussing, that player may no longer participate in the discussion.<sup>2</sup>
+
 <Footnotes entries={[
-  { num: 1, text: 'Official Rulebook, Discussion Phase: "You may not use or devise codes or signals for communicating things that do not relate to game actions."', url: 'https://cdn.svc.asmodee.net/production-libellud/uploads/2025/09/TT_RULES_EN_WEB.pdf' }
+  { num: 1, text: 'Official Rulebook, p. 4: "You may not use or devise codes or signals for communicating things that do not relate to game actions."', url: 'https://cdn.svc.asmodee.net/production-libellud/uploads/2025/09/TT_RULES_EN_WEB.pdf' },
+  { num: 2, text: 'Official Rulebook, p. 4: "If a player picks up their cards before other players have finished their discussion, that player may no longer participate in the discussion."' }
 ]} />
 
 </StepRow>
 
-<StepRow step={4} title="Placement Phase — Silence" sidebar={<>
+<StepRow step={4} title="Placement Phase" sidebar={<>
   <SideCard label="The Heart of the Game" color="gold">
     <p>This is where Take Time shines. You've made a plan, you've seen your cards, and now you must act in perfect silence. Every card you place is a message to your teammates — <em>if</em> they can read it.</p>
   </SideCard>
@@ -312,28 +251,28 @@ Any player may place the first card. After that, play proceeds **clockwise** —
 <FlowDiagram steps={[
   { label: "Pick up cards", variant: "dark" },
   { label: "Silence begins", variant: "red" },
-  { label: "Place 1 card", variant: "gold" },
-  { label: "Next player →", variant: "dark" },
-  { label: "Repeat until done", variant: "gold" }
+  { label: "Place 1 card each", variant: "gold" },
+  { label: "Repeat clockwise", variant: "dark" }
 ]} />
 
 Continue clockwise until all 12 cards have been played.
 
-### Reading Your Teammates
+### Checking Information
 
-Even without words, you communicate through your **actions**. Where someone places a card, when they hesitate, and whether they use a Solar or Lunar card all carry meaning. Over time, your team develops an unspoken language.
+You may look at the face of any card **you** placed to confirm its value. You may also ask which player placed a specific card. You may **not** look at face-down cards placed by other players.<sup>1</sup>
 
 <RuleBox>
-**You are placing cards into the clock's 6 segments — not specific positions within a segment.** Multiple cards can go in the same segment. The order cards are placed within a segment does not matter; only the total value matters.<sup>1</sup>
+**You are placing cards into the clock's 6 segments — not specific positions within a segment.** Multiple cards can go in the same segment. The order cards are placed within a segment does not matter; only the total value matters.<sup>2</sup>
 </RuleBox>
 
 <Footnotes entries={[
-  { num: 1, text: 'Official Rulebook, Placement Phase: Cards are placed next to the segments of the clock. The sum of all cards in each segment is what matters during resolution.' }
+  { num: 1, text: 'Official Rulebook, p. 6: "At any time during this Phase, you may check or confirm any known information that you may have forgotten. You may not look at facedown cards placed by other players."' },
+  { num: 2, text: 'Official Rulebook, p. 6: "The next player selects 1 card from their hand and places it next to the segment of their choice, which may be a segment with 1 or more cards next to it, or one with no cards."' }
 ]} />
 
 </StepRow>
 
-<StepRow step={5} title="Face-Up Cards — Breaking the Silence" sidebar={<>
+<StepRow step={5} title="Face-Up Cards" sidebar={<>
   <SideCard label="Strategic Signaling" color="green">
     <p>Playing a card face up communicates its exact value to everyone. Use this for critical placements: "I'm putting my 12 here to anchor the high end." Choosing <em>not</em> to reveal when things are going well is also a signal.</p>
   </SideCard>
@@ -384,7 +323,10 @@ A face-up card is powerful: everyone can see the value, removing uncertainty fro
 
 </StepRow>
 
-<StepRow step={6} title="Resolution — Did You Pass?" sidebar={<>
+<StepRow step={6} title="Resolution" sidebar={<>
+  <SideCard label="Common Mistake" color="red">
+    <p>Start from the <strong>Clock Hand segment</strong> and go <strong>clockwise</strong>. Some players check in the wrong direction or start from an arbitrary segment. The clock hand defines where ascending order begins.</p>
+  </SideCard>
   <SideCard label="The Moment of Truth" color="gold">
     <p>Resolution is simultaneous tension and relief. Flip the cards segment by segment, add the values, and watch the totals either climb in perfect order — or crumble. When everything clicks, it feels like your team read each other's minds.</p>
   </SideCard>
@@ -432,13 +374,10 @@ When you fail a test, you gain a small advantage for the next attempt.
 
 Flip one of the 3 **Bonus tokens** face up. Each face-up Bonus token grants the group **1 additional face-up card** on the retry. This means your second attempt has more information than the first, and your third attempt even more.
 
-<FlowDiagram steps={[
-  { label: "Fail attempt 1", variant: "red" },
-  { label: "+1 face-up card", variant: "gold" },
-  { label: "Fail attempt 2", variant: "red" },
-  { label: "+2 face-up cards", variant: "gold" },
-  { label: "Fail attempt 3", variant: "red" },
-  { label: "+3 face-up cards", variant: "gold" }
+<SummaryPanel items={[
+  { num: "1", text: "1st failure → flip 1 Bonus token → +1 face-up card on retry" },
+  { num: "2", text: "2nd failure → flip 2nd Bonus token → +2 face-up cards on retry" },
+  { num: "3", text: "3rd failure → flip 3rd Bonus token → +3 face-up cards on retry" }
 ]} />
 
 Once you **pass** the test, all Bonus tokens flip back face down for the next clock.
@@ -542,12 +481,17 @@ Once you've attempted every test (passed or failed), you may open the **Rebirth 
   <SideCard label="Setup is Fast" color="green">
     <p>Once you know the game, setup takes about 1 minute: pull out a clock, shuffle cards, deal, go. The bulk of your time is spent playing, not preparing.</p>
   </SideCard>
-  <SideCard label="2-Player Variant" color="red">
-    <p>In a 2-player game, each player gets <strong>two stacks</strong>: 4 cards and 2 cards. You only look at the 4-card stack when Placement begins. After both players have played 2 cards, pick up the 2-card stack and continue. This is easy to miss!</p>
+  <SideCard label="Easy to Miss!" color="red">
+    <p>The 2-player split-stack deal is the most commonly missed rule. Don't look at the 2-card stack until it's time to pick it up mid-round.</p>
   </SideCard>
 </>}>
 
 ### Components
+
+<RawHTML html={`<div style="margin:0 0 1.2rem 0;text-align:center;">
+  <img src="/images/take-time/components.jpg" alt="Take Time game components spread: box, chapter sleeves with clocks, gear-shaped tokens, Solar and Lunar card decks" style="width:100%;max-width:560px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.15);" />
+  <p style="font-family:var(--font-ui);font-size:11px;color:var(--text-muted);margin-top:0.5rem;">All components. Image courtesy of Libellud.</p>
+</div>`} />
 
 Lay out the following:
 
@@ -583,14 +527,19 @@ Lay out the following:
   ]}
 />
 
+### 2-Player Deal
+
+In a 2-player game, each player's 6 cards are split into **two stacks**: one of 4 cards and one of 2 cards. At the end of the Discussion phase, each player picks up only the **4-card stack**. The 2-card stack remains face down — do not look at it. After both players have placed 2 cards from their hand, pick up the remaining **2-card stack** and add those cards to your hand.<sup>1</sup>
+
 7. If the clock is from **Chapter 3 or later**, place the **Clock Hand** near the clock
 
 <RuleBox>
-**Do not look at your cards after dealing.** Cards sit face down in front of you. The Discussion phase comes first — you'll pick them up when it's time for Placement.<sup>1</sup>
+**Do not look at your cards after dealing.** Cards sit face down in front of you. The Discussion phase comes first — you'll pick them up when it's time for Placement.<sup>2</sup>
 </RuleBox>
 
 <Footnotes entries={[
-  { num: 1, text: 'Official Rulebook, Setup: "Deal 12 cards face down to the players. Players should NOT look at their cards."' }
+  { num: 1, text: 'Official Rulebook, p. 5: "In a 2-player game, each player has two sets of cards: one containing 4 cards, and the other containing 2 cards. At the end of the Discussion Phase, they only pick up their set of 4 cards."' },
+  { num: 2, text: 'Official Rulebook, p. 3: "Players are NOT allowed to look at their cards at this point."' }
 ]} />
 
 </StepRow>
