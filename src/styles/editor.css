@@ -146,6 +146,11 @@
   color: var(--bg-dark);
 }
 
+/* Hide the floating user menu on the edit page */
+body:has(.edit-page) .site-user-menu {
+  display: none;
+}
+
 /* ===================== EDITOR PAGE ===================== */
 .edit-page {
   display: flex;
@@ -224,6 +229,35 @@
   flex: 1;
   min-height: 0;
   overflow: hidden;
+  position: relative;
+}
+
+.edit-sync-toggle {
+  position: absolute;
+  bottom: 0.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(245,239,224,0.15);
+  background: var(--bg-dark);
+  color: rgba(245,239,224,0.4);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s;
+  opacity: 0.6;
+}
+.edit-sync-toggle:hover {
+  opacity: 1;
+}
+.edit-sync-toggle.active {
+  border-color: rgba(201,169,78,0.4);
+  color: var(--gold);
 }
 
 .edit-editor-pane {

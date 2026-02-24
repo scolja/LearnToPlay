@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useCallback } from 'react';
-import { CodeEditor } from './CodeEditor';
+import { useState, useCallback, useRef } from 'react';
+import { CodeEditor, CodeEditorHandle } from './CodeEditor';
 import { LivePreview } from './LivePreview';
 import { FrontmatterEditor } from './FrontmatterEditor';
 import { EditToolbar } from './EditToolbar';
+import { useScrollSync } from './useScrollSync';
 import { apiFetch } from '@/lib/api-client';
 import { GameFrontmatter } from '@/lib/types';
 
@@ -19,6 +20,12 @@ export function EditPage({ slug, initialContent, initialFrontmatter }: EditPageP
   const [frontmatter, setFrontmatter] = useState<GameFrontmatter>(initialFrontmatter);
   const [editSummary, setEditSummary] = useState('');
   const [saving, setSaving] = useState(false);
+  const [syncScroll, setSyncScroll] = useState(true);
+
+  const editorRef = useRef<CodeEditorHandle>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
+
+  useScrollSync(editorRef, previewRef, syncScroll);
 
   const handleSave = useCallback(async (publish: boolean) => {
     setSaving(true);
@@ -67,11 +74,18 @@ export function EditPage({ slug, initialContent, initialFrontmatter }: EditPageP
       <FrontmatterEditor frontmatter={frontmatter} onChange={setFrontmatter} />
       <div className="edit-split">
         <div className="edit-editor-pane">
-          <CodeEditor value={content} onChange={setContent} />
+          <CodeEditor ref={editorRef} value={content} onChange={setContent} />
         </div>
-        <div className="edit-preview-pane">
+        <div className="edit-preview-pane" ref={previewRef}>
           <LivePreview content={content} />
         </div>
+        <button
+          className={`edit-sync-toggle ${syncScroll ? 'active' : ''}`}
+          onClick={() => setSyncScroll(s => !s)}
+          title={syncScroll ? 'Scroll sync on' : 'Scroll sync off'}
+        >
+          {syncScroll ? 'Sync On' : 'Sync Off'}
+        </button>
       </div>
     </div>
   );
