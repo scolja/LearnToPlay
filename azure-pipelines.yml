@@ -75,7 +75,7 @@ stages:
                 - task: AzureWebApp@1
                   displayName: "Deploy to Azure Web App"
                   inputs:
-                    azureSubscription: "Pay-As-You-Go - SSI"
+                    azureSubscription: "Pay-As-You-Go - SSI (ee9f0e11-43bd-4668-8728-b0ce2d0bee8a)"
                     appType: "webAppLinux"
                     appName: "LearnToPlay"
                     package: "$(Pipeline.Workspace)/static-site.zip"
