@@ -20,6 +20,28 @@ Game name: $ARGUMENTS
 
 5. **Find reviews mentioning confusion.** Look for reviews that say "the rules were confusing about X" — these indicate where extra clarity is needed.
 
+### Phase 1.5: Image Sourcing
+
+If `/research-game` was run first, check `public/images/[game-name]/` for already-prepared images. If not, or if images are missing:
+
+1. **Find the publisher's press kit.** Search for "[publisher] [game name] press kit" or check the publisher's resources page. Download any available ZIP files.
+
+2. **Extract and review all images.** Catalogue what's available: component photos, card close-ups, game-in-action shots, box art, box back.
+
+3. **Optimize for web.** Use ImageMagick or similar:
+   - Resize to max 800-1000px wide
+   - JPG quality 85 for photos, PNG for images needing transparency
+   - Target <400KB per image
+   - Save to `public/images/[game-name]/`
+
+4. **Map images to steps.** Plan which image goes where:
+   - Step 1 (Goal): Game-in-action or box back showing the game overview
+   - Step 2 (Cards/Components): Close-ups of the main components players interact with
+   - Setup step: Component spread showing everything laid out
+   - Hero: Box cover art (if available and visually striking)
+
+5. **Identify gaps.** For steps without suitable photos, plan SVG diagrams or CSS-based visuals instead.
+
 ### Phase 2: Content Planning
 
 1. **Map the dependency graph.** Which concepts require which others? No concept may be referenced before it is taught.
@@ -70,12 +92,24 @@ Read `game-teaching-style-guide.md` thoroughly before writing. Follow every spec
 - Footnotes are hidden by default — users click to reveal
 
 **Visual Aids (NOT placeholders):**
-- Generate inline SVG diagrams for component layouts, card anatomy, board overviews
+- **Prefer real images from the publisher's press kit** when available (see Phase 1.5 below)
+- Generate inline SVG diagrams for concepts that need annotated explanations (clock layouts, flow charts, formulas)
 - Create small interactive HTML demos for core mechanics (e.g., dice rollers)
 - Use HTML/CSS grids for component overviews (token types, card categories)
 - Use dark-panel styled checklists for setup procedures
 - One visual per step max. Place AFTER the text it illustrates.
 - See the "Visual Aids" section in the style guide for SVG standards.
+
+**Using Real Images:**
+- Real images go in `public/images/[game-name]/` and are referenced as `/images/[game-name]/filename.ext`
+- Wrap images in a centered container with rounded corners, shadow, and a caption crediting the publisher
+- Optimize all images for web: max 800-1000px wide, <400KB each, JPG for photos, PNG for transparency
+- Best uses for real images:
+  - Component close-ups (cards, tokens) — teach what things look like
+  - Game-in-action shots — show how the play area looks during a game
+  - Component spreads — overview all pieces for the Setup step
+- Use SVG diagrams when you need to annotate, label, or explain relationships between components
+- A step can have both a real image AND an SVG diagram if they serve different purposes
 
 **Quick Reference Glossary:**
 - Add a floating quick-reference panel (bottom-right button) with all game terms
