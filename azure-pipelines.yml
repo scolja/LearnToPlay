@@ -49,7 +49,9 @@ stages:
           - script: |
               cp -r public .next/standalone/public
               cp -r .next/static .next/standalone/.next/static
-              cp -r content .next/standalone/content
+              if [ -d content ] && [ "$(ls -A content)" ]; then
+                cp -r content .next/standalone/content
+              fi
             displayName: "Copy static assets and content into standalone"
 
           - task: ArchiveFiles@2

@@ -6,7 +6,7 @@ const EDIT_PATTERN = /^\/games\/[^/]+\/edit/;
 const HISTORY_PATTERN = /^\/games\/[^/]+\/history/;
 const GUIDE_API_PATTERN = /^\/api\/guides\//;
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Protect edit pages — redirect to login

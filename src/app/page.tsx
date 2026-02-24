@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { getAllGames } from '@/lib/content';
 
-export default function Home() {
-  const games = getAllGames();
+export const revalidate = 3600; // ISR: revalidate every hour
+
+export default async function Home() {
+  const games = await getAllGames();
 
   return (
     <div className="homepage">

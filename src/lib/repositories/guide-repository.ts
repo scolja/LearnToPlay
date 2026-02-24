@@ -131,6 +131,13 @@ export async function getAllDbSlugs(): Promise<string[]> {
   return result.recordset.map(r => r.Slug);
 }
 
+export async function getAllCurrentGuides(): Promise<DbGuideVersion[]> {
+  const pool = await getPool();
+  const result = await pool.request()
+    .query<DbGuideVersion>('SELECT * FROM ltp.GuideVersions WHERE IsCurrent = 1');
+  return result.recordset;
+}
+
 export async function revertToVersion(slug: string, versionId: string, userId: string): Promise<DbGuideVersion> {
   const target = await getVersionById(versionId);
   if (!target || target.Slug !== slug) {
