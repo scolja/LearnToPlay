@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Full bleed background for maskable icons -->
+  <rect width="512" height="512" fill="#1a1612"/>
+  <!-- L2P text - smaller to fit in 80% safe zone -->
+  <text font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="125" y="300">
+    <tspan x="82" fill="#f5efe0">L</tspan>
+    <tspan x="192" fill="#c9a94e">2</tspan>
+    <tspan x="308" fill="#f5efe0">P</tspan>
+  </text>
+</svg>

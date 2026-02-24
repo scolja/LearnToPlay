@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="80" fill="#1a1612"/>
+  <!-- Subtle gold accent lines -->
+  <rect x="80" y="132" width="352" height="2.5" rx="1.25" fill="#c9a94e" opacity="0.45"/>
+  <!-- L2P text -->
+  <text font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="155" y="325">
+    <tspan x="52" fill="#f5efe0">L</tspan>
+    <tspan x="186" fill="#c9a94e">2</tspan>
+    <tspan x="330" fill="#f5efe0">P</tspan>
+  </text>
+  <rect x="80" y="362" width="352" height="2.5" rx="1.25" fill="#c9a94e" opacity="0.45"/>
+</svg>

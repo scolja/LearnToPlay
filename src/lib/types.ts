@@ -3,6 +3,7 @@ export interface GlossaryEntry {
   definition: string;
   step: string;
   searchTerms: string;
+  group?: string;
 }
 
 export interface GameFrontmatter {
@@ -19,6 +20,7 @@ export interface GameFrontmatter {
   age: string;
   bggUrl?: string;
   heroGradient?: string;
+  heroImage?: string;
   draft?: boolean;
   glossary?: GlossaryEntry[];
 }

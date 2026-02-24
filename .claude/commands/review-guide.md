@@ -108,6 +108,7 @@ Check against every specification in `game-teaching-style-guide.md`:
 ### Pass 4: Completeness
 
 - [ ] Hero section: badge, title, subtitle, meta bar with all game info
+- [ ] `heroImage` set in frontmatter if box art or suitable image exists in `public/images/[game-name]/`
 - [ ] All core rules covered (compare against rulebook table of contents)
 - [ ] Setup section present and comes after gameplay
 - [ ] Complete turn/round summary as final gameplay step

@@ -7,6 +7,8 @@ export default function Home() {
   return (
     <div className="homepage">
       <div className="hero">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/icons/logo.svg" alt="L2P logo" className="hero-logo" />
         <h1>Learn to Play</h1>
         <p className="hero-sub">Interactive teaching guides for board games</p>
       </div>
