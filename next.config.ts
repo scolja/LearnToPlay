@@ -6,6 +6,7 @@ const contentDir = path.join(process.cwd(), 'content', 'games');
 
 const nextConfig: NextConfig = {
   output: 'export',
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
