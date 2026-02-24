@@ -1,0 +1,742 @@
+---
+title: "Vantage"
+slug: "vantage"
+subtitle: "An open-world cooperative adventure — crash-land on an alien planet and explore its mysteries together"
+designer: "Jamey Stegmaier"
+artist: "Valentina Filić, Sören Meding, Emilien Rotival"
+publisher: "Stonemaier Games"
+publisherUrl: "https://stonemaiergames.com"
+year: 2025
+players: "1-6"
+time: "120-180 Min"
+age: "14+"
+glossary:
+  - term: "Action Types"
+    definition: "On your turn, choose ONE: a location action (6 skill categories), a card action (from your grid/supply), or depart (move to adjacent location)."
+    step: "Step 2"
+    searchTerms: "action location card depart turn"
+  - term: "Blank (Dice Face)"
+    definition: "A challenge die face with no effect. Return to center — no penalty. The best result you can roll."
+    step: "Step 3"
+    searchTerms: "blank dice"
+  - term: "Boost"
+    definition: "Small cubes representing knowledge. Placed on cards, spent to activate boost powers. Location/depart boost → character card. All other boost → source card."
+    step: "Step 8"
+    searchTerms: "boost cube knowledge power"
+  - term: "Boost Power"
+    definition: "An ability on a grid card activated by spending boost from that card. Usable at any time, even on other players' turns. Effects last until end of current turn."
+    step: "Step 8"
+    searchTerms: "boost power ability activate"
+  - term: "Challenge Dice"
+    definition: "Black dice rolled from the shared pool. Roll a number equal to the action's cost (minus skill tokens spent). Faces: time, morale, health, setback, or blank."
+    step: "Step 3"
+    searchTerms: "challenge dice pool roll cost"
+  - term: "Compass Rose"
+    definition: "On each location card — shows 4 cardinal directions for departing. Numbers = known destinations. Stars (★) = check Depart storybook."
+    step: "Step 2"
+    searchTerms: "compass rose depart direction north"
+  - term: "Cost"
+    definition: "A number on each action representing difficulty. Determines how many challenge dice you roll. Reduced by spending matching skill tokens."
+    step: "Step 3"
+    searchTerms: "cost difficulty action"
+  - term: "Damage"
+    definition: "Heat, cold, or hypoxia damage from locations. For each point: lose 1 health OR lose both 1 time and 1 morale. Your choice."
+    step: "Step 5"
+    searchTerms: "damage heat cold hypoxia"
+  - term: "Depart"
+    definition: "Action to move to an adjacent location via compass rose. Uses the separate Depart storybook (not the Move storybook!)."
+    step: "Step 2"
+    searchTerms: "depart move travel adjacent"
+  - term: "Destiny"
+    definition: "Personal objective cards. Earned by completing your grid (8 cards) or through discovery. Represents how you respond to being stranded."
+    step: "Step 11"
+    searchTerms: "destiny personal objective reward grid"
+  - term: "Grid (3×3)"
+    definition: "Your personal 3×3 tableau with character at center. 8 surrounding spaces for discovered cards. More cards = more slots = better survivability."
+    step: "Step 7"
+    searchTerms: "grid 3x3 character card tableau"
+  - term: "Health"
+    definition: "🛡 One of three tracked resources (0–6). Lost from unplaced health dice or damage. If any player hits 0, the game is in danger."
+    step: "Step 5"
+    searchTerms: "health tracker resource shield"
+  - term: "Impact Slot"
+    definition: "A special slot on grid cards usable by ANY player — the primary cooperative mechanic. Communicate your open impact slots to teammates."
+    step: "Step 4"
+    searchTerms: "impact slot cooperative any player"
+  - term: "Location Action"
+    definition: "An action from one of 6 skill categories on your location card. ONE per location visit — once you perform any, all others at that location are locked."
+    step: "Step 2"
+    searchTerms: "location action one per visit"
+  - term: "Mission"
+    definition: "Group objective (1 of 21). Determined by rolling 2 skill dice at setup. Completing it = win. Reroll doubles for easier missions on first game."
+    step: "Step 11"
+    searchTerms: "mission objective win goal"
+  - term: "Morale"
+    definition: "❤ One of three tracked resources (0–6). Lost from unplaced morale dice or damage. If any player hits 0, the game is in danger."
+    step: "Step 5"
+    searchTerms: "morale tracker resource heart"
+  - term: "Penalty"
+    definition: "When a challenge die can't be placed on any slot (including impact slots), it goes to the penalty section. You lose the matching resource."
+    step: "Step 5"
+    searchTerms: "penalty unplaced dice lose"
+  - term: "Refresh (Dice)"
+    definition: "When the pool has fewer dice than needed: return ALL challenge dice from all grids and the penalty section to the pool, then roll."
+    step: "Step 3"
+    searchTerms: "refresh dice pool empty"
+  - term: "Reserve"
+    definition: "Holds cards when your grid is full. Starting capacity: 1. Pay 1 boost from character to swap a reserved card into grid. Reserved cards are inactive."
+    step: "Step 7"
+    searchTerms: "reserve capacity swap grid full"
+  - term: "Setback"
+    definition: "A challenge die face. Must be placed on a setback slot or suffer a penalty. Some grid cards have setback slots to absorb these."
+    step: "Step 3"
+    searchTerms: "setback dice slot"
+  - term: "Skill Token"
+    definition: "6 types (one per action category). Spend before rolling to reduce cost by 1 per token. NEVER required to take an action — only reduce cost."
+    step: "Step 6"
+    searchTerms: "skill token reduce cost move look engage help take overpower"
+  - term: "Slot"
+    definition: "Spaces on grid cards where challenge dice are placed. Each accepts a specific result type. Placing a die = no penalty + often a bonus. More cards = more slots."
+    step: "Step 4"
+    searchTerms: "slot dice placement card"
+  - term: "Storybook"
+    definition: "8 books with 7,000+ entries. Another player reads your action result aloud. One book per skill category + Depart + Book of Secrets."
+    step: "Step 9"
+    searchTerms: "storybook read entry result"
+  - term: "Time"
+    definition: "⏱ One of three tracked resources (0–6). Lost from unplaced time dice or damage. If any player hits 0, the game is in danger."
+    step: "Step 5"
+    searchTerms: "time tracker resource clock"
+  - term: "When Placed"
+    definition: "One-time bonus gained when a card is first placed into your grid. Does not re-trigger if swapped out and back in."
+    step: "Step 7"
+    searchTerms: "when placed benefit trigger initial"
+---
+
+<StepRow step={1} title="The Goal" sidebar={<>
+  <SideCard label="Like a Video Game" color="blue">
+    <p>Jamey Stegmaier cites <strong>Breath of the Wild</strong>, <strong>Elden Ring</strong>, and <strong>Stardew Valley</strong> as inspirations. Think of Vantage as a tabletop open-world RPG — you explore, discover, and interact with the world at your own pace.</p>
+  </SideCard>
+  <SideCard label="Not a Campaign" color="gold">
+    <p>Each game is a standalone session — there are no legacy components, no unlocking boxes across sessions. But <em>knowledge</em> persists. What you learn about the planet helps in future games.</p>
+  </SideCard>
+</>}>
+
+You and your fellow players are crew members on an intergalactic vessel heading toward an uncharted planet. After a malfunction, you crash-land in different locations — separated, but connected by intercom.
+
+You see the world from a **first-person perspective**. Only you can see your location card. You can describe what you see to other players, but you can't show them.<sup>1</sup>
+
+<RuleBox>
+**Vantage is a cooperative, open-world exploration game.** Your group shares a mission. Explore the planet, gain cards, discover resources, and work together — even though you're physically apart in the game world.
+</RuleBox>
+
+There are no set paths. You have complete freedom to explore, interact, and discover in whatever order you choose. The planet has nearly 800 interconnected locations and over 900 discoverable cards.<sup>2</sup>
+
+<RawHTML html={`<div class="diagram" style="background:#eae4d5;border-radius:10px;padding:1.5rem;margin:1rem 0;">
+  <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+    <rect x="220" y="20" width="280" height="140" rx="12" fill="#1a1612" stroke="#c9a94e" stroke-width="2"/>
+    <text x="360" y="62" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="18" font-weight="700">CENTER BOARD</text>
+    <text x="360" y="92" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="14">Dice Pool · Trackers</text>
+    <text x="360" y="116" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="14">Mission · Penalties</text>
+    <rect x="540" y="30" width="160" height="100" rx="8" fill="#2a2318" opacity="0.7"/>
+    <text x="620" y="70" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="15">📖 Storybooks</text>
+    <text x="620" y="96" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="13">7,000+ entries</text>
+    <line x1="360" y1="160" x2="120" y2="230" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+    <line x1="360" y1="160" x2="360" y2="230" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+    <line x1="360" y1="160" x2="600" y2="230" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+    <rect x="20" y="230" width="200" height="110" rx="10" fill="#2a2318"/>
+    <rect x="35" y="248" width="46" height="62" rx="5" fill="#c9a94e" opacity="0.3"/>
+    <text x="58" y="284" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">CHAR</text>
+    <rect x="92" y="248" width="36" height="48" rx="4" fill="#4a8fbf" opacity="0.2" stroke="#4a8fbf" stroke-width="1"/>
+    <rect x="134" y="248" width="36" height="48" rx="4" fill="#4a9e62" opacity="0.2" stroke="#4a9e62" stroke-width="1"/>
+    <rect x="176" y="248" width="36" height="48" rx="4" fill="#8a5fb5" opacity="0.2" stroke="#8a5fb5" stroke-width="1"/>
+    <text x="120" y="328" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="15">Player 1</text>
+    <rect x="260" y="230" width="200" height="110" rx="10" fill="#2a2318"/>
+    <rect x="275" y="248" width="46" height="62" rx="5" fill="#c9a94e" opacity="0.3"/>
+    <text x="298" y="284" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">CHAR</text>
+    <rect x="332" y="248" width="36" height="48" rx="4" fill="#d4802a" opacity="0.2" stroke="#d4802a" stroke-width="1"/>
+    <rect x="374" y="248" width="36" height="48" rx="4" fill="#c94444" opacity="0.2" stroke="#c94444" stroke-width="1"/>
+    <rect x="416" y="248" width="36" height="48" rx="4" fill="#c4a72e" opacity="0.2" stroke="#c4a72e" stroke-width="1"/>
+    <text x="360" y="328" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="15">Player 2</text>
+    <rect x="500" y="230" width="200" height="110" rx="10" fill="#2a2318"/>
+    <rect x="515" y="248" width="46" height="62" rx="5" fill="#c9a94e" opacity="0.3"/>
+    <text x="538" y="284" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">CHAR</text>
+    <rect x="572" y="248" width="36" height="48" rx="4" fill="#4a8fbf" opacity="0.2" stroke="#4a8fbf" stroke-width="1"/>
+    <rect x="614" y="248" width="36" height="48" rx="4" fill="#4a9e62" opacity="0.2" stroke="#4a9e62" stroke-width="1"/>
+    <rect x="656" y="248" width="36" height="48" rx="4" fill="#d4802a" opacity="0.2" stroke="#d4802a" stroke-width="1"/>
+    <text x="600" y="328" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="15">Player 3</text>
+    <text x="360" y="380" text-anchor="middle" fill="rgba(44,36,24,0.5)" font-family="DM Sans,sans-serif" font-size="15" font-style="italic">Each player explores separately, connected by intercom</text>
+  </svg>
+</div>`} />
+
+<Footnotes entries={[
+  { num: 1, text: 'Official Rulebook, "Communication" section: Players may describe but not show their location cards to other players.' },
+  { num: 2, text: 'Stonemaier Games product page: "nearly 800 unique locations" and "900+ discoverable cards."', url: 'https://stonemaiergames.com/games/vantage/' }
+]} />
+
+</StepRow>
+
+<StepRow step={2} title="Your Turn — Choose an Action" sidebar={<>
+  <SideCard label="Common Mistake" color="red">
+    <p>There are <strong>two different blue storybooks</strong> — one for Move actions and one for Depart actions. They are separate books. Don't mix them up!</p>
+  </SideCard>
+  <SideCard label="First Game Tip" color="green">
+    <p>The designer recommends ignoring the mission on your first game. Instead, just explore freely and try to fill your grid with 8 cards from different locations. Focus on learning the actions, not "winning."</p>
+  </SideCard>
+</>}>
+
+On your turn, you choose **one action** from three types:
+
+<RawHTML html={`<div class="flow">
+  <span class="fb fb-blue">Location Action</span>
+  <span style="color:var(--text-muted);font-family:var(--font-ui);font-size:12px;">or</span>
+  <span class="fb fb-gold">Card Action</span>
+  <span style="color:var(--text-muted);font-family:var(--font-ui);font-size:12px;">or</span>
+  <span class="fb fb-green">Depart</span>
+</div>`} />
+
+### Location Actions
+
+Each location card lists up to 6 actions, one in each skill category: <span className="sk sk-move">Move</span> <span className="sk sk-look">Look</span> <span className="sk sk-engage">Engage</span> <span className="sk sk-help">Help</span> <span className="sk sk-take">Take</span> <span className="sk sk-overpower">Overpower</span>. Choose one, then look up the result in the matching storybook.
+
+<RuleBox danger>
+**One location action per visit.** Once you perform any location action at your current location, you cannot perform another location action there — even on a future turn.<sup>1</sup> You must depart or take a card action instead.
+</RuleBox>
+
+### Card Actions
+
+Many cards in your grid, supply, or the center have actions printed on them. You can perform these instead of a location action.
+
+### Depart
+
+Move to an adjacent location in one of four cardinal directions (north is always "forward"). Each location shows a compass rose with numbered destinations or stars (\*) that require a Depart storybook lookup.
+
+<RuleBox>
+**You choose without knowing the cost or outcome.** You always succeed at your chosen action — the challenge is what it costs you.<sup>2</sup> You may not change your mind after reading the cost.<sup>3</sup>
+</RuleBox>
+
+<RawHTML html={`<div class="diagram" style="background:#eae4d5;border-radius:10px;padding:1.5rem;margin:1rem 0;">
+  <svg viewBox="0 0 680 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+    <rect x="60" y="10" width="340" height="490" rx="16" fill="#1a1612" stroke="#c9a94e" stroke-width="2"/>
+    <rect x="78" y="28" width="304" height="170" rx="8" fill="#2a3a4a"/>
+    <text x="230" y="110" text-anchor="middle" fill="rgba(245,239,224,0.35)" font-family="DM Sans,sans-serif" font-size="18">First-Person Artwork</text>
+    <text x="230" y="138" text-anchor="middle" fill="rgba(245,239,224,0.22)" font-family="DM Sans,sans-serif" font-size="14">Only you can see this card</text>
+    <circle cx="348" cy="68" r="32" fill="rgba(0,0,0,0.3)" stroke="#c9a94e" stroke-width="1.5" opacity="0.6"/>
+    <text x="348" y="58" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14" font-weight="700">N</text>
+    <text x="348" y="76" text-anchor="middle" fill="rgba(201,169,78,0.6)" font-family="DM Sans,sans-serif" font-size="10">S</text>
+    <text x="335" y="68" text-anchor="middle" fill="rgba(201,169,78,0.5)" font-family="DM Sans,sans-serif" font-size="9">W</text>
+    <text x="362" y="68" text-anchor="middle" fill="rgba(201,169,78,0.5)" font-family="DM Sans,sans-serif" font-size="9">E</text>
+    <rect x="86" y="216" width="138" height="34" rx="6" fill="#4a8fbf"/>
+    <text x="155" y="238" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">MOVE</text>
+    <rect x="234" y="216" width="138" height="34" rx="6" fill="#8a5fb5"/>
+    <text x="303" y="238" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">LOOK</text>
+    <rect x="86" y="260" width="138" height="34" rx="6" fill="#d4802a"/>
+    <text x="155" y="282" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">ENGAGE</text>
+    <rect x="234" y="260" width="138" height="34" rx="6" fill="#4a9e62"/>
+    <text x="303" y="282" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">HELP</text>
+    <rect x="86" y="304" width="138" height="34" rx="6" fill="#c4a72e"/>
+    <text x="155" y="326" text-anchor="middle" fill="#2c2418" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">TAKE</text>
+    <rect x="234" y="304" width="138" height="34" rx="6" fill="#c94444"/>
+    <text x="303" y="326" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">OVERPOWER</text>
+    <text x="230" y="380" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="18" font-weight="700">Location #247</text>
+    <text x="230" y="420" text-anchor="middle" fill="rgba(245,239,224,0.55)" font-family="DM Sans,sans-serif" font-size="16">N: 302   E: ★   S: 198   W: ★</text>
+    <text x="230" y="452" text-anchor="middle" fill="rgba(245,239,224,0.35)" font-family="DM Sans,sans-serif" font-size="13">★ = check Depart storybook for destination</text>
+    <line x1="378" y1="270" x2="440" y2="240" stroke="#c9a94e" stroke-width="1.5"/>
+    <text x="448" y="234" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">← 6 Skill Actions</text>
+    <text x="448" y="256" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="13">Choose ONE per visit</text>
+    <line x1="378" y1="420" x2="440" y2="430" stroke="#c9a94e" stroke-width="1.5"/>
+    <text x="448" y="426" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">← Compass Rose</text>
+    <text x="448" y="448" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="13">Depart destinations</text>
+    <line x1="378" y1="68" x2="440" y2="68" stroke="#c9a94e" stroke-width="1.5"/>
+    <text x="448" y="64" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="15" font-weight="600">← Direction Indicator</text>
+    <text x="448" y="86" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="13">North is always "forward"</text>
+  </svg>
+</div>`} />
+
+<Footnotes entries={[
+  { num: 1, text: 'Official Rulebook, "Location Actions": "Once you perform a location action, you may not perform another location action at that location."' },
+  { num: 2, text: 'Official Rulebook, "Actions": "You always succeed at your action — the question is what it costs you."' },
+  { num: 3, text: 'Official Rulebook, "Turn Sequence": The active player may not change their action choice after the cost is read.' }
+]} />
+
+</StepRow>
+
+<StepRow step={3} title="Challenge Dice — The Core Tension" sidebar={<>
+  <SideCard label="Like One Deck Dungeon" color="blue">
+    <p>If you've played One Deck Dungeon, the challenge dice work similarly — you roll dice against a challenge and place them on available spaces. Unplaced dice mean penalties. Your card collection determines how many dice you can absorb.</p>
+  </SideCard>
+  <SideCard label="Refreshing Dice" color="gold">
+    <p>If there aren't enough dice in the pool when you need to roll, <strong>refresh all dice</strong> — return every challenge die from all player grids and the center penalty section back to the pool. Then roll.</p>
+  </SideCard>
+</>}>
+
+Every action has a **cost** — a number representing its difficulty. You roll that many black **challenge dice** <span className="die die-challenge">?</span> from the shared pool on the center board.
+
+For example, a cost of 3 means you roll 3 challenge dice. Higher costs mean harder actions with more potential consequences.
+
+### What the Dice Show
+
+Each challenge die has six faces. The possible results are:
+
+<GameTable
+  headers={["Face", "Meaning"]}
+  rows={[
+    ["<strong>Time</strong> ⏱", "Lose 1 time if unplaced — find a matching slot or suffer the penalty"],
+    ["<strong>Morale</strong> ❤", "Lose 1 morale if unplaced — find a matching slot or suffer the penalty"],
+    ["<strong>Health</strong> 🛡", "Lose 1 health if unplaced — find a matching slot or suffer the penalty"],
+    ["<strong>Setback</strong>", "Must be placed on a setback slot — or suffer a penalty"],
+    ["<strong>Blank</strong>", "No effect — return to the center. The best result you can roll!"]
+  ]}
+/>
+
+The dice are generous: roughly half the faces are blanks. But the other faces create the game's tension — you need somewhere to put them, or you lose resources.
+
+<DiceRoller />
+
+</StepRow>
+
+<StepRow step={4} title="Slots — Where Dice Go" sidebar={<>
+  <SideCard label="Strategy: Expand Your Grid" color="green">
+    <p>More cards in your grid means more slots. Gaining new cards is one of the best ways to improve survivability — every new slot is insurance against future dice penalties.</p>
+  </SideCard>
+  <SideCard label="Impact is Cooperative" color="gold">
+    <p>Offering your impact slots proactively is one of the most impactful (pun intended) things you can do. Keep an eye on what slots you have open and communicate them to teammates.</p>
+  </SideCard>
+</>}>
+
+Cards in your grid have **slots** — spaces where you can place challenge dice to absorb their results. Each slot accepts a specific type of result (a skill color or setback).
+
+When you place a die on a slot, you avoid the penalty AND often gain a bonus — like 1 boost token on that card.
+
+### Impact Slots
+
+Some slots are marked as **impact** slots. These are special: *any player* can place a matching die there, not just the card's owner. This is one of the strongest cooperative tools in the game.
+
+<RuleBox>
+**You can only place challenge dice on cards in your grid.** Reserved cards and cards in your supply do not have active slots. Impact slots on any player's grid are available to everyone.
+</RuleBox>
+
+<RawHTML html={`<div class="diagram" style="background:#eae4d5;border-radius:10px;padding:1.5rem;margin:1rem 0;">
+  <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+    <rect x="15" y="15" width="195" height="285" rx="12" fill="#1a1612" stroke="#c9a94e" stroke-width="2"/>
+    <text x="112" y="48" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">CHARACTER</text>
+    <circle cx="62" cy="90" r="18" fill="none" stroke="#4a8fbf" stroke-width="2" stroke-dasharray="5,3"/>
+    <text x="62" y="96" text-anchor="middle" fill="#4a8fbf" font-family="DM Sans,sans-serif" font-size="14">⏱</text>
+    <circle cx="112" cy="90" r="18" fill="none" stroke="#d4802a" stroke-width="2" stroke-dasharray="5,3"/>
+    <text x="112" y="96" text-anchor="middle" fill="#d4802a" font-family="DM Sans,sans-serif" font-size="14">❤</text>
+    <circle cx="162" cy="90" r="18" fill="none" stroke="#c94444" stroke-width="2" stroke-dasharray="5,3"/>
+    <text x="162" y="96" text-anchor="middle" fill="#c94444" font-family="DM Sans,sans-serif" font-size="14">🛡</text>
+    <text x="112" y="128" text-anchor="middle" fill="rgba(245,239,224,0.35)" font-family="DM Sans,sans-serif" font-size="11">Empty slots (dashed)</text>
+    <rect x="55" y="152" width="18" height="18" rx="3" fill="#c9a94e"/>
+    <rect x="80" y="152" width="18" height="18" rx="3" fill="#c9a94e"/>
+    <rect x="105" y="152" width="18" height="18" rx="3" fill="rgba(201,169,78,0.2)" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
+    <rect x="130" y="152" width="18" height="18" rx="3" fill="rgba(201,169,78,0.2)" stroke="#c9a94e" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="112" y="192" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="12">Boost: 2 of 4</text>
+    <rect x="35" y="212" width="155" height="52" rx="6" fill="rgba(201,169,78,0.15)" stroke="#c9a94e" stroke-width="1"/>
+    <text x="112" y="238" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="13" font-weight="600">2 boost → Gain Move token</text>
+    <text x="112" y="256" text-anchor="middle" fill="rgba(245,239,224,0.4)" font-family="DM Sans,sans-serif" font-size="11">Boost Power</text>
+    <rect x="250" y="15" width="195" height="285" rx="12" fill="#1a1612" stroke="rgba(245,239,224,0.25)" stroke-width="1.5"/>
+    <text x="347" y="48" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="16" font-weight="600">Grid Card</text>
+    <circle cx="302" cy="95" r="20" fill="none" stroke="#4a8fbf" stroke-width="2"/>
+    <text x="302" y="101" text-anchor="middle" fill="#4a8fbf" font-family="DM Sans,sans-serif" font-size="14">⏱</text>
+    <circle cx="392" cy="95" r="20" fill="rgba(212,128,42,0.15)" stroke="#d4802a" stroke-width="2"/>
+    <rect x="372" y="75" width="40" height="40" rx="6" fill="#2c2c2c" stroke="#d4802a" stroke-width="2"/>
+    <text x="392" y="100" text-anchor="middle" fill="#d4802a" font-family="DM Sans,sans-serif" font-size="18">❤</text>
+    <circle cx="302" cy="175" r="20" fill="none" stroke="#c94444" stroke-width="2"/>
+    <text x="302" y="181" text-anchor="middle" fill="#c94444" font-family="DM Sans,sans-serif" font-size="14">🛡</text>
+    <rect x="278" y="200" width="48" height="20" rx="3" fill="rgba(201,169,78,0.25)"/>
+    <text x="302" y="214" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="10" font-weight="700">IMPACT</text>
+    <rect x="372" y="155" width="40" height="40" rx="6" fill="none" stroke="rgba(245,239,224,0.3)" stroke-width="2" stroke-dasharray="5,3"/>
+    <text x="392" y="180" text-anchor="middle" fill="rgba(245,239,224,0.45)" font-family="DM Sans,sans-serif" font-size="12">SET</text>
+    <line x1="455" y1="95" x2="500" y2="72" stroke="#c9a94e" stroke-width="1.5"/>
+    <text x="508" y="66" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14" font-weight="600">Die placed on slot</text>
+    <text x="508" y="86" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="12">No penalty + often a bonus</text>
+    <line x1="455" y1="175" x2="500" y2="158" stroke="#c9a94e" stroke-width="1.5"/>
+    <text x="508" y="152" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14" font-weight="600">Impact slot</text>
+    <text x="508" y="172" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="12">Any player can place here!</text>
+    <line x1="455" y1="240" x2="500" y2="240" stroke="#c9a94e" stroke-width="1.5"/>
+    <text x="508" y="236" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14" font-weight="600">Setback slot</text>
+    <text x="508" y="256" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="12">Absorbs setback dice results</text>
+    <text x="508" y="310" fill="rgba(44,36,24,0.4)" font-family="DM Sans,sans-serif" font-size="12" font-style="italic">More cards in your grid = more slots = fewer penalties</text>
+  </svg>
+</div>`} />
+
+</StepRow>
+
+<StepRow step={5} title="Penalties — Time, Morale, Health" sidebar={<>
+  <SideCard label="Any Player Hits 0 = Danger" color="red">
+    <p>This is cooperative — if <em>any</em> player's tracker reaches 0, it threatens the whole group. The game ends for everyone, not just that player. Keep communicating about your status.</p>
+  </SideCard>
+  <SideCard label="Difficulty Scaling" color="green">
+    <p>Starting tracker positions control difficulty. "Daring" (4) is recommended for first games. Higher values (5–6) give a more relaxed experience; lower values (3) are for experienced players seeking a challenge.</p>
+  </SideCard>
+</>}>
+
+Any challenge die that you *cannot* place on a slot causes a **penalty**. You lose the resource shown on that die:
+
+<RawHTML html={`<div class="flow">
+  <span class="fb fb-blue">⏱ Time</span>
+  <span class="fb" style="background:var(--sk-engage);color:#fff;">❤ Morale</span>
+  <span class="fb fb-red">🛡 Health</span>
+</div>`} />
+
+Each player tracks these three resources on the center board, on a scale of 0 to 6. Unplaced dice go to the penalty section of the center board.
+
+<RuleBox danger>
+**If any tracker reaches 0, the game can end.** There is a one-time reprieve option presented by the mission card<sup>1</sup> — but after that, hitting 0 means defeat. Watch the shared stats closely: it's often better to help a struggling teammate than to push your own exploration.
+</RuleBox>
+
+### Damage
+
+Some locations also cause **damage** (heat, cold, or hypoxia) when you arrive. For each point of damage, you lose either 1 <span className="tr tr-health">🛡 health</span>, or *both* 1 <span className="tr tr-time">⏱ time</span> and 1 <span className="tr tr-morale">❤ morale</span>. You choose which.<sup>2</sup>
+
+<Footnotes entries={[
+  { num: 1, text: 'Official Rulebook, "Losing the Game": The mission card provides a one-time option when a tracker first reaches 0.' },
+  { num: 2, text: 'Official Rulebook, "Damage": "For each damage, lose 1 health OR lose both 1 time and 1 morale."' }
+]} />
+
+</StepRow>
+
+<StepRow step={6} title="Skill Tokens — Reducing the Cost" sidebar={<>
+  <SideCard label="The #1 Common Mistake" color="red">
+    <p>From the designer directly: "Please follow the action steps on the player aids verbatim. There is <strong>no mention</strong> of paying a skill token to perform an action, as that is not a rule in Vantage." Tokens reduce cost. That's it.</p>
+  </SideCard>
+  <SideCard label="Skill Economy" color="green">
+    <p>Early in the game, skill tokens are your main way to make actions safer. As your grid fills with slots, dice placement becomes more reliable and skill tokens become less critical.</p>
+  </SideCard>
+</>}>
+
+Before rolling challenge dice, you may spend **skill tokens** to reduce the cost. Each matching skill token spent removes 1 die from the roll.
+
+There are 6 types of skill tokens, one per action category:
+
+<span className="sk sk-move">Move</span> <span className="sk sk-look">Look</span> <span className="sk sk-engage">Engage</span> <span className="sk sk-help">Help</span> <span className="sk sk-take">Take</span> <span className="sk sk-overpower">Overpower</span>
+
+If an action costs 3 <span className="sk sk-look">Look</span> and you spend 1 look skill token, you only roll 2 dice. If you reduce the cost to 0, you don't roll any dice at all — the action is free.
+
+<RuleBox danger>
+**Skill tokens are never required to take an action.**<sup>1</sup> You don't need a blue token to move, or a green token to help. Tokens only reduce cost. This is the most common mistake new players make.
+</RuleBox>
+
+### Earning Skill Tokens
+
+You gain skill tokens from action results, boost powers on your character, and by rolling skill dice. When the game says "gain a random skill," you roll a skill die and take the matching token.
+
+You can also gain random skills when your <span className="tr tr-time">⏱ time</span>, <span className="tr tr-morale">❤ morale</span>, or <span className="tr tr-health">🛡 health</span> is already at 6 and you would gain more — instead, you gain a random skill token.<sup>2</sup>
+
+<Footnotes entries={[
+  { num: 1, text: 'Stonemaier FAQ: Designer Jamey Stegmaier: "Please follow the action steps on the player aids verbatim. There is no mention of paying a skill token to perform an action."', url: 'https://stonemaiergames.com/games/vantage/rules-faq/' },
+  { num: 2, text: 'Official Rulebook, "Gaining Resources": When a tracker is already at maximum (6) and you would gain more, gain a random skill token instead.' }
+]} />
+
+</StepRow>
+
+<StepRow step={7} title="Your Grid — Building Your Abilities" sidebar={<>
+  <SideCard label="Grid = Your Character Sheet" color="gold">
+    <p>Think of the grid as your evolving character sheet. Your starting character is generic — the cards you collect define who you become. An animal companion, a crafted weapon, a learned ability. Every game builds a different character.</p>
+  </SideCard>
+  <SideCard label="Fill It Up" color="green">
+    <p>The game gives you a "destiny" reward when you first complete your grid with 8 surrounding cards. Prioritize gaining cards early — it's both mechanically powerful and narratively rewarding.</p>
+  </SideCard>
+</>}>
+
+Each player builds a **3×3 grid** of cards with their character card at the center. The 8 surrounding spaces are filled with cards you discover through exploration — items, animals, abilities, and more.
+
+<RawHTML html={`<div class="grid-vis">
+  <div class="grid-cell gc-empty">?</div>
+  <div class="grid-cell gc-filled">Item</div>
+  <div class="grid-cell gc-empty">?</div>
+  <div class="grid-cell gc-filled">Animal</div>
+  <div class="grid-cell gc-char">You</div>
+  <div class="grid-cell gc-empty">?</div>
+  <div class="grid-cell gc-empty">?</div>
+  <div class="grid-cell gc-filled">Ability</div>
+  <div class="grid-cell gc-empty">?</div>
+</div>`} />
+
+Every card you add to your grid provides new **slots** for placing dice, **boost powers** to use, and sometimes new **actions** you can take.
+
+### Reserve
+
+If your grid is full and you gain a new card, it goes to your **reserve**. Your character starts with a reserve capacity of 1 (some cards increase this).<sup>1</sup> You can pay 1 boost from your character to swap a reserved card into your grid.
+
+<RuleBox>
+**Reserved cards cannot use slots, abilities, or boost powers.** They retain any boost tokens on them, and their challenge dice are refreshed, but they are inactive until placed in your grid.
+</RuleBox>
+
+### "When Placed" Benefits
+
+Many cards have a "when placed" benefit — a one-time bonus you gain the first time you place that card into your grid (like gaining 2 boost). This triggers only on the initial placement.<sup>2</sup>
+
+<Footnotes entries={[
+  { num: 1, text: 'Official Rulebook, "Reserve": Default reserve capacity is 1. Some cards grant additional reserve capacity.' },
+  { num: 2, text: 'Official Rulebook, "When Placed": "When placed" benefits trigger once — when the card is first placed into the grid. Swapping a card out and back in does not re-trigger it.' }
+]} />
+
+</StepRow>
+
+<StepRow step={8} title="Boost — Knowledge and Power" sidebar={<>
+  <SideCard label="Boost Placement Matters" color="gold">
+    <p>Location boost always goes on your character. Card boost goes on that card. This matters because boost powers spend boost <em>from that specific card</em>. Having boost spread across multiple cards gives you more options.</p>
+  </SideCard>
+  <SideCard label='"Place in the Center"' color="red">
+    <p>If a challenge die ability says "place them in the center," it means the <strong>penalty section</strong> of the center board. If it meant the pool, it would say "refresh." This trips people up.</p>
+  </SideCard>
+</>}>
+
+**Boost** <span className="boost"></span> represents knowledge you've gained through exploration. Boost tokens are small cubes placed on your cards, and you spend them to activate powerful abilities.
+
+### Where Boost Lives
+
+Boost from **location actions and departing** goes on your character card. Boost from all other sources goes on the specific card that generated it.<sup>1</sup> Each card has a limited capacity for boost.
+
+### Boost Powers
+
+Cards in your grid have **boost powers** — abilities you activate by spending boost from that card. For example, your starting character lets you pay 2 <span className="boost"></span> to gain a <span className="sk sk-move">Move</span> skill token, or pay 1 <span className="boost"></span> to reroll a challenge die.
+
+<RuleBox>
+**Boost powers can be used at any time — even during another player's turn.**<sup>2</sup> Their effects last until the end of the current turn. If a boost power has an "impact" icon, it can benefit any player.
+</RuleBox>
+
+<Footnotes entries={[
+  { num: 1, text: 'Official Rulebook, "Boost": "Boost gained from location actions or departing goes on your character card. Boost gained from other sources goes on the card that generated it."' },
+  { num: 2, text: 'Official Rulebook, "Boost Powers": Boost powers may be activated at any time, including during other players\' turns. Effects persist until end of the current turn.' }
+]} />
+
+</StepRow>
+
+<StepRow step={9} title="Storybooks — Discovering the World" sidebar={<>
+  <SideCard label="Like a Choose-Your-Own-Adventure" color="blue">
+    <p>The storybooks are your game master. Each entry is a brief narrative that reveals costs, outcomes, and new cards. It's the same "read aloud" pattern as games like <strong>The 7th Continent</strong> or <strong>Sleeping Gods</strong>.</p>
+  </SideCard>
+  <SideCard label="Rulepop Web App" color="gold">
+    <p>The official Rulepop web app at <strong>vantage.rulepop.com</strong> has a digital version of all storybooks, works offline, and includes the latest errata. Consider using it alongside the physical books.</p>
+  </SideCard>
+</>}>
+
+Vantage includes **8 storybooks** that contain over 7,000 action results. When you take an action, another player reads the relevant entry aloud to you.
+
+There's one storybook for each action category (<span className="sk sk-move">Move</span>, <span className="sk sk-look">Look</span>, <span className="sk sk-engage">Engage</span>, <span className="sk sk-help">Help</span>, <span className="sk sk-take">Take</span>, <span className="sk sk-overpower">Overpower</span>), plus a separate **Depart** storybook and the **Book of Secrets** (referenced only when instructed).
+
+### The Discovery Rule
+
+You may **describe** what you see on your location card and what happens in storybook results, but you may not **show** other players your card. This preserves the first-person perspective — they might visit that location later.
+
+<RuleBox>
+**In multi-option lists, choose before reading the outcome.** If a storybook says "choose to go to location 259 or 310," you commit to one before seeing what's there. A big part of the game is intuiting, discussing, and learning by trying.
+</RuleBox>
+
+<RawHTML html={`<div class="diagram" style="background:#eae4d5;border-radius:10px;padding:1.5rem;margin:1rem 0;">
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:520px;margin:0 auto;">
+    <div style="background:#4a8fbf;color:#fff;border-radius:8px;padding:1rem 0.5rem;text-align:center;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.6;"><span style="font-size:24px;">📖</span><br>Move</div>
+    <div style="background:#8a5fb5;color:#fff;border-radius:8px;padding:1rem 0.5rem;text-align:center;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.6;"><span style="font-size:24px;">📖</span><br>Look</div>
+    <div style="background:#d4802a;color:#fff;border-radius:8px;padding:1rem 0.5rem;text-align:center;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.6;"><span style="font-size:24px;">📖</span><br>Engage</div>
+    <div style="background:#4a9e62;color:#fff;border-radius:8px;padding:1rem 0.5rem;text-align:center;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.6;"><span style="font-size:24px;">📖</span><br>Help</div>
+    <div style="background:#c4a72e;color:#2c2418;border-radius:8px;padding:1rem 0.5rem;text-align:center;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.6;"><span style="font-size:24px;">📖</span><br>Take</div>
+    <div style="background:#c94444;color:#fff;border-radius:8px;padding:1rem 0.5rem;text-align:center;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.6;"><span style="font-size:24px;">📖</span><br>Overpower</div>
+    <div style="background:#4a6fa5;color:#fff;border-radius:8px;padding:1rem 0.5rem;text-align:center;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.6;"><span style="font-size:24px;">📖</span><br>Depart</div>
+    <div style="background:#2a2318;color:#c9a94e;border-radius:8px;padding:1rem 0.5rem;text-align:center;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:1.6;border:1.5px solid #c9a94e;"><span style="font-size:24px;">🔒</span><br>Secrets</div>
+  </div>
+  <div style="font-family:var(--font-ui);font-size:13px;color:var(--text-muted);text-align:center;margin-top:0.8rem;">8 books · 7,000+ entries · One per action category + Depart + Book of Secrets</div>
+</div>`} />
+
+</StepRow>
+
+<StepRow step={10} title="Cooperation — Separated but Together" sidebar={<>
+  <SideCard label="Communication is Key" color="green">
+    <p>Experienced players recommend actively communicating: what resources you have, what actions you've taken, what slots are open, and where you might go next. Vantage rewards coordination even across vast distances.</p>
+  </SideCard>
+  <SideCard label="Remote Play" color="gold">
+    <p>If both groups own a copy of Vantage, you can play remotely with only audio. The first-person perspective and verbal description model means it's naturally suited to this.</p>
+  </SideCard>
+</>}>
+
+Each player explores a different part of the planet. You cannot see each other's locations. But you are connected by intercom and work together in several ways:
+
+### Sharing Information
+
+You can freely describe what you see at your location — the landscape, creatures, available actions, resources — in your own words. Share what you've learned about the world. What you discover benefits everyone.
+
+### Impact Slots
+
+When any player rolls challenge dice, *all* players can offer their impact slots. If a teammate rolls a <span className="sk sk-help">Help</span> result and you have an unused help impact slot on one of your grid cards, that die can go there. This is the game's primary cooperative mechanism.
+
+### Thematic Consistency
+
+If a player burned a bridge at a location, another player who later visits that same location cannot cross the bridge. The game trusts players to remember their collective actions and maintain thematic consistency.
+
+</StepRow>
+
+<StepRow step={11} title="Missions, Destinies & Endgame" sidebar={<>
+  <SideCard label="Roguelike Spirit" color="gold">
+    <p>Like a roguelike video game, you won't see everything in one session. You're meant to play, explore, lose, learn, and try again. Each playthrough reveals new corners of the world.</p>
+  </SideCard>
+  <SideCard label="21 Missions" color="green">
+    <p>Mission difficulty varies. Missions assigned by rolling doubles on the skill dice are harder. The game recommends rerolling doubles for your first game.</p>
+  </SideCard>
+</>}>
+
+At the start of each game, the group receives a **mission** — one of 21 possible objectives that represents why you traveled to this planet. Completing the mission is the primary way to "win."
+
+### Destinies
+
+Along the way, you may discover **destiny** cards — personal objectives that represent how you choose to respond to being stranded. Completing your first grid of 8 cards is one way to earn a destiny.
+
+### How the Game Ends
+
+<RawHTML html={`<div class="flow">
+  <span class="fb fb-green">Mission Complete → Win!</span>
+  <span class="fa">|</span>
+  <span class="fb fb-red">Any tracker hits 0 → Danger</span>
+</div>`} />
+
+When a tracker first reaches 0, the mission card presents a one-time reprieve option. After that, hitting 0 again means the game ends. The group decides together whether they've accomplished enough to feel satisfied.
+
+<RuleBox>
+**Victory is partly self-defined.** The mission is the structured win condition. But many players also set personal goals — exploring a specific region, solving a puzzle, finding a companion. The game explicitly supports intrinsic motivation alongside the mission.
+</RuleBox>
+
+</StepRow>
+
+<StepRow fullWidth title="Test Your Knowledge">
+
+<KnowledgeCheck questions={[
+  {
+    question: "You want to take the Help action at your current location, but you don't have any green skill tokens. What happens?",
+    options: [
+      { text: "You take the action normally — skill tokens only reduce cost, they're never required", correct: true },
+      { text: "You can't take the help action without a green skill token", correct: false },
+      { text: "You must pay 1 boost instead of a skill token", correct: false }
+    ],
+    correctFeedback: "Correct! Skill tokens are never required to perform any action. They only reduce cost. This is the most common mistake new players make (Step 6).",
+    incorrectFeedback: "Not quite. Skill tokens only reduce the number of challenge dice you roll — they are never required to take an action. You can always take any action. (Step 6)"
+  },
+  {
+    question: "You roll 3 challenge dice. One is a blank, one shows a time result, and one shows a health result. You have no matching open slots. What happens to the time and health dice?",
+    options: [
+      { text: "You reroll them until they show blanks", correct: false },
+      { text: "They go to the penalty section of the center — you lose the matching resources", correct: true },
+      { text: "You can place them on any empty slot regardless of type", correct: false }
+    ],
+    correctFeedback: "Correct! Unplaced dice go to the penalty section and you lose the matching time and health. This is why filling your grid with more slots is so important (Steps 4 & 5).",
+    incorrectFeedback: "Dice must match the slot type. If no matching slot is available (including impact slots offered by teammates), the dice go to the penalty section and you lose the indicated resource. (Steps 4 & 5)"
+  },
+  {
+    question: "You already performed a Look action at your current location two turns ago. On this turn, can you do the Engage action at the same location?",
+    options: [
+      { text: "Yes — you only can't repeat the same specific action", correct: false },
+      { text: "No — once you perform any location action, no other location actions are available there", correct: true },
+      { text: "Yes — the restriction only applies to the current turn", correct: false }
+    ],
+    correctFeedback: "Correct! Once you perform any location action at a location, you cannot perform another location action there — even on a future turn. You'd need to depart or take a card action. (Step 2)",
+    incorrectFeedback: "The restriction is broader than that. Once you've performed any location action at a location (even on a previous turn), all location actions at that location are unavailable to you. Depart or take a card action instead. (Step 2)"
+  }
+]} />
+
+</StepRow>
+
+<StepRow step={12} title="Setup" sidebar={<>
+  <SideCard label="Setup IS the First Scene" color="gold">
+    <p>Vantage's setup is designed to feel like the game has already begun. Reading the Book of Vantages, choosing your character, and crash-landing — it's all part of the narrative. Lean into it.</p>
+  </SideCard>
+  <SideCard label="Duplicates on Random Selection" color="red">
+    <p>If multiple players roll the same result when randomly selecting characters or escape pods, reroll until everyone has a unique selection. Players cannot share a character or escape pod.</p>
+  </SideCard>
+</>}>
+
+Now that you understand how the game works, here's how to set it up:
+
+### 1. The Center
+
+Place the game board in the center (either side — they offer the same gameplay, different layout). Place all storybooks, skill tokens, coins, boost tokens (cubes), and skill dice in a shared supply nearby.
+
+### 2. Challenge Dice Pool
+
+Seed the pool with **8 dice + 2 per player**.<sup>1</sup> For a 3-player game, that's 14 dice. Return excess dice to the box.
+
+### 3. Book of Vantages
+
+Place the Book of Vantages face-up showing **location 000**. This starts the game's narrative and guides the rest of setup.
+
+### 4. Follow Location 000
+
+Read the back of the Book of Vantages (sections 1–4). These instructions walk you through:
+
+- Each player chooses a **character** (or rolls a skill die for random selection)
+- Take the matching skill token and place 2 boost on your character
+- Each player gains a **card holder** for their location card
+- Set <span className="tr tr-time">⏱ time</span>, <span className="tr tr-morale">❤ morale</span>, and <span className="tr tr-health">🛡 health</span> trackers — the recommended starting level is **4 ("Daring")**
+- The first player rolls 2 skill dice to determine the group's **mission** (reroll doubles for an easier start)
+- Each player determines their starting **escape pod** and crash location
+
+<RawHTML html={`<div style="background:var(--bg-dark);border-radius:10px;padding:1.8rem 2rem;margin:1rem 0;">
+  <div style="font-family:var(--font-ui);font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:1.2rem;">Setup at a Glance</div>
+  <div style="display:grid;grid-template-columns:auto 1fr;gap:0.7rem 1.2rem;font-family:var(--font-ui);font-size:15px;color:var(--text-light);line-height:1.5;">
+    <span style="color:var(--gold);font-weight:700;font-size:18px;">①</span><span>Place center board + storybooks nearby</span>
+    <span style="color:var(--gold);font-weight:700;font-size:18px;">②</span><span>Seed dice pool: <strong style="color:var(--gold);">8 + 2 per player</strong></span>
+    <span style="color:var(--gold);font-weight:700;font-size:18px;">③</span><span>Open Book of Vantages to location 000</span>
+    <span style="color:var(--gold);font-weight:700;font-size:18px;">④</span><span>Each player: choose character + card holder</span>
+    <span style="color:var(--gold);font-weight:700;font-size:18px;">⑤</span><span>Place 2 boost on character, take matching skill token</span>
+    <span style="color:var(--gold);font-weight:700;font-size:18px;">⑥</span><span>Set trackers: ⏱ ❤ 🛡 all to <strong style="color:var(--gold);">4</strong> (Daring)</span>
+    <span style="color:var(--gold);font-weight:700;font-size:18px;">⑦</span><span>Roll 2 skill dice → determine mission</span>
+    <span style="color:var(--gold);font-weight:700;font-size:18px;">⑧</span><span>Each player: determine escape pod + crash location</span>
+  </div>
+</div>`} />
+
+<Footnotes entries={[
+  { num: 1, text: 'Official Rulebook, "Setup": Challenge dice pool = 8 + (2 × number of players). Excess dice are returned to the box.' }
+]} />
+
+</StepRow>
+
+<StepRow fullWidth title="Complete Turn Summary">
+
+<RawHTML html={`<div class="turn-strip">
+  <div class="ts"><span class="ts-num">1</span>Choose Action</div>
+  <div class="ts"><span class="ts-num">2</span>Read Cost</div>
+  <div class="ts"><span class="ts-num">3</span>Spend Skills</div>
+  <div class="ts"><span class="ts-num">4</span>Roll Dice</div>
+  <div class="ts"><span class="ts-num">5</span>Place Dice</div>
+  <div class="ts"><span class="ts-num">6</span>Suffer Penalties</div>
+  <div class="ts"><span class="ts-num">7</span>Gain Result</div>
+  <div class="ts"><span class="ts-num">8</span>End Turn</div>
+</div>`} />
+
+<RawHTML html={`<div style="background:var(--bg-dark);color:var(--text-light);border-radius:10px;padding:1.3rem 1.5rem;margin-top:1rem;">
+  <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+    <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">1.</span>
+    <span><strong>Choose one action</strong> — a location action, a card action, or depart in a cardinal direction. You choose without knowing the cost.</span>
+  </div>
+  <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+    <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">2.</span>
+    <span><strong>Read the cost and action</strong> — another player looks up the storybook entry and reads the cost and action (not the result yet). You may not change your mind.</span>
+  </div>
+  <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+    <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">3.</span>
+    <span><strong>Optionally spend skill tokens</strong> — each matching token removes 1 die from the roll.</span>
+  </div>
+  <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+    <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">4.</span>
+    <span><strong>Roll challenge dice</strong> — roll dice equal to remaining cost from the shared pool.</span>
+  </div>
+  <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+    <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">5.</span>
+    <span><strong>Place dice on slots</strong> — put matching results on card slots in any player's grid (impact slots). Blanks go to the center (no penalty).</span>
+  </div>
+  <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+    <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">6.</span>
+    <span><strong>Suffer penalties</strong> — unplaced dice go to the penalty section. Lose the matching <span class="tr tr-time">⏱</span> <span class="tr tr-morale">❤</span> <span class="tr tr-health">🛡</span> resources.</span>
+  </div>
+  <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+    <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">7.</span>
+    <span><strong>Gain the result</strong> — the storybook reader reveals the outcome. Gain cards, boost, coins, or other rewards.</span>
+  </div>
+  <div style="display:flex;gap:0.8rem;align-items:baseline;">
+    <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">8.</span>
+    <span><strong>End your turn</strong> — or, if the result says "continue," perform an additional action (a rare bonus). Next player goes.</span>
+  </div>
+</div>`} />
+
+<p style={{ textAlign: 'center', marginTop: '1.5rem', fontFamily: 'var(--font-display)', fontSize: '1.2rem', color: 'var(--gold)' }}>You're ready to explore. Good luck on the planet.</p>
+
+</StepRow>

@@ -10,6 +10,9 @@ import { KnowledgeCheck } from './KnowledgeCheck';
 import { Footnotes } from './Footnotes';
 import { QuickReference } from './QuickReference';
 import { Footer } from './Footer';
+import { RawHTML } from './RawHTML';
+import { ScoringDemo } from './ScoringDemo';
+import { DiceRoller } from './DiceRoller';
 
 export const mdxComponents = {
   Hero,
@@ -24,6 +27,9 @@ export const mdxComponents = {
   Footnotes,
   QuickReference,
   Footer,
+  RawHTML,
+  ScoringDemo,
+  DiceRoller,
 };
 
 export {
@@ -39,4 +45,7 @@ export {
   Footnotes,
   QuickReference,
   Footer,
+  RawHTML,
+  ScoringDemo,
+  DiceRoller,
 };

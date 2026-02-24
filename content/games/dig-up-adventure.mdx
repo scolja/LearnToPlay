@@ -1,0 +1,470 @@
+---
+title: "DIG UP Adventure"
+slug: "dig-up-adventure"
+subtitle: "A treasure-hunting card game — swap gems, score positions, and uncover your mine"
+designer: "Babel Dread"
+artist: "Régis Torres"
+publisher: "Amazing Game"
+year: 2022
+players: "2-4"
+time: "15-30 Min"
+age: "8+"
+glossary:
+  - term: "Adventure Card"
+    definition: "Action card with a special effect (reveal, peek, swap, steal, or draw). Played from hand, applied immediately, then discarded. Never placed in your mine."
+    step: "Step 5"
+    searchTerms: "adventure action card effect discard"
+  - term: "Consecutive Cards"
+    definition: "Adjacent slots in your mine (reading L-R, top-bottom) containing your favorite color. Used as the tiebreaker when scores are equal."
+    step: "Step 7"
+    searchTerms: "consecutive tiebreak tie break"
+  - term: "Discard Pile"
+    definition: "Where used adventure cards and replaced face-up gems go. Also where you can voluntarily discard unwanted hand cards during phase 2 of your turn."
+    step: "Step 3"
+    searchTerms: "discard pile remove throw away"
+  - term: "Draw Pile"
+    definition: "The face-down deck you draw from at the end of your turn to refill your hand to 3 cards."
+    step: "Step 3"
+    searchTerms: "draw pile deck refill hand"
+  - term: "Face-Down Card"
+    definition: "A card in your mine that hasn't been revealed yet. You cannot peek at your own face-down cards unless a card effect allows it."
+    step: "Step 4"
+    searchTerms: "face down hidden unknown card"
+  - term: "Favorite Color"
+    definition: "The gem color assigned to you by your Player Card. Gems of this color score 2–3 points (vs 0–1 for other colors)."
+    step: "Step 2"
+    searchTerms: "favorite preferred chosen assigned player"
+  - term: "Game End"
+    definition: "Triggered when any player has all 9 mine cards face-up. All remaining face-down cards are flipped and scores tallied."
+    step: "Step 7"
+    searchTerms: "end finish complete trigger over"
+  - term: "Gem Card"
+    definition: "Numbered 1–9 in various colors. Placed in mine slots. Scores based on color match (to your favorite) and position match (card number = slot number)."
+    step: "Step 4"
+    searchTerms: "gem jewel crystal colored numbered"
+  - term: "Hand"
+    definition: "Your personal cards (max 3). You play from your hand and refill to 3 at the end of each turn."
+    step: "Step 3"
+    searchTerms: "hand cards hold three limit"
+  - term: "Idol Card"
+    definition: "Special card worth 2 points in any position. Max 1 can be played from your hand; additional idols only enter through adventure card effects."
+    step: "Step 6"
+    searchTerms: "idol treasure golden special two points"
+  - term: "Mine"
+    definition: "Your personal 3×3 grid of 9 cards. Slots are numbered 1–9 (top-left to bottom-right). Center card (slot 5) starts face-up; the rest start face-down."
+    step: "Step 1"
+    searchTerms: "mine grid tableau board 3x3 nine slots"
+  - term: "Peek"
+    definition: "An adventure card action that lets you secretly look at a face-down card without flipping it face-up for others to see."
+    step: "Step 5"
+    searchTerms: "peek spy look secret hidden"
+  - term: "Player Card"
+    definition: "Card dealt at setup that assigns your favorite color for scoring purposes. Keep it visible throughout the game."
+    step: "Step 2"
+    searchTerms: "player card identity role color assignment"
+  - term: "Position"
+    definition: "Each mine slot is numbered 1–9. When a gem's number matches its slot number, you earn a position bonus (+1 point)."
+    step: "Step 2"
+    searchTerms: "position slot number placement grid location"
+  - term: "Replace"
+    definition: "Playing a gem onto a face-up slot. The old card goes to the discard pile (not your hand). Used to upgrade your mine."
+    step: "Step 4"
+    searchTerms: "replace cover overwrite face up"
+  - term: "Reveal"
+    definition: "An adventure card action that flips a face-down card face-up for all players to see."
+    step: "Step 5"
+    searchTerms: "reveal flip show uncover turn over"
+  - term: "Scoring"
+    definition: "3 pts = fav color + right slot. 2 pts = fav color wrong slot, or idol. 1 pt = other color right slot. 0 pts = other color wrong slot, or skeleton."
+    step: "Step 2"
+    searchTerms: "score points tally count total"
+  - term: "Skeleton Card"
+    definition: "A dud card worth 0 points. Takes up a mine slot with no benefit. Replace it as soon as possible."
+    step: "Step 6"
+    searchTerms: "skeleton skull bones dud zero worthless bad"
+  - term: "Steal"
+    definition: "An adventure card action that takes a card from an opponent's mine and replaces it with one from yours."
+    step: "Step 5"
+    searchTerms: "steal take rob opponent thief"
+  - term: "Swap"
+    definition: "When you play a gem onto a face-down slot, the cards exchange: your gem goes in face-up, the old card goes to your hand. Also an adventure card action type."
+    step: "Step 4"
+    searchTerms: "swap exchange trade face down"
+  - term: "Tiebreaker"
+    definition: "If scores are tied, the player with the most consecutive cards of their favorite color wins."
+    step: "Step 7"
+    searchTerms: "tiebreaker tie break winner equal"
+---
+
+<StepRow step={1} title="The Goal" sidebar={<>
+  <SideCard label="Game Comparison" color="blue">
+    <p>If you've played <strong>Skyjo</strong> or the card game <strong>Golf</strong>, you'll feel right at home. Dig Up Adventure uses the same hidden-grid-of-cards concept, but adds adventure cards for more player interaction.</p>
+  </SideCard>
+  <SideCard label="Common Mistake" color="red">
+    <p>Don't race to reveal all your cards first! Completing your mine triggers the end, but the <em>highest score</em> wins. A mine full of bad cards loses to one with carefully placed gems.</p>
+  </SideCard>
+</>}>
+
+You are an adventurer digging for gems in an ancient mine. Your **mine** is a 3&times;3 grid of nine cards. At the start, eight of these are face-down — you don't know what's buried there.
+
+Your goal is simple: fill all nine slots of your mine with cards that score the most points. When any player reveals all nine of their cards, the game ends and scores are tallied.
+
+<RuleBox>
+**You win by having the highest score when the game ends.** Finishing first doesn't guarantee victory — it just triggers the end.
+</RuleBox>
+
+<RawHTML html={`<div class="photo-block"><img src="https://www.neoludis.com/wp-content/uploads/2022/08/JDPAZG001_3-600x600.png" alt="DIG UP Adventure game components spread" loading="lazy"><div class="photo-caption">DIG UP Adventure — game components. Photo: Neo Ludis</div></div>`} />
+
+<Footnotes entries={[
+  { num: 1, text: "Official Rulebook: \"The goal is to fill the 9 slots of your mine with cards granting you the most points.\"" },
+  { num: 2, text: "Board Game Arena: \"As soon as a Mine is entirely revealed, the game comes to an end.\" https://en.boardgamearena.com/gamepanel?game=digupadventure" }
+]} />
+
+</StepRow>
+
+<StepRow step={2} title="How Scoring Works" sidebar={<>
+  <SideCard label="Common Mistake" color="red">
+    <p>Many new players focus only on color and ignore the position numbers entirely. A gem of your color in the right slot is worth <strong>50% more</strong> than one in the wrong slot (3 vs 2). Always check the number!</p>
+  </SideCard>
+  <SideCard label="Strategy Tip" color="green">
+    <p>A non-favorite gem in its correct position (1 pt) is better than nothing. If you can't find your color, position-matching is your fallback plan.</p>
+  </SideCard>
+</>}>
+
+Before learning what to *do* on your turn, you need to understand what you're optimizing for. Every card in your mine scores based on two factors: **color** and **position**.
+
+### Your Favorite Color
+
+At the start of the game, you receive a **Player Card** that assigns you a **favorite color**. Gems matching your favorite color are worth more.
+
+### Position Numbering
+
+Each slot in your mine is numbered 1 through 9. Each **gem card** is also numbered 1–9. When a gem's number matches the slot it's placed in, you score a position bonus.
+
+<RawHTML html={`<div class="diagram"><div class="diagram-title">Mine Position Numbering</div><svg viewBox="0 0 300 300" style="width:100%;max-width:300px;height:auto;"><rect x="10" y="10" width="86" height="86" rx="8" fill="#3a2f22" stroke="#c4882d" stroke-width="1.5"/><rect x="107" y="10" width="86" height="86" rx="8" fill="#3a2f22" stroke="#c4882d" stroke-width="1.5"/><rect x="204" y="10" width="86" height="86" rx="8" fill="#3a2f22" stroke="#c4882d" stroke-width="1.5"/><rect x="10" y="107" width="86" height="86" rx="8" fill="#3a2f22" stroke="#c4882d" stroke-width="1.5"/><rect x="107" y="107" width="86" height="86" rx="8" fill="#c4882d" stroke="#c4882d" stroke-width="1.5" opacity="0.3"/><rect x="204" y="107" width="86" height="86" rx="8" fill="#3a2f22" stroke="#c4882d" stroke-width="1.5"/><rect x="10" y="204" width="86" height="86" rx="8" fill="#3a2f22" stroke="#c4882d" stroke-width="1.5"/><rect x="107" y="204" width="86" height="86" rx="8" fill="#3a2f22" stroke="#c4882d" stroke-width="1.5"/><rect x="204" y="204" width="86" height="86" rx="8" fill="#3a2f22" stroke="#c4882d" stroke-width="1.5"/><text x="53" y="62" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">1</text><text x="150" y="62" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">2</text><text x="247" y="62" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">3</text><text x="53" y="159" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">4</text><text x="150" y="159" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">5</text><text x="247" y="159" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">6</text><text x="53" y="256" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">7</text><text x="150" y="256" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">8</text><text x="247" y="256" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="28" font-weight="700">9</text><text x="150" y="182" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" letter-spacing="1">STARTS FACE-UP</text></svg></div>`} className="diagram" />
+
+### Scoring Table
+
+<GameTable
+  headers={["Condition", "Points", "Example"]}
+  rows={[
+    ["Favorite color + correct position", "<strong>3 pts</strong>", "Your color is red; <span class=\"gem gem-red\">5</span> in slot 5"],
+    ["Favorite color + wrong position", "<strong>2 pts</strong>", "Your color is red; <span class=\"gem gem-red\">3</span> in slot 7"],
+    ["Other color + correct position", "<strong>1 pt</strong>", "Your color is red; <span class=\"gem gem-blue\">5</span> in slot 5"],
+    ["Other color + wrong position", "<strong>0 pts</strong>", "Your color is red; <span class=\"gem gem-blue\">3</span> in slot 7"],
+    ["Idol card (any position)", "<strong>2 pts</strong>", "<span class=\"gem gem-idol\">&#9733;</span> in any slot"],
+    ["Skeleton card (any position)", "<strong>0 pts</strong>", "<span class=\"gem gem-skeleton\">&#9760;</span> in any slot"]
+  ]}
+/>
+
+<RuleBox>
+**The maximum score for a single card is 3 points** — your favorite color in its matching numbered position. A perfect mine of all 9 favorite-color gems in the right spots would score 27 points.
+</RuleBox>
+
+<Footnotes entries={[
+  { num: 1, text: "BGA Rules: \"Favorite color in correct position = 3 points, favorite color incorrect position = 2 points, non-favorite color correct position = 1 point.\" https://en.boardgamearena.com/gamepanel?game=digupadventure" },
+  { num: 2, text: "Philibert product page: \"Idol cards = 2 points. Skeleton cards = no points.\" https://www.philibertnet.com/en/amazing-game/113341-dig-up-adventure-3770027401001.html" }
+]} />
+
+</StepRow>
+
+<StepRow step={3} title="What You Do on Your Turn" sidebar={<>
+  <SideCard label="Key Insight" color="gold">
+    <p>You don't <em>have</em> to play any cards. Sometimes it's better to discard a bad hand and draw fresh. Playing a card just to play one can backfire.</p>
+  </SideCard>
+  <SideCard label="Common Mistake" color="red">
+    <p>Some players try to draw cards mid-turn. Drawing <strong>only</strong> happens at the end, after you've played and discarded.</p>
+  </SideCard>
+</>}>
+
+Your turn has three phases, always in this order:
+
+<EvalStrip steps={[
+  { num: "1", label: "Play Cards" },
+  { num: "2", label: "Discard" },
+  { num: "3", label: "Draw" },
+  { num: "↺", label: "Next Player" }
+]} />
+
+### Phase 1: Play Up to 2 Cards
+
+You may play **0, 1, or 2 cards** from your hand. You can play any combination of gem cards and adventure cards.
+
+### Phase 2: Discard (Optional)
+
+After playing, you may discard any unwanted cards from your hand to the discard pile.
+
+### Phase 3: Draw Back to 3
+
+Refill your hand to **3 cards** from the draw pile. Your hand size is always 3 at the start of your next turn.
+
+<RuleBox>
+**Your hand limit is 3 cards.** You always draw back up to 3 at the end of your turn, regardless of how many you played or discarded.
+</RuleBox>
+
+<Footnotes entries={[
+  { num: 1, text: "BGA Rules: \"On your turn, you can play up to 2 cards from your hand.\" https://en.boardgamearena.com/gamepanel?game=digupadventure" },
+  { num: 2, text: "BGA Rules: \"Hand limit is 3. Your hand will automatically be filled back up to 3.\" https://en.boardgamearena.com/gamepanel?game=digupadventure" }
+]} />
+
+</StepRow>
+
+<StepRow step={4} title="Playing Gem Cards" sidebar={<>
+  <SideCard label="Common Mistake" color="red">
+    <p>New players often think swapping a face-down card discards it. <strong>It goes to your hand!</strong> This is a key tactical difference — you now know that card and can plan around it.</p>
+  </SideCard>
+  <SideCard label="Game Comparison" color="blue">
+    <p>This swap-and-reveal mechanic is almost identical to <strong>Skyjo</strong> and <strong>Golf</strong>. The twist is that Dig Up Adventure cares about <em>which slot</em> a card lands in, not just its value.</p>
+  </SideCard>
+  <SideCard label="Strategy Tip" color="green">
+    <p>Early game, swap into face-down slots to <em>discover</em> what's hidden. Later, replace face-up cards to <em>optimize</em> your score. The swap phase is intel-gathering; the replace phase is fine-tuning.</p>
+  </SideCard>
+</>}>
+
+Gem cards are the foundation of your mine. When you play a gem card from your hand, you place it into a slot in your mine. The result depends on whether the target slot is face-down or face-up.
+
+### Onto a Face-Down Slot
+
+When you play a gem onto a **face-down card**, the two cards **swap**. Your gem goes into the mine (face-up), and the face-down card comes into your hand — now revealed to you.
+
+<FlowDiagram steps={[
+  { label: "Gem from hand", variant: "gold" },
+  { label: "Swap", variant: "dark" },
+  { label: "Old card to hand", variant: "teal" }
+]} />
+
+### Onto a Face-Up Slot
+
+When you play a gem onto a slot that already has a **face-up card**, you replace it. The old card goes to the **discard pile** (not your hand).
+
+<FlowDiagram steps={[
+  { label: "Gem from hand", variant: "gold" },
+  { label: "Replace", variant: "dark" },
+  { label: "Old card to discard", variant: "red" }
+]} />
+
+<RuleBox danger>
+**You cannot peek at your own face-down cards.** The only way to see what's hidden in your mine is to swap a gem into that slot, or use an adventure card that lets you peek or reveal.
+</RuleBox>
+
+<Footnotes entries={[
+  { num: 1, text: "BGA News: \"Deploy Gem cards into their mines and utilize Adventure cards for strategic advantages.\" https://en.boardgamearena.com/news?id=712" },
+  { num: 2, text: "Meeple QC Review: Confirmed swap mechanic and discard behavior for face-up replacements. https://www.meepleqc.ca/2023/08/28/dig-up-adventure-avis-critique-et-test-de-jeu/" }
+]} />
+
+</StepRow>
+
+<StepRow step={5} title="Adventure Cards" sidebar={<>
+  <SideCard label="Game Comparison" color="blue">
+    <p>Adventure cards serve a similar role to <strong>action cards in Uno</strong> — they let you mess with opponents or give yourself an advantage beyond just playing gems.</p>
+  </SideCard>
+  <SideCard label="Strategy Tip" color="green">
+    <p>Peek cards are underrated. Knowing what's face-down in your mine lets you make smarter swaps later. Information is power!</p>
+  </SideCard>
+</>}>
+
+**Adventure cards** are action cards with special effects. When you play one, you apply its effect immediately, then discard it. Adventure cards never go into your mine — they're single-use tools.
+
+### What Adventure Cards Do
+
+Adventure cards let you manipulate the game state in ways gem cards can't. Their effects fall into five categories:
+
+<GameTable
+  headers={["Action", "Effect"]}
+  rows={[
+    ["<strong>Reveal</strong>", "Flip a face-down card in any player's mine face-up"],
+    ["<strong>Peek</strong>", "Secretly look at a face-down card (yours or an opponent's) without revealing it to others"],
+    ["<strong>Swap</strong>", "Exchange cards between mines — yours or between opponents"],
+    ["<strong>Steal</strong>", "Take a card from an opponent's mine and replace it with one from yours"],
+    ["<strong>Draw</strong>", "Draw extra cards from the draw pile"]
+  ]}
+/>
+
+Each adventure card describes its specific effect. Read the card text carefully when you play it.
+
+<RuleBox>
+**Adventure cards are discarded after use.** They never occupy a mine slot. Play them for their effect, then put them in the discard pile.
+</RuleBox>
+
+<Footnotes entries={[
+  { num: 1, text: "BGA News: \"Use Adventure cards to your advantage to reveal, swap or steal cards in play.\" https://en.boardgamearena.com/news?id=712" },
+  { num: 2, text: "1jour-1jeu: \"Action cards help you progress or even trouble your adversaries, and are discarded immediately.\" https://en.1jour-1jeu.com/cardgame/2022-dig-up-adventure" }
+]} />
+
+</StepRow>
+
+<StepRow step={6} title="Idols & Skeletons" sidebar={<>
+  <SideCard label="Common Mistake" color="red">
+    <p>Players sometimes think you can never have more than one idol. You can — just not from your hand. Swaps and steals can land extra idols in your mine, and that's perfectly legal.</p>
+  </SideCard>
+  <SideCard label="Strategy Tip" color="green">
+    <p>An idol at 2 pts is better than a wrong-color gem in the wrong slot (0 pts), but worse than your favorite color in any position (2–3 pts). Use idols to plug gaps, not as a primary strategy.</p>
+  </SideCard>
+</>}>
+
+Two special card types can appear in your mine alongside gems.
+
+### Idol Cards <span className="gem gem-idol">&#9733;</span>
+
+**Idols** are golden treasures worth **2 points** in any position. They ignore the position-numbering system — an idol scores 2 points no matter where it sits.
+
+You may play an idol from your hand into your mine, but only if you **don't already have one** in your mine. However, adventure card effects (like swaps or steals) can result in multiple idols in your mine.
+
+### Skeleton Cards <span className="gem gem-skeleton">&#9760;</span>
+
+**Skeletons** are duds worth **0 points**. They occupy a mine slot without contributing to your score. If one turns up in your mine, try to replace it as soon as possible.
+
+<RuleBox danger>
+**You can only play 1 idol from your hand into your mine.** If your mine already contains an idol (even one placed by a card effect), you cannot play another from your hand. Multiple idols only happen through adventure card effects.
+</RuleBox>
+
+<Footnotes entries={[
+  { num: 1, text: "BGA Rules: \"Idol cards = 2 points.\" and \"You can't play an idol card from your hand if there is already one in your mine.\" https://en.boardgamearena.com/gamepanel?game=digupadventure" },
+  { num: 2, text: "BGA Rules: \"Skeleton cards = no points.\" https://en.boardgamearena.com/gamepanel?game=digupadventure" }
+]} />
+
+</StepRow>
+
+<StepRow step={7} title="Game End & Winning" sidebar={<>
+  <SideCard label="Common Mistake" color="red">
+    <p>Rushing to reveal all 9 cards is tempting, but dangerous. If your mine is full of skeletons and wrong-color gems, you're handing the win to opponents who took time to optimize.</p>
+  </SideCard>
+  <SideCard label="Key Insight" color="gold">
+    <p>The endgame trigger creates a fascinating tension: you want to optimize your mine, but if you wait too long, an opponent might end the game before you're ready.</p>
+  </SideCard>
+</>}>
+
+The game ends the moment **any player has all 9 cards in their mine face-up**. This can happen through gem swaps, adventure card reveals, or any combination.
+
+Once triggered, all players flip their remaining face-down cards and calculate their scores.
+
+<FlowDiagram steps={[
+  { label: "Mine complete", variant: "gold" },
+  { label: "All mines revealed", variant: "dark" },
+  { label: "Tally scores", variant: "teal" },
+  { label: "Highest wins!", variant: "green" }
+]} />
+
+### Tiebreaker
+
+If two or more players tie on points, the player with the **most consecutive cards of their favorite color** in their mine wins. Count adjacent slots (reading left-to-right, top-to-bottom) that contain your color.
+
+<RuleBox>
+**When any mine is fully revealed, the game ends immediately.** Every remaining face-down card in all mines is flipped and scores are tallied. You don't get extra turns.
+</RuleBox>
+
+<RawHTML html={`<div class="photo-block"><img src="https://cdn.1j1ju.com/thumbs/game-lg/medias/45/cc/a5-dig-up-adventure-cover.jpg" alt="DIG UP Adventure box cover art" loading="lazy"><div class="photo-caption">DIG UP Adventure — box art by Régis Torres. Photo: 1jour-1jeu</div></div>`} />
+
+<Footnotes entries={[
+  { num: 1, text: "BGA News: \"As soon as a Mine is entirely revealed, the game comes to an end and the player with the most points wins!\" https://en.boardgamearena.com/news?id=712" },
+  { num: 2, text: "BGA Rules: \"Tie breaker: the person with the most consecutive cards of their favorite color wins.\" https://en.boardgamearena.com/gamepanel?game=digupadventure" }
+]} />
+
+</StepRow>
+
+<KnowledgeCheck questions={[
+  {
+    question: "Your favorite color is red. You place a red gem numbered 5 in slot 5 of your mine. How many points is this worth?",
+    options: [
+      { text: "3 points (favorite color + correct position)", correct: true },
+      { text: "2 points (favorite color only)", correct: false },
+      { text: "1 point (correct position only)", correct: false }
+    ],
+    correctFeedback: "Correct! Favorite color in the matching position scores the maximum 3 points. (Step 2)",
+    incorrectFeedback: "Not quite. Color AND position both match here, so it's 3 points — the maximum. Review Step 2."
+  },
+  {
+    question: "You play a gem card onto a face-down slot in your mine. What happens to the face-down card?",
+    options: [
+      { text: "It goes to the discard pile", correct: false },
+      { text: "It goes to your hand (now revealed to you)", correct: true },
+      { text: "It stays face-down in the same slot", correct: false }
+    ],
+    correctFeedback: "Correct! It's a swap — the face-down card comes to your hand, and you now know what it is. (Step 4)",
+    incorrectFeedback: "It's a swap, not a discard. The old card goes to your hand, revealed. This is one of the most commonly misunderstood rules! (Step 4)"
+  },
+  {
+    question: "What triggers the end of the game?",
+    options: [
+      { text: "The draw pile runs out", correct: false },
+      { text: "Any player reveals all 9 cards in their mine", correct: true },
+      { text: "A set number of rounds are completed", correct: false }
+    ],
+    correctFeedback: "Correct! The instant any player's mine is fully face-up, the game ends and scores are tallied. (Step 7)",
+    incorrectFeedback: "The game ends when any player has all 9 mine cards face-up. It's not about rounds or the draw pile. (Step 7)"
+  },
+  {
+    question: "Can you have 2 idol cards in your mine?",
+    options: [
+      { text: "No, never — one idol maximum", correct: false },
+      { text: "Yes, but only through adventure card effects (not from your hand)", correct: true },
+      { text: "Yes, you can play as many as you like", correct: false }
+    ],
+    correctFeedback: "Correct! You can only play one idol from your hand, but swaps and steals can result in multiple idols in your mine. (Step 6)",
+    incorrectFeedback: "You can only play one from your hand, but adventure effects can add more. You can't freely play multiples, but multiples can happen. (Step 6)"
+  }
+]} />
+
+<StepRow step={8} title="Setup" sidebar={<>
+  <SideCard label="Key Insight" color="gold">
+    <p>Notice that setup comes <em>after</em> understanding the rules. By now, you know that position 5 is the center and why seeing that card matters — it's your first piece of information about your mine.</p>
+  </SideCard>
+  <SideCard label="Speed Tip" color="green">
+    <p>Deal 9 cards to each player in a row, then let each person arrange their own grid. It's faster than dealing one card at a time into a grid formation.</p>
+  </SideCard>
+</>}>
+
+Now that you understand how the game works, setup is straightforward.
+
+1. Give each player a **Player Card** that shows their **favorite color**. Keep it visible.
+2. Shuffle all **Gem Cards** into one deck and all **Adventure Cards** into a separate deck. Place both as face-down draw piles in the center.
+3. Deal **9 cards** face-down from the Gem deck to each player.
+4. Each player arranges their 9 cards into a **3&times;3 grid** — this is their **Mine**. All cards stay face-down.
+5. Each player **flips their center card** (position 5) face-up.
+6. Each player draws **3 cards** to form their starting hand.
+7. Choose a starting player. Play clockwise.
+
+<RawHTML html={`<div class="diagram"><div class="diagram-title">Starting Player Setup</div><svg viewBox="0 0 440 260" style="width:100%;max-width:440px;height:auto;"><text x="110" y="18" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">YOUR MINE</text><rect x="30" y="30" width="50" height="65" rx="6" fill="#5d4e37" stroke="rgba(255,255,255,0.15)" stroke-width="1"/><text x="55" y="67" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="10">?</text><rect x="85" y="30" width="50" height="65" rx="6" fill="#5d4e37" stroke="rgba(255,255,255,0.15)" stroke-width="1"/><text x="110" y="67" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="10">?</text><rect x="140" y="30" width="50" height="65" rx="6" fill="#5d4e37" stroke="rgba(255,255,255,0.15)" stroke-width="1"/><text x="165" y="67" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="10">?</text><rect x="30" y="100" width="50" height="65" rx="6" fill="#5d4e37" stroke="rgba(255,255,255,0.15)" stroke-width="1"/><text x="55" y="137" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="10">?</text><rect x="85" y="100" width="50" height="65" rx="6" fill="#c0392b" stroke="#c4882d" stroke-width="2"/><text x="110" y="137" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">5</text><text x="110" y="155" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="DM Sans,sans-serif" font-size="7">FACE UP</text><rect x="140" y="100" width="50" height="65" rx="6" fill="#5d4e37" stroke="rgba(255,255,255,0.15)" stroke-width="1"/><text x="165" y="137" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="10">?</text><rect x="30" y="170" width="50" height="65" rx="6" fill="#5d4e37" stroke="rgba(255,255,255,0.15)" stroke-width="1"/><text x="55" y="207" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="10">?</text><rect x="85" y="170" width="50" height="65" rx="6" fill="#5d4e37" stroke="rgba(255,255,255,0.15)" stroke-width="1"/><text x="110" y="207" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="10">?</text><rect x="140" y="170" width="50" height="65" rx="6" fill="#5d4e37" stroke="rgba(255,255,255,0.15)" stroke-width="1"/><text x="165" y="207" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-family="DM Sans,sans-serif" font-size="10">?</text><text x="325" y="18" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">YOUR HAND</text><rect x="270" y="30" width="40" height="55" rx="5" fill="#2471a3" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><text x="290" y="62" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">3</text><rect x="315" y="30" width="40" height="55" rx="5" fill="#6d4c2a" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-dasharray="3,2"/><text x="335" y="55" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="DM Sans,sans-serif" font-size="8">ADV</text><rect x="360" y="30" width="40" height="55" rx="5" fill="#1e8449" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><text x="380" y="62" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">7</text><text x="325" y="115" text-anchor="middle" fill="#c4882d" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">PLAYER CARD</text><rect x="290" y="125" width="70" height="45" rx="6" fill="#c0392b" stroke="#c4882d" stroke-width="1.5"/><text x="325" y="152" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="9" font-weight="600">FAV: RED</text><text x="325" y="198" text-anchor="middle" fill="rgba(245,239,224,0.4)" font-family="DM Sans,sans-serif" font-size="9">3 cards in hand</text><text x="325" y="215" text-anchor="middle" fill="rgba(245,239,224,0.4)" font-family="DM Sans,sans-serif" font-size="9">9 cards in mine</text><text x="325" y="232" text-anchor="middle" fill="rgba(245,239,224,0.4)" font-family="DM Sans,sans-serif" font-size="9">Center card revealed</text></svg></div>`} className="diagram" />
+
+<Footnotes entries={[
+  { num: 1, text: "BGA Rules: \"Each player receives 9 unknown cards and set up their Mine by placing them face down in a 3x3 square.\" https://en.boardgamearena.com/gamepanel?game=digupadventure" },
+  { num: 2, text: "BGA Rules: \"They flip the center card face up and the game can begin.\" https://en.boardgamearena.com/gamepanel?game=digupadventure" }
+]} />
+
+</StepRow>
+
+<StepRow step={9} title="Complete Turn Summary" sidebar={<>
+  <SideCard label="First Game Tip" color="green">
+    <p>For your first game, focus on learning your mine's hidden cards through swaps. Don't worry about perfect placement yet — just get a feel for the rhythm of play-discard-draw.</p>
+  </SideCard>
+  <SideCard label="Variant: Shorter Game" color="purple">
+    <p>For younger or new players, try playing with a 2&times;2 mine (4 slots) using only gem cards numbered 1–4. It's a great way to learn scoring before introducing the full game.</p>
+  </SideCard>
+</>}>
+
+Here's everything in one place. You're ready to play!
+
+<SummaryPanel items={[
+  { num: "1.", text: "<strong>Play up to 2 cards</strong> — Gem cards go into your mine (swap with face-down or replace face-up). Adventure cards apply their effect and are discarded. Idols fill slots for 2 pts each." },
+  { num: "2.", text: "<strong>Discard</strong> — Optionally discard any unwanted cards from your hand." },
+  { num: "3.", text: "<strong>Draw back to 3</strong> — Refill your hand to 3 cards from the draw pile." },
+  { num: "4.", text: "<strong>Next player</strong> — Play passes clockwise. When any mine is fully revealed, the game ends." }
+]} />
+
+### Scoring Recap
+
+<SummaryPanel items={[
+  { num: "3", text: "Favorite color + correct position" },
+  { num: "2", text: "Favorite color + wrong position" },
+  { num: "2", text: "Idol card (any position)" },
+  { num: "1", text: "Other color + correct position" },
+  { num: "0", text: "Other color + wrong position / Skeleton cards" }
+]} />
+
+<ScoringDemo />
+
+<Footnotes entries={[
+  { num: 1, text: "All rules summarized from the official BGA implementation and BGA news article. https://en.boardgamearena.com/gamepanel?game=digupadventure" }
+]} />
+
+</StepRow>
