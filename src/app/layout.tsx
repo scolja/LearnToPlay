@@ -1,4 +1,5 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import { Fraunces, Crimson_Pro, DM_Sans } from 'next/font/google';
 import './globals.css';
 
@@ -28,6 +29,24 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: 'Learn to Play',
   description: 'Interactive teaching guides for board games.',
+  manifest: '/manifest.json',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icons/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icons/favicon-16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: '/icons/apple-touch-icon.png',
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'L2P',
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#1a1612',
 };
 
 export default function RootLayout({
@@ -37,7 +56,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${fraunces.variable} ${crimsonPro.variable} ${dmSans.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Script id="sw-register" strategy="lazyOnload">{`
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js');
+          }
+        `}</Script>
+      </body>
     </html>
   );
 }

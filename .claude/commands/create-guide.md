@@ -35,12 +35,14 @@ If `/research-game` was run first, check `public/images/[game-name]/` for alread
    - Save to `public/images/[game-name]/`
 
 4. **Map images to steps.** Plan which image goes where:
+   - **Hero background**: Box art (front or back) makes an excellent subtle background — set `heroImage` in frontmatter (see below)
    - Step 1 (Goal): Game-in-action or box back showing the game overview
    - Step 2 (Cards/Components): Close-ups of the main components players interact with
    - Setup step: Component spread showing everything laid out
-   - Hero: Box cover art (if available and visually striking)
 
 5. **Identify gaps.** For steps without suitable photos, plan SVG diagrams or CSS-based visuals instead.
+
+6. **Hero background image.** If box art or a visually striking image is available, add `heroImage: "/images/[game-name]/filename.ext"` to the YAML frontmatter. The Hero component renders this as a blurred, dimmed background behind the title — it adds atmosphere without competing with the text. Best candidates: box front art, box back, or a stylized game illustration.
 
 ### Phase 2: Content Planning
 
@@ -141,3 +143,4 @@ Before delivering, verify:
 - [ ] All media-ph placeholders replaced with inline SVG/HTML diagrams
 - [ ] Quick reference glossary contains all bolded game terms
 - [ ] Interactive demos work correctly (click handlers, output display)
+- [ ] `heroImage` set in frontmatter if box art or suitable image is available

@@ -79,6 +79,7 @@ BoardGameTeacher/
 - **Prefer real images from publisher press kits** over SVG diagrams for component photos, game-in-action shots, and setup spreads. SVG diagrams are better for annotated explanations and flow charts.
 - Game images go in `public/images/[game-name]/` and are referenced as `/images/[game-name]/filename.ext` in MDX.
 - All images must be web-optimized: max 800-1000px wide, <400KB each, with descriptive `alt` text and publisher credit captions.
+- **Hero background images**: If box art or a visually striking image is available, add `heroImage: "/images/[game-name]/filename.ext"` to the YAML frontmatter. The Hero component renders this as a blurred, dimmed background behind the title text. Best candidates: box front art, box back, or stylized game illustrations.
 
 ## MDX Component Reference
 

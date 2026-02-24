@@ -24,6 +24,11 @@ export function Footer({ title, year, designer, artist, publisher, publisherUrl,
       <p style={{ marginTop: '0.5rem' }}>
         This guide is an independent fan-made resource. It is not affiliated with or endorsed by {publisher}.
       </p>
+      <div className="footer-brand">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/icons/logo.svg" alt="L2P" className="footer-logo" />
+        <span>Learn to Play</span>
+      </div>
     </footer>
   );
 }

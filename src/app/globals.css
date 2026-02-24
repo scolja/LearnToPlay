@@ -18,9 +18,9 @@
   --font-display: var(--font-fraunces), Georgia, serif;
   --font-body: var(--font-crimson-pro), Georgia, serif;
   --font-ui: var(--font-dm-sans), system-ui, sans-serif;
-  --main-width: 680px;
-  --sidebar-width: 360px;
-  --gap: 48px;
+  --main-width: 820px;
+  --sidebar-width: 420px;
+  --gap: 56px;
 }
 
 /* ===================== RESET & BASE ===================== */
@@ -47,12 +47,25 @@ strong { font-weight: 700; }
   position: relative;
   overflow: hidden;
 }
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--hero-bg-url) center/cover no-repeat;
+  filter: blur(3px) brightness(0.35);
+  opacity: 0.45;
+  z-index: 0;
+}
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at 50% 120%, rgba(201,169,78,0.08) 0%, transparent 70%);
   pointer-events: none;
+  z-index: 1;
+}
+.hero-badge, .hero h1, .hero-sub, .hero-meta {
+  position: relative;
+  z-index: 2;
 }
 .hero-fade {
   height: 100px;
@@ -92,7 +105,7 @@ strong { font-weight: 700; }
 .hero-sub {
   font-size: 1.05rem;
   color: rgba(245,239,224,0.6);
-  max-width: 520px;
+  max-width: 600px;
   margin: 0 auto 1.2rem;
   font-style: italic;
 }
@@ -137,7 +150,7 @@ strong { font-weight: 700; }
   display: block;
 }
 .row.full-width .main {
-  max-width: 700px;
+  max-width: 840px;
   margin: 0 auto;
 }
 
@@ -666,6 +679,41 @@ strong { font-weight: 700; }
   line-height: 1.5;
 }
 .qref-item.expanded .qref-def { display: block; }
+.qref-group { margin-bottom: 0.5rem; }
+.qref-group-header {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  padding: 0.6rem 0.8rem 0.25rem;
+  border-bottom: 1px solid rgba(201,169,78,0.15);
+  margin-top: 0.3rem;
+  position: sticky;
+  top: 0;
+  background: var(--bg-dark);
+  z-index: 1;
+}
+.qref-group:first-child .qref-group-header { margin-top: 0; }
+.qref-item.hl-active {
+  border-left: 3px solid var(--gold);
+  background: rgba(201,169,78,0.1);
+}
+
+/* Page-level term highlighting */
+mark.qref-hl {
+  background: var(--gold);
+  color: var(--bg-dark);
+  padding: 0.05em 0.3em;
+  border-radius: 3px;
+  font-weight: 700;
+  box-shadow: 0 0 0 2px var(--gold), 0 0 12px rgba(201,169,78,0.6);
+  animation: qref-pulse 2s ease-in-out infinite;
+}
+@keyframes qref-pulse {
+  0%, 100% { box-shadow: 0 0 0 2px var(--gold), 0 0 12px rgba(201,169,78,0.6); }
+  50% { box-shadow: 0 0 0 3px var(--gold), 0 0 24px rgba(201,169,78,0.9), 0 0 48px rgba(201,169,78,0.3); }
+}
 
 /* ===================== FOOTER ===================== */
 footer {
@@ -684,8 +732,32 @@ footer a {
   opacity: 0.7;
 }
 footer a:hover { opacity: 1; }
+.footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  color: rgba(245,239,224,0.3);
+  font-size: 12px;
+  font-weight: 600;
+}
+.footer-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
+  opacity: 0.5;
+}
 
 /* ===================== HOMEPAGE ===================== */
+.hero-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
 .homepage .hero {
   padding-bottom: 2.5rem;
 }
@@ -701,11 +773,25 @@ footer a:hover { opacity: 1; }
 .game-card {
   background: var(--bg-sidebar);
   border-radius: 12px;
-  padding: 1.5rem;
+  overflow: hidden;
   text-decoration: none;
   color: var(--text-light);
   transition: transform 0.2s, box-shadow 0.2s;
   display: block;
+}
+.game-card-image {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+.game-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.game-card-body {
+  padding: 1.2rem 1.5rem 1.5rem;
 }
 .game-card:hover {
   transform: translateY(-3px);
