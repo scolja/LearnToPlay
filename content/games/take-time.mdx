@@ -1,0 +1,648 @@
+---
+title: "Take Time"
+slug: "take-time"
+subtitle: "A cooperative card puzzle — place numbered cards around a clock in silence and solve 40 evolving challenges together"
+designer: "Alexi Piovesan & Julien Prothière"
+artist: "Maud Chalmel"
+publisher: "Libellud"
+publisherUrl: "https://www.libellud.com/en/our-games/take-time/"
+year: 2025
+players: "2-4"
+time: "30 Min"
+age: "10+"
+bggUrl: "https://boardgamegeek.com/boardgame/440540/take-time"
+glossary:
+  - term: "Solar Card"
+    definition: "One of 12 numbered cards (1–12) with a warm-colored sun back. Distinguishable from Lunar cards by the back design."
+    step: "Step 2"
+    searchTerms: "solar sun card warm day"
+  - term: "Lunar Card"
+    definition: "One of 12 numbered cards (1–12) with a cool-colored moon back. Distinguishable from Solar cards by the back design."
+    step: "Step 2"
+    searchTerms: "lunar moon card cool night"
+  - term: "Clock"
+    definition: "The circular play area divided into 6 segments. Each test uses a unique clock with its own special rules printed on it."
+    step: "Step 1"
+    searchTerms: "clock dial face board play area"
+  - term: "Segment"
+    definition: "One of 6 wedge-shaped sections around the clock where cards are placed. Each must contain at least 1 card."
+    step: "Step 1"
+    searchTerms: "segment wedge section area zone"
+  - term: "Clock Hand"
+    definition: "Indicates which segment is the starting segment for the ascending order check during resolution. Values go up clockwise from this point."
+    step: "Step 1"
+    searchTerms: "clock hand start pointer beginning"
+  - term: "Discussion Phase"
+    definition: "The first phase of each test. Players strategize openly but cannot look at the faces of their cards — only the backs (Sun/Moon) are visible."
+    step: "Step 3"
+    searchTerms: "discussion talk strategy plan communicate"
+  - term: "Placement Phase"
+    definition: "The second phase. Players pick up their cards, then take turns placing one card at a time into any segment. No communication of any kind is allowed."
+    step: "Step 4"
+    searchTerms: "placement play silent quiet cards turn"
+  - term: "Resolution Phase"
+    definition: "The final phase. Cards are revealed segment by segment starting from the clock hand. Check all universal and special rules to determine pass or fail."
+    step: "Step 6"
+    searchTerms: "resolution reveal check verify pass fail"
+  - term: "Universal Rules"
+    definition: "Three rules that apply to every clock: (1) at least 1 card per segment, (2) ascending totals clockwise from clock hand, (3) no segment exceeds 24."
+    step: "Step 1"
+    searchTerms: "universal rules base always ascending 24"
+  - term: "Face-Up Card"
+    definition: "A card played face up (visible to all) instead of face down. The group has a limited number of these per test, determined by the Reminder token and Bonus tokens."
+    step: "Step 5"
+    searchTerms: "face up open visible reveal show signal"
+  - term: "Reminder Token"
+    definition: "A token (specific to player count) that shows how many face-up cards the group can play per test. The eye symbols indicate the limit."
+    step: "Step 5"
+    searchTerms: "reminder token eye symbol limit face up"
+  - term: "Bonus Token"
+    definition: "One of 3 tokens that start face down. Flipped face up after a failed test, each adds 1 additional face-up card for retries. Reset after passing."
+    step: "Step 7"
+    searchTerms: "bonus token retry fail extra face up"
+  - term: "Chapter"
+    definition: "A group of 4 clocks with shared rules. The game has 10 chapters that progressively introduce new constraints and mechanics."
+    step: "Step 8"
+    searchTerms: "chapter envelope sleeve group set"
+  - term: "Special Rules"
+    definition: "Unique constraints printed on each clock — segment-specific (affecting one wedge) or center rules (affecting all segments)."
+    step: "Step 8"
+    searchTerms: "special rules constraint restriction unique clock"
+  - term: "Sleeve of Regrets"
+    definition: "Where skipped clocks are stored. You can return to these tests later. Skipping resets all Bonus tokens to face down."
+    step: "Step 7"
+    searchTerms: "sleeve regrets skip pass difficult too hard"
+  - term: "Rebirth Sleeve"
+    definition: "An envelope opened after completing (or attempting) all 40 tests. Contains a Second Hand and 6 tokens for additional challenge and replayability."
+    step: "Step 8"
+    searchTerms: "rebirth envelope bonus extra content second hand"
+  - term: "Test"
+    definition: "A single challenge — one clock with its rules. You pass by satisfying all universal and special rules during resolution."
+    step: "Step 1"
+    searchTerms: "test challenge puzzle clock attempt"
+---
+
+<style>{`
+  :root {
+    --tt-solar: #e8a524;
+    --tt-lunar: #6b7fb8;
+    --tt-solar-bg: rgba(232,165,36,0.12);
+    --tt-lunar-bg: rgba(107,127,184,0.12);
+    --tt-clock-bg: #1a1a2e;
+    --tt-clock-rim: #c9a94e;
+    --tt-segment: rgba(201,169,78,0.08);
+  }
+  .tt-card {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 44px;
+    border-radius: 5px;
+    font-family: var(--font-ui);
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 2px;
+    vertical-align: middle;
+  }
+  .tt-card.solar {
+    background: linear-gradient(135deg, #f5c842, #e8a524);
+    color: #2c1a00;
+    box-shadow: 0 1px 3px rgba(232,165,36,0.3);
+  }
+  .tt-card.lunar {
+    background: linear-gradient(135deg, #8b9fd4, #6b7fb8);
+    color: #fff;
+    box-shadow: 0 1px 3px rgba(107,127,184,0.3);
+  }
+  .tt-card.back-solar {
+    background: repeating-linear-gradient(45deg, #f5c842, #f5c842 3px, #e8a524 3px, #e8a524 6px);
+    color: transparent;
+    border: 2px solid #e8a524;
+  }
+  .tt-card.back-lunar {
+    background: repeating-linear-gradient(45deg, #8b9fd4, #8b9fd4 3px, #6b7fb8 3px, #6b7fb8 6px);
+    color: transparent;
+    border: 2px solid #6b7fb8;
+  }
+`}</style>
+
+<StepRow step={1} title="The Goal" sidebar={<>
+  <SideCard label="The Mind + The Crew" color="blue">
+    <p>Reviewers call Take Time "the baby of The Mind and The Crew." It blends the silent tension of <strong>The Mind</strong> (playing cards without talking) with the progressive campaign structure of <strong>The Crew</strong> (escalating cooperative challenges).</p>
+  </SideCard>
+  <SideCard label="Start Simple" color="green">
+    <p>Chapter 1 clocks are deliberately easy. The game teaches you through play — each chapter gently introduces one or two new constraints. Don't worry about mastering everything before you start.</p>
+  </SideCard>
+</>}>
+
+Take Time is a **cooperative** card puzzle. You and your teammates work together to solve clock challenges — placing numbered cards around a circular clock divided into **6 segments**.
+
+The twist: you plan your strategy together *before* seeing your cards, then play them in **complete silence**.
+
+<RuleBox>
+**Your team wins a test when every card is placed and all rules are satisfied.** There are 40 tests across 10 chapters. Each chapter introduces new rules that build on what you've already learned.
+</RuleBox>
+
+Every clock enforces three **universal rules**:
+
+1. Each of the 6 segments must have **at least 1 card**
+2. Segment totals must be in **ascending order** (or equal) clockwise from the clock hand
+3. No segment may total **more than 24**
+
+<RawHTML html={`<div class="diagram" style="background:#eae4d5;border-radius:10px;padding:1.5rem;margin:1rem 0;">
+  <svg viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+    <!-- Clock circle -->
+    <circle cx="260" cy="200" r="160" fill="#1a1a2e" stroke="#c9a94e" stroke-width="3"/>
+    <!-- Segment dividers -->
+    <line x1="260" y1="40" x2="260" y2="360" stroke="rgba(201,169,78,0.3)" stroke-width="1.5"/>
+    <line x1="121" y1="120" x2="399" y2="280" stroke="rgba(201,169,78,0.3)" stroke-width="1.5"/>
+    <line x1="121" y1="280" x2="399" y2="120" stroke="rgba(201,169,78,0.3)" stroke-width="1.5"/>
+    <!-- Center dot -->
+    <circle cx="260" cy="200" r="28" fill="#1a1a2e" stroke="#c9a94e" stroke-width="1.5"/>
+    <text x="260" y="205" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="11" font-weight="700">CLOCK</text>
+    <!-- Segment labels with example values -->
+    <text x="260" y="82" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14" font-weight="700">①</text>
+    <text x="260" y="100" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="11">sum: 3</text>
+    <text x="355" y="142" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14" font-weight="700">②</text>
+    <text x="355" y="160" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="11">sum: 7</text>
+    <text x="355" y="268" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14" font-weight="700">③</text>
+    <text x="355" y="286" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="11">sum: 12</text>
+    <text x="260" y="328" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14" font-weight="700">④</text>
+    <text x="260" y="346" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="11">sum: 14</text>
+    <text x="165" y="268" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14" font-weight="700">⑤</text>
+    <text x="165" y="286" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="11">sum: 20</text>
+    <text x="165" y="142" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14" font-weight="700">⑥</text>
+    <text x="165" y="160" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="11">sum: 22</text>
+    <!-- Clock hand pointing to segment 1 -->
+    <line x1="260" y1="172" x2="260" y2="60" stroke="#c9a94e" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="260" cy="172" r="5" fill="#c9a94e"/>
+    <!-- Clockwise arrow -->
+    <path d="M 330 68 A 90 90 0 0 1 388 140" fill="none" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <polygon points="388,140 382,126 395,130" fill="#c9a94e"/>
+    <text x="376" y="96" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="10" font-weight="600">ascending</text>
+    <!-- Annotations -->
+    <line x1="420" y1="200" x2="470" y2="200" stroke="#c9a94e" stroke-width="1.2"/>
+    <text x="478" y="190" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="13" font-weight="600">6 segments</text>
+    <text x="478" y="208" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="11">At least 1 card each</text>
+    <line x1="260" y1="60" x2="490" y2="60" stroke="#c9a94e" stroke-width="1.2"/>
+    <text x="498" y="54" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="13" font-weight="600">Clock Hand</text>
+    <text x="498" y="72" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="11">Start ascending from here</text>
+    <text x="478" y="250" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="11">3 ≤ 7 ≤ 12 ≤ 14 ≤ 20 ≤ 22</text>
+    <text x="478" y="268" fill="rgba(44,36,24,0.4)" font-family="DM Sans,sans-serif" font-size="10">All ≤ 24 ✓</text>
+  </svg>
+</div>`} />
+
+<Footnotes entries={[
+  { num: 1, text: 'Official Rulebook: "Each segment must contain at least 1 card, values must be ascending (or equal) clockwise from the clock hand, and no segment may exceed 24."', url: 'https://cdn.svc.asmodee.net/production-libellud/uploads/2025/09/TT_RULES_EN_WEB.pdf' }
+]} />
+
+</StepRow>
+
+<StepRow step={2} title="The Cards" sidebar={<>
+  <SideCard label="Card Backs are Intel" color="gold">
+    <p>Card backs are intentionally different — Solar cards have a warm sun design, Lunar cards have a cool moon design. When a teammate plays a card face down, you can't see the number but you <strong>know which type it is</strong>. This is legal information.</p>
+  </SideCard>
+  <SideCard label="Like Hanabi" color="blue">
+    <p>During the Discussion phase, you know information about others' cards (the backs) that they also know. But the <em>values</em> are hidden from everyone, much like how <strong>Hanabi</strong> keeps your own hand hidden from you.</p>
+  </SideCard>
+</>}>
+
+The deck has **24 cards** divided into two suits:
+
+- **12 Solar cards** (numbered 1–12) — warm-colored sun backs
+- **12 Lunar cards** (numbered 1–12) — cool-colored moon backs
+
+<RawHTML html={`<div class="diagram" style="background:#eae4d5;border-radius:10px;padding:1.5rem;margin:1rem 0;">
+  <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+    <!-- Solar cards -->
+    <text x="20" y="30" fill="#2c2418" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" text-transform="uppercase" letter-spacing="2">SOLAR CARDS</text>
+    <rect x="20" y="45" width="36" height="50" rx="4" fill="url(#sunGrad)" stroke="#e8a524" stroke-width="1.5"/>
+    <text x="38" y="76" text-anchor="middle" fill="#2c1a00" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">1</text>
+    <rect x="62" y="45" width="36" height="50" rx="4" fill="url(#sunGrad)" stroke="#e8a524" stroke-width="1.5"/>
+    <text x="80" y="76" text-anchor="middle" fill="#2c1a00" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">2</text>
+    <rect x="104" y="45" width="36" height="50" rx="4" fill="url(#sunGrad)" stroke="#e8a524" stroke-width="1.5"/>
+    <text x="122" y="76" text-anchor="middle" fill="#2c1a00" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">3</text>
+    <text x="152" y="76" text-anchor="middle" fill="rgba(44,36,24,0.4)" font-family="DM Sans,sans-serif" font-size="16">…</text>
+    <rect x="170" y="45" width="36" height="50" rx="4" fill="url(#sunGrad)" stroke="#e8a524" stroke-width="1.5"/>
+    <text x="188" y="76" text-anchor="middle" fill="#2c1a00" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">12</text>
+    <!-- Lunar cards -->
+    <text x="20" y="130" fill="#2c2418" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" text-transform="uppercase" letter-spacing="2">LUNAR CARDS</text>
+    <rect x="20" y="145" width="36" height="50" rx="4" fill="url(#moonGrad)" stroke="#6b7fb8" stroke-width="1.5"/>
+    <text x="38" y="176" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">1</text>
+    <rect x="62" y="145" width="36" height="50" rx="4" fill="url(#moonGrad)" stroke="#6b7fb8" stroke-width="1.5"/>
+    <text x="80" y="176" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">2</text>
+    <rect x="104" y="145" width="36" height="50" rx="4" fill="url(#moonGrad)" stroke="#6b7fb8" stroke-width="1.5"/>
+    <text x="122" y="176" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">3</text>
+    <text x="152" y="176" text-anchor="middle" fill="rgba(44,36,24,0.4)" font-family="DM Sans,sans-serif" font-size="16">…</text>
+    <rect x="170" y="145" width="36" height="50" rx="4" fill="url(#moonGrad)" stroke="#6b7fb8" stroke-width="1.5"/>
+    <text x="188" y="176" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="16" font-weight="700">12</text>
+    <!-- Card backs -->
+    <text x="340" y="30" fill="#2c2418" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" text-transform="uppercase" letter-spacing="2">CARD BACKS (WHAT YOU SEE)</text>
+    <rect x="340" y="45" width="36" height="50" rx="4" fill="#e8a524" opacity="0.7" stroke="#e8a524" stroke-width="1.5"/>
+    <text x="358" y="66" text-anchor="middle" fill="#2c1a00" font-family="DM Sans,sans-serif" font-size="18">☀</text>
+    <text x="358" y="84" text-anchor="middle" fill="#2c1a00" font-family="DM Sans,sans-serif" font-size="9" font-weight="600">SOLAR</text>
+    <rect x="388" y="45" width="36" height="50" rx="4" fill="#6b7fb8" opacity="0.7" stroke="#6b7fb8" stroke-width="1.5"/>
+    <text x="406" y="66" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="18">☽</text>
+    <text x="406" y="84" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="9" font-weight="600">LUNAR</text>
+    <text x="340" y="125" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="12">During discussion: you only see backs</text>
+    <text x="340" y="142" fill="rgba(44,36,24,0.55)" font-family="DM Sans,sans-serif" font-size="12">You know the type, not the number</text>
+    <!-- Total note -->
+    <text x="340" y="180" fill="#2c2418" font-family="DM Sans,sans-serif" font-size="13" font-weight="600">24 total cards = 12 dealt per test</text>
+    <text x="340" y="198" fill="rgba(44,36,24,0.4)" font-family="DM Sans,sans-serif" font-size="11">Remaining 12 not used this test</text>
+    <!-- Gradient defs -->
+    <defs>
+      <linearGradient id="sunGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f5c842"/><stop offset="100%" stop-color="#e8a524"/></linearGradient>
+      <linearGradient id="moonGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#8b9fd4"/><stop offset="100%" stop-color="#6b7fb8"/></linearGradient>
+    </defs>
+  </svg>
+</div>`} />
+
+For each test, shuffle all 24 cards together and deal **12 cards** to the players. The remaining 12 are not used. The number of cards per player depends on player count — covered in the Setup step.
+
+</StepRow>
+
+<StepRow step={3} title="Discussion Phase — Plan Without Looking" sidebar={<>
+  <SideCard label="Common Mistake" color="red">
+    <p>Players instinctively look at their cards when they're dealt. <strong>Don't!</strong> During Discussion, cards stay face down in front of you. You can only see the backs — which tell you the Sun/Moon split in each player's hand.</p>
+  </SideCard>
+  <SideCard label="Strategy Tip" color="green">
+    <p>Experienced players use the Discussion phase to agree on conventions: "Let's aim for low values in segments 1–2 and pile high values in segments 5–6." The more specific your plan, the better you'll coordinate in silence.</p>
+  </SideCard>
+</>}>
+
+Each test begins with the **Discussion phase**. Players examine the clock — its segments, any special rules printed on it — and strategize together.
+
+The catch: **you cannot look at your cards.** Cards have been dealt to you, but they sit face down. You can see the backs (Solar or Lunar) of your own cards and everyone else's, but nobody knows any values.
+
+### What You CAN Discuss
+
+- General strategy: "Let's keep segments 1 and 2 low"
+- The clock's special rules: "Segment 4 needs exactly 3 cards"
+- Card type distribution: "I have 3 Solar and 1 Lunar"
+- Where to concentrate values: "Someone should save big cards for segment 6"
+
+### What You CANNOT Do
+
+<RuleBox danger>
+**No codes, signals, or secret systems.** You may not devise any way to communicate card values indirectly. Examples of forbidden behavior: "If I scratch my ear, I have an 8" or "I'll place my card at an angle to mean it's high." Only genuine discussion of game strategy is allowed.<sup>1</sup>
+</RuleBox>
+
+Once all discussion is finished, the group agrees to move on. Players then **pick up and look at their cards** — and from this moment, all communication ends.
+
+<Footnotes entries={[
+  { num: 1, text: 'Official Rulebook, Discussion Phase: "You may not use or devise codes or signals for communicating things that do not relate to game actions."', url: 'https://cdn.svc.asmodee.net/production-libellud/uploads/2025/09/TT_RULES_EN_WEB.pdf' }
+]} />
+
+</StepRow>
+
+<StepRow step={4} title="Placement Phase — Silence" sidebar={<>
+  <SideCard label="The Heart of the Game" color="gold">
+    <p>This is where Take Time shines. You've made a plan, you've seen your cards, and now you must act in perfect silence. Every card you place is a message to your teammates — <em>if</em> they can read it.</p>
+  </SideCard>
+  <SideCard label="Common Mistake" color="red">
+    <p><strong>No communication means none.</strong> No speaking, no whispering, no gestures, no pointed looks, no sighs. Not even a raised eyebrow. The silence must be absolute. Some groups play music to fill the quiet.</p>
+  </SideCard>
+</>}>
+
+Players pick up their cards and look at them. **All communication stops.**
+
+Any player may place the first card. After that, play proceeds **clockwise** — each player places one card at a time into any of the 6 segments. Cards are placed **face down** by default.
+
+<FlowDiagram steps={[
+  { label: "Pick up cards", variant: "dark" },
+  { label: "Silence begins", variant: "red" },
+  { label: "Place 1 card", variant: "gold" },
+  { label: "Next player →", variant: "dark" },
+  { label: "Repeat until done", variant: "gold" }
+]} />
+
+Continue clockwise until all 12 cards have been played.
+
+### Reading Your Teammates
+
+Even without words, you communicate through your **actions**. Where someone places a card, when they hesitate, and whether they use a Solar or Lunar card all carry meaning. Over time, your team develops an unspoken language.
+
+<RuleBox>
+**You are placing cards into the clock's 6 segments — not specific positions within a segment.** Multiple cards can go in the same segment. The order cards are placed within a segment does not matter; only the total value matters.<sup>1</sup>
+</RuleBox>
+
+<Footnotes entries={[
+  { num: 1, text: 'Official Rulebook, Placement Phase: Cards are placed next to the segments of the clock. The sum of all cards in each segment is what matters during resolution.' }
+]} />
+
+</StepRow>
+
+<StepRow step={5} title="Face-Up Cards — Breaking the Silence" sidebar={<>
+  <SideCard label="Strategic Signaling" color="green">
+    <p>Playing a card face up communicates its exact value to everyone. Use this for critical placements: "I'm putting my 12 here to anchor the high end." Choosing <em>not</em> to reveal when things are going well is also a signal.</p>
+  </SideCard>
+  <SideCard label="The Limit is Shared" color="red">
+    <p>The face-up limit applies to the <strong>whole group</strong>, not per player. If your Reminder token shows 2 eyes, the group gets 2 face-up cards total — not 2 each. Coordinate wisely during Discussion about who might need them.</p>
+  </SideCard>
+</>}>
+
+By default, cards go face down. But your team has a limited number of **face-up plays** — cards placed with the number showing.
+
+The **Reminder token** (specific to your player count) shows how many face-up cards the group can use. Look for the eye symbols — each one means one face-up card.
+
+A face-up card is powerful: everyone can see the value, removing uncertainty from that segment. But you have only a few of them, and the decision to play face up **cannot be discussed** — it must be made silently during the Placement phase.<sup>1</sup>
+
+<RawHTML html={`<div class="diagram" style="background:#eae4d5;border-radius:10px;padding:1.5rem;margin:1rem 0;">
+  <svg viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+    <!-- Reminder token -->
+    <circle cx="80" cy="80" r="45" fill="#1a1a2e" stroke="#c9a94e" stroke-width="2"/>
+    <text x="80" y="56" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" letter-spacing="1">REMINDER</text>
+    <text x="64" y="86" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="22">👁</text>
+    <text x="96" y="86" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="22">👁</text>
+    <text x="80" y="112" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="10">2 face-up cards</text>
+    <!-- Plus sign -->
+    <text x="150" y="86" text-anchor="middle" fill="rgba(44,36,24,0.4)" font-family="DM Sans,sans-serif" font-size="24">+</text>
+    <!-- Bonus tokens -->
+    <circle cx="210" cy="80" r="22" fill="rgba(201,169,78,0.15)" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="210" y="76" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14">★</text>
+    <text x="210" y="92" text-anchor="middle" fill="rgba(201,169,78,0.5)" font-family="DM Sans,sans-serif" font-size="8">BONUS</text>
+    <circle cx="260" cy="80" r="22" fill="rgba(201,169,78,0.15)" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="260" y="76" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14">★</text>
+    <text x="260" y="92" text-anchor="middle" fill="rgba(201,169,78,0.5)" font-family="DM Sans,sans-serif" font-size="8">BONUS</text>
+    <circle cx="310" cy="80" r="22" fill="rgba(201,169,78,0.15)" stroke="#c9a94e" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="310" y="76" text-anchor="middle" fill="#c9a94e" font-family="DM Sans,sans-serif" font-size="14">★</text>
+    <text x="310" y="92" text-anchor="middle" fill="rgba(201,169,78,0.5)" font-family="DM Sans,sans-serif" font-size="8">BONUS</text>
+    <!-- Equals -->
+    <text x="360" y="86" text-anchor="middle" fill="rgba(44,36,24,0.4)" font-family="DM Sans,sans-serif" font-size="24">=</text>
+    <!-- Result -->
+    <text x="470" y="76" text-anchor="middle" fill="#2c2418" font-family="DM Sans,sans-serif" font-size="14" font-weight="700">Total face-up</text>
+    <text x="470" y="96" text-anchor="middle" fill="#2c2418" font-family="DM Sans,sans-serif" font-size="14" font-weight="700">cards allowed</text>
+    <text x="470" y="126" text-anchor="middle" fill="rgba(44,36,24,0.45)" font-family="DM Sans,sans-serif" font-size="11">Bonus tokens start face down</text>
+    <text x="470" y="142" text-anchor="middle" fill="rgba(44,36,24,0.45)" font-family="DM Sans,sans-serif" font-size="11">They flip up after failed attempts</text>
+  </svg>
+</div>`} />
+
+<Footnotes entries={[
+  { num: 1, text: 'Official Rulebook, Face-Up Cards: "The placing of open cards can be shared freely among players, but cannot be openly discussed during this Phase."' }
+]} />
+
+</StepRow>
+
+<StepRow step={6} title="Resolution — Did You Pass?" sidebar={<>
+  <SideCard label="The Moment of Truth" color="gold">
+    <p>Resolution is simultaneous tension and relief. Flip the cards segment by segment, add the values, and watch the totals either climb in perfect order — or crumble. When everything clicks, it feels like your team read each other's minds.</p>
+  </SideCard>
+</>}>
+
+After all cards are played, it's time to check. Starting with the segment marked by the **clock hand**, reveal each face-down card. Don't rearrange the cards — just flip them.
+
+### Checking the Rules
+
+For each segment, add up all card values. Then verify:
+
+<EvalStrip steps={[
+  { num: "1", label: "At least 1 card per segment?" },
+  { num: "2", label: "Totals ascending clockwise?" },
+  { num: "3", label: "No segment over 24?" },
+  { num: "4", label: "Special rules satisfied?" }
+]} />
+
+If **every condition** is met — you pass the test. Move to the next clock.
+
+If **any condition** fails — you fail the test. But failure isn't the end.
+
+<RuleBox>
+**Equal values between adjacent segments are allowed.** The rule is "equal to or greater than" — two segments can share the same total. Totals must be non-decreasing, not strictly increasing.<sup>1</sup>
+</RuleBox>
+
+<Footnotes entries={[
+  { num: 1, text: 'Official Rulebook, Resolution: "The value of each segment must be equal to or greater than the previous segment."' }
+]} />
+
+</StepRow>
+
+<StepRow step={7} title="Failing & Retrying" sidebar={<>
+  <SideCard label="Failure is a Teacher" color="green">
+    <p>Expect to fail — especially on later clocks. Most groups need 2–4 attempts per clock. Each failure gives you more information: what went wrong, where the plan broke down, and how to adjust. The conversations after a failed attempt are some of the best moments in the game.</p>
+  </SideCard>
+  <SideCard label="Too Hard? Skip It." color="gold">
+    <p>If a clock is beyond you, place it in the <strong>Sleeve of Regrets</strong> and move on. You can come back to it later. Skipping resets all Bonus tokens back to face down.</p>
+  </SideCard>
+</>}>
+
+When you fail a test, you gain a small advantage for the next attempt.
+
+### Bonus Tokens
+
+Flip one of the 3 **Bonus tokens** face up. Each face-up Bonus token grants the group **1 additional face-up card** on the retry. This means your second attempt has more information than the first, and your third attempt even more.
+
+<FlowDiagram steps={[
+  { label: "Fail attempt 1", variant: "red" },
+  { label: "+1 face-up card", variant: "gold" },
+  { label: "Fail attempt 2", variant: "red" },
+  { label: "+2 face-up cards", variant: "gold" },
+  { label: "Fail attempt 3", variant: "red" },
+  { label: "+3 face-up cards", variant: "gold" }
+]} />
+
+Once you **pass** the test, all Bonus tokens flip back face down for the next clock.
+
+### Retrying
+
+Shuffle all 24 cards, re-deal, and try the same clock again. You bring everything you learned from the failure — just not the extra face-up cards from previous tests.
+
+### The Sleeve of Regrets
+
+If a clock is too difficult, you may skip it. Flip any face-up Bonus tokens back down, place the clock in the **Sleeve of Regrets**, and proceed to the next test. You can return to skipped clocks later.<sup>1</sup>
+
+<Footnotes entries={[
+  { num: 1, text: 'Official Rulebook, Skipping: "Flip any faceup Bonus tokens facedown, place the clock into the Sleeve of Regrets, and proceed to the next test."' }
+]} />
+
+</StepRow>
+
+<StepRow step={8} title="Chapters & Evolving Rules" sidebar={<>
+  <SideCard label="No Spoilers" color="gold">
+    <p>Each chapter sleeve is sealed. Open them in order — the game is designed to surprise you with new mechanics and illustrated worlds. The progression from "Awakening" to "Rebirth" is a poetic journey.</p>
+  </SideCard>
+  <SideCard label="Codenames Duet Vibes" color="blue">
+    <p>Like <strong>Codenames Duet</strong>, Take Time is a cooperative puzzle where you must infer your partner's intentions from constrained actions. The silent placement phase creates the same "did they mean what I think they meant?" tension.</p>
+  </SideCard>
+</>}>
+
+The 40 tests are organized into **10 chapters**, each containing 4 clocks and a rules sheet. Chapters are stored in sealed sleeves and opened sequentially.
+
+### Progressive Difficulty
+
+Chapter 1 clocks use only the universal rules. As you advance, each chapter introduces **new constraints**:
+
+- A segment that requires exactly a certain number of cards
+- A segment that only accepts Solar or Lunar cards
+- Maximum or minimum value targets for specific segments
+- **Center rules** that apply to all 6 segments on that clock
+- The **Clock Hand** (introduced in Chapter 3) designating where ascending order begins
+
+<RuleBox>
+**Each chapter's rules sheet explains the new mechanics for that chapter.** Read it before attempting the clocks. The rules are cumulative — later chapters assume you know earlier ones.
+</RuleBox>
+
+### After All 40 Tests
+
+Once you've attempted every test (passed or failed), you may open the **Rebirth sleeve**. It contains a Second Hand and 6 tokens that add new variability and challenge — extending the game beyond its initial 40 puzzles.<sup>1</sup>
+
+<Footnotes entries={[
+  { num: 1, text: 'Official Rulebook, Completing the Game: "After you have attempted all of the tests in the game, you may open the Rebirth sleeve for additional replayability."' }
+]} />
+
+</StepRow>
+
+<StepRow fullWidth title="Test Your Knowledge">
+
+<KnowledgeCheck questions={[
+  {
+    question: "During the Discussion phase, you notice you have 2 Solar cards and 2 Lunar cards (from the backs). Can you tell your teammates this?",
+    options: [
+      { text: "Yes — you can freely discuss the card types visible on the backs", correct: true },
+      { text: "No — you cannot reveal any information about your cards", correct: false },
+      { text: "Only if you don't mention the exact count", correct: false }
+    ],
+    correctFeedback: "Correct! Card backs (Solar vs Lunar) are visible to everyone during Discussion. Sharing this information is completely legal. What you cannot do is look at the card faces or use secret codes. (Step 3)",
+    incorrectFeedback: "Card backs are open information — you can see them and discuss them freely. The restriction is on card values (the faces), not the card types shown on the backs. (Step 3)"
+  },
+  {
+    question: "Your team is placing cards and you realize your plan won't work. You want to signal a teammate to change strategy. What should you do?",
+    options: [
+      { text: "Whisper a quick hint — a small word is fine", correct: false },
+      { text: "Nothing — no communication of any kind is allowed during Placement", correct: true },
+      { text: "Use a predetermined hand signal from the Discussion phase", correct: false }
+    ],
+    correctFeedback: "Correct! During Placement, absolutely no communication is permitted — no words, gestures, or signals. You can only 'communicate' through the cards you play and where you place them. (Step 4)",
+    incorrectFeedback: "The silence during Placement is absolute. No talking, no gestures, no codes. The only way to influence the outcome is through your card placement choices. Predetermined signals are explicitly forbidden by the rules. (Steps 3 & 4)"
+  },
+  {
+    question: "After resolution, segment totals are: 5, 8, 8, 15, 21, 23. Did you satisfy the ascending order rule?",
+    options: [
+      { text: "Yes — totals are non-decreasing (equal values are allowed)", correct: true },
+      { text: "No — segments 2 and 3 are equal, they must be strictly increasing", correct: false }
+    ],
+    correctFeedback: "Correct! The rule requires values to be 'equal to or greater than' the previous segment. Two segments with the same total (8, 8) is perfectly valid. (Step 6)",
+    incorrectFeedback: "Equal values are allowed! The rule says 'equal to or greater than,' not 'strictly greater than.' Segments with matching totals satisfy the ascending order rule. (Step 6)"
+  },
+  {
+    question: "You failed a test twice. Your Reminder token shows 2 eyes. How many face-up cards can your team play on the third attempt?",
+    options: [
+      { text: "2 (just the Reminder token)", correct: false },
+      { text: "4 (Reminder token + 2 flipped Bonus tokens)", correct: true },
+      { text: "3 (1 Reminder + 2 Bonus per player)", correct: false }
+    ],
+    correctFeedback: "Correct! The Reminder token provides 2 base face-up cards. Each failed attempt flips a Bonus token, adding 1 more each. After 2 failures: 2 + 2 = 4 face-up cards total for the group. (Steps 5 & 7)",
+    incorrectFeedback: "Face-up cards = Reminder token eyes + face-up Bonus tokens. With 2 eyes on the Reminder token and 2 Bonus tokens flipped from 2 failures, that's 2 + 2 = 4 face-up cards for the whole group. (Steps 5 & 7)"
+  }
+]} />
+
+</StepRow>
+
+<StepRow step={9} title="Setup" sidebar={<>
+  <SideCard label="Setup is Fast" color="green">
+    <p>Once you know the game, setup takes about 1 minute: pull out a clock, shuffle cards, deal, go. The bulk of your time is spent playing, not preparing.</p>
+  </SideCard>
+  <SideCard label="2-Player Variant" color="red">
+    <p>In a 2-player game, each player gets <strong>two stacks</strong>: 4 cards and 2 cards. You only look at the 4-card stack when Placement begins. After both players have played 2 cards, pick up the 2-card stack and continue. This is easy to miss!</p>
+  </SideCard>
+</>}>
+
+### Components
+
+Lay out the following:
+
+<GameTable
+  headers={["Component", "Quantity", "Purpose"]}
+  rows={[
+    ["Solar Cards", "12", "Numbered 1–12, warm sun backs"],
+    ["Lunar Cards", "12", "Numbered 1–12, cool moon backs"],
+    ["Clock Hand", "1", "Marks the starting segment (from Chapter 3)"],
+    ["Reminder Tokens", "3", "One per player count — shows face-up card limit"],
+    ["Bonus Tokens", "3", "Flip up on failures for extra face-up cards"],
+    ["Chapter Sleeves", "10", "Each has 4 clocks + rules sheet"],
+    ["Sleeve of Regrets", "1", "Stores skipped clocks"],
+    ["Rebirth Sleeve", "1", "Post-game bonus content"]
+  ]}
+/>
+
+### Setting Up a Test
+
+1. **Select a clock** from the current chapter sleeve
+2. **Read the rules sheet** for the chapter if it's your first clock in this chapter
+3. **Place the Reminder token** matching your player count near the clock (return the others to the box)
+4. **Place 3 Bonus tokens** face down near the Reminder token
+5. **Shuffle** all 24 cards (Solar + Lunar) into a single deck
+6. **Deal 12 cards** face down to the players:
+
+<GameTable
+  headers={["Players", "Cards Each", "Notes"]}
+  rows={[
+    ["2", "6 (split 4+2)", "Only pick up the 4-card stack first; pick up the 2-card stack after playing 2 cards each"],
+    ["3", "4", "Standard deal"],
+    ["4", "3", "Standard deal"]
+  ]}
+/>
+
+7. If the clock is from **Chapter 3 or later**, place the **Clock Hand** near the clock
+
+<RuleBox>
+**Do not look at your cards after dealing.** Cards sit face down in front of you. The Discussion phase comes first — you'll pick them up when it's time for Placement.<sup>1</sup>
+</RuleBox>
+
+<Footnotes entries={[
+  { num: 1, text: 'Official Rulebook, Setup: "Deal 12 cards face down to the players. Players should NOT look at their cards."' }
+]} />
+
+</StepRow>
+
+<StepRow fullWidth title="Complete Test Summary">
+
+<RawHTML html={`<div class="turn-strip">
+  <div class="ts"><span class="ts-num">1</span>Select Clock</div>
+  <div class="ts"><span class="ts-num">2</span>Deal Cards</div>
+  <div class="ts"><span class="ts-num">3</span>Discuss</div>
+  <div class="ts"><span class="ts-num">4</span>Place Cards</div>
+  <div class="ts"><span class="ts-num">5</span>Resolve</div>
+  <div class="ts"><span class="ts-num">6</span>Pass or Retry</div>
+</div>`} />
+
+<RawHTML html={`<div style="background:var(--bg-dark);color:var(--text-light);border-radius:10px;padding:1.3rem 1.5rem;margin-top:1rem;">
+  <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+    <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">1.</span>
+    <span><strong>Select a clock</strong> from the current chapter. Read the chapter rules sheet if needed. Place the Clock Hand nearby (Chapter 3+).</span>
+  </div>
+  <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+    <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">2.</span>
+    <span><strong>Shuffle and deal 12 cards</strong> — face down. Set out the Reminder token and 3 Bonus tokens (face down).</span>
+  </div>
+  <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+    <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">3.</span>
+    <span><strong>Discussion Phase</strong> — examine the clock's rules together. Strategize openly. <em>Do not look at your cards.</em> You can see card backs only.</span>
+  </div>
+  <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+    <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">4.</span>
+    <span><strong>Placement Phase</strong> — pick up your cards. <em>Total silence.</em> Take turns clockwise, placing one card per turn into any segment. Most go face down; a few may go face up (per Reminder + Bonus tokens).</span>
+  </div>
+  <div style="display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.7rem;">
+    <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">5.</span>
+    <span><strong>Resolution</strong> — reveal all face-down cards starting from the clock hand. Check: at least 1 card per segment, ascending totals, none over 24, and all special rules met.</span>
+  </div>
+  <div style="display:flex;gap:0.8rem;align-items:baseline;">
+    <span style="color:var(--gold);font-weight:700;font-family:var(--font-ui);">6.</span>
+    <span><strong>Pass?</strong> Move to the next clock. All Bonus tokens reset. <strong>Fail?</strong> Flip a Bonus token, reshuffle, and try again — or place the clock in the Sleeve of Regrets to skip it.</span>
+  </div>
+</div>`} />
+
+<p style={{ textAlign: 'center', marginTop: '1.5rem', fontFamily: 'var(--font-display)', fontSize: '1.2rem', color: 'var(--gold)' }}>Take your time. Trust your teammates. The clock is waiting.</p>
+
+</StepRow>
+
+<Footer
+  title="Take Time"
+  year={2025}
+  designer="Alexi Piovesan & Julien Prothière"
+  artist="Maud Chalmel"
+  publisher="Libellud"
+  publisherUrl="https://www.libellud.com/en/our-games/take-time/"
+  bggUrl="https://boardgamegeek.com/boardgame/440540/take-time"
+/>
