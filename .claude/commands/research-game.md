@@ -85,6 +85,34 @@ Identify analogies to other popular games:
 - What video games have similar gameplay loops?
 - These become sidebar blue cards.
 
+### 8. Images & Press Kit
+
+Search for official images that can be used in the teaching guide:
+- Search: "[game name] press kit" on the publisher's website
+- Search: "[publisher name] [game name] resources" or "[publisher name] [game name] media"
+- Check the publisher's resources/press page for downloadable ZIP files or image galleries
+- Look for press kit download links on the game's official page
+
+**Priority images to find:**
+1. **Component photos** — cards, tokens, boards, tiles laid out clearly (ideal for Setup step)
+2. **Card/component close-ups** — showing faces, backs, and distinguishing features (ideal for teaching card types)
+3. **Game in action** — the game set up mid-play showing the core play area (ideal for Goal step)
+4. **Box art / cover** — for potential Hero section use
+5. **Box back** — often shows a gameplay summary or phase overview
+
+**If a press kit ZIP is found:**
+- Download it to `/tmp/[game-name]-press/`
+- Extract and catalogue all image files
+- Review each image for teaching usefulness
+- Optimize useful images for web (resize to max 800-1000px wide, compress to <400KB each)
+- Copy optimized images to `public/images/[game-name]/`
+- Document which images are available and what step each would best serve
+
+**If no press kit is available:**
+- Note this in the research document
+- SVG diagrams and CSS-based visuals will be created during guide authoring instead
+- Check if the publisher allows use of product images from their site (note any license terms)
+
 ## Output Format
 
 Produce a structured research document with these sections:
@@ -123,10 +151,18 @@ Produce a structured research document with these sections:
 ## Confusing Areas (from reviews)
 - [Area] — [What's confusing] — Source: [review]
 
+## Images & Visual Assets
+- Press kit URL: [URL or "not found"]
+- Images saved to: public/images/[game-name]/
+  - [filename] — [what it shows] — Best for: [which step]
+  - ...
+- Notes: [license terms, missing image types, SVG needed for ...]
+
 ## Sources
 - Official rulebook: [URL]
 - Publisher FAQ: [URL]
 - BGG page: [URL]
+- Press kit: [URL]
 - Teaching guides consulted: [URLs]
 - Reviews consulted: [URLs]
 ```

@@ -16,6 +16,12 @@ BoardGameTeacher/
 ├── content/games/                     # Guide source files (MDX)
 │   └── [game-name].mdx               # One MDX file per game
 │
+├── public/images/                     # Game images (from press kits)
+│   └── [game-name]/                   # One folder per game
+│       ├── cards.png                  # Component close-ups
+│       ├── components.jpg             # Full component spread
+│       └── ...                        # Other optimized images
+│
 ├── src/
 │   ├── app/
 │   │   ├── layout.tsx                 # Root layout (fonts, metadata)
@@ -70,6 +76,9 @@ BoardGameTeacher/
 - **Important MDX rule**: Markdown syntax (`**bold**`, `*italic*`) is NOT processed inside JSX expression props (like `sidebar={<>...</>}`). Use HTML tags (`<strong>`, `<em>`, `<p>`) instead inside sidebar content and other JSX props.
 - Guides include **collapsible footnotes** via `<Footnotes>` that reference original rule sources.
 - Guides include a **floating quick reference glossary** populated from frontmatter `glossary` entries.
+- **Prefer real images from publisher press kits** over SVG diagrams for component photos, game-in-action shots, and setup spreads. SVG diagrams are better for annotated explanations and flow charts.
+- Game images go in `public/images/[game-name]/` and are referenced as `/images/[game-name]/filename.ext` in MDX.
+- All images must be web-optimized: max 800-1000px wide, <400KB each, with descriptive `alt` text and publisher credit captions.
 
 ## MDX Component Reference
 
@@ -87,9 +96,9 @@ BoardGameTeacher/
 
 ## Workflow
 
-1. `/research-game [game name]` — Gather rules, FAQs, common mistakes, teaching tips
-2. `/create-guide [game name]` — Generate the MDX teaching guide
-3. `/review-guide [file]` — Review for accuracy, style, and completeness
+1. `/research-game [game name]` — Gather rules, FAQs, common mistakes, teaching tips, and press kit images
+2. `/create-guide [game name]` — Generate the MDX teaching guide (using real images where available)
+3. `/review-guide [file]` — Review for accuracy, style, image usage, and completeness
 4. `/check-style [file]` — Validate structural and formatting compliance
 
 ## Build & Development

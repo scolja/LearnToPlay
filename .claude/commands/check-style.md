@@ -61,6 +61,9 @@ For full-width sections (knowledge check, production notes):
 - Inline SVG diagrams use game-specific colors and `DM Sans` font
 - Interactive demos have labeled titles and functional JS handlers
 - `.diagram` containers have rounded corners and appropriate backgrounds
+- [ ] Real images (if present) use `/images/[game-name]/` path format
+- [ ] Real images have descriptive `alt` text and publisher credit captions
+- [ ] Real images are web-optimized (<400KB each, max 1000px wide)
 
 **Flow diagrams:**
 - Max 3-4 boxes per flow

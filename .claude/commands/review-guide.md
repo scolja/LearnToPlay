@@ -120,13 +120,20 @@ Check against every specification in `game-teaching-style-guide.md`:
 
 ---
 
-### Pass 5: Visual Aids & Interactive Elements
+### Pass 5: Visual Aids, Images & Interactive Elements
 
-- [ ] All media placeholders replaced with inline SVG/HTML/CSS diagrams
+- [ ] All media placeholders replaced with inline SVG/HTML/CSS diagrams or real images
 - [ ] SVG diagrams use correct game-specific colors and terminology
 - [ ] Interactive demos function correctly (click handlers, result display)
 - [ ] Visual aids placed AFTER the text they illustrate
 - [ ] One visual aid per step maximum
+- [ ] **Real images:** Check if publisher press kit images are available in `public/images/[game-name]/`
+  - If images exist, verify they are used where appropriate (component close-ups, game-in-action, setup spread)
+  - If no images exist, check if a press kit is available from the publisher that should have been sourced
+  - Verify image `alt` text is descriptive and includes component names
+  - Verify images have captions crediting the publisher
+  - Verify images are web-optimized (check file sizes — should be <400KB each)
+  - Verify image paths use `/images/[game-name]/filename.ext` format
 
 ---
 
