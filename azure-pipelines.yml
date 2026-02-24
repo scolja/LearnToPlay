@@ -15,7 +15,7 @@ stages:
       vmImage: "ubuntu-latest"
     jobs:
       - job: Build
-        displayName: "Build Static Site"
+        displayName: "Build Standalone App"
         steps:
           - task: NodeTool@0
             inputs:
@@ -38,26 +38,27 @@ stages:
             displayName: "Install dependencies"
 
           - script: npm run build
-            displayName: "Build static site"
+            displayName: "Build standalone app"
 
           - script: |
-              cp server.js out/server.js
-              echo '{"scripts":{"start":"node server.js"}}' > out/package.json
-            displayName: "Add static file server"
+              cp -r public .next/standalone/public
+              cp -r .next/static .next/standalone/.next/static
+              cp -r content .next/standalone/content
+            displayName: "Copy static assets and content into standalone"
 
           - task: ArchiveFiles@2
-            displayName: "Archive static site"
+            displayName: "Archive standalone app"
             inputs:
-              rootFolderOrFile: "out"
+              rootFolderOrFile: ".next/standalone"
               includeRootFolder: false
               archiveType: "zip"
-              archiveFile: "$(Build.ArtifactStagingDirectory)/static-site.zip"
+              archiveFile: "$(Build.ArtifactStagingDirectory)/standalone-app.zip"
 
           - task: PublishPipelineArtifact@1
-            displayName: "Publish static site artifact"
+            displayName: "Publish standalone artifact"
             inputs:
-              targetPath: "$(Build.ArtifactStagingDirectory)/static-site.zip"
-              artifactName: "static-site"
+              targetPath: "$(Build.ArtifactStagingDirectory)/standalone-app.zip"
+              artifactName: "standalone-app"
 
   - stage: Deploy
     displayName: "Deploy"
@@ -74,9 +75,9 @@ stages:
             deploy:
               steps:
                 - task: DownloadPipelineArtifact@2
-                  displayName: "Download static site artifact"
+                  displayName: "Download standalone artifact"
                   inputs:
-                    artifactName: "static-site"
+                    artifactName: "standalone-app"
                     targetPath: "$(Pipeline.Workspace)"
 
                 - task: AzureWebApp@1
@@ -85,4 +86,5 @@ stages:
                     azureSubscription: "Pay-As-You-Go - SSI (ee9f0e11-43bd-4668-8728-b0ce2d0bee8a)"
                     appType: "webAppLinux"
                     appName: "LearnToPlay"
-                    package: "$(Pipeline.Workspace)/static-site.zip"
+                    package: "$(Pipeline.Workspace)/standalone-app.zip"
+                    startUpCommand: "node server.js"

@@ -1,0 +1,25 @@
+/* ===================== TABLES ===================== */
+.rtable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.8rem 0;
+  font-size: 0.92rem;
+}
+.rtable thead { background: var(--bg-dark); }
+.rtable th {
+  background: var(--bg-dark);
+  color: var(--gold);
+  padding: 0.5rem 0.7rem;
+  text-align: left;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.rtable td {
+  padding: 0.5rem 0.7rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  font-size: 0.88rem;
+}
+.rtable tr:nth-child(even) td { background: rgba(44,36,24,0.02); }

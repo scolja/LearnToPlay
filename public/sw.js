@@ -1,4 +1,17 @@
-const CACHE_NAME = 'l2p-v1';
+const CACHE_NAME = 'l2p-v2';
+
+// Paths that should never be cached (API routes, edit pages)
+const NO_CACHE_PATTERNS = [
+  /^\/api\//,
+  /\/edit\/?$/,
+  /\/history\/?/,
+  /\/login\/?$/,
+];
+
+function shouldCache(url) {
+  const path = new URL(url).pathname;
+  return !NO_CACHE_PATTERNS.some(pattern => pattern.test(path));
+}
 
 // Install: cache the app shell
 self.addEventListener('install', (event) => {
@@ -27,13 +40,16 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch: network-first with cache fallback
+// Fetch: network-first with cache fallback (skip API/edit routes)
 self.addEventListener('fetch', (event) => {
+  if (!shouldCache(event.request.url) || event.request.method !== 'GET') {
+    return;
+  }
+
   event.respondWith(
     fetch(event.request)
       .then((response) => {
-        // Cache successful GET responses
-        if (event.request.method === 'GET' && response.status === 200) {
+        if (response.status === 200) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
         }

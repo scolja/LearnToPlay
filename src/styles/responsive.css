@@ -1,0 +1,27 @@
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 960px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .side {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  .side-card {
+    flex: 1;
+    min-width: 250px;
+  }
+}
+@media (max-width: 600px) {
+  html { font-size: 16px; }
+  .page-wrap { padding: 0 1rem; }
+  .hero h1 { font-size: 1.8rem; }
+  .eval-strip { grid-template-columns: repeat(2, 1fr); }
+  .turn-strip { grid-template-columns: repeat(4, 1fr); }
+  .hero-meta { flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
+  .qref-panel { width: calc(100vw - 2rem); right: 1rem; }
+  .game-grid { grid-template-columns: 1fr; }
+}

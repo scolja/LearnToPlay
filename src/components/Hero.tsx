@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { GameFrontmatter } from '@/lib/types';
+import { EditGuideButton } from './EditGuideButton';
 
-export function Hero({ title, subtitle, players, time, age, heroImage }: GameFrontmatter) {
+export function Hero({ title, subtitle, players, time, age, heroImage, slug }: GameFrontmatter) {
   return (
     <>
       <div className="hero">
@@ -19,6 +20,7 @@ export function Hero({ title, subtitle, players, time, age, heroImage }: GameFro
           <span>{time}</span>
           <span>Ages {age}</span>
         </div>
+        {slug && <EditGuideButton slug={slug} />}
       </div>
       <div className="hero-fade" />
     </>

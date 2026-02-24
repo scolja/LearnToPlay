@@ -1,0 +1,80 @@
+/* ===================== HOMEPAGE ===================== */
+.hero-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+.homepage .hero {
+  padding-bottom: 2.5rem;
+}
+.homepage .hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 2.5rem 0;
+}
+.game-card {
+  background: var(--bg-sidebar);
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text-light);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: block;
+}
+.game-card-image {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+.game-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.game-card-body {
+  padding: 1.2rem 1.5rem 1.5rem;
+}
+.game-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+}
+.game-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+.game-card p {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: rgba(245,239,224,0.6);
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+.game-meta {
+  display: flex;
+  gap: 1rem;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: rgba(245,239,224,0.4);
+}
+.game-meta span {
+  padding: 3px 8px;
+  border: 1px solid rgba(245,239,224,0.1);
+  border-radius: 4px;
+}
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+}

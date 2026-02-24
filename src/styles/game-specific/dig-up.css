@@ -1,0 +1,25 @@
+/* ===================== DIG UP: GEM TOKENS ===================== */
+.gem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 38px;
+  border-radius: 5px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  vertical-align: middle;
+  margin: 0 2px;
+  line-height: 1;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.gem-red { background: linear-gradient(135deg, #c0392b, #e74c3c); }
+.gem-blue { background: linear-gradient(135deg, #2471a3, #3498db); }
+.gem-green { background: linear-gradient(135deg, #1e8449, #27ae60); }
+.gem-yellow { background: linear-gradient(135deg, #b7950b, #f1c40f); color: #5d4e0e; text-shadow: none; }
+.gem-purple { background: linear-gradient(135deg, #6c3483, #8e44ad); }
+.gem-orange { background: linear-gradient(135deg, #ba6516, #e67e22); }
+.gem-idol { background: linear-gradient(135deg, #b7950b, #d4ac0d); border: 2px solid #8b7209; }
+.gem-skeleton { background: linear-gradient(135deg, #566573, #839192); border: 1.5px solid #4a5568; }

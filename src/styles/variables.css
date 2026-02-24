@@ -1,0 +1,24 @@
+/* ===================== CSS CUSTOM PROPERTIES ===================== */
+:root {
+  --bg: #f6f1e7;
+  --bg-sidebar: #2a2318;
+  --bg-dark: #1a1612;
+  --text: #2c2418;
+  --text-light: #f5efe0;
+  --text-muted: rgba(44,36,24,0.55);
+  --gold: #c9a94e;
+  --red: #b93e3e;
+  --green: #4a7c59;
+  --blue: #4a6fa5;
+  --purple: #7a5195;
+  --orange: #d4802a;
+  --yellow: #c4a72e;
+  --teal: #3a8a7a;
+  --border: rgba(44,36,24,0.1);
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-body: var(--font-crimson-pro), Georgia, serif;
+  --font-ui: var(--font-dm-sans), system-ui, sans-serif;
+  --main-width: 820px;
+  --sidebar-width: 420px;
+  --gap: 56px;
+}

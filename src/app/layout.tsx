@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { Fraunces, Crimson_Pro, DM_Sans } from 'next/font/google';
+import { Providers } from '@/components/Providers';
+import { UserMenu } from '@/components/UserMenu';
 import './globals.css';
 
 const fraunces = Fraunces({
@@ -57,7 +59,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${fraunces.variable} ${crimsonPro.variable} ${dmSans.variable}`}>
       <body>
-        {children}
+        <Providers>
+          <div className="site-user-menu">
+            <UserMenu />
+          </div>
+          {children}
+        </Providers>
         <Script id="sw-register" strategy="lazyOnload">{`
           if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js');

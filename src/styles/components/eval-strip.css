@@ -1,0 +1,24 @@
+/* ===================== EVAL STRIP ===================== */
+.eval-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin: 1rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.es {
+  background: var(--bg-dark);
+  padding: 10px 8px;
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: var(--text-light);
+}
+.es-letter {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 2px;
+}

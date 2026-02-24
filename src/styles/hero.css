@@ -1,0 +1,90 @@
+/* ===================== HERO ===================== */
+.hero {
+  background: var(--bg-dark);
+  padding: 3.5rem 2rem 2rem;
+  text-align: center;
+  color: var(--text-light);
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--hero-bg-url) center/cover no-repeat;
+  filter: blur(3px) brightness(0.35);
+  opacity: 0.45;
+  z-index: 0;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 120%, rgba(201,169,78,0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-badge, .hero h1, .hero-sub, .hero-meta {
+  position: relative;
+  z-index: 2;
+}
+.hero-fade {
+  height: 100px;
+  background: linear-gradient(to bottom, var(--bg-dark) 0%, color-mix(in srgb, var(--bg-dark) 60%, var(--bg)) 40%, var(--bg) 100%);
+  margin-top: -1px;
+}
+.hero-badge {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--gold);
+  border: 1.5px solid var(--gold);
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 2px;
+  margin-bottom: 1.2rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.hero-badge:hover {
+  background: var(--gold);
+  color: var(--bg-dark);
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 0.8rem;
+}
+.hero h1 em {
+  color: var(--gold);
+  font-style: italic;
+}
+.hero-sub {
+  font-size: 1.05rem;
+  color: rgba(245,239,224,0.6);
+  max-width: 600px;
+  margin: 0 auto 1.2rem;
+  font-style: italic;
+}
+.hero-meta {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: rgba(245,239,224,0.45);
+}
+.hero-meta span::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: var(--gold);
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}

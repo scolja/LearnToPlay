@@ -5,10 +5,24 @@ import fs from 'fs';
 const contentDir = path.join(process.cwd(), 'content', 'games');
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  output: 'standalone',
   trailingSlash: true,
   images: {
     unoptimized: true,
+  },
+  async headers() {
+    return [
+      {
+        // Google Sign-In popup needs same-origin-allow-popups to postMessage back
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin-allow-popups',
+          },
+        ],
+      },
+    ];
   },
   // Allow build to proceed with both webpack and turbopack configs present
   turbopack: {},
