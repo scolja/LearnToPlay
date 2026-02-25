@@ -457,11 +457,15 @@ Use the pattern `Step N` with a plain sequential number. The H2 that follows sho
 | **Chunking** | 10–14 focused steps, one concept each | Working memory can hold ~4 chunks; each step is one chunk |
 | **Dual coding** | Every rule paired with text + visual (chip icons, flow diagrams, media) | Information encoded in two modalities is retained better |
 | **Anchoring** | "Like Blackjack" / "Like Mario Kart" in sidebar | Connecting new info to existing knowledge structures speeds learning |
-| **Active recall** | Knowledge check quizzes mid-page | Testing yourself strengthens memory more than re-reading |
+| **Active recall** | Interactive reinforcement mini-games between steps | Testing yourself strengthens memory more than re-reading |
 | **Error anticipation** | Red sidebar cards call out common mistakes alongside the relevant rule | Prevents the mistake before it happens, rather than correcting after |
 | **Concrete before abstract** | Examples shown before/alongside formal rules | People understand specifics before generalizations |
 | **Minimal effective dose** | Main column is as short as possible while being complete | Respects the reader's time; they came to play, not to study |
-| **Spaced review** | The Knowledge Check and Round Summary revisit earlier rules | Retrieval practice at natural pause points |
+| **Spaced review** | Reinforcement breaks and Round Summary revisit earlier rules | Retrieval practice at natural pause points |
+| **Procedural practice** | SequenceSort challenges after multi-step processes | Reconstructing processes strengthens procedural memory |
+| **Association building** | MatchUp challenges after term/resource introductions | Linking related concepts creates stronger mental maps |
+| **Applied reasoning** | ScenarioChallenge after decision-heavy mechanics | Applying rules to novel situations deepens understanding |
+| **Error detection** | SpotTheError exercises targeting common mistakes | Finding mistakes develops critical evaluation of game states |
 
 ### The "Can I Play Now?" Test
 
@@ -512,36 +516,76 @@ See the **Visual Aids** section below for the full specification of diagram type
 
 ---
 
-## Knowledge Checks
+## Interactive Reinforcement
+
+Interactive mini-games are placed at natural breakpoints throughout a guide to reinforce commonly misunderstood rules. They are NOT tests for the sake of testing — they target the specific concepts that errata, FAQs, and community discussions reveal as genuinely confusing.
 
 ### Placement
 
-Insert one knowledge check block after approximately 70–80% of the rules have been taught (typically after Step 10, before Setup). This is the optimal retrieval practice point — enough has been learned to ask meaningful questions, but the setup and summary steps still provide a natural review afterward.
+Place reinforcement breaks at **natural conceptual boundaries**, roughly every 3 steps. A guide with 12 steps typically has **2–4 reinforcement breaks**, not one after every cluster. Skip the break entirely if recent steps were straightforward and don't warrant reinforcement.
 
-### Question Design
+**Principles:**
+- Every mini-game must reference **real confusion points** from research — errata, FAQ entries, BGG threads about common mistakes
+- Never test concepts not yet taught
+- Questions should be **concrete scenarios**, not trivia ("What happens when you bump your own worker?" not "How many workers do you start with?")
+- Vary the mini-game types — don't use the same type twice in a row
+- If there are no good candidates for a breakpoint, **skip it**
 
-- **2–4 questions per check.** Enough to cover the critical rules without becoming a test.
-- **Target the rules most commonly misunderstood.** Use community forums, FAQ threads, and BGG rules discussions to identify these.
-- **Use concrete scenarios, not abstract questions.** "Your pot contains X, Y, Z — what happens?" not "Explain the explosion rule."
-- **2–3 answer options per question.** Include the correct answer, one plausible-but-wrong answer based on common mistakes, and optionally one clearly wrong answer.
-- **Immediate feedback.** On click, show a brief explanation of WHY the answer is correct or incorrect. Reference the step where the rule was taught.
+### The Five Component Types
+
+| Component | Purpose | Best For | Learning Mode |
+|-----------|---------|----------|---------------|
+| `<KnowledgeCheck>` | Multiple-choice quiz | Factual rules, edge cases, calculations | Recall & recognition |
+| `<SequenceSort>` | Order shuffled steps correctly | Turn structure, launch checklists, phase sequences | Procedural memory |
+| `<MatchUp>` | Connect related pairs | Resource→use mappings, term→definition, icon→meaning | Association |
+| `<ScenarioChallenge>` | Choose best action in a game state | Decision-heavy mechanics, trade-offs, synthesizing rules | Applied reasoning |
+| `<SpotTheError>` | Find the rule violation in a scenario | Common mistakes from errata/FAQ, rules people confidently get wrong | Error detection |
+
+### Choosing the Right Type
+
+| What Was Just Taught | Best Component | Why |
+|----------------------|----------------|-----|
+| A multi-step process (turn, launch, scoring) | `<SequenceSort>` | Can they reconstruct the sequence? |
+| Multiple related terms, resources, or mappings | `<MatchUp>` | Can they link concepts correctly? |
+| Decision-heavy mechanics with trade-offs | `<ScenarioChallenge>` | Can they reason about a novel situation? |
+| Rules with common mistakes (from errata/FAQ) | `<SpotTheError>` | Can they spot a rule violation? |
+| Factual rules, edge cases, calculations | `<KnowledgeCheck>` | Standard comprehension check |
+
+### Design Principles
+
+- **KnowledgeCheck:** 2–4 questions per check. 2–3 answer options per question. Include the correct answer, one plausible-but-wrong answer based on common mistakes, and optionally one clearly wrong answer. Immediate feedback explains WHY and references the step where the rule was taught.
+
+- **SequenceSort:** 4–6 items per challenge. Use real process steps from the game — turn phases, launch checklists, scoring sequences. The explanation should clarify why the order matters.
+
+- **MatchUp:** 3–5 pairs per challenge. Pairs should test meaningful associations, not obvious ones. The shuffled right column ensures the reader must actually think about the connections.
+
+- **ScenarioChallenge:** Describe a specific game state with enough detail to reason about. Offer 2–3 choices ranked as best/good/suboptimal. No harsh "wrong" — all choices teach something. The "best" choice should require understanding the rules taught so far.
+
+- **SpotTheError:** Describe a game situation, then list 3–4 statements about it — one contains a rule violation. The error should be a **common mistake from research**, not an obscure trick. Explanations for ALL statements (both correct and incorrect) reinforce understanding.
 
 ### Implementation
 
-```html
-<div class="kcheck">
-  <h4>🧪 Quick Check</h4>
-  <div class="kc-q">Question text with inline chips if relevant</div>
-  <div class="kc-opts" id="q1o">
-    <div class="kc-opt" onclick="ans(this,'q1',1)">Correct answer</div>
-    <div class="kc-opt" onclick="ans(this,'q1',0)">Wrong answer</div>
-  </div>
-  <div class="kc-fb" id="q1y">✅ Correct explanation</div>
-  <div class="kc-fb" id="q1n">❌ Correction explanation</div>
-</div>
-```
+All mini-game components use the `.mini-game` base class for consistent dark-panel styling. In MDX, they sit between `<StepRow>` sections as standalone full-width elements:
 
-The `ans()` function handles: marking selected option as right/wrong, dimming other options, displaying the appropriate feedback block.
+```mdx
+<StepRow step={3} title="Worker Placement & Bumping">
+  {/* step content */}
+</StepRow>
+
+<SpotTheError
+  title="Spot the Bumping Error"
+  scenario="Player A wants to use the Shipyard station. Player B already has a worker there."
+  statements={[
+    { text: "Player A places their worker at the Shipyard, bumping Player B's worker back to their break room", isError: false, explanation: "bumping sends the displaced worker to the break room" },
+    { text: "Player B receives a funding bonus because their worker was bumped", isError: false, explanation: "bumped workers always receive a funding bonus" },
+    { text: "Player A bumps their own worker from the Shipyard to get a funding bonus", isError: true, explanation: "You CANNOT bump your own worker unless you've unlocked that specific upgrade. This is the #1 most commonly misunderstood rule." }
+  ]}
+/>
+
+<StepRow step={4} title="The Network">
+  {/* step content */}
+</StepRow>
+```
 
 ---
 

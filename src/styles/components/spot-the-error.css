@@ -1,0 +1,82 @@
+/* ===================== SPOT THE ERROR ===================== */
+
+.se-scenario {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: rgba(245,239,224,0.85);
+  background: rgba(245,239,224,0.04);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.6;
+  border-left: 3px solid rgba(201,169,78,0.3);
+}
+
+.se-instruction {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: rgba(245,239,224,0.5);
+  margin-bottom: 0.8rem;
+}
+
+.se-statements {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.se-stmt {
+  padding: 10px 14px;
+  border: 1px solid rgba(245,239,224,0.12);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.se-stmt:hover {
+  border-color: var(--gold);
+}
+
+.se-stmt-text {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.4;
+}
+
+/* Found the error */
+.se-stmt.se-error-found {
+  border-color: var(--red);
+  background: rgba(185,62,62,0.12);
+}
+
+/* Valid statement (shown after solve) */
+.se-stmt.se-valid {
+  border-color: var(--green);
+  background: rgba(74,124,89,0.08);
+  opacity: 0.7;
+}
+
+/* Wrong pick flash */
+.se-stmt.se-wrong-pick {
+  border-color: var(--green);
+  background: rgba(74,124,89,0.1);
+}
+
+/* Feedback text */
+.se-feedback {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(245,239,224,0.06);
+  line-height: 1.5;
+}
+
+.se-fb-error {
+  color: #e87070;
+}
+
+.se-fb-ok {
+  color: #7cc98e;
+}

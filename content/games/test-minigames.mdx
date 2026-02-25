@@ -1,0 +1,112 @@
+---
+title: "Mini-Game Component Test"
+subtitle: "Testing all interactive reinforcement components"
+gameName: "Test Game"
+players: "2-4"
+time: "30 min"
+age: "10+"
+---
+
+<StepRow step={1} title="Basic Rules" fullWidth>
+
+This is a test page to verify all five interactive reinforcement components render and function correctly.
+
+</StepRow>
+
+<KnowledgeCheck
+  title="Knowledge Check Test"
+  questions={[
+    {
+      question: "What is 2 + 2?",
+      options: [
+        { text: "3", correct: false },
+        { text: "4", correct: true },
+        { text: "5", correct: false }
+      ],
+      correctFeedback: "Correct! 2 + 2 = 4.",
+      incorrectFeedback: "Not quite. 2 + 2 = 4."
+    }
+  ]}
+/>
+
+<StepRow step={2} title="Turn Structure" fullWidth>
+
+On your turn, you perform three phases in order: Draw, Play, Discard.
+
+</StepRow>
+
+<SequenceSort
+  title="Turn Phase Order"
+  description="Put the three turn phases in the correct order."
+  items={[
+    { text: "Draw a card from the deck", position: 1 },
+    { text: "Play cards from your hand", position: 2 },
+    { text: "Discard down to hand limit", position: 3 },
+    { text: "Check for end-game conditions", position: 4 }
+  ]}
+  explanation="The turn always follows Draw → Play → Discard → Check. You must draw before playing so you have options, and discard after playing so your hand limit is enforced."
+/>
+
+<StepRow step={3} title="Resources" fullWidth>
+
+There are three resources in the game: Gold, Wood, and Stone. Each is used for different purposes.
+
+</StepRow>
+
+<MatchUp
+  title="Resource Uses"
+  description="Match each resource to what it's primarily used for."
+  pairs={[
+    { left: "Gold", right: "Hiring workers" },
+    { left: "Wood", right: "Building structures" },
+    { left: "Stone", right: "Upgrading defenses" }
+  ]}
+  explanation="Gold fuels your workforce, Wood builds your economy, and Stone fortifies your position. Managing all three is key to a balanced strategy."
+/>
+
+<StepRow step={4} title="Combat" fullWidth>
+
+When two players contest the same territory, combat occurs. The attacker rolls dice equal to their army size (max 3), the defender rolls dice equal to their garrison (max 2).
+
+</StepRow>
+
+<ScenarioChallenge
+  title="Battle Decision"
+  scenario="You have 4 armies adjacent to a territory held by your opponent with 2 armies. You also need to defend your own territory which has only 1 army and borders an opponent with 3 armies. It's your turn."
+  choices={[
+    {
+      text: "Attack with all 4 armies",
+      result: "You'd roll 3 dice (max) vs their 2. Good odds of winning, but leaving your territory with only 1 army makes it very vulnerable to counterattack next turn.",
+      quality: "suboptimal"
+    },
+    {
+      text: "Move 2 armies to reinforce your weak territory, attack with the remaining 2",
+      result: "This balances offense and defense. Your attack is weaker (2 dice vs 2), but your home territory is now safer with 3 armies.",
+      quality: "best"
+    },
+    {
+      text: "Skip the attack entirely and fortify your position",
+      result: "Safe but passive. You miss a good attacking opportunity while your opponent may consolidate their forces. Sometimes patience is warranted, but here the risk-reward favors some aggression.",
+      quality: "good"
+    }
+  ]}
+/>
+
+<StepRow step={5} title="Trading Rules" fullWidth>
+
+You may trade resources with other players on your turn. However, you cannot trade cards — only resource tokens.
+
+</StepRow>
+
+<SpotTheError
+  title="Spot the Trading Error"
+  scenario="During Player A's turn, the following trades happen:"
+  statements={[
+    { text: "Player A trades 2 Gold to Player B for 1 Stone", isError: false, explanation: "players can freely negotiate resource-for-resource trades on the active player's turn" },
+    { text: "Player B offers to trade 3 Wood to Player C for 2 Gold", isError: true, explanation: "Only the active player (Player A) can initiate or participate in trades. Player B cannot trade directly with Player C during Player A's turn." },
+    { text: "Player A declines a trade offer from Player C", isError: false, explanation: "the active player can always decline any trade offer" },
+    { text: "Player A trades 1 Wood for 1 Gold with Player C after completing the trade with Player B", isError: false, explanation: "there is no limit on the number of trades the active player can make on their turn" }
+  ]}
+/>
+
+<Footer game="Test Game" designer="Test Designer" publisher="Test Publisher" />

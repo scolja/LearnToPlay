@@ -79,6 +79,17 @@ For full-width sections (knowledge check, production notes):
 - Feedback divs have correct IDs matching the onclick handlers
 - Quiz JS function `ans()` is defined in the script block
 
+**Interactive reinforcement mini-games (MDX guides):**
+- 2-4 mini-game components total across the guide
+- Mini-game types are varied (not all `<KnowledgeCheck>`)
+- Components used: `<KnowledgeCheck>`, `<SequenceSort>`, `<MatchUp>`, `<ScenarioChallenge>`, `<SpotTheError>`
+- Mini-games are placed between `<StepRow>` sections (not inside them)
+- Each mini-game uses the `.mini-game` base class (except KnowledgeCheck which uses `.kcheck`)
+- SequenceSort: has `items` array with `text` and `position` props, position values are sequential
+- MatchUp: has `pairs` array with `left` and `right` props, minimum 3 pairs
+- ScenarioChallenge: has `scenario` text and `choices` array with `quality` values (best/good/suboptimal)
+- SpotTheError: has `scenario` text and `statements` array, exactly one statement has `isError: true`
+
 ### 5. Responsive CSS
 
 Verify media queries exist for:

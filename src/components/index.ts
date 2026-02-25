@@ -13,6 +13,10 @@ import { Footer } from './Footer';
 import { RawHTML } from './RawHTML';
 import { ScoringDemo } from './ScoringDemo';
 import { DiceRoller } from './DiceRoller';
+import { SequenceSort } from './SequenceSort';
+import { MatchUp } from './MatchUp';
+import { ScenarioChallenge } from './ScenarioChallenge';
+import { SpotTheError } from './SpotTheError';
 
 export const mdxComponents = {
   Hero,
@@ -30,6 +34,10 @@ export const mdxComponents = {
   RawHTML,
   ScoringDemo,
   DiceRoller,
+  SequenceSort,
+  MatchUp,
+  ScenarioChallenge,
+  SpotTheError,
 };
 
 export {
@@ -48,4 +56,8 @@ export {
   RawHTML,
   ScoringDemo,
   DiceRoller,
+  SequenceSort,
+  MatchUp,
+  ScenarioChallenge,
+  SpotTheError,
 };

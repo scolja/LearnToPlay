@@ -1,0 +1,88 @@
+/* ===================== SEQUENCE SORT ===================== */
+
+.ss-instruction {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: rgba(245,239,224,0.5);
+  margin-bottom: 0.8rem;
+}
+
+.ss-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ss-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 10px 14px;
+  border: 1px solid rgba(245,239,224,0.12);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-ui);
+  font-size: 13px;
+}
+
+.ss-item:hover {
+  border-color: var(--gold);
+}
+
+.ss-item.ss-selected {
+  border-color: var(--gold);
+  background: rgba(201,169,78,0.12);
+}
+
+.ss-item.ss-correct {
+  border-color: var(--green);
+  background: rgba(74,124,89,0.15);
+}
+
+.ss-item.ss-wrong {
+  border-color: var(--red);
+  background: rgba(185,62,62,0.12);
+}
+
+.ss-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(245,239,224,0.08);
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.ss-item.ss-correct .ss-num {
+  background: rgba(74,124,89,0.3);
+  color: #7cc98e;
+}
+
+.ss-item.ss-wrong .ss-num {
+  background: rgba(185,62,62,0.25);
+  color: #e87070;
+}
+
+.ss-text {
+  color: var(--text-light);
+  line-height: 1.4;
+}
+
+.ss-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.ss-hint {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: #e87070;
+}
