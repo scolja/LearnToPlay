@@ -68,6 +68,41 @@ export interface GuideSection {
   versionNumber: number;
 }
 
+export interface GuideSectionWithDraft extends GuideSection {
+  draftTitle: string | null;
+  draftContent: string | null;
+  draftNotes: string | null;
+  draftDisplayData: Record<string, unknown> | null;
+  draftEditedAt: string | null;
+  hasDraft: boolean;
+}
+
+export interface SectionHistoryEntry {
+  id: string;
+  sectionId: string;
+  guideId: string;
+  versionNumber: number;
+  title: string | null;
+  content: string;
+  notes: string | null;
+  displayData: Record<string, unknown> | null;
+  editedByUserId: string | null;
+  editedAt: string;
+  editSummary: string | null;
+  editorName?: string;
+  editorPicture?: string | null;
+}
+
+export interface GuideMetaEditable extends GuideMeta {
+  isDraft: boolean;
+  heroGradient: string | null;
+  customCss: string | null;
+  subtitle: string | null;
+  artist: string | null;
+  publisherUrl: string | null;
+  bggUrl: string | null;
+}
+
 export interface DbGlossaryEntry {
   id: string;
   guideId: string;

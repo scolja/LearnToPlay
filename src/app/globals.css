@@ -30,6 +30,7 @@
 @import '../styles/game-specific/vantage.css';
 @import '../styles/game-specific/dig-up.css';
 @import '../styles/game-specific/house-of-1000-corpses.css';
+@import '../styles/game-specific/fate-of-the-fellowship.css';
 
 /* Mobile card viewer */
 @import '../styles/mobile/card-viewer.css';
@@ -46,12 +47,14 @@
 
 /* Theme toggle, settings & controls */
 @import '../styles/theme-toggle.css';
-@import '../styles/mobile-controls.css';
+
 @import '../styles/settings-drawer.css';
 
 /* Responsive & Editor */
 @import '../styles/responsive.css';
 @import '../styles/editor.css';
+@import '../styles/editor/shared-editor.css';
+@import '../styles/editor/desktop-editor.css';
 
 /* Theme overrides (must be last for specificity) */
 @import '../styles/theme-overrides.css';

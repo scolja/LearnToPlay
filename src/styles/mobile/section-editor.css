@@ -209,3 +209,316 @@
 .se-status-error {
   color: var(--red);
 }
+
+/* =====================================================================
+   Mobile Editor Page
+   Matches the visual language of cv-topbar / gl-topbar / cv-bottombar
+   ===================================================================== */
+
+.me-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Top bar — matches cv-topbar / gl-topbar
+   --------------------------------------------------------------------------- */
+.me-topbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  flex-shrink: 0;
+  padding-top: max(0.75rem, calc(env(safe-area-inset-top) + 0.4rem));
+  position: relative;
+}
+
+.me-back {
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.me-back:active {
+  background: rgba(201, 169, 78, 0.15);
+}
+
+.me-topbar-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.me-topbar-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.me-topbar-subtitle {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: rgba(var(--text-light-rgb), 0.5);
+  margin-top: 0.1rem;
+}
+
+.me-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  position: relative;
+}
+
+.me-topbar-menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: rgba(var(--text-light-rgb), 0.6);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.me-topbar-menu-btn:active {
+  background: rgba(var(--text-light-rgb), 0.1);
+}
+
+/* ---------------------------------------------------------------------------
+   Dropdown menu (anchored to top bar)
+   --------------------------------------------------------------------------- */
+.me-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+}
+
+.me-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.4rem;
+  background: var(--bg-dark);
+  border: 1px solid rgba(var(--text-light-rgb), 0.12);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  overflow: hidden;
+  z-index: 100;
+  min-width: 200px;
+}
+
+.me-menu button {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(var(--text-light-rgb), 0.06);
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-family: var(--font-ui);
+}
+
+.me-menu button:last-child {
+  border-bottom: none;
+}
+
+.me-menu button:active {
+  background: rgba(var(--text-light-rgb), 0.06);
+}
+
+.me-menu button svg {
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Navigation strip — section picker + tabs
+   --------------------------------------------------------------------------- */
+.me-nav-strip {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-dark);
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(var(--text-light-rgb), 0.08);
+  padding-top: 0.5rem;
+}
+
+.me-section-select {
+  margin: 0 0.75rem 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid rgba(var(--text-light-rgb), 0.15);
+  border-radius: 8px;
+  background: rgba(var(--text-light-rgb), 0.06);
+  color: var(--text-light);
+  font-size: 0.85rem;
+  font-family: var(--font-ui);
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c9a94e' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  padding-right: 2rem;
+}
+
+/* Native <option> elements need explicit colors for dark themes */
+.me-section-select option {
+  background: #1a1612;
+  color: #f5efe0;
+}
+
+.me-tabs {
+  display: flex;
+}
+
+.me-tab {
+  flex: 1;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(var(--text-light-rgb), 0.4);
+  font-family: var(--font-ui);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.15s;
+}
+
+.me-tab--active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* ---------------------------------------------------------------------------
+   Content area
+   --------------------------------------------------------------------------- */
+.me-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.me-content .se-editor-pane {
+  flex: 1;
+}
+
+.me-content .se-editor-body {
+  flex: 1;
+}
+
+.me-content .se-textarea {
+  min-height: 200px;
+}
+
+.me-content .ed-preview {
+  padding: 0.8rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Action bar — above bottom nav
+   --------------------------------------------------------------------------- */
+.me-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  border-top: 1px solid rgba(var(--text-rgb), 0.08);
+  background: var(--bg);
+  flex-shrink: 0;
+}
+
+.me-actions .ed-toolbar {
+  flex: 1;
+  border-bottom: none;
+  min-height: 44px;
+  background: var(--bg);
+}
+
+/* Make compact toolbar buttons match the app's gold accent */
+.me-actions .ed-btn--primary {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--bg-dark);
+  font-weight: 700;
+}
+
+.me-actions .ed-btn--secondary {
+  background: transparent;
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ---------------------------------------------------------------------------
+   Drawer overlay (slide-up panel for history / metadata / glossary)
+   --------------------------------------------------------------------------- */
+.me-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 200;
+  display: flex;
+  align-items: flex-end;
+}
+
+.me-drawer {
+  background: var(--bg);
+  width: 100%;
+  max-height: 80vh;
+  border-radius: 16px 16px 0 0;
+  overflow-y: auto;
+  animation: me-drawer-slide-up 0.2s ease-out;
+}
+
+.me-drawer-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 0.8rem 0;
+}
+
+@keyframes me-drawer-slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* Responsive: center on wider viewports like cv-shell */
+@media (min-width: 768px) {
+  .me-layout {
+    max-width: 480px;
+    margin: 0 auto;
+    border-left: 1px solid rgba(var(--text-rgb), 0.1);
+    border-right: 1px solid rgba(var(--text-rgb), 0.1);
+  }
+}
+
+@media (min-width: 1024px) {
+  .me-layout {
+    max-width: 520px;
+  }
+}

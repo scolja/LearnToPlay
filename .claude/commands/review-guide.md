@@ -4,13 +4,13 @@ Thoroughly review an existing game teaching guide for accuracy, style compliance
 
 ## Input
 
-File to review: $ARGUMENTS
+Guide to review: $ARGUMENTS
 
-If no file is specified, check `games/` for available guides and ask which one to review.
+If no guide is specified, query `ltp.Guides` for available guides and ask which one to review.
 
 ## Review Process
 
-Read the guide file completely. Then read `game-teaching-style-guide.md` for the standards to check against. Conduct the following review passes:
+Query the guide's sections from `ltp.GuideSections` (via `section-repository.ts` or direct SQL). Read all section Content, Notes, and DisplayData. Then read `game-teaching-style-guide.md` for the standards to check against. Conduct the following review passes:
 
 ---
 
@@ -61,12 +61,18 @@ Check against every specification in `game-teaching-style-guide.md`:
 - [ ] Responsive breakpoints at 960px and 600px
 
 **Components:**
-- [ ] Rule boxes: max 2 per step, gold or danger variant
-- [ ] Sidebar cards: max 3 per step, correct color classes
-- [ ] Flow diagrams: max 3-4 boxes
-- [ ] Media placeholders: specific actionable descriptions, placed after text
-- [ ] Tables: dark header, alternating rows
-- [ ] Knowledge check: 2-4 questions, concrete scenarios, immediate feedback
+- [ ] Callout boxes (:::callout / :::callout-danger): max 2 per section
+- [ ] Sidebar tip cards: max 3 per section, correct color labels (gold/red/green/blue/purple)
+- [ ] Flow diagrams: max 3-4 items with short labels (mobile-friendly)
+- [ ] Tables: structured in DisplayData with headers and rows
+- [ ] Inline tokens: use `[text]{.class}` syntax, game-specific CSS classes exist and are imported
+
+**Token & directive syntax:**
+- [ ] Token syntax `[text]{.class}` used consistently for game components
+- [ ] Game-specific CSS file exists at `src/styles/game-specific/[game-name].css`
+- [ ] CSS file imported in `src/app/globals.css`
+- [ ] Token classes follow base+variant pattern (e.g. `.act` + `.act-move`)
+- [ ] DisplayData JSON is valid and matches directive usage (flows count matches :::flow count, etc.)
 
 **Content voice:**
 - [ ] Main column: terse, direct, second-person, present tense
@@ -112,48 +118,55 @@ Check against every specification in `game-teaching-style-guide.md`:
 
 ### Pass 4: Completeness
 
-- [ ] Hero section: badge, title, subtitle, meta bar with all game info
-- [ ] `heroImage` set in frontmatter if box art or suitable image exists in `public/images/[game-name]/`
+- [ ] Guide metadata in `ltp.Guides`: title, subtitle, designer, publisher, players, time, age, bggUrl
+- [ ] `HeroImage` or `HeroGradient` set for homepage thumbnail
+- [ ] `CustomCss` set with theme overrides if game has a distinct visual identity
 - [ ] All core rules covered (compare against rulebook table of contents)
 - [ ] Setup section present and comes after gameplay
-- [ ] Complete turn/round summary as final gameplay step
-- [ ] Interactive reinforcement breaks present (2-4 varied mini-game types)
-- [ ] No media-ph placeholder boxes remain — all replaced with inline SVG/HTML diagrams
-- [ ] Visual aids are relevant and accurately represent the mechanics described
-- [ ] Quick reference glossary present with 15-30 game terms
-- [ ] Footer with correct attribution and disclaimer
-- [ ] Footnotes present with source citations
+- [ ] Complete turn/round summary as final gameplay section
+- [ ] Visual aids (:::html-block, :::flow, :::diagram) are relevant and accurate
+- [ ] Glossary entries in `ltp.GlossaryEntries` with 15-30 game terms
+- [ ] Every glossary entry has `SectionId` populated (powers mobile navigation)
+- [ ] All bolded game terms have corresponding glossary entries
 
 ---
 
-### Pass 5: Visual Aids, Images & Interactive Elements
+### Pass 5: Visual Aids & Images
 
-- [ ] All media placeholders replaced with inline SVG/HTML/CSS diagrams or real images
-- [ ] SVG diagrams use correct game-specific colors and terminology
-- [ ] Interactive demos function correctly (click handlers, result display)
+- [ ] Visual aids use directives (:::html-block, :::diagram, :::flow) with matching DisplayData
+- [ ] DisplayData JSON is valid — indexed arrays match directive count
+- [ ] SVG/HTML diagrams use correct game-specific colors and terminology
 - [ ] Visual aids placed AFTER the text they illustrate
-- [ ] One visual aid per step maximum
+- [ ] One visual per section maximum
 - [ ] **Real images:** Check if publisher press kit images are available in `public/images/[game-name]/`
-  - If images exist, verify they are used where appropriate (component close-ups, game-in-action, setup spread)
-  - If no images exist, check if a press kit is available from the publisher that should have been sourced
-  - Verify image `alt` text is descriptive and includes component names
-  - Verify images have captions crediting the publisher
-  - Verify images are web-optimized (check file sizes — should be <400KB each)
+  - If images exist, verify they are used where appropriate
+  - Verify images are web-optimized (<400KB each)
   - Verify image paths use `/images/[game-name]/filename.ext` format
 
 ---
 
-### Pass 6: Quick Reference & Footnotes
+### Pass 6: Mobile Rendering
 
-- [ ] Quick reference glossary panel present with floating toggle button
-- [ ] All bolded game terms have corresponding glossary entries
-- [ ] Search/filter functionality works
-- [ ] Each glossary entry references the correct step
-- [ ] Key rule claims have footnotes citing specific sources
-- [ ] Footnotes reference real, verifiable sources (rulebook pages, FAQ URLs, BGG threads)
-- [ ] Footnote numbering is sequential and consistent within each step
-- [ ] Footnote toggle/collapse JS is functional
-- [ ] No "orphan" footnotes (referenced but not defined, or defined but not referenced)
+**This is critical — mobile is the first-class citizen.** The primary experience is `/games/[slug]/learn` (card-based mobile flow).
+
+- [ ] Flow diagrams have **3-4 short labels** (wraps at 2+2 on 375px screens — long labels break layout)
+- [ ] Strips have **≤4 items** (the grid uses `repeat(4, 1fr)` on mobile; more items wrap awkwardly)
+- [ ] HTML blocks in DisplayData render cleanly at mobile width (no horizontal overflow)
+- [ ] Tip cards (sidebar notes) don't have bullet points touching the edge (ul/li have no bullets in tc-body)
+- [ ] Inline tokens don't cause line-wrapping mid-token (tokens with long text may overflow)
+- [ ] Section titles are concise (long titles truncate on mobile cards)
+- [ ] Content blocks don't have excessive nesting or deeply indented lists
+
+---
+
+### Pass 7: Glossary & Data Integrity
+
+- [ ] All glossary entries in `ltp.GlossaryEntries` have `SectionId` populated
+- [ ] Each glossary entry's `SectionId` points to the section where the term is taught
+- [ ] `SearchTerms` includes common synonyms/abbreviations
+- [ ] No duplicate glossary entries for the same term
+- [ ] Guide's `ltp.Guides` row has non-null: Slug, Title, Designer, Publisher, Players, Time, Age
+- [ ] All `ltp.GuideSections` rows have `IsActive = 1` and sequential `SortOrder`
 
 ---
 
@@ -166,8 +179,9 @@ Produce a structured review report with:
 3. **Style Issues** — Deviations from the style guide (should fix)
 4. **Pedagogical Notes** — Suggestions for teaching quality improvements (nice to fix)
 5. **Completeness Gaps** — Missing sections or content (should fix)
-6. **Footnote Status** — Are sources properly cited? What needs citations?
-7. **Strengths** — What the guide does well (important for morale and consistency)
+6. **Mobile Rendering Issues** — Flow/strip wrapping, overflow, token layout problems (should fix)
+7. **Data Integrity** — Glossary SectionIds, DisplayData validity, missing metadata (should fix)
+8. **Strengths** — What the guide does well (important for morale and consistency)
 
 For each issue, include:
 - Location (step, element type)

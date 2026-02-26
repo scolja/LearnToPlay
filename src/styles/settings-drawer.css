@@ -166,3 +166,127 @@
   border-radius: 8px;
   border: 1px solid rgba(var(--text-light-rgb), 0.06);
 }
+
+/* ---- Account section ---- */
+
+.sd-account-loading {
+  height: 48px;
+  border-radius: 10px;
+  background: rgba(var(--text-light-rgb), 0.06);
+  animation: sd-account-shimmer 1.4s ease infinite;
+}
+
+@keyframes sd-account-shimmer {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Signed-in state */
+.sd-account-signed-in {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sd-account-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sd-account-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(var(--text-light-rgb), 0.15);
+}
+
+.sd-account-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(var(--text-light-rgb), 0.08);
+  border: 1.5px solid rgba(var(--text-light-rgb), 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: rgba(var(--text-light-rgb), 0.5);
+}
+
+.sd-account-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.sd-account-name {
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sd-account-email {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: rgba(var(--text-light-rgb), 0.45);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sd-account-signout {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(var(--text-light-rgb), 0.15);
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(var(--text-light-rgb), 0.7);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  min-height: 40px;
+}
+.sd-account-signout:active {
+  background: rgba(var(--text-light-rgb), 0.08);
+  border-color: rgba(var(--text-light-rgb), 0.25);
+}
+
+/* Signed-out state */
+.sd-account-signed-out {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.sd-google-btn-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.sd-account-fine-print {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  color: rgba(var(--text-light-rgb), 0.35);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.sd-account-error {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: #e07070;
+  text-align: center;
+  padding: 0.4rem 0.5rem;
+  background: rgba(224, 112, 112, 0.1);
+  border-radius: 6px;
+}

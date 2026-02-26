@@ -1,0 +1,271 @@
+/* ===================== FATE OF THE FELLOWSHIP: GAME TOKENS ===================== */
+
+/* Card suit tokens — 2-char prefix "su" auto-parents */
+.su {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+  margin: 0 1px;
+  color: #fff;
+}
+.su-friendship  { background: #4a7c59; }
+.su-valor       { background: #b93e3e; }
+.su-stealth     { background: #3d6b8e; }
+.su-resistance  { background: #7a5195; }
+
+/* Ring token */
+.ring {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c9a94e, #e0c860);
+  color: #2c2418;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 10px;
+  vertical-align: middle;
+  margin: 0 2px;
+  border: 1.5px solid rgba(0,0,0,0.2);
+  box-shadow: 0 1px 3px rgba(201,169,78,0.3);
+}
+
+/* Action tokens — 3-char prefix "act" auto-parents */
+.act {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+  margin: 0 1px;
+  color: #fff;
+}
+.act-travel    { background: #4a7c59; }
+.act-attack    { background: #b93e3e; }
+.act-muster    { background: #4a6fa5; }
+.act-prepare   { background: #c9a94e; color: #2c2418; }
+.act-capture   { background: #7a5195; }
+.act-fellowship { background: #3d6b8e; }
+
+/* Hope pip */
+.hope {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4a98c9, #7ec4e8);
+  vertical-align: middle;
+  margin: 0 2px;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+
+/* Eye of Sauron token */
+.eye {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b1a1a, #cc2222);
+  color: #ffcc00;
+  font-size: 12px;
+  vertical-align: middle;
+  margin: 0 2px;
+  border: 1.5px solid rgba(0,0,0,0.3);
+  box-shadow: 0 0 4px rgba(204,34,34,0.4);
+}
+
+/* Nazgul token */
+.naz {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  border-radius: 4px;
+  background: #1a1a1a;
+  color: #aaa;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+  margin: 0 1px;
+  border: 1px solid #444;
+}
+
+/* Shadow troop meeple */
+.shadow {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  background: #8b1a1a;
+  vertical-align: middle;
+  margin: 0 2px;
+  border: 1px solid rgba(0,0,0,0.3);
+}
+
+/* Ally troop types — 3-char prefix "trp" auto-parents */
+.trp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 3px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  vertical-align: middle;
+  margin: 0 1px;
+  color: #fff;
+}
+.trp-gondor   { background: #2c5f8a; }
+.trp-elven    { background: #4a7c59; }
+.trp-rohirrim { background: #c4a72e; color: #2c2418; }
+.trp-dwarven  { background: #8b6914; }
+
+/* Skies Darken card */
+.skies {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 7px;
+  border-radius: 4px;
+  background: #2a1a2e;
+  color: #b899d4;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+
+/* Haven / Stronghold badges */
+.haven {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 7px;
+  border-radius: 4px;
+  background: rgba(74,124,89,0.15);
+  color: #4a7c59;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+  margin: 0 2px;
+  border: 1px solid rgba(74,124,89,0.3);
+}
+
+.stronghold {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 7px;
+  border-radius: 4px;
+  background: rgba(139,26,26,0.15);
+  color: #b93e3e;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+  margin: 0 2px;
+  border: 1px solid rgba(139,26,26,0.3);
+}
+
+/* Battle die faces */
+.die {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 11px;
+  vertical-align: middle;
+  margin: 0 2px;
+  border: 1.5px solid rgba(0,0,0,0.2);
+}
+.die-hit {
+  background: #b93e3e;
+  color: #fff;
+}
+.die-miss {
+  background: #e8e0d0;
+  color: #2c2418;
+}
+
+/* Character name badge */
+.char {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 7px;
+  border-radius: 4px;
+  background: rgba(201,169,78,0.12);
+  color: var(--gold);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+  margin: 0 2px;
+  border: 1px solid rgba(201,169,78,0.25);
+}
+
+/* Threat rate marker */
+.threat {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 3px;
+  background: #4a1a1a;
+  color: #e87070;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 10px;
+  vertical-align: middle;
+  margin: 0 2px;
+  border: 1px solid rgba(232,112,112,0.3);
+}

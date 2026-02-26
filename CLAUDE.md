@@ -1,6 +1,6 @@
 # BoardGameTeacher
 
-Interactive "Learn to Play" teaching pages for board games, built with Next.js and MDX.
+Interactive "Learn to Play" teaching pages for board games, built with Next.js. **Mobile is the first-class citizen** — the primary experience is the mobile card-based learn flow (`/games/[slug]/learn`).
 
 ## Project Structure
 
@@ -44,8 +44,13 @@ BoardGameTeacher/
 │   │   ├── Footer.tsx                 # Attribution footer
 │   │   └── index.ts                   # Component map for MDX
 │   └── lib/
-│       ├── content.ts                 # MDX file loading & frontmatter parsing
-│       └── types.ts                   # TypeScript interfaces
+│       ├── content.ts                 # Legacy MDX file loading (not used by main pages)
+│       ├── section-renderer.ts        # Markdown → HTML rendering with token preprocessing
+│       ├── types.ts                   # TypeScript interfaces
+│       ├── db.ts                      # SQL Server connection pool
+│       └── repositories/
+│           ├── section-repository.ts  # Reads from ltp.Guides/GuideSections/GlossaryEntries (ACTIVE)
+│           └── guide-repository.ts    # Reads from ltp.GuideVersions_MDX_Legacy (LEGACY — history/edit only)
 │
 ├── database/                          # SQL schema scripts (ltp schema)
 │   ├── schema-current.sql             # Full current-state DDL (source of truth)
@@ -64,12 +69,12 @@ BoardGameTeacher/
 
 ## Tech Stack
 
-- **Next.js** with App Router and `output: 'export'` for static site generation
-- **MDX** via `next-mdx-remote` for rich content with embedded React components
+- **Next.js** with App Router
 - **TypeScript** for type safety
 - **Google Fonts** (Fraunces, Crimson Pro, DM Sans) loaded via `next/font/google`
 - No Tailwind — the design system CSS is comprehensive and self-contained
 - **SQL Server** database with `ltp` schema for guide storage and auth
+- **marked** for server-side markdown → HTML rendering (section content is markdown, not MDX)
 
 ## Database Schema (`ltp` schema)
 
@@ -82,51 +87,123 @@ All tables live under the `ltp` schema. See `database/schema-current.sql` for th
 | `ltp.Guides` | Guide metadata (title, designer, publisher, hero image, etc.) |
 | `ltp.GuideSections` | Ordered content sections — markdown + JSON `DisplayData` bag |
 | `ltp.GlossaryEntries` | Searchable terms linked to guides and sections. `SectionId` must be populated — it powers glossary → learn page navigation with term highlighting |
-| `ltp.GuideVersions_MDX_Legacy` | Legacy monolithic MDX versions (pre-section model) |
+| `ltp.GuideVersions_MDX_Legacy` | **LEGACY** — only used by history/edit pages, NOT the rendering pipeline |
 
 Migration scripts in `database/` are numbered (`001_`, `002_`, ...) and represent the history of schema changes. The `schema-current.sql` file is the canonical reference for the deployed state.
 
+**Important:** The active rendering pipeline reads from the **section-based tables** (`Guides` + `GuideSections` + `GlossaryEntries`). Both the homepage, desktop guide page (`/games/[slug]`), and mobile learn page (`/games/[slug]/learn`) use `section-repository.ts`. The legacy `GuideVersions_MDX_Legacy` table is only used by the edit/history/versioning features.
+
+## Rendering Pipeline
+
+Guide content flows through this pipeline:
+
+```
+ltp.GuideSections (markdown + DisplayData JSON)
+  → section-renderer.ts: preprocessTokens() → marked → HTML content blocks
+  → ContentBlockRenderer.tsx (mobile) or DesktopGuide.tsx (desktop)
+```
+
+### Section Content Format
+
+Each `GuideSections` row has:
+- **`Content`** — Markdown with custom directives and token syntax (see below)
+- **`Notes`** — Markdown for sidebar/tip cards, separated by `\n---\n`, each starting with `**[color] Label**`
+- **`DisplayData`** — JSON bag for rich content (diagrams, flows, tables, quizzes, HTML blocks)
+
+### Token Syntax (preprocessTokens)
+
+Inline game tokens use `[text]{.class}` syntax in section markdown. The `preprocessTokens()` function in `section-renderer.ts` converts these to `<span>` elements before the markdown parser runs.
+
+**Auto-parent rule:** If the class has a hyphen and the prefix is 2–3 characters, the prefix is auto-added as a parent class:
+
+| Syntax | Output HTML | Use Case |
+|--------|-------------|----------|
+| `[MOVE]{.act-move}` | `<span class="act act-move">MOVE</span>` | Action card token (prefix `act` = 3 chars) |
+| `[Move]{.sk-move}` | `<span class="sk sk-move">Move</span>` | Skill token (prefix `sk` = 2 chars) |
+| `[VICTIM]{.sc-victim}` | `<span class="sc sc-victim">VICTIM</span>` | Search card type (prefix `sc` = 2 chars) |
+| `[]{.adr}` | `<span class="adr"></span>` | Adrenaline cube (standalone, no hyphen) |
+| `[☠]{.corpse}` | `<span class="corpse">☠</span>` | Corpse token (standalone) |
+| `[WYDELL]{.wydell-badge}` | `<span class="wydell-badge">WYDELL</span>` | Badge (prefix `wydell` > 3 chars, no parent) |
+| `[3]{.str}` | `<span class="str">3</span>` | Strength value (standalone) |
+
+The CSS classes for these tokens live in game-specific CSS files (see below).
+
+### Content Directives
+
+Section content supports these directive blocks (parsed by `section-renderer.ts`):
+
+| Directive | DisplayData Key | Description |
+|-----------|----------------|-------------|
+| `:::callout` / `:::callout-danger` | — | Info or danger callout box (content is inline markdown) |
+| `:::flow` | `flows: string[][]` | Horizontal flow chain (items from DisplayData, indexed) |
+| `:::diagram` | `diagrams: string[]` | SVG diagram (HTML from DisplayData, indexed) |
+| `:::strip` | `strip: {num, label}[]` | Phase/eval strip |
+| `:::table` | `table: {headers, rows}` | Styled table |
+| `:::quiz` | `quiz: {question, options, ...}[]` | Interactive quiz |
+| `:::html-block` / `:::styled-block` | `htmlBlocks: string[]` | Raw HTML (indexed) |
+| `:::grid-visual` | `gridVisuals: string[]` | Grid layout HTML (indexed) |
+| `:::dice-roller` | — | Interactive dice roller |
+
+**Indexed directives:** Some directives (flow, diagram, html-block, grid-visual) support multiple instances per section. The Nth occurrence in content maps to the Nth entry in the corresponding DisplayData array.
+
+### Notes Format (Sidebar/Tip Cards)
+
+The `Notes` field contains sidebar cards separated by `\n---\n`. Each card starts with a header line:
+
+```markdown
+**[gold] Key Concept**
+The action chain is the heart of the game. Think of it as a conveyor belt.
+
+---
+
+**[red] Common Mistake**
+New players forget that rightmost slots cost more cubes.
+
+---
+
+**[green] Strategy Tip**
+Plan 2–3 turns ahead to keep frequently used cards in cheap slots.
+```
+
+Valid colors: `gold`, `red`, `green`, `blue`, `purple`
+
+### Game-Specific CSS
+
+Each game can have a CSS file at `src/styles/game-specific/[game-name].css` containing token classes, grid layouts, and other game-specific visual styles. Import it in `src/app/globals.css`.
+
+Additionally, each guide's `ltp.Guides.CustomCss` field can contain CSS that gets injected as an inline `<style>` tag — use this for theme overrides (accent colors, rule box colors, etc.).
+
 ## Key Conventions
 
-- Each game guide is an **MDX file** in `content/games/[game-name].mdx` (lowercase, hyphenated).
-- MDX files use **YAML frontmatter** for metadata (title, players, time, age, glossary, etc.).
-- Guide content uses **React components** (`<StepRow>`, `<RuleBox>`, `<SideCard>`, etc.) for structure.
+- **Guides are stored in the database**, not as files. The active data lives in `ltp.Guides` (metadata), `ltp.GuideSections` (content), and `ltp.GlossaryEntries` (glossary).
+- Section content is **markdown with custom directives and token syntax** — not MDX or React components. See "Rendering Pipeline" above.
 - All guides follow the design system in `game-teaching-style-guide.md`. Read it before creating or reviewing any guide.
 - The design system CSS lives in `src/app/globals.css` — component classes match the style guide.
-- Game-specific CSS (custom colors, inline tokens) can be added via `<style>` blocks in MDX.
-- **Important MDX rule**: Markdown syntax (`**bold**`, `*italic*`) is NOT processed inside JSX expression props (like `sidebar={<>...</>}`). Use HTML tags (`<strong>`, `<em>`, `<p>`) instead inside sidebar content and other JSX props.
-- Guides include **collapsible footnotes** via `<Footnotes>` that reference original rule sources.
-- Guides include a **floating quick reference glossary** populated from frontmatter `glossary` entries.
+- Game-specific CSS (token classes, grid layouts) goes in `src/styles/game-specific/[game-name].css`, imported in `globals.css`.
+- Theme overrides (accent colors, rule box colors) go in `ltp.Guides.CustomCss` and are injected as an inline `<style>` tag.
 - **Prefer real images from publisher press kits** over SVG diagrams for component photos, game-in-action shots, and setup spreads. SVG diagrams are better for annotated explanations and flow charts.
-- Game images go in `public/images/[game-name]/` and are referenced as `/images/[game-name]/filename.ext` in MDX.
+- Game images go in `public/images/[game-name]/` and are referenced as `/images/[game-name]/filename.ext`.
 - All images must be web-optimized: max 800-1000px wide, <400KB each, with descriptive `alt` text and publisher credit captions.
-- **Hero background images**: If box art or a visually striking image is available, add `heroImage: "/images/[game-name]/filename.ext"` to the YAML frontmatter. The Hero component renders this as a blurred, dimmed background behind the title text. Best candidates: box front art, box back, or stylized game illustrations.
-- **Glossary `SectionId`**: Every `ltp.GlossaryEntries` row must have its `SectionId` populated, pointing to the `ltp.GuideSections` row where the term is best explained. This powers the mobile glossary's "jump to learn page" feature — tapping an arrow navigates to the correct section with the term highlighted in gold. When creating new guides or glossary entries, always assign each term to its most relevant section.
-
-## MDX Component Reference
-
-| Component | Props | Description |
-|-----------|-------|-------------|
-| `<StepRow>` | `step`, `title`, `sidebar`, `fullWidth` | Two-column layout wrapper |
-| `<SideCard>` | `label`, `color` (gold/red/green/blue/purple) | Dark sidebar card |
-| `<RuleBox>` | `danger` (boolean) | Gold or red rule highlight box |
-| `<FlowDiagram>` | `steps` (array of {label, variant}) | Horizontal flow chain |
-| `<EvalStrip>` | `steps` (array of {num, label}) | Phase strip |
-| `<SummaryPanel>` | `items` (array of {num, text}) | Dark numbered summary |
-| `<GameTable>` | `headers`, `rows` | Styled table |
-| `<KnowledgeCheck>` | `questions` (array) | Interactive quiz |
-| `<SequenceSort>` | `title`, `description`, `items` (array of {text, position}), `explanation` | Order-the-steps challenge |
-| `<MatchUp>` | `title`, `description`, `pairs` (array of {left, right}), `explanation` | Pair-matching challenge |
-| `<ScenarioChallenge>` | `title`, `scenario`, `choices` (array of {text, result, quality}) | Situational decision challenge |
-| `<SpotTheError>` | `title`, `scenario`, `statements` (array of {text, isError, explanation}) | Find-the-rule-violation challenge |
-| `<Footnotes>` | `entries` (array of {num, text, url?}) | Collapsible source citations |
+- **Hero background images**: Set `HeroImage` on the `ltp.Guides` row. The Hero component renders this as a blurred, dimmed background behind the title text.
+- **Glossary `SectionId`**: Every `ltp.GlossaryEntries` row must have its `SectionId` populated, pointing to the `ltp.GuideSections` row where the term is best explained. This powers the mobile glossary's "jump to learn page" feature — tapping an arrow navigates to the correct section with the term highlighted in gold.
+- **Mobile-first design**: Always consider how content renders on mobile before desktop. The `CardViewer` component renders sections as swipeable cards. Long sections, wide tables, and complex layouts should be tested at mobile widths. Keep flow diagrams to 3–4 short-labeled items, strips to ≤4 columns on mobile.
 
 ## Workflow
 
 1. `/research-game [game name]` — Gather rules, FAQs, common mistakes, teaching tips, and press kit images
-2. `/create-guide [game name]` — Generate the MDX teaching guide (using real images where available)
-3. `/review-guide [file]` — Review for accuracy, style, image usage, and completeness
-4. `/check-style [file]` — Validate structural and formatting compliance
+2. `/create-guide [game name]` — Write section content and publish to the database
+3. `/review-guide [game name]` — Review for accuracy, style, mobile rendering, and completeness
+4. `/check-style [game name]` — Validate structural and formatting compliance
+
+## Publishing a New Guide
+
+Creating a guide requires inserting rows into three tables:
+
+1. **`ltp.Guides`** — One row with metadata (title, subtitle, designer, publisher, players, time, age, slug, heroImage, heroGradient, customCss)
+2. **`ltp.GuideSections`** — One row per section (sortOrder, title, content, notes, displayData), linked to the guide via `GuideId`
+3. **`ltp.GlossaryEntries`** — One row per term (term, definition, searchTerms, groupName, sortOrder), linked to guide AND section via `GuideId` and `SectionId`
+
+Use the MCP mssql tools for queries. For multi-row inserts (sections, glossary), use individual INSERT statements — the MCP transaction tool is unreliable.
 
 ## Build & Development
 

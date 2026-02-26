@@ -4,6 +4,7 @@ import type { GuideMeta, RenderedSection, DbGlossaryEntry, GlossaryEntry } from 
 import { ContentBlockRenderer } from './mobile/ContentBlockRenderer';
 import { QuickReference } from './QuickReference';
 import { Footer } from './Footer';
+import { EditGuideButton } from './EditGuideButton';
 import Link from 'next/link';
 
 interface DesktopGuideProps {
@@ -73,6 +74,7 @@ export function DesktopGuide({ guide, sections, glossary }: DesktopGuideProps) {
           <span>{guide.time}</span>
           <span>Ages {guide.age}</span>
         </div>
+        <EditGuideButton slug={guide.slug} />
       </div>
       <div className="hero-fade" />
 

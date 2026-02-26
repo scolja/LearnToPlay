@@ -3,7 +3,8 @@
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import type { GuideMeta } from '@/lib/types';
-import { MobileControls } from '@/components/MobileControls';
+import { useAuth } from '@/lib/auth-context';
+
 import { BottomNav } from '@/components/mobile/BottomNav';
 
 interface HomePageContentProps {
@@ -37,11 +38,45 @@ function getProgressMap(games: GuideMeta[]): Record<string, { current: number; t
 export function HomePageContent({ games }: HomePageContentProps) {
   const [search, setSearch] = useState('');
   const [progress, setProgress] = useState<Record<string, { current: number; total: number }>>({});
+  const { user } = useAuth();
 
-  // Read progress from localStorage after mount (client-only)
+  // Read progress from localStorage (always) and server (when logged in)
   useEffect(() => {
-    setProgress(getProgressMap(games));
-  }, [games]);
+    const localMap = getProgressMap(games);
+
+    if (user) {
+      // Logged in: merge server + localStorage with "furthest ahead wins"
+      fetch('/api/progress')
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+          if (!data?.progress) {
+            setProgress(localMap);
+            return;
+          }
+          const serverMap: Record<string, { current: number; total: number }> = {};
+          for (const p of data.progress as { slug: string; currentSectionIndex: number; totalSections: number }[]) {
+            if (p.currentSectionIndex > 0 && p.totalSections > 0) {
+              serverMap[p.slug] = { current: p.currentSectionIndex, total: p.totalSections };
+            }
+          }
+          const merged: Record<string, { current: number; total: number }> = {};
+          const allSlugs = new Set([...Object.keys(serverMap), ...Object.keys(localMap)]);
+          for (const slug of allSlugs) {
+            const server = serverMap[slug];
+            const local = localMap[slug];
+            if (server && local) {
+              merged[slug] = server.current >= local.current ? server : local;
+            } else {
+              merged[slug] = (server ?? local)!;
+            }
+          }
+          setProgress(merged);
+        })
+        .catch(() => setProgress(localMap));
+    } else {
+      setProgress(localMap);
+    }
+  }, [games, user]);
 
   const filtered = useMemo(() => {
     if (!search.trim()) return games;
@@ -64,9 +99,7 @@ export function HomePageContent({ games }: HomePageContentProps) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/icons/logo.svg" alt="L2P" className="hp-topbar-logo" />
         <h1 className="hp-topbar-title">Learn to Play</h1>
-        <div className="hp-topbar-actions">
-          <MobileControls />
-        </div>
+        <div className="hp-topbar-actions" />
       </header>
 
       {/* Desktop hero (hidden on mobile) */}
@@ -218,10 +251,10 @@ function MobileRow({ game, isNew, progress }: { game: GuideMeta; isNew?: boolean
         {progress && (
           <div className="hp-row-progress-ring">
             <svg viewBox="0 0 36 36" width="36" height="36">
-              <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(201,169,78,0.15)" strokeWidth="3" />
+              <circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--gold)" strokeWidth="3" opacity="0.35" />
               <circle
                 cx="18" cy="18" r="15.5" fill="none"
-                stroke="var(--gold)" strokeWidth="3"
+                stroke="var(--green)" strokeWidth="3"
                 strokeLinecap="round"
                 strokeDasharray={`${Math.round((progress.current / progress.total) * 97.4)} 97.4`}
                 transform="rotate(-90 18 18)"

@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useTheme, type Theme } from '@/lib/theme-context';
 import { useSettings, type FontSize } from '@/lib/settings-context';
+import { useAuth } from '@/lib/auth-context';
+import { useNativeGoogleLogin } from '@/lib/useNativeGoogleLogin';
+import { GoogleLogin } from '@react-oauth/google';
 
 interface SettingsDrawerProps {
   open: boolean;
@@ -53,6 +56,10 @@ const DISMISS_THRESHOLD = 0.3; // 30% of panel height
 export function SettingsDrawer({ open, onClose }: SettingsDrawerProps) {
   const { theme, setTheme } = useTheme();
   const { fontSize, setFontSize } = useSettings();
+  const { user, loading: authLoading, login, logout } = useAuth();
+  const { isNative, nativeLogin } = useNativeGoogleLogin();
+  const [loginError, setLoginError] = useState('');
+  const [signingIn, setSigningIn] = useState(false);
 
   const panelRef = useRef<HTMLDivElement>(null);
   const [dragY, setDragY] = useState(0);
@@ -163,6 +170,102 @@ export function SettingsDrawer({ open, onClose }: SettingsDrawerProps) {
               <path d="M18 6L6 18M6 6l12 12" />
             </svg>
           </button>
+        </div>
+
+        {/* Account */}
+        <div className="sd-section">
+          <div className="sd-label">Account</div>
+          {authLoading ? (
+            <div className="sd-account-loading" />
+          ) : user ? (
+            <div className="sd-account-signed-in">
+              <div className="sd-account-identity">
+                {user.picture ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={user.picture}
+                    alt=""
+                    className="sd-account-avatar"
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <div className="sd-account-avatar-placeholder" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" strokeWidth="2">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
+                  </div>
+                )}
+                <div className="sd-account-info">
+                  <span className="sd-account-name">{user.name}</span>
+                  <span className="sd-account-email">{user.email}</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="sd-account-signout"
+                onClick={() => logout()}
+              >
+                Sign Out
+              </button>
+            </div>
+          ) : (
+            <div className="sd-account-signed-out">
+              {loginError && (
+                <p className="sd-account-error">{loginError}</p>
+              )}
+              <div className="sd-google-btn-wrap">
+                {isNative ? (
+                  <button
+                    type="button"
+                    className="login-native-google-btn"
+                    disabled={signingIn}
+                    onClick={async () => {
+                      setLoginError('');
+                      setSigningIn(true);
+                      try {
+                        const idToken = await nativeLogin();
+                        await login(idToken);
+                      } catch (err) {
+                        setLoginError(err instanceof Error ? err.message : 'Sign-in failed');
+                      } finally {
+                        setSigningIn(false);
+                      }
+                    }}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
+                      <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                      <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                      <path fill="#FBBC05" d="M10.53 28.59a14.5 14.5 0 0 1 0-9.18l-7.98-6.19a24.01 24.01 0 0 0 0 21.56l7.98-6.19z"/>
+                      <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                    </svg>
+                    <span>{signingIn ? 'Signing in\u2026' : 'Sign in with Google'}</span>
+                  </button>
+                ) : (
+                  <GoogleLogin
+                    onSuccess={async (response) => {
+                      setLoginError('');
+                      try {
+                        if (response.credential) {
+                          await login(response.credential);
+                        }
+                      } catch (err) {
+                        setLoginError(err instanceof Error ? err.message : 'Sign-in failed');
+                      }
+                    }}
+                    onError={() => setLoginError('Google sign-in failed')}
+                    theme="filled_black"
+                    shape="rectangular"
+                    size="large"
+                  />
+                )}
+              </div>
+              <p className="sd-account-fine-print">
+                Sign in to sync your reading progress across devices.
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Theme */}

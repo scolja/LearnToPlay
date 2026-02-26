@@ -96,75 +96,99 @@ If `/research-game` was run first, check `public/images/[game-name]/` for alread
 
 Read `game-teaching-style-guide.md` thoroughly before writing. Follow every specification in it.
 
-**Game-specific color adaptation:**
-- Adjust `--bg`, `--bg-sidebar`, `--gold`, and accent colors to match the game's theme
-- Keep semantic colors (red=warning, green=tip, blue=comparison) consistent
-- Create game-specific inline token/chip classes for the game's components
+**IMPORTANT: Content format is markdown with directives — NOT MDX or React components.** See CLAUDE.md "Rendering Pipeline" for the full spec. Section content goes into `ltp.GuideSections` rows, not files.
 
 **Content voice:**
 - Main column: Terse, direct, second-person, present tense. "You draw a card." Not "The player draws a card."
 - Sidebar: Conversational, warmer. "Think of it like..." Strategy opinions welcome.
-- Rule boxes: Declarative and authoritative. State the rule AND its scope.
+- Rule boxes (callouts): Declarative and authoritative. State the rule AND its scope.
 
-**Footnotes:**
-- Add footnotes for rules claims, citing the specific source (rulebook page, FAQ entry, BGG thread)
-- Use the footnote component: `<sup class="fn-ref" onclick="toggleFn(this)">N</sup>` in text
-- Add corresponding `<div class="fn-item">` entries in a collapsible `<div class="fn-section">` at the bottom of each step's main column
-- Include a `<button class="fn-toggle">` before each fn-section
-- Footnotes are hidden by default — users click to reveal
+**Game-specific CSS & tokens:**
+- Create `src/styles/game-specific/[game-name].css` with token classes for the game's components
+- Token classes follow the pattern: base class (layout/sizing) + variant class (color). Example: `.act { display: inline-flex; ... }` + `.act-move { background: #4a7c59; }`
+- Import the file in `src/app/globals.css`
+- Use token syntax `[TEXT]{.class}` in section markdown — preprocessTokens auto-adds parent classes for 2–3 char prefixes
+- Theme overrides (accent colors, callout colors) go in `ltp.Guides.CustomCss`
 
-**Visual Aids (NOT placeholders):**
-- **Prefer real images from the publisher's press kit** when available (see Phase 1.5 below)
-- Generate inline SVG diagrams for concepts that need annotated explanations (clock layouts, flow charts, formulas)
-- Create small interactive HTML demos for core mechanics (e.g., dice rollers)
-- Use HTML/CSS grids for component overviews (token types, card categories)
-- Use dark-panel styled checklists for setup procedures
-- One visual per step max. Place AFTER the text it illustrates.
-- See the "Visual Aids" section in the style guide for SVG standards.
+**Inline token examples:**
+```markdown
+Spend []{.adr} cubes on [MOVE]{.act-move}, [SEARCH]{.act-search}, or [KILL]{.act-kill}.
+The blood meter []{.blood} advances by the victim's [3]{.str} strength value.
+Place a [☠]{.corpse} corpse token in the room.
+```
+
+**Sidebar notes format:**
+Each section's `Notes` field contains tip cards separated by `\n---\n`:
+```markdown
+**[gold] Key Concept**
+The action chain is the heart of the game.
+
+---
+
+**[red] Common Mistake**
+New players forget the rightmost slots cost more cubes.
+
+---
+
+**[green] Strategy Tip**
+Plan 2–3 turns ahead.
+```
+
+**Visual Aids:**
+- **Prefer real images from the publisher's press kit** when available (see Phase 1.5)
+- For diagrams, use `:::html-block` directives with HTML in `DisplayData.htmlBlocks`
+- For flow chains, use `:::flow` directives with items in `DisplayData.flows`
+- For phase strips, use `:::strip` with items in `DisplayData.strip`
+- For SVG diagrams, use `:::diagram` with SVG in `DisplayData.diagrams`
+- One visual per section max. Place AFTER the text it illustrates.
+- **Mobile-first**: Test all visuals at 375px width. Flow diagrams should have 3–4 short labels. Strips should have ≤4 items or they wrap awkwardly.
 
 **Using Real Images:**
 - Real images go in `public/images/[game-name]/` and are referenced as `/images/[game-name]/filename.ext`
-- Wrap images in a centered container with rounded corners, shadow, and a caption crediting the publisher
 - Optimize all images for web: max 800-1000px wide, <400KB each, JPG for photos, PNG for transparency
-- Best uses for real images:
-  - Component close-ups (cards, tokens) — teach what things look like
-  - Game-in-action shots — show how the play area looks during a game
-  - Component spreads — overview all pieces for the Setup step
 - Use SVG diagrams when you need to annotate, label, or explain relationships between components
-- A step can have both a real image AND an SVG diagram if they serve different purposes
 
-**Quick Reference Glossary:**
-- Add a floating quick-reference panel (bottom-right button) with all game terms
-- Each term: click-to-expand definition, step reference, search keywords in data-terms
-- Alphabetical order, 15–30 entries typical
-- See the "Quick Reference Glossary" section in the style guide for CSS/HTML patterns.
+### Phase 4: Publishing to Database
 
-### Phase 4: Assembly
+Insert guide data into the three active tables using MCP mssql tools (individual queries, NOT transactions — the transaction tool is unreliable):
 
-Generate a single self-contained HTML file at `games/[game-name]-learn.html` containing:
-- Complete `<style>` block with the full design system CSS + game-specific additions (including footnotes, quick reference, and diagram styles)
-- All HTML content following the page structure with inline SVG/HTML diagrams (no placeholder boxes)
-- Quick reference glossary panel (HTML before the script block)
-- `<script>` block with quiz JS, footnotes JS, quick reference JS, and any interactive demo JS
-- Footer with attribution and disclaimer
+1. **`ltp.Guides`** — One row with all metadata:
+   - `Slug` (lowercase, hyphenated game name)
+   - `Title`, `Subtitle`, `Designer`, `Artist`, `Publisher`, `PublisherUrl`
+   - `Year`, `Players`, `Time`, `Age`, `BggUrl`
+   - `HeroGradient` (CSS gradient for thumbnail fallback)
+   - `HeroImage` (path to hero background image, or NULL)
+   - `CustomCss` (theme overrides CSS string)
+   - `IsDraft = 0` for published guides
+
+2. **`ltp.GuideSections`** — One row per section:
+   - `GuideId` (FK to Guides)
+   - `SortOrder` (1-based sequential)
+   - `Title` (section heading)
+   - `Content` (markdown with directives and token syntax)
+   - `Notes` (sidebar tip cards, `---` separated)
+   - `DisplayData` (JSON string with flows, diagrams, htmlBlocks, etc.)
+   - `IsActive = 1`
+
+3. **`ltp.GlossaryEntries`** — One row per game term:
+   - `GuideId` AND `SectionId` (both required — SectionId powers mobile glossary navigation)
+   - `Term`, `Definition`, `SearchTerms`, `GroupName`, `SortOrder`
 
 ### Phase 5: Self-Review
 
 Before delivering, verify:
 - [ ] Every rule comes from the official rulebook
 - [ ] No step forward-references a concept from a later step
-- [ ] Main column is complete without sidebar
-- [ ] Rule boxes max 2 per step
-- [ ] Sidebar cards max 3 per step, color-coded
+- [ ] Main column is complete without sidebar (notes)
+- [ ] Callout boxes max 2 per section
+- [ ] Sidebar tip cards max 3 per section, color-coded
 - [ ] Setup comes after all gameplay concepts
 - [ ] Interactive reinforcements target commonly misunderstood rules (not trivia)
 - [ ] Mini-game types are varied (not all quizzes)
 - [ ] No reinforcement break tests concepts not yet taught
-- [ ] Each mini-game references real confusion points from research/errata/FAQ
-- [ ] Breakpoints are skipped where recent steps don't warrant reinforcement
-- [ ] Responsive breakpoints work (960px, 600px)
-- [ ] Footnotes cite specific sources (rulebook pages, FAQ URLs, BGG threads)
-- [ ] All media-ph placeholders replaced with inline SVG/HTML diagrams
-- [ ] Quick reference glossary contains all bolded game terms
-- [ ] Interactive demos work correctly (click handlers, output display)
-- [ ] `heroImage` set in frontmatter if box art or suitable image is available
+- [ ] Inline tokens render correctly (check game-specific CSS file exists and is imported)
+- [ ] Flow diagrams have 3–4 short labels (mobile-friendly)
+- [ ] All GlossaryEntries have SectionId populated
+- [ ] Game-specific CSS file created and imported in globals.css
+- [ ] CustomCss theme overrides set on Guides row
+- [ ] HeroGradient set for homepage thumbnail fallback

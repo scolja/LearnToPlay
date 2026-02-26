@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import type { GuideMeta, DbGlossaryEntry } from '@/lib/types';
-import { MobileControls } from '@/components/MobileControls';
+
 import { BottomNav } from './BottomNav';
 
 interface GlossaryViewerProps {
@@ -63,9 +63,7 @@ export function GlossaryViewer({ guide, entries, sectionMap }: GlossaryViewerPro
           <h1 className="gl-topbar-title">Glossary</h1>
           <span className="gl-topbar-subtitle">{guide.title}</span>
         </div>
-        <div className="gl-topbar-actions">
-          <MobileControls />
-        </div>
+        <div className="gl-topbar-actions" />
       </header>
 
       {/* Search */}

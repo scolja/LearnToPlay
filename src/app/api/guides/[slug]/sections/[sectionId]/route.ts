@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSectionById, updateSection } from '@/lib/repositories/section-repository';
+import { getSectionById, updateSection, deleteSection } from '@/lib/repositories/section-repository';
 import { getCurrentUser } from '@/lib/auth';
 
-export async function GET(
-  _request: NextRequest,
-  { params }: { params: Promise<{ slug: string; sectionId: string }> }
-) {
+type Params = { params: Promise<{ slug: string; sectionId: string }> };
+
+export async function GET(_request: NextRequest, { params }: Params) {
   const { sectionId } = await params;
 
   try {
@@ -20,10 +19,7 @@ export async function GET(
   }
 }
 
-export async function PUT(
-  request: NextRequest,
-  { params }: { params: Promise<{ slug: string; sectionId: string }> }
-) {
+export async function PUT(request: NextRequest, { params }: Params) {
   const { sectionId } = await params;
 
   const user = await getCurrentUser();
@@ -45,6 +41,23 @@ export async function PUT(
     return NextResponse.json(updated);
   } catch (err) {
     console.error('Error updating section:', err);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}
+
+export async function DELETE(_request: NextRequest, { params }: Params) {
+  const { sectionId } = await params;
+
+  const user = await getCurrentUser();
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  try {
+    await deleteSection(sectionId);
+    return NextResponse.json({ ok: true });
+  } catch (err) {
+    console.error('Error deleting section:', err);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

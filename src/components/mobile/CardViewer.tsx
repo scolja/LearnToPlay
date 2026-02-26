@@ -1,12 +1,14 @@
 'use client';
 
 import { useState, useRef, useCallback, useEffect } from 'react';
+import Link from 'next/link';
 import type { RenderedSection, GuideMeta } from '@/lib/types';
+import { useAuth } from '@/lib/auth-context';
 import { SectionCard } from './SectionCard';
 import { ProgressDots } from './ProgressDots';
 import { TableOfContents } from './TableOfContents';
 import { BottomNav } from './BottomNav';
-import { MobileControls } from '@/components/MobileControls';
+
 
 interface CardViewerProps {
   guide: GuideMeta;
@@ -75,6 +77,7 @@ function applyHighlights(root: HTMLElement | null, term: string) {
 
 export function CardViewer({ guide, sections }: CardViewerProps) {
   const storageKey = `ltp-section-${guide.slug}`;
+  const { user, isEditor } = useAuth();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isReady, setIsReady] = useState(false);
@@ -83,6 +86,7 @@ export function CardViewer({ guide, sections }: CardViewerProps) {
   const [highlightTerm, setHighlightTerm] = useState<string | null>(null);
   const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const syncTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const section = sections[currentIndex];
   const total = sections.length;
@@ -131,15 +135,60 @@ export function CardViewer({ guide, sections }: CardViewerProps) {
       } catch { /* ignore */ }
     }
 
-    setCurrentIndex(idx);
-    setIsReady(true);
+    // If logged in, fetch server progress and apply "furthest ahead wins"
+    if (user && !s && !hl) {
+      const localIdx = idx;
+      fetch(`/api/progress?slug=${encodeURIComponent(guide.slug)}`)
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+          const serverIdx = data?.progress?.currentSectionIndex ?? 0;
+          const resolved = Math.max(0, Math.min(
+            Math.max(localIdx, serverIdx),
+            sections.length - 1
+          ));
+          setCurrentIndex(resolved);
+          setIsReady(true);
+        })
+        .catch(() => {
+          setCurrentIndex(localIdx);
+          setIsReady(true);
+        });
+    } else {
+      setCurrentIndex(idx);
+      setIsReady(true);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Persist current section so navigating to glossary and back restores position
+  // Persist current section to localStorage and (if logged in) debounced server sync.
+  // Guard with isReady so the initial render (currentIndex=0) doesn't overwrite
+  // the saved value before the mount effect restores it.
   useEffect(() => {
+    if (!isReady) return;
+
+    // Always write localStorage (fast, offline-capable)
     try { localStorage.setItem(storageKey, String(currentIndex)); } catch { /* ignore */ }
-  }, [storageKey, currentIndex]);
+
+    // Debounced server sync for logged-in users
+    if (user) {
+      if (syncTimerRef.current) clearTimeout(syncTimerRef.current);
+      syncTimerRef.current = setTimeout(() => {
+        fetch('/api/progress', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            slug: guide.slug,
+            currentSectionIndex: currentIndex,
+            totalSections: total,
+          }),
+        }).catch(() => { /* silent — localStorage is the fallback */ });
+      }, 1500);
+    }
+
+    return () => {
+      if (syncTimerRef.current) clearTimeout(syncTimerRef.current);
+    };
+  }, [storageKey, currentIndex, isReady, user, guide.slug, total]);
 
   // Apply highlights after content renders
   useEffect(() => {
@@ -198,7 +247,14 @@ export function CardViewer({ guide, sections }: CardViewerProps) {
       <header className="cv-topbar">
         <h1 className="cv-topbar-title">{guide.title}</h1>
         <div className="cv-topbar-actions">
-          <MobileControls />
+          {isEditor && (
+            <Link href={`/games/${guide.slug}/learn/edit`} className="cv-edit-btn" aria-label="Edit guide">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+              </svg>
+            </Link>
+          )}
         </div>
         <button
           className="cv-toc-btn"

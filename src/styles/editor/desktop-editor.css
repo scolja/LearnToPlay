@@ -1,0 +1,123 @@
+/* =========================================================================
+   Desktop Section Editor
+   Full-screen layout with sidebar, tabs, and split-pane editing
+   ========================================================================= */
+
+.de-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.de-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Main content area (right of sidebar) */
+.de-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Tab bar below toolbar */
+.de-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-1);
+  flex-shrink: 0;
+}
+
+.de-tab {
+  padding: 0.5rem 1.2rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  transition: color 0.15s;
+}
+
+.de-tab:hover {
+  color: var(--text);
+}
+
+.de-tab--active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* Tab content area */
+.de-tab-content {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+}
+
+/* Split pane for Edit tab */
+.de-split {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.de-split-editor {
+  flex: 1;
+  display: flex;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.de-split-divider {
+  width: 4px;
+  background: var(--border);
+  cursor: col-resize;
+  flex-shrink: 0;
+}
+
+.de-split-divider:hover {
+  background: var(--accent);
+}
+
+.de-split-preview {
+  flex: 1;
+  overflow-y: auto;
+  min-width: 0;
+  background: var(--bg);
+}
+
+/* Back link */
+.de-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.5rem;
+}
+
+.de-back:hover {
+  color: var(--text);
+}
+
+/* No section selected state */
+.de-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-muted);
+  font-style: italic;
+}

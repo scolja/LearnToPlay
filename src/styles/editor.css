@@ -146,6 +146,45 @@ body:has(.login-screen) .site-user-menu {
   margin-bottom: 1.2rem;
 }
 
+.login-native-google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 300px;
+  padding: 0.65rem 1.5rem;
+  background: #fff;
+  color: #3c4043;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.login-native-google-btn:hover {
+  background: #f7f8f8;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.login-native-google-btn:active {
+  background: #eee;
+}
+
+.login-native-google-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-native-google-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
 .login-fine-print {
   font-family: var(--font-ui);
   font-size: 0.75rem;

@@ -12,7 +12,8 @@
 /* Hide the site-wide user menu on mobile views */
 body:has(.cv-shell) .site-user-menu,
 body:has(.gl-shell) .site-user-menu,
-body:has(.se-layout) .site-user-menu {
+body:has(.se-layout) .site-user-menu,
+body:has(.me-layout) .site-user-menu {
   display: none;
 }
 
@@ -78,6 +79,21 @@ body:has(.se-layout) .site-user-menu {
   display: flex;
   align-items: center;
   gap: 0.25rem;
+}
+
+.cv-edit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  color: var(--gold);
+  background: rgba(201, 169, 78, 0.12);
+  transition: background 0.15s;
+}
+.cv-edit-btn:hover {
+  background: rgba(201, 169, 78, 0.25);
 }
 
 /* Highlight banner (from glossary jump) */

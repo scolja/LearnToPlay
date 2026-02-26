@@ -28,6 +28,36 @@ const AuthContext = createContext<AuthContextValue>({
 
 const SESSION_KEY = 'ltp_session';
 const REFRESH_INTERVAL = 25 * 60 * 1000; // 25 minutes
+const PROGRESS_KEY_PREFIX = 'ltp-section-';
+
+/** Upload all localStorage progress keys to the server after login */
+async function syncLocalProgressToServer(): Promise<void> {
+  const keys: string[] = [];
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith(PROGRESS_KEY_PREFIX)) {
+        keys.push(key);
+      }
+    }
+  } catch { return; }
+
+  for (const key of keys) {
+    const slug = key.slice(PROGRESS_KEY_PREFIX.length);
+    const saved = localStorage.getItem(key);
+    if (!saved) continue;
+    const currentSectionIndex = parseInt(saved, 10);
+    if (isNaN(currentSectionIndex) || currentSectionIndex <= 0) continue;
+
+    try {
+      await fetch('/api/progress', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug, currentSectionIndex, totalSections: 0 }),
+      });
+    } catch { /* continue with next */ }
+  }
+}
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
@@ -106,6 +136,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const data = await res.json();
     setUser(data.user);
     localStorage.setItem(SESSION_KEY, '1');
+
+    // Sync localStorage progress to server (fire-and-forget)
+    syncLocalProgressToServer().catch(() => { /* silent */ });
   }, []);
 
   const logout = useCallback(async () => {
