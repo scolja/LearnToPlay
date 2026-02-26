@@ -19,7 +19,7 @@ export default async function Home() {
         {games.length > 0 ? (
           <div className="game-grid">
             {games.map(({ slug, frontmatter }) => (
-              <Link key={slug} href={`/games/${slug}`} className="game-card">
+              <div key={slug} className="game-card">
                 {frontmatter.heroImage && (
                   <div className="game-card-image">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -34,8 +34,12 @@ export default async function Home() {
                     <span>{frontmatter.time}</span>
                     <span>Ages {frontmatter.age}</span>
                   </div>
+                  <div className="game-card-actions">
+                    <Link href={`/games/${slug}`} className="game-card-btn">Full Guide</Link>
+                    <Link href={`/games/${slug}/learn`} className="game-card-btn game-card-btn-learn">Learn</Link>
+                  </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         ) : (
