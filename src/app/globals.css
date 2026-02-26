@@ -18,6 +18,13 @@
 @import '../styles/components/quick-reference.css';
 @import '../styles/components/photo.css';
 
+/* Interactive reinforcement mini-games */
+@import '../styles/components/mini-game-base.css';
+@import '../styles/components/sequence-sort.css';
+@import '../styles/components/match-up.css';
+@import '../styles/components/scenario-challenge.css';
+@import '../styles/components/spot-the-error.css';
+
 /* Game-specific tokens */
 @import '../styles/game-specific/vantage.css';
 @import '../styles/game-specific/dig-up.css';

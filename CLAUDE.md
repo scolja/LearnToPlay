@@ -93,6 +93,10 @@ BoardGameTeacher/
 | `<SummaryPanel>` | `items` (array of {num, text}) | Dark numbered summary |
 | `<GameTable>` | `headers`, `rows` | Styled table |
 | `<KnowledgeCheck>` | `questions` (array) | Interactive quiz |
+| `<SequenceSort>` | `title`, `description`, `items` (array of {text, position}), `explanation` | Order-the-steps challenge |
+| `<MatchUp>` | `title`, `description`, `pairs` (array of {left, right}), `explanation` | Pair-matching challenge |
+| `<ScenarioChallenge>` | `title`, `scenario`, `choices` (array of {text, result, quality}) | Situational decision challenge |
+| `<SpotTheError>` | `title`, `scenario`, `statements` (array of {text, isError, explanation}) | Find-the-rule-violation challenge |
 | `<Footnotes>` | `entries` (array of {num, text, url?}) | Collapsible source citations |
 
 ## Workflow

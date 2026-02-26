@@ -1,0 +1,112 @@
+/* ===================== SCENARIO CHALLENGE ===================== */
+
+.sc-scenario {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: rgba(245,239,224,0.85);
+  background: rgba(245,239,224,0.04);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  border-left: 3px solid rgba(201,169,78,0.3);
+}
+
+.sc-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sc-choice {
+  padding: 12px 14px;
+  border: 1px solid rgba(245,239,224,0.12);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sc-choice:hover {
+  border-color: var(--gold);
+}
+
+.sc-choice-text {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.4;
+}
+
+/* Answered states */
+.sc-choice.sc-best {
+  border-color: var(--gold);
+  background: rgba(201,169,78,0.08);
+}
+
+.sc-choice.sc-good {
+  border-color: var(--green);
+  background: rgba(74,124,89,0.08);
+}
+
+.sc-choice.sc-suboptimal {
+  border-color: var(--orange);
+  background: rgba(212,128,42,0.08);
+}
+
+/* Highlight the one the user actually picked */
+.sc-choice.sc-picked {
+  box-shadow: inset 0 0 0 1px currentColor;
+}
+
+.sc-choice.sc-best.sc-picked {
+  background: rgba(201,169,78,0.15);
+}
+
+.sc-choice.sc-good.sc-picked {
+  background: rgba(74,124,89,0.15);
+}
+
+.sc-choice.sc-suboptimal.sc-picked {
+  background: rgba(212,128,42,0.15);
+}
+
+/* Result area revealed after answer */
+.sc-result {
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(245,239,224,0.06);
+}
+
+.sc-badge {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-bottom: 0.4rem;
+}
+
+.sc-badge.sc-best {
+  background: rgba(201,169,78,0.2);
+  color: var(--gold);
+}
+
+.sc-badge.sc-good {
+  background: rgba(74,124,89,0.2);
+  color: #7cc98e;
+}
+
+.sc-badge.sc-suboptimal {
+  background: rgba(212,128,42,0.2);
+  color: var(--orange);
+}
+
+.sc-result-text {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: rgba(245,239,224,0.7);
+  line-height: 1.5;
+}

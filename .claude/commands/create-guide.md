@@ -59,9 +59,10 @@ If `/research-game` was run first, check `public/images/[game-name]/` for alread
    - Step 8: Secondary Currency (if applicable)
    - Step 9: Round-Start Events / Catch-Up
    - Step 10: Game Arc & Endgame
-   - Knowledge Check (2-4 questions)
    - Step 11: Setup
    - Step 12: Complete Round/Turn Summary
+
+   Interactive reinforcement breaks are inserted between steps at natural conceptual boundaries (see step 5 below).
 
 3. **Identify sidebar content.** For each step, plan:
    - Gold cards: Key insights, helpful context
@@ -71,6 +72,25 @@ If `/research-game` was run first, check `public/images/[game-name]/` for alread
    - Max 3 cards per step
 
 4. **Draft knowledge check questions.** Target the most commonly misunderstood rules. Use concrete scenarios, not abstract questions.
+
+5. **Plan interactive reinforcement breakpoints.** After roughly every 3 steps (or at natural conceptual boundaries), consider placing a mini-game component. Choose the type based on what was just taught:
+
+   | What Was Taught | Best Component | Why |
+   |-----------------|----------------|-----|
+   | A multi-step process (turn, launch, scoring) | `<SequenceSort>` | Tests procedural recall — can they reconstruct the sequence? |
+   | Multiple related terms/resources/mappings | `<MatchUp>` | Tests associations — can they link concepts correctly? |
+   | Decision-heavy mechanics with trade-offs | `<ScenarioChallenge>` | Tests rule application — can they reason about a novel situation? |
+   | Rules with common mistakes (from errata/FAQ) | `<SpotTheError>` | Targets specific misconceptions — can they spot a rule violation? |
+   | Factual rules, edge cases, calculations | `<KnowledgeCheck>` | Tests recall & comprehension — standard multiple choice |
+
+   **Guidance:**
+   - **Only place a mini-game if there's genuinely confusing material to reinforce.** Skip the breakpoint if recent steps were straightforward. Not every gap between steps needs a game.
+   - **Target errata, FAQ material, and common mistakes from research** — these are the concepts readers actually struggle with. The "Common Mistakes" section of research notes is the primary source for mini-game content.
+   - **Questions should be concrete scenarios, not trivia.** "What happens when you bump your own worker?" not "How many workers do you start with?"
+   - **Vary the types** — don't use the same mini-game type twice in a row.
+   - **A guide with 12 steps typically has 2-4 reinforcement breaks**, not one per every 3 steps. Quality over quantity.
+   - **Mini-games sit between StepRow sections** in the MDX, as standalone full-width components (not inside a StepRow).
+   - **Never test concepts not yet taught.** Each mini-game can only reference material from preceding steps.
 
 ### Phase 3: Writing
 
@@ -137,7 +157,11 @@ Before delivering, verify:
 - [ ] Rule boxes max 2 per step
 - [ ] Sidebar cards max 3 per step, color-coded
 - [ ] Setup comes after all gameplay concepts
-- [ ] Knowledge check targets common mistakes
+- [ ] Interactive reinforcements target commonly misunderstood rules (not trivia)
+- [ ] Mini-game types are varied (not all quizzes)
+- [ ] No reinforcement break tests concepts not yet taught
+- [ ] Each mini-game references real confusion points from research/errata/FAQ
+- [ ] Breakpoints are skipped where recent steps don't warrant reinforcement
 - [ ] Responsive breakpoints work (960px, 600px)
 - [ ] Footnotes cite specific sources (rulebook pages, FAQ URLs, BGG threads)
 - [ ] All media-ph placeholders replaced with inline SVG/HTML diagrams

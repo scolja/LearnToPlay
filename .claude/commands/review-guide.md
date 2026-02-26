@@ -91,11 +91,16 @@ Check against every specification in `game-teaching-style-guide.md`:
 - [ ] H2 headings are concise and action-oriented
 - [ ] Rule boxes highlight genuinely critical rules, not obvious ones
 
-**Knowledge check:**
-- [ ] Questions target commonly misunderstood rules (not trivia)
+**Interactive reinforcement (mini-games):**
+- [ ] Mini-game types are varied (not all quizzes — use SequenceSort, MatchUp, ScenarioChallenge, SpotTheError, KnowledgeCheck)
+- [ ] Each mini-game targets commonly misunderstood rules, errata, or FAQ material (not trivia)
 - [ ] Scenarios are concrete, not abstract
 - [ ] Feedback explains WHY and references the relevant step
-- [ ] Wrong answers reflect actual common mistakes
+- [ ] Wrong answers / error statements reflect actual common mistakes from research
+- [ ] Breakpoints are placed at natural conceptual boundaries (roughly every 3 steps)
+- [ ] Breakpoints are skipped where recent steps don't warrant reinforcement
+- [ ] No mini-game tests concepts not yet taught in preceding steps
+- [ ] Guide has 2–4 reinforcement breaks total (quality over quantity)
 
 **Sidebar quality:**
 - [ ] Cards align with their main column content
@@ -112,7 +117,7 @@ Check against every specification in `game-teaching-style-guide.md`:
 - [ ] All core rules covered (compare against rulebook table of contents)
 - [ ] Setup section present and comes after gameplay
 - [ ] Complete turn/round summary as final gameplay step
-- [ ] Knowledge check present with 2-4 questions
+- [ ] Interactive reinforcement breaks present (2-4 varied mini-game types)
 - [ ] No media-ph placeholder boxes remain — all replaced with inline SVG/HTML diagrams
 - [ ] Visual aids are relevant and accurately represent the mechanics described
 - [ ] Quick reference glossary present with 15-30 game terms

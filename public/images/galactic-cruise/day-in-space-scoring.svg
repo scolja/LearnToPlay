@@ -1,0 +1,266 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 520" font-family="'DM Sans', 'Segoe UI', sans-serif">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1b2a"/>
+      <stop offset="100%" stop-color="#1b2d45"/>
+    </linearGradient>
+    <!-- Guest type colors -->
+    <linearGradient id="familyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4883e"/>
+      <stop offset="100%" stop-color="#b8702e"/>
+    </linearGradient>
+    <linearGradient id="relaxGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8b5fbf"/>
+      <stop offset="100%" stop-color="#6f4a9e"/>
+    </linearGradient>
+    <linearGradient id="adventGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3fa7a0"/>
+      <stop offset="100%" stop-color="#2d8a84"/>
+    </linearGradient>
+    <!-- Glow filter -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Star shape for reputation -->
+    <polygon id="star" points="12,0 15.5,8 24,9.5 17.8,15.2 19.4,24 12,19.8 4.6,24 6.2,15.2 0,9.5 8.5,8" fill="#c9a94e"/>
+    <!-- Meeple shape -->
+    <path id="meeple" d="M10,22 C10,22 4,22 4,18 C4,16 6,14 6,12 C6,8 8,6 10,4 C10,2 8,0 10,0 C12,0 10,2 10,4 C12,6 14,8 14,12 C14,14 16,16 16,18 C16,22 10,22 10,22 Z"/>
+  </defs>
+
+  <!-- Background -->
+  <rect width="780" height="520" rx="16" fill="url(#bgGrad)"/>
+  <rect width="780" height="520" rx="16" fill="none" stroke="rgba(201,169,78,0.3)" stroke-width="2"/>
+
+  <!-- Title bar -->
+  <rect x="0" y="0" width="780" height="56" rx="16" fill="rgba(201,169,78,0.12)"/>
+  <rect x="0" y="40" width="780" height="16" fill="rgba(201,169,78,0.12)"/>
+  <text x="390" y="38" text-anchor="middle" fill="#c9a94e" font-size="22" font-weight="700" letter-spacing="1">DAY IN SPACE &#8212; BONUS SCORING</text>
+
+  <!-- Subtitle -->
+  <text x="390" y="78" text-anchor="middle" fill="rgba(245,239,224,0.6)" font-size="13" font-weight="400">For each guest color: count matching icons on ship segments, then collect that many bonuses</text>
+
+  <!-- Column headers -->
+  <text x="105" y="112" text-anchor="middle" fill="rgba(245,239,224,0.45)" font-size="11" font-weight="600" letter-spacing="1.5">GUEST TYPE</text>
+  <text x="330" y="112" text-anchor="middle" fill="rgba(245,239,224,0.45)" font-size="11" font-weight="600" letter-spacing="1.5">FORMULA</text>
+  <text x="630" y="112" text-anchor="middle" fill="rgba(245,239,224,0.45)" font-size="11" font-weight="600" letter-spacing="1.5">YOU EARN</text>
+  <line x1="30" y1="120" x2="750" y2="120" stroke="rgba(245,239,224,0.15)" stroke-width="1"/>
+
+  <!-- ═══════════ ROW 1: FAMILY ═══════════ -->
+  <g transform="translate(0, 130)">
+    <!-- Guest badge -->
+    <rect x="30" y="5" width="150" height="56" rx="10" fill="url(#familyGrad)" opacity="0.9"/>
+    <g transform="translate(48, 14) scale(1.4)" fill="#fff">
+      <use href="#meeple"/>
+    </g>
+    <text x="82" y="28" fill="#fff" font-size="15" font-weight="700">Family</text>
+    <text x="82" y="46" fill="rgba(255,255,255,0.75)" font-size="11">Orange guests</text>
+
+    <!-- Formula -->
+    <!-- Guests bubble -->
+    <rect x="210" y="8" width="50" height="50" rx="8" fill="rgba(212,136,62,0.2)" stroke="rgba(212,136,62,0.5)" stroke-width="1.5"/>
+    <g transform="translate(225, 16) scale(1.2)" fill="#d4883e"><use href="#meeple"/></g>
+
+    <text x="274" y="40" fill="rgba(245,239,224,0.7)" font-size="22" font-weight="700">&#215;</text>
+
+    <!-- Matching icons on ship -->
+    <rect x="295" y="8" width="110" height="50" rx="8" fill="rgba(212,136,62,0.2)" stroke="rgba(212,136,62,0.5)" stroke-width="1.5"/>
+    <g transform="translate(305, 13)">
+      <rect width="28" height="28" rx="6" fill="rgba(212,136,62,0.4)"/>
+      <g transform="translate(4,2) scale(0.9)" fill="#d4883e"><use href="#meeple"/></g>
+    </g>
+    <text x="340" y="33" fill="rgba(245,239,224,0.5)" font-size="14">+</text>
+    <g transform="translate(355, 13)">
+      <rect width="28" height="28" rx="6" fill="rgba(212,136,62,0.4)"/>
+      <g transform="translate(4,2) scale(0.9)" fill="#d4883e"><use href="#meeple"/></g>
+    </g>
+    <text x="310" y="55" fill="rgba(245,239,224,0.35)" font-size="9">icons on segments</text>
+
+    <!-- Equals -->
+    <text x="425" y="40" fill="rgba(245,239,224,0.7)" font-size="22" font-weight="700">=</text>
+
+    <!-- Reward -->
+    <rect x="455" y="5" width="290" height="56" rx="10" fill="rgba(212,136,62,0.12)" stroke="rgba(212,136,62,0.3)" stroke-width="1"/>
+    <!-- Coin icons -->
+    <g transform="translate(475, 16)">
+      <circle cx="14" cy="16" r="14" fill="#c9a94e" opacity="0.9"/>
+      <text x="14" y="21" text-anchor="middle" fill="#1b2d45" font-size="14" font-weight="800">$</text>
+    </g>
+    <g transform="translate(510, 16)">
+      <circle cx="14" cy="16" r="14" fill="#c9a94e" opacity="0.6"/>
+      <text x="14" y="21" text-anchor="middle" fill="#1b2d45" font-size="14" font-weight="800">$</text>
+    </g>
+    <text x="560" y="30" fill="#c9a94e" font-size="15" font-weight="700">Money</text>
+    <text x="560" y="48" fill="rgba(245,239,224,0.5)" font-size="11">1 per match</text>
+  </g>
+
+  <!-- ═══════════ ROW 2: RELAXATION ═══════════ -->
+  <g transform="translate(0, 210)">
+    <!-- Guest badge -->
+    <rect x="30" y="5" width="150" height="56" rx="10" fill="url(#relaxGrad)" opacity="0.9"/>
+    <g transform="translate(48, 14) scale(1.4)" fill="#fff">
+      <use href="#meeple"/>
+    </g>
+    <text x="82" y="28" fill="#fff" font-size="15" font-weight="700">Relaxation</text>
+    <text x="82" y="46" fill="rgba(255,255,255,0.75)" font-size="11">Purple guests</text>
+
+    <!-- Formula -->
+    <rect x="210" y="8" width="50" height="50" rx="8" fill="rgba(139,95,191,0.2)" stroke="rgba(139,95,191,0.5)" stroke-width="1.5"/>
+    <g transform="translate(225, 16) scale(1.2)" fill="#8b5fbf"><use href="#meeple"/></g>
+
+    <text x="274" y="40" fill="rgba(245,239,224,0.7)" font-size="22" font-weight="700">&#215;</text>
+
+    <rect x="295" y="8" width="110" height="50" rx="8" fill="rgba(139,95,191,0.2)" stroke="rgba(139,95,191,0.5)" stroke-width="1.5"/>
+    <g transform="translate(305, 13)">
+      <rect width="28" height="28" rx="6" fill="rgba(139,95,191,0.4)"/>
+      <g transform="translate(4,2) scale(0.9)" fill="#8b5fbf"><use href="#meeple"/></g>
+    </g>
+    <text x="340" y="33" fill="rgba(245,239,224,0.5)" font-size="14">+</text>
+    <g transform="translate(355, 13)">
+      <rect width="28" height="28" rx="6" fill="rgba(139,95,191,0.4)"/>
+      <g transform="translate(4,2) scale(0.9)" fill="#8b5fbf"><use href="#meeple"/></g>
+    </g>
+    <text x="310" y="55" fill="rgba(245,239,224,0.35)" font-size="9">icons on segments</text>
+
+    <text x="425" y="40" fill="rgba(245,239,224,0.7)" font-size="22" font-weight="700">=</text>
+
+    <!-- Reward -->
+    <rect x="455" y="5" width="290" height="56" rx="10" fill="rgba(139,95,191,0.12)" stroke="rgba(139,95,191,0.3)" stroke-width="1"/>
+    <!-- Ad megaphone icons -->
+    <g transform="translate(478, 18)">
+      <rect x="0" y="4" width="24" height="20" rx="4" fill="#8b5fbf" opacity="0.9"/>
+      <text x="12" y="19" text-anchor="middle" fill="#fff" font-size="12" font-weight="800">Ad</text>
+    </g>
+    <g transform="translate(510, 18)">
+      <rect x="0" y="4" width="24" height="20" rx="4" fill="#8b5fbf" opacity="0.6"/>
+      <text x="12" y="19" text-anchor="middle" fill="#fff" font-size="12" font-weight="800">Ad</text>
+    </g>
+    <text x="560" y="30" fill="#a87fdb" font-size="15" font-weight="700">Ads</text>
+    <text x="560" y="48" fill="rgba(245,239,224,0.5)" font-size="11">1 per match</text>
+  </g>
+
+  <!-- ═══════════ ROW 3: ADVENTUROUS ═══════════ -->
+  <g transform="translate(0, 290)">
+    <!-- Guest badge -->
+    <rect x="30" y="5" width="150" height="56" rx="10" fill="url(#adventGrad)" opacity="0.9"/>
+    <g transform="translate(48, 14) scale(1.4)" fill="#fff">
+      <use href="#meeple"/>
+    </g>
+    <text x="82" y="28" fill="#fff" font-size="15" font-weight="700">Adventurous</text>
+    <text x="82" y="46" fill="rgba(255,255,255,0.75)" font-size="11">Teal guests</text>
+
+    <!-- Formula -->
+    <rect x="210" y="8" width="50" height="50" rx="8" fill="rgba(63,167,160,0.2)" stroke="rgba(63,167,160,0.5)" stroke-width="1.5"/>
+    <g transform="translate(225, 16) scale(1.2)" fill="#3fa7a0"><use href="#meeple"/></g>
+
+    <text x="274" y="40" fill="rgba(245,239,224,0.7)" font-size="22" font-weight="700">&#215;</text>
+
+    <rect x="295" y="8" width="110" height="50" rx="8" fill="rgba(63,167,160,0.2)" stroke="rgba(63,167,160,0.5)" stroke-width="1.5"/>
+    <g transform="translate(305, 13)">
+      <rect width="28" height="28" rx="6" fill="rgba(63,167,160,0.4)"/>
+      <g transform="translate(4,2) scale(0.9)" fill="#3fa7a0"><use href="#meeple"/></g>
+    </g>
+    <text x="340" y="33" fill="rgba(245,239,224,0.5)" font-size="14">+</text>
+    <g transform="translate(355, 13)">
+      <rect width="28" height="28" rx="6" fill="rgba(63,167,160,0.4)"/>
+      <g transform="translate(4,2) scale(0.9)" fill="#3fa7a0"><use href="#meeple"/></g>
+    </g>
+    <text x="310" y="55" fill="rgba(245,239,224,0.35)" font-size="9">icons on segments</text>
+
+    <text x="425" y="40" fill="rgba(245,239,224,0.7)" font-size="22" font-weight="700">=</text>
+
+    <!-- Reward -->
+    <rect x="455" y="5" width="290" height="56" rx="10" fill="rgba(63,167,160,0.12)" stroke="rgba(63,167,160,0.3)" stroke-width="1"/>
+    <!-- Star icons for reputation -->
+    <g transform="translate(474, 14)">
+      <g transform="scale(0.95)"><use href="#star"/></g>
+    </g>
+    <g transform="translate(502, 14)">
+      <g transform="scale(0.95)" opacity="0.6"><use href="#star"/></g>
+    </g>
+    <text x="560" y="30" fill="#3fa7a0" font-size="15" font-weight="700">Reputation</text>
+    <text x="560" y="48" fill="rgba(245,239,224,0.5)" font-size="11">1 per match</text>
+  </g>
+
+  <!-- Divider -->
+  <line x1="30" y1="368" x2="750" y2="368" stroke="rgba(201,169,78,0.25)" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- ═══════════ WORKED EXAMPLE ═══════════ -->
+  <text x="390" y="394" text-anchor="middle" fill="#c9a94e" font-size="14" font-weight="700" letter-spacing="1">EXAMPLE</text>
+
+  <!-- Ship diagram - simplified vertical ship -->
+  <g transform="translate(40, 405)">
+    <!-- Ship outline -->
+    <rect x="0" y="0" width="160" height="95" rx="10" fill="rgba(245,239,224,0.06)" stroke="rgba(245,239,224,0.2)" stroke-width="1"/>
+    <text x="80" y="18" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-size="10" font-weight="600">YOUR SHIP</text>
+
+    <!-- Segment 1 - has Family + Relaxation icons -->
+    <rect x="10" y="25" width="40" height="30" rx="5" fill="rgba(212,136,62,0.3)" stroke="rgba(212,136,62,0.5)" stroke-width="1"/>
+    <g transform="translate(18, 29) scale(0.8)" fill="#d4883e"><use href="#meeple"/></g>
+    <text x="30" y="52" text-anchor="middle" fill="rgba(245,239,224,0.3)" font-size="7">Seg 1</text>
+
+    <!-- Segment 2 - has Family + Adventurous icons -->
+    <rect x="60" y="25" width="40" height="30" rx="5" fill="rgba(139,95,191,0.3)" stroke="rgba(139,95,191,0.5)" stroke-width="1"/>
+    <g transform="translate(68, 29) scale(0.8)" fill="#8b5fbf"><use href="#meeple"/></g>
+    <text x="80" y="52" text-anchor="middle" fill="rgba(245,239,224,0.3)" font-size="7">Seg 2</text>
+
+    <!-- Segment 3 -->
+    <rect x="110" y="25" width="40" height="30" rx="5" fill="rgba(63,167,160,0.3)" stroke="rgba(63,167,160,0.5)" stroke-width="1"/>
+    <g transform="translate(118, 29) scale(0.8)" fill="#3fa7a0"><use href="#meeple"/></g>
+    <text x="130" y="52" text-anchor="middle" fill="rgba(245,239,224,0.3)" font-size="7">Seg 3</text>
+
+    <!-- Guests on board -->
+    <text x="80" y="72" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-size="9" font-weight="600">Guests on board:</text>
+    <g transform="translate(30, 75) scale(0.7)" fill="#d4883e"><use href="#meeple"/></g>
+    <text x="50" y="87" fill="rgba(245,239,224,0.5)" font-size="9">&#215;1</text>
+    <g transform="translate(75, 75) scale(0.7)" fill="#8b5fbf"><use href="#meeple"/></g>
+    <text x="95" y="87" fill="rgba(245,239,224,0.5)" font-size="9">&#215;1</text>
+  </g>
+
+  <!-- Calculation -->
+  <g transform="translate(230, 405)">
+    <rect x="0" y="0" width="510" height="95" rx="10" fill="rgba(245,239,224,0.04)" stroke="rgba(245,239,224,0.12)" stroke-width="1"/>
+    <text x="255" y="18" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-size="10" font-weight="600">CALCULATION</text>
+
+    <!-- Family calc -->
+    <g transform="translate(15, 26)">
+      <g transform="scale(0.8)" fill="#d4883e"><use href="#meeple"/></g>
+      <text x="20" y="14" fill="rgba(245,239,224,0.6)" font-size="13">1 Family guest</text>
+      <text x="140" y="14" fill="rgba(245,239,224,0.5)" font-size="13">&#215;</text>
+      <text x="158" y="14" fill="#d4883e" font-size="13" font-weight="700">1</text>
+      <text x="172" y="14" fill="rgba(245,239,224,0.5)" font-size="11">matching icon</text>
+      <text x="280" y="14" fill="rgba(245,239,224,0.5)" font-size="13">=</text>
+      <text x="300" y="14" fill="#c9a94e" font-size="14" font-weight="700">1 Money</text>
+      <circle cx="370" cy="9" r="9" fill="#c9a94e" opacity="0.8"/>
+      <text x="370" y="13" text-anchor="middle" fill="#1b2d45" font-size="10" font-weight="800">$</text>
+    </g>
+
+    <!-- Relaxation calc -->
+    <g transform="translate(15, 52)">
+      <g transform="scale(0.8)" fill="#8b5fbf"><use href="#meeple"/></g>
+      <text x="20" y="14" fill="rgba(245,239,224,0.6)" font-size="13">1 Relax. guest</text>
+      <text x="140" y="14" fill="rgba(245,239,224,0.5)" font-size="13">&#215;</text>
+      <text x="158" y="14" fill="#8b5fbf" font-size="13" font-weight="700">1</text>
+      <text x="172" y="14" fill="rgba(245,239,224,0.5)" font-size="11">matching icon</text>
+      <text x="280" y="14" fill="rgba(245,239,224,0.5)" font-size="13">=</text>
+      <text x="300" y="14" fill="#a87fdb" font-size="14" font-weight="700">1 Ad</text>
+      <rect x="347" y="1" width="22" height="17" rx="3" fill="#8b5fbf" opacity="0.8"/>
+      <text x="358" y="14" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">Ad</text>
+    </g>
+
+    <!-- Adventurous calc -->
+    <g transform="translate(15, 78)">
+      <g transform="scale(0.8)" fill="#3fa7a0"><use href="#meeple"/></g>
+      <text x="20" y="14" fill="rgba(245,239,224,0.6)" font-size="13">0 Adv. guests</text>
+      <text x="140" y="14" fill="rgba(245,239,224,0.5)" font-size="13">&#215;</text>
+      <text x="158" y="14" fill="#3fa7a0" font-size="13" font-weight="700">1</text>
+      <text x="172" y="14" fill="rgba(245,239,224,0.5)" font-size="11">matching icon</text>
+      <text x="280" y="14" fill="rgba(245,239,224,0.5)" font-size="13">=</text>
+      <text x="300" y="14" fill="rgba(245,239,224,0.35)" font-size="14" font-weight="700">0 (no guest!)</text>
+    </g>
+  </g>
+
+  <!-- Footer note -->
+  <text x="390" y="515" text-anchor="middle" fill="rgba(245,239,224,0.3)" font-size="10">Pilot counts as a guest of their color. Upgrade tokens do NOT apply during Days in Space.</text>
+</svg>
