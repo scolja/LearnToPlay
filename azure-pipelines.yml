@@ -28,14 +28,11 @@ stages:
               path: "$(HOME)/.npm"
             displayName: "Cache npm packages"
 
-          - task: Cache@2
-            inputs:
-              key: 'nextjs | "$(Agent.OS)" | package-lock.json'
-              path: ".next/cache"
-            displayName: "Cache Next.js build"
-
           - script: npm ci
             displayName: "Install dependencies"
+
+          - script: rm -rf .next
+            displayName: "Clean previous build artifacts"
 
           - script: npm run build
             displayName: "Build standalone app"
