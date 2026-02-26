@@ -73,3 +73,27 @@
   color: var(--text-muted);
   margin-bottom: 0.75rem;
 }
+
+/* =====================================================================
+   Responsive: Two-column layout with tips sidebar (landscape tablets+)
+   ===================================================================== */
+@media (min-width: 900px) {
+  .sc-card {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 0 2rem;
+  }
+
+  .sc-header {
+    grid-column: 1 / -1;
+  }
+
+  .sc-notes {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+    position: sticky;
+    top: 0;
+    align-self: start;
+  }
+}
