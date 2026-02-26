@@ -21,6 +21,8 @@ const qualityConfig = {
 };
 
 export function ScenarioChallenge({ title = 'What Would You Do?', scenario, choices }: ScenarioChallengeProps) {
+  if (!choices || choices.length === 0) return null;
+
   const [selected, setSelected] = useState<number | null>(null);
 
   const answered = selected !== null;

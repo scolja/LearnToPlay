@@ -3,6 +3,8 @@ interface EvalStripProps {
 }
 
 export function EvalStrip({ steps }: EvalStripProps) {
+  if (!steps || steps.length === 0) return null;
+
   return (
     <div className="eval-strip" style={{ gridTemplateColumns: `repeat(${steps.length}, 1fr)` }}>
       {steps.map((step, i) => (

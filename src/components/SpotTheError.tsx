@@ -15,6 +15,8 @@ interface SpotTheErrorProps {
 }
 
 export function SpotTheError({ title = 'Spot the Error', scenario, statements }: SpotTheErrorProps) {
+  if (!statements || statements.length === 0) return null;
+
   const [selected, setSelected] = useState<number | null>(null);
   const [solved, setSolved] = useState(false);
   const [cleared, setCleared] = useState<Set<number>>(new Set());

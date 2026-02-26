@@ -1,9 +1,13 @@
+'use client';
+
 interface GameTableProps {
   headers: string[];
   rows: string[][];
 }
 
 export function GameTable({ headers, rows }: GameTableProps) {
+  if (!headers || !rows) return null;
+
   return (
     <table className="rtable">
       <thead>

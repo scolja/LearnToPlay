@@ -24,6 +24,8 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 export function MatchUp({ title = 'Match the Pairs', description, pairs, explanation }: MatchUpProps) {
+  if (!pairs || pairs.length === 0) return null;
+
   const shuffledRight = useMemo(() => shuffle(pairs.map(p => p.right)), [pairs]);
 
   const [selectedLeft, setSelectedLeft] = useState<number | null>(null);

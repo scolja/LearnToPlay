@@ -15,6 +15,8 @@ interface FootnotesProps {
 export function Footnotes({ entries }: FootnotesProps) {
   const [open, setOpen] = useState(false);
 
+  if (!entries || entries.length === 0) return null;
+
   return (
     <>
       <button className="fn-toggle" onClick={() => setOpen(!open)}>

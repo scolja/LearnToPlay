@@ -22,6 +22,8 @@ interface KnowledgeCheckProps {
 export function KnowledgeCheck({ title = 'Quick Check', questions }: KnowledgeCheckProps) {
   const [answered, setAnswered] = useState<Record<number, number>>({});
 
+  if (!questions || questions.length === 0) return null;
+
   function handleAnswer(qIndex: number, oIndex: number) {
     if (answered[qIndex] !== undefined) return;
     setAnswered(prev => ({ ...prev, [qIndex]: oIndex }));

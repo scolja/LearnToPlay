@@ -24,6 +24,8 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 export function SequenceSort({ title = 'Put These in Order', description, items, explanation }: SequenceSortProps) {
+  if (!items || items.length === 0) return null;
+
   const initialOrder = useMemo(() => {
     let shuffled = shuffle(items);
     // Ensure it's not already in correct order

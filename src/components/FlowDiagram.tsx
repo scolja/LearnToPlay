@@ -10,6 +10,8 @@ interface FlowDiagramProps {
 }
 
 export function FlowDiagram({ steps }: FlowDiagramProps) {
+  if (!steps || steps.length === 0) return null;
+
   return (
     <div className="flow">
       {steps.map((step, i) => (

@@ -81,10 +81,15 @@ export async function getGameContent(slug: string): Promise<GameGuide> {
 }
 
 export async function getAllGameSlugs(): Promise<string[]> {
-  // Get filesystem slugs
+  // Get filesystem slugs (excluding drafts)
   const fsSlugs = fs.existsSync(CONTENT_DIR)
     ? fs.readdirSync(CONTENT_DIR)
         .filter(f => f.endsWith('.mdx'))
+        .filter(f => {
+          const raw = fs.readFileSync(path.join(CONTENT_DIR, f), 'utf-8');
+          const { data } = matter(raw);
+          return !data.draft;
+        })
         .map(f => f.replace(/\.mdx$/, ''))
     : [];
 
