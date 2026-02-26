@@ -248,20 +248,6 @@ function MobileRow({ game, isNew, progress }: { game: GuideMeta; isNew?: boolean
             style={{ '--thumb-bg': game.heroGradient || undefined } as React.CSSProperties}
           />
         )}
-        {progress && (
-          <div className="hp-row-progress-ring">
-            <svg viewBox="0 0 36 36" width="36" height="36">
-              <circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--gold)" strokeWidth="3" opacity="0.35" />
-              <circle
-                cx="18" cy="18" r="15.5" fill="none"
-                stroke="var(--green)" strokeWidth="3"
-                strokeLinecap="round"
-                strokeDasharray={`${Math.round((progress.current / progress.total) * 97.4)} 97.4`}
-                transform="rotate(-90 18 18)"
-              />
-            </svg>
-          </div>
-        )}
       </div>
       <div className="hp-row-info">
         <span className="hp-row-title">
@@ -279,7 +265,21 @@ function MobileRow({ game, isNew, progress }: { game: GuideMeta; isNew?: boolean
         )}
       </div>
       {game.readMinutes > 0 && (
-        <span className="hp-row-time">{game.readMinutes} min</span>
+        <div className={`hp-row-time-wrap${progress ? ' has-progress' : ''}`}>
+          {progress && (
+            <svg className="hp-row-time-ring" viewBox="0 0 48 48">
+              <circle cx="24" cy="24" r="21" fill="none" stroke="var(--gold)" strokeWidth="2.5" opacity="0.25" />
+              <circle
+                cx="24" cy="24" r="21" fill="none"
+                stroke="var(--green)" strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeDasharray={`${Math.round((progress.current / progress.total) * 131.9)} 131.9`}
+                transform="rotate(-90 24 24)"
+              />
+            </svg>
+          )}
+          <span className="hp-row-time">{game.readMinutes} min</span>
+        </div>
       )}
       <svg className="hp-row-chevron" width="16" height="16" viewBox="0 0 24 24"
            fill="none" stroke="currentColor" strokeWidth="2">
