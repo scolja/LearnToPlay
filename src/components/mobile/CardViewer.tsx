@@ -13,6 +13,66 @@ interface CardViewerProps {
   sections: RenderedSection[];
 }
 
+function escapeRegex(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function clearHighlights(root: HTMLElement | null) {
+  if (!root) return;
+  root.querySelectorAll('mark.gl-hl').forEach(mark => {
+    const parent = mark.parentNode;
+    if (parent) {
+      parent.replaceChild(document.createTextNode(mark.textContent || ''), mark);
+      parent.normalize();
+    }
+  });
+}
+
+function applyHighlights(root: HTMLElement | null, term: string) {
+  if (!root || !term) return;
+  clearHighlights(root);
+
+  const pattern = new RegExp(`(${escapeRegex(term)})`, 'gi');
+  const hits: Text[] = [];
+
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      const el = node.parentElement;
+      if (!el) return NodeFilter.FILTER_REJECT;
+      if (el.closest('.cv-hl-banner, script, style')) return NodeFilter.FILTER_REJECT;
+      if (el.tagName === 'MARK' && el.classList.contains('gl-hl')) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+
+  while (walker.nextNode()) {
+    const t = walker.currentNode as Text;
+    if (pattern.test(t.textContent || '')) hits.push(t);
+    pattern.lastIndex = 0;
+  }
+
+  hits.forEach(node => {
+    const text = node.textContent || '';
+    const parts = text.split(pattern);
+    if (parts.length <= 1) return;
+
+    const frag = document.createDocumentFragment();
+    parts.forEach(part => {
+      if (pattern.test(part)) {
+        const mark = document.createElement('mark');
+        mark.className = 'gl-hl';
+        mark.textContent = part;
+        frag.appendChild(mark);
+      } else if (part) {
+        frag.appendChild(document.createTextNode(part));
+      }
+      pattern.lastIndex = 0;
+    });
+
+    node.parentNode?.replaceChild(frag, node);
+  });
+}
+
 export function CardViewer({ guide, sections }: CardViewerProps) {
   const storageKey = `ltp-section-${guide.slug}`;
 
@@ -20,6 +80,7 @@ export function CardViewer({ guide, sections }: CardViewerProps) {
   const [isReady, setIsReady] = useState(false);
   const [tocOpen, setTocOpen] = useState(false);
   const [slideDirection, setSlideDirection] = useState<'left' | 'right' | null>(null);
+  const [highlightTerm, setHighlightTerm] = useState<string | null>(null);
   const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -32,12 +93,31 @@ export function CardViewer({ guide, sections }: CardViewerProps) {
 
     // Deep link from glossary takes priority
     const params = new URLSearchParams(window.location.search);
+    const hl = params.get('highlight');
+    if (hl) setHighlightTerm(hl);
+
     const s = params.get('section');
     if (s !== null) {
       const parsed = parseInt(s, 10);
       if (!isNaN(parsed) && parsed >= 0 && parsed < sections.length) {
         idx = parsed;
       }
+    } else if (hl) {
+      // No explicit section — search section content to find the first match
+      const termLower = hl.toLowerCase();
+      const found = sections.findIndex(sec => {
+        // Search title
+        if (sec.title && sec.title.toLowerCase().includes(termLower)) return true;
+        // Search block content (HTML stripped to text)
+        return sec.blocks.some(block => {
+          if ('html' in block && block.html) {
+            const text = block.html.replace(/<[^>]*>/g, '').toLowerCase();
+            return text.includes(termLower);
+          }
+          return false;
+        });
+      });
+      if (found >= 0) idx = found;
     } else {
       // Fall back to saved position
       try {
@@ -60,6 +140,26 @@ export function CardViewer({ guide, sections }: CardViewerProps) {
   useEffect(() => {
     try { localStorage.setItem(storageKey, String(currentIndex)); } catch { /* ignore */ }
   }, [storageKey, currentIndex]);
+
+  // Apply highlights after content renders
+  useEffect(() => {
+    if (highlightTerm && containerRef.current) {
+      // Small delay to let SectionCard render its HTML
+      const timer = setTimeout(() => {
+        applyHighlights(containerRef.current, highlightTerm);
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [highlightTerm, currentIndex]);
+
+  function handleClearHighlight() {
+    clearHighlights(containerRef.current);
+    setHighlightTerm(null);
+    // Clean highlight from URL without navigation
+    const url = new URL(window.location.href);
+    url.searchParams.delete('highlight');
+    window.history.replaceState({}, '', url.toString());
+  }
 
   const goTo = useCallback((index: number) => {
     const clamped = Math.max(0, Math.min(index, total - 1));
@@ -113,6 +213,14 @@ export function CardViewer({ guide, sections }: CardViewerProps) {
           {currentIndex + 1}/{total}
         </button>
       </header>
+
+      {/* Highlight banner from glossary navigation */}
+      {highlightTerm && (
+        <div className="cv-hl-banner">
+          <span>Highlighting: <strong>{highlightTerm}</strong></span>
+          <button type="button" onClick={handleClearHighlight}>Clear</button>
+        </div>
+      )}
 
       {/* Table of Contents overlay */}
       {tocOpen && (

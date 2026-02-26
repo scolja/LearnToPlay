@@ -22,11 +22,27 @@
   padding-top: max(0.75rem, calc(env(safe-area-inset-top) + 0.4rem));
 }
 
-.gl-topbar-title {
+.gl-topbar-text {
   flex: 1;
+  min-width: 0;
+}
+
+.gl-topbar-title {
   font-family: var(--font-display);
   font-size: 1.1rem;
   font-weight: 700;
+  line-height: 1.2;
+}
+
+.gl-topbar-subtitle {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: rgba(var(--text-light-rgb), 0.5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 0.1rem;
 }
 
 .gl-topbar-actions {
@@ -90,16 +106,40 @@
   z-index: 1;
 }
 
-/* Entry */
+/* Entry — collapsed by default, tap to expand */
 .gl-entry {
   padding: 0.75rem 0;
   border-bottom: 1px solid rgba(var(--text-rgb), 0.06);
   cursor: pointer;
   transition: background 0.1s;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .gl-entry:active {
   background: rgba(201, 169, 78, 0.06);
+}
+
+.gl-entry-expanded {
+  background: rgba(var(--text-rgb), 0.02);
+}
+
+/* Entry header row (always visible) */
+.gl-entry-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.gl-chevron {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  width: 0.8em;
+  transition: color 0.15s;
+}
+
+.gl-entry-expanded .gl-chevron {
+  color: var(--gold);
 }
 
 .gl-term {
@@ -107,7 +147,30 @@
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--text);
-  margin-bottom: 0.2rem;
+}
+
+/* Go-to arrow (always visible on right) */
+.gl-goto {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  color: var(--gold);
+  text-decoration: none;
+  transition: background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.gl-goto:active {
+  background: rgba(201, 169, 78, 0.12);
+}
+
+/* Expanded body (definition + jump button) */
+.gl-entry-body {
+  padding: 0.4rem 0 0.2rem 1.2rem;
 }
 
 .gl-def {
@@ -117,13 +180,31 @@
   color: var(--text-muted);
 }
 
-.gl-section-link {
-  display: inline-block;
-  margin-top: 0.3rem;
-  font-family: var(--font-ui);
-  font-size: 0.7rem;
+/* Jump-to-learn button */
+.gl-jump-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0.6rem;
+  padding: 0.65rem 1rem;
+  border: 1.5px solid var(--gold);
+  border-radius: 8px;
+  background: rgba(201, 169, 78, 0.08);
   color: var(--gold);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
   font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  min-height: 44px;
+  transition: background 0.15s, transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gl-jump-btn:active {
+  transform: scale(0.97);
+  background: rgba(201, 169, 78, 0.18);
 }
 
 /* Empty state */

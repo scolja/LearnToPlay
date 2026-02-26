@@ -81,7 +81,7 @@ All tables live under the `ltp` schema. See `database/schema-current.sql` for th
 | `ltp.RefreshTokens` | JWT refresh token store |
 | `ltp.Guides` | Guide metadata (title, designer, publisher, hero image, etc.) |
 | `ltp.GuideSections` | Ordered content sections — markdown + JSON `DisplayData` bag |
-| `ltp.GlossaryEntries` | Searchable terms linked to guides and sections |
+| `ltp.GlossaryEntries` | Searchable terms linked to guides and sections. `SectionId` must be populated — it powers glossary → learn page navigation with term highlighting |
 | `ltp.GuideVersions_MDX_Legacy` | Legacy monolithic MDX versions (pre-section model) |
 
 Migration scripts in `database/` are numbered (`001_`, `002_`, ...) and represent the history of schema changes. The `schema-current.sql` file is the canonical reference for the deployed state.
@@ -101,6 +101,7 @@ Migration scripts in `database/` are numbered (`001_`, `002_`, ...) and represen
 - Game images go in `public/images/[game-name]/` and are referenced as `/images/[game-name]/filename.ext` in MDX.
 - All images must be web-optimized: max 800-1000px wide, <400KB each, with descriptive `alt` text and publisher credit captions.
 - **Hero background images**: If box art or a visually striking image is available, add `heroImage: "/images/[game-name]/filename.ext"` to the YAML frontmatter. The Hero component renders this as a blurred, dimmed background behind the title text. Best candidates: box front art, box back, or stylized game illustrations.
+- **Glossary `SectionId`**: Every `ltp.GlossaryEntries` row must have its `SectionId` populated, pointing to the `ltp.GuideSections` row where the term is best explained. This powers the mobile glossary's "jump to learn page" feature — tapping an arrow navigates to the correct section with the term highlighted in gold. When creating new guides or glossary entries, always assign each term to its most relevant section.
 
 ## MDX Component Reference
 

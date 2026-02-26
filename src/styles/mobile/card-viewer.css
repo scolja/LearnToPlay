@@ -77,6 +77,56 @@ body:has(.se-layout) .site-user-menu {
   gap: 0.25rem;
 }
 
+/* Highlight banner (from glossary jump) */
+.cv-hl-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.4rem 1rem;
+  background: var(--bg-dark);
+  border-bottom: 2px solid var(--gold);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--text-light);
+  flex-shrink: 0;
+}
+.cv-hl-banner strong {
+  color: var(--gold);
+}
+.cv-hl-banner button {
+  padding: 0.25rem 0.75rem;
+  border: 1.5px solid var(--gold);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--gold);
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 32px;
+  transition: background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.cv-hl-banner button:active {
+  background: rgba(201, 169, 78, 0.15);
+}
+
+/* Term highlighting marks */
+mark.gl-hl {
+  background: var(--gold);
+  color: var(--bg-dark);
+  padding: 0.05em 0.25em;
+  border-radius: 3px;
+  font-weight: 700;
+  box-shadow: 0 0 0 2px var(--gold), 0 0 8px rgba(201, 169, 78, 0.5);
+  animation: gl-hl-pulse 2s ease-in-out infinite;
+}
+@keyframes gl-hl-pulse {
+  0%, 100% { box-shadow: 0 0 0 2px var(--gold), 0 0 8px rgba(201, 169, 78, 0.5); }
+  50% { box-shadow: 0 0 0 3px var(--gold), 0 0 16px rgba(201, 169, 78, 0.8); }
+}
+
 /* Scrollable content area */
 .cv-content {
   flex: 1;
