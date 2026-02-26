@@ -16,6 +16,16 @@ const config: CapacitorConfig = {
         // Production
         url: 'https://learntoplay.azurewebsites.net',
       },
+  plugins: {
+    SocialLogin: {
+      providers: {
+        google: true,
+        facebook: false,
+        apple: false,
+        twitter: false,
+      },
+    },
+  },
 };
 
 export default config;

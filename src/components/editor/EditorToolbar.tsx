@@ -32,9 +32,11 @@ export function EditorToolbar({
   return (
     <div className={`ed-toolbar ${compact ? 'ed-toolbar--compact' : ''}`}>
       <div className="ed-toolbar-left">
-        <span className="ed-toolbar-section-title">
-          {sectionTitle || '(untitled)'}
-        </span>
+        {!compact && (
+          <span className="ed-toolbar-section-title">
+            {sectionTitle || '(untitled)'}
+          </span>
+        )}
         {hasDraft && <span className="ed-toolbar-draft-badge">Draft</span>}
         {isDirty && <span className="ed-toolbar-dirty-badge">Unsaved</span>}
       </div>
