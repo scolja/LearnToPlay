@@ -264,20 +264,3 @@ mark.gl-hl {
   color: var(--gold);
 }
 
-/* =====================================================================
-   Responsive: Tablet & Desktop (> 768px)
-   ===================================================================== */
-@media (min-width: 768px) {
-  .cv-shell {
-    max-width: 480px;
-    margin: 0 auto;
-    border-left: 1px solid rgba(var(--text-rgb), 0.1);
-    border-right: 1px solid rgba(var(--text-rgb), 0.1);
-  }
-}
-
-@media (min-width: 1024px) {
-  .cv-shell {
-    max-width: 520px;
-  }
-}
