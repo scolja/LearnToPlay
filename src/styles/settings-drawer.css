@@ -261,6 +261,11 @@
   border-color: rgba(var(--text-light-rgb), 0.25);
 }
 
+.sd-btn-icon {
+  margin-right: 0.4rem;
+  vertical-align: -2px;
+}
+
 /* Signed-out state */
 .sd-account-signed-out {
   display: flex;

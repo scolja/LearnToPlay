@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import { useTheme, type Theme } from '@/lib/theme-context';
 import { useSettings, type FontSize } from '@/lib/settings-context';
 import { useAuth } from '@/lib/auth-context';
@@ -56,8 +57,10 @@ const DISMISS_THRESHOLD = 0.3; // 30% of panel height
 export function SettingsDrawer({ open, onClose }: SettingsDrawerProps) {
   const { theme, setTheme } = useTheme();
   const { fontSize, setFontSize } = useSettings();
+  const router = useRouter();
   const { user, loading: authLoading, login, logout } = useAuth();
   const { isNative, nativeLogin } = useNativeGoogleLogin();
+  const isAdmin = !!user && user.roles.includes('admin');
   const [loginError, setLoginError] = useState('');
   const [signingIn, setSigningIn] = useState(false);
 
@@ -202,6 +205,21 @@ export function SettingsDrawer({ open, onClose }: SettingsDrawerProps) {
                   <span className="sd-account-email">{user.email}</span>
                 </div>
               </div>
+              {isAdmin && (
+                <button
+                  type="button"
+                  className="sd-account-signout"
+                  onClick={() => { animateClose(); router.push('/admin/users'); }}
+                >
+                  <svg className="sd-btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  Manage Users
+                </button>
+              )}
               <button
                 type="button"
                 className="sd-account-signout"
