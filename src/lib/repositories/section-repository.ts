@@ -15,7 +15,7 @@ export async function getGuideBySlug(slug: string): Promise<GuideMeta | null> {
              PublisherUrl as publisherUrl, Year as year, Players as players,
              Time as time, Age as age, BggUrl as bggUrl,
              HeroGradient as heroGradient, HeroImage as heroImage,
-             CustomCss as customCss
+             CustomCss as customCss, CreatedAt as createdAt
       FROM ltp.Guides
       WHERE Slug = @slug AND IsDraft = 0
     `);
@@ -31,10 +31,10 @@ export async function getAllGuides(): Promise<GuideMeta[]> {
              PublisherUrl as publisherUrl, Year as year, Players as players,
              Time as time, Age as age, BggUrl as bggUrl,
              HeroGradient as heroGradient, HeroImage as heroImage,
-             CustomCss as customCss
+             CustomCss as customCss, CreatedAt as createdAt
       FROM ltp.Guides
       WHERE IsDraft = 0
-      ORDER BY Title
+      ORDER BY CreatedAt DESC, Title
     `);
   return result.recordset;
 }

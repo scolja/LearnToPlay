@@ -52,6 +52,7 @@ export interface GuideMeta {
   heroGradient: string | null;
   heroImage: string | null;
   customCss: string | null;
+  createdAt: string;
 }
 
 export interface GuideSection {

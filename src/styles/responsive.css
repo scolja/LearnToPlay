@@ -23,5 +23,4 @@
   .turn-strip { grid-template-columns: repeat(4, 1fr); }
   .hero-meta { flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
   .qref-panel { width: calc(100vw - 2rem); right: 1rem; }
-  .game-grid { grid-template-columns: 1fr; }
 }

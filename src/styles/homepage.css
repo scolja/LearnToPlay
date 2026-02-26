@@ -1,120 +1,379 @@
-/* ===================== HOMEPAGE ===================== */
-.hero-logo {
-  width: 72px;
-  height: 72px;
-  border-radius: 14px;
-  margin-bottom: 1rem;
-  position: relative;
-  z-index: 2;
+/* ===================== HOMEPAGE — Mobile-first app shell ===================== */
+
+/* Hide site user menu on mobile homepage */
+body:has(.hp-shell) .site-user-menu {
+  display: none;
 }
-.homepage .hero {
-  padding-bottom: 2.5rem;
-}
-.homepage .hero h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-}
-.game-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-  padding: 2.5rem 0;
-}
-.game-card {
-  background: var(--bg-sidebar);
-  border-radius: 12px;
+
+/* Shell: full viewport flex column, like the card viewer */
+.hp-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  background: var(--bg);
   overflow: hidden;
+}
+
+/* ---- Mobile top bar ---- */
+.hp-topbar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1rem;
+  background: var(--bg-dark);
   color: var(--text-light);
-  display: flex;
-  flex-direction: column;
+  flex-shrink: 0;
+  padding-top: max(0.65rem, env(safe-area-inset-top));
 }
-.game-card-image {
-  width: 100%;
-  height: 180px;
-  overflow: hidden;
+.hp-topbar-logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
 }
-.game-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.game-card-body {
-  padding: 1.2rem 1.5rem 1.5rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.game-card h2 {
+.hp-topbar-title {
   font-family: var(--font-display);
-  font-size: 1.4rem;
-  color: var(--gold);
-  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+  font-weight: 700;
 }
-.game-card p {
+
+/* Desktop hero: hidden on mobile */
+.hp-hero-desktop {
+  display: none;
+}
+
+/* ---- Sticky search bar ---- */
+.hp-search-wrap {
+  padding: 0.6rem 1rem;
+  background: var(--bg);
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(44, 36, 24, 0.08);
+}
+.hp-search-inner {
+  position: relative;
+}
+.hp-search-icon {
+  position: absolute;
+  left: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.hp-search {
+  width: 100%;
+  padding: 0.5rem 0.8rem 0.5rem 2.2rem;
+  border: 1.5px solid rgba(44, 36, 24, 0.12);
+  border-radius: 10px;
+  background: rgba(44, 36, 24, 0.03);
   font-family: var(--font-ui);
   font-size: 0.85rem;
-  color: rgba(245,239,224,0.6);
-  margin-bottom: 0.8rem;
-  line-height: 1.5;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s;
+  -webkit-appearance: none;
 }
-.game-meta {
-  display: flex;
-  gap: 1rem;
-  font-family: var(--font-ui);
-  font-size: 11px;
-  color: rgba(245,239,224,0.4);
+.hp-search:focus {
+  border-color: var(--gold);
 }
-.game-meta span {
-  padding: 3px 8px;
-  border: 1px solid rgba(245,239,224,0.1);
-  border-radius: 4px;
+.hp-search::placeholder {
+  color: var(--text-muted);
 }
-/* Card action buttons */
-.game-card-actions {
-  display: flex;
-  gap: 0.6rem;
-  margin-top: auto;
-  padding-top: 1rem;
-}
-.game-card-btn {
+
+/* ---- Scrollable content area ---- */
+.hp-content {
   flex: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+/* ---- Section headers (New / All Games) ---- */
+.hp-section-header {
   font-family: var(--font-ui);
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  padding: 0.7rem 1rem 0.35rem;
+  border-bottom: 1px solid rgba(201, 169, 78, 0.15);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 2;
+  margin: 0;
+}
+
+/* ---- Mobile game row ---- */
+.hp-row-mobile {
+  display: flex;
+}
+.hp-card-desktop {
+  display: none;
+}
+
+.hp-row {
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
   text-decoration: none;
-  transition: background 0.2s, color 0.2s;
-  background: rgba(245,239,224,0.08);
-  color: rgba(245,239,224,0.7);
+  color: var(--text);
+  border-bottom: 1px solid rgba(44, 36, 24, 0.06);
+  transition: background 0.1s;
+  min-height: 56px;
 }
-.game-card-btn:hover {
-  background: rgba(245,239,224,0.15);
-  color: var(--text-light);
+.hp-row:active {
+  background: rgba(201, 169, 78, 0.07);
 }
-.game-card-btn-learn {
+
+.hp-row-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--bg-sidebar);
+}
+.hp-row-thumb-placeholder {
+  background: linear-gradient(135deg, var(--bg-sidebar), var(--bg-dark));
+}
+
+.hp-row-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.hp-row-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.hp-row-meta {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hp-row-chevron {
+  flex-shrink: 0;
+  color: var(--text-muted);
+  opacity: 0.35;
+}
+
+/* ---- NEW badge ---- */
+.hp-badge-new {
+  font-family: var(--font-ui);
+  font-size: 0.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   background: var(--gold);
   color: var(--bg-dark);
-}
-.game-card-btn-learn:hover {
-  background: #d4b85a;
-  color: var(--bg-dark);
-}
-
-/* On mobile, make Learn button full-width and more prominent */
-@media (max-width: 600px) {
-  .game-card-actions {
-    flex-direction: column;
-  }
+  padding: 1px 5px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  line-height: 1.4;
 }
 
-.empty-state {
+/* ---- Empty state ---- */
+.hp-empty {
   text-align: center;
-  padding: 3rem;
+  padding: 3rem 1rem;
   color: var(--text-muted);
   font-family: var(--font-ui);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+}
+
+
+/* ===================== DESKTOP (>= 768px) ===================== */
+@media (min-width: 768px) {
+  /* Restore site-wide user menu */
+  body:has(.hp-shell) .site-user-menu {
+    display: block;
+  }
+
+  .hp-shell {
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Hide mobile top bar, show desktop hero */
+  .hp-topbar {
+    display: none;
+  }
+  .hp-hero-desktop {
+    display: block;
+  }
+
+  /* Hero logo */
+  .hero-logo {
+    width: 72px;
+    height: 72px;
+    border-radius: 14px;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Homepage hero tweaks */
+  .hp-hero-desktop .hero {
+    padding-bottom: 2.5rem;
+  }
+  .hp-hero-desktop .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  /* Search bar within centered wrap */
+  .hp-search-wrap {
+    width: 100%;
+    max-width: calc(var(--main-width) + var(--gap) + var(--sidebar-width) + 80px);
+    margin: 0 auto;
+    padding: 1.5rem 2rem 0;
+    border-bottom: none;
+  }
+
+  /* Content becomes centered card area */
+  .hp-content {
+    width: 100%;
+    max-width: calc(var(--main-width) + var(--gap) + var(--sidebar-width) + 80px);
+    margin: 0 auto;
+    padding: 0 2rem 2.5rem;
+    overflow: visible;
+  }
+
+  .hp-section-header {
+    padding: 1.5rem 0 0.6rem;
+    position: static;
+    font-size: 0.65rem;
+    background: transparent;
+  }
+
+  /* Swap: hide mobile rows, show desktop cards */
+  .hp-row-mobile {
+    display: none !important;
+  }
+  .hp-card-desktop {
+    display: flex;
+  }
+
+  /* Desktop card grid within sections */
+  .hp-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .hp-section-header {
+    grid-column: 1 / -1;
+  }
+
+  /* ---- Desktop card ---- */
+  .hp-card-desktop {
+    background: var(--bg-sidebar);
+    border-radius: 12px;
+    overflow: hidden;
+    color: var(--text-light);
+    flex-direction: column;
+  }
+  .hp-card-image {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+  }
+  .hp-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hp-card-body {
+    padding: 1.2rem 1.5rem 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .hp-card-body h2 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .hp-card-subtitle {
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    color: rgba(245, 239, 224, 0.6);
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+  }
+  .hp-card-meta {
+    display: flex;
+    gap: 0.75rem;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: rgba(245, 239, 224, 0.4);
+  }
+  .hp-card-meta span {
+    padding: 3px 8px;
+    border: 1px solid rgba(245, 239, 224, 0.1);
+    border-radius: 4px;
+  }
+
+  /* Card action buttons */
+  .hp-card-actions {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: auto;
+    padding-top: 1rem;
+  }
+  .hp-card-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    background: rgba(245, 239, 224, 0.08);
+    color: rgba(245, 239, 224, 0.7);
+  }
+  .hp-card-btn:hover {
+    background: rgba(245, 239, 224, 0.15);
+    color: var(--text-light);
+  }
+  .hp-card-btn-learn {
+    background: var(--gold);
+    color: var(--bg-dark);
+  }
+  .hp-card-btn-learn:hover {
+    background: #d4b85a;
+    color: var(--bg-dark);
+  }
+
+  /* NEW badge on desktop: outline variant */
+  .hp-badge-new {
+    font-size: 0.55rem;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+  }
 }

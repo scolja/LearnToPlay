@@ -95,7 +95,7 @@ export function CardViewer({ guide, sections, glossaryCount }: CardViewerProps) 
     <div className={`cv-shell${isReady ? '' : ' cv-loading'}`}>
       {/* Top bar */}
       <header className="cv-topbar">
-        <a href={`/games/${guide.slug}`} className="cv-back" aria-label="Back to guide">
+        <a href="/" className="cv-back" aria-label="Back to home">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M15 18l-6-6 6-6" />
           </svg>
