@@ -1,0 +1,75 @@
+/* =====================================================================
+   Section Card — Individual content card within the card viewer
+   ===================================================================== */
+
+.sc-card {
+  min-height: 100%;
+}
+
+/* Header */
+.sc-header {
+  margin-bottom: 1.25rem;
+}
+
+.sc-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+/* Body — markdown content area */
+.sc-body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.sc-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 1.5rem 0 0.5rem;
+  color: var(--text);
+}
+
+.sc-body p {
+  margin-bottom: 0.8rem;
+}
+
+.sc-body ul, .sc-body ol {
+  margin: 0.5rem 0 1rem 1.2rem;
+}
+
+.sc-body li {
+  margin-bottom: 0.3rem;
+}
+
+.sc-body strong {
+  font-weight: 600;
+}
+
+.sc-body sup {
+  font-size: 0.7em;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* Notes section */
+.sc-notes {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(44, 36, 24, 0.1);
+}
+
+.sc-notes-label {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}

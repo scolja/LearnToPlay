@@ -1,0 +1,155 @@
+/* =====================================================================
+   Table of Contents — Fullscreen section picker
+   ===================================================================== */
+
+.toc-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  animation: toc-fade-in 0.15s ease;
+}
+
+@keyframes toc-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.toc-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  /* Safe area for notched phones */
+  padding-top: max(0rem, env(safe-area-inset-top));
+  padding-bottom: max(0rem, env(safe-area-inset-bottom));
+}
+
+.toc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1rem 0.6rem;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(44, 36, 24, 0.08);
+}
+
+.toc-heading {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.toc-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+}
+
+.toc-close:active {
+  background: rgba(44, 36, 24, 0.08);
+}
+
+.toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0;
+  overflow-y: auto;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+.toc-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.3;
+  transition: background 0.1s;
+  min-height: 48px;
+}
+
+.toc-item:active {
+  background: rgba(44, 36, 24, 0.06);
+}
+
+.toc-item-active {
+  background: rgba(201, 169, 78, 0.08);
+}
+
+.toc-item-active .toc-item-num {
+  color: var(--gold);
+}
+
+.toc-item-active .toc-item-title {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.toc-item-num {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 1.5rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.toc-item-title {
+  flex: 1;
+}
+
+/* TOC trigger button in top bar — styled as the counter */
+.cv-toc-btn {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: rgba(245, 239, 224, 0.5);
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid rgba(245, 239, 224, 0.15);
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.cv-toc-btn:active {
+  background: rgba(245, 239, 224, 0.08);
+  color: rgba(245, 239, 224, 0.7);
+}
+
+/* Responsive: constrain on wider screens */
+@media (min-width: 768px) {
+  .toc-overlay {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .toc-overlay {
+    max-width: 520px;
+  }
+}

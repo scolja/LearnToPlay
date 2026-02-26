@@ -1,0 +1,131 @@
+/* =====================================================================
+   Glossary Page — Standalone searchable glossary
+   ===================================================================== */
+
+.gl-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+/* Top bar */
+.gl-topbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  flex-shrink: 0;
+  padding-top: max(0.6rem, env(safe-area-inset-top));
+}
+
+.gl-topbar-title {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* Search */
+.gl-search-wrap {
+  padding: 0.75rem 1rem;
+  background: var(--bg);
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(44, 36, 24, 0.08);
+}
+
+.gl-search {
+  width: 100%;
+  padding: 0.6rem 0.9rem;
+  border: 1.5px solid rgba(44, 36, 24, 0.15);
+  border-radius: 10px;
+  background: rgba(44, 36, 24, 0.03);
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.gl-search:focus {
+  border-color: var(--gold);
+}
+
+.gl-search::placeholder {
+  color: var(--text-muted);
+}
+
+/* Content area */
+.gl-content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.5rem 1rem 1rem;
+}
+
+/* Group header */
+.gl-group-header {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  padding: 0.8rem 0 0.4rem;
+  border-bottom: 1px solid rgba(201, 169, 78, 0.2);
+  margin-bottom: 0.4rem;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 1;
+}
+
+/* Entry */
+.gl-entry {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(44, 36, 24, 0.06);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.gl-entry:active {
+  background: rgba(201, 169, 78, 0.06);
+}
+
+.gl-term {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+}
+
+.gl-def {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.gl-section-link {
+  display: inline-block;
+  margin-top: 0.3rem;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* Empty state */
+.gl-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+}
+
+/* Bottom bar (shared with card viewer) */

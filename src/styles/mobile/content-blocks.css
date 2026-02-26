@@ -1,0 +1,234 @@
+/* =====================================================================
+   Content Blocks — Renderers for structured content within cards
+   ===================================================================== */
+
+/* HTML blocks (rendered markdown) */
+.cb-html {
+  margin-bottom: 0.5rem;
+}
+
+.cb-html p {
+  margin-bottom: 0.8rem;
+}
+
+.cb-html p:last-child {
+  margin-bottom: 0;
+}
+
+/* Callout boxes */
+.cb-callout {
+  border: 2px solid var(--gold);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  margin: 1rem 0;
+  background: rgba(201, 169, 78, 0.05);
+}
+
+.cb-callout p {
+  margin-bottom: 0.4rem;
+}
+.cb-callout p:last-child {
+  margin-bottom: 0;
+}
+
+.cb-callout-danger {
+  border-color: var(--red);
+  background: rgba(185, 62, 62, 0.04);
+}
+
+/* Tables */
+.cb-table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0;
+  border-radius: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cb-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 280px;
+}
+
+.cb-table th {
+  background: var(--bg-dark);
+  color: var(--gold);
+  padding: 0.5rem 0.7rem;
+  text-align: left;
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.cb-table td {
+  padding: 0.5rem 0.7rem;
+  border-bottom: 1px solid rgba(44, 36, 24, 0.08);
+  vertical-align: top;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.cb-table tr:nth-child(even) td {
+  background: rgba(44, 36, 24, 0.02);
+}
+
+/* Flow diagram */
+.cb-flow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1rem 0;
+}
+
+.cb-flow-item {
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--bg-dark);
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.cb-flow-arrow {
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+}
+
+/* SVG diagrams */
+.cb-diagram {
+  margin: 1rem 0;
+  background: #eae4d5;
+  border-radius: 10px;
+  padding: 1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cb-diagram svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Turn/phase strip */
+.cb-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+  margin: 1rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cb-strip-item {
+  background: var(--bg-dark);
+  color: var(--text-light);
+  text-align: center;
+  padding: 0.5rem 0.25rem;
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  line-height: 1.3;
+}
+
+.cb-strip-num {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 2px;
+}
+
+.cb-strip-label {
+  display: block;
+}
+
+/* Styled HTML blocks (summaries, setup-at-a-glance, etc.) */
+.cb-styled {
+  margin: 1rem 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Grid visual */
+.cb-grid-visual {
+  margin: 1rem 0;
+}
+
+/* Inline game tokens (carried over from design system) */
+.sc-body .sk,
+.cb-html .sk,
+.cb-callout .sk {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  border-radius: 4px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+  margin: 0 1px;
+  color: #fff;
+}
+
+.sk-move { background: #4a8fbf; }
+.sk-look { background: #8a5fb5; }
+.sk-engage { background: #d4802a; }
+.sk-help { background: #4a9e62; }
+.sk-take { background: #c4a72e; color: #2c2418; }
+.sk-overpower { background: #c94444; }
+
+.die {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: #2c2c2c;
+  color: #fff;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.7rem;
+  vertical-align: middle;
+  margin: 0 1px;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.die-challenge { background: #1a1a1a; }
+
+.boost {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--gold);
+  vertical-align: middle;
+  margin: 0 2px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.tr {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.75rem;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+.tr-time { color: #4a8fbf; }
+.tr-morale { color: #d4802a; }
+.tr-health { color: #c94444; }

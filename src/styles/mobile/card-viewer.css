@@ -1,0 +1,180 @@
+/* =====================================================================
+   Card Viewer — Mobile-first layout shell
+   =====================================================================
+   The card viewer is a full-viewport app shell with:
+     - Fixed top bar (game title + back + counter)
+     - Progress dots
+     - Scrollable card content area
+     - Fixed section navigation
+     - Fixed bottom tab bar
+   ===================================================================== */
+
+/* Hide the site-wide user menu on mobile views */
+body:has(.cv-shell) .site-user-menu,
+body:has(.gl-shell) .site-user-menu,
+body:has(.se-layout) .site-user-menu {
+  display: none;
+}
+
+/* Hide section-dependent content until position is restored from sessionStorage.
+   Uses visibility so layout is stable (no shift), content just appears. */
+.cv-loading .cv-toc-btn,
+.cv-loading .pd-bar,
+.cv-loading .cv-content,
+.cv-loading .cv-section-nav {
+  visibility: hidden;
+}
+
+/* Shell: full viewport, flex column */
+.cv-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  background: var(--bg);
+  overflow: hidden;
+  /* Prevent pull-to-refresh interfering with swipe */
+  overscroll-behavior: none;
+}
+
+/* Top bar */
+.cv-topbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  flex-shrink: 0;
+  /* Safe area for notched phones */
+  padding-top: max(0.6rem, env(safe-area-inset-top));
+}
+
+.cv-back {
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+.cv-back:active {
+  background: rgba(201, 169, 78, 0.15);
+}
+
+.cv-topbar-title {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Scrollable content area */
+.cv-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 1rem;
+}
+
+/* Section navigation */
+.cv-section-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: var(--bg);
+  border-top: 1px solid rgba(44, 36, 24, 0.08);
+  flex-shrink: 0;
+}
+
+.cv-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--bg-dark);
+  color: var(--gold);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  min-height: 44px;
+  /* Minimum touch target */
+}
+.cv-nav-btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+.cv-nav-btn:not(:disabled):active {
+  opacity: 0.7;
+}
+
+.cv-nav-label {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: center;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 0.5rem;
+}
+
+/* Bottom tab bar */
+.cv-bottombar {
+  display: flex;
+  background: var(--bg-dark);
+  border-top: 1px solid rgba(245, 239, 224, 0.08);
+  flex-shrink: 0;
+  /* Safe area for home indicator */
+  padding-bottom: max(0.25rem, env(safe-area-inset-bottom));
+}
+
+.cv-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.5rem 0;
+  color: rgba(245, 239, 224, 0.4);
+  text-decoration: none;
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 600;
+  transition: color 0.15s;
+  min-height: 50px;
+  justify-content: center;
+}
+.cv-tab:active {
+  color: rgba(245, 239, 224, 0.6);
+}
+.cv-tab-active {
+  color: var(--gold);
+}
+
+/* =====================================================================
+   Responsive: Tablet & Desktop (> 768px)
+   ===================================================================== */
+@media (min-width: 768px) {
+  .cv-shell {
+    max-width: 480px;
+    margin: 0 auto;
+    border-left: 1px solid rgba(44, 36, 24, 0.1);
+    border-right: 1px solid rgba(44, 36, 24, 0.1);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cv-shell {
+    max-width: 520px;
+  }
+}

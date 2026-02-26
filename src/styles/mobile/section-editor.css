@@ -1,0 +1,211 @@
+/* =====================================================================
+   Section Editor — Desktop section-based editing UI
+   ===================================================================== */
+
+.se-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  height: 100vh;
+  background: var(--bg);
+}
+
+/* Sidebar: section list */
+.se-sidebar {
+  background: var(--bg-dark);
+  color: var(--text-light);
+  overflow-y: auto;
+  border-right: 1px solid rgba(245, 239, 224, 0.08);
+}
+
+.se-sidebar-header {
+  padding: 1.2rem 1rem 0.8rem;
+  border-bottom: 1px solid rgba(245, 239, 224, 0.08);
+}
+
+.se-sidebar-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.se-sidebar-subtitle {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: rgba(245, 239, 224, 0.4);
+}
+
+.se-section-list {
+  list-style: none;
+  padding: 0.5rem 0;
+}
+
+.se-section-item {
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: background 0.1s, border-color 0.1s;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: rgba(245, 239, 224, 0.7);
+}
+
+.se-section-item:hover {
+  background: rgba(245, 239, 224, 0.04);
+}
+
+.se-section-item-active {
+  background: rgba(201, 169, 78, 0.1);
+  border-left-color: var(--gold);
+  color: var(--text-light);
+}
+
+.se-section-step {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+/* Main editing area */
+.se-main {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.se-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid rgba(44, 36, 24, 0.1);
+  background: var(--bg);
+  flex-shrink: 0;
+}
+
+.se-toolbar-title {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.se-save-btn {
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--gold);
+  color: var(--bg-dark);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.se-save-btn:hover { opacity: 0.9; }
+.se-save-btn:disabled { opacity: 0.4; cursor: default; }
+
+/* Editor panes */
+.se-panes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  flex: 1;
+  overflow: hidden;
+  background: rgba(44, 36, 24, 0.1);
+}
+
+.se-pane {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.se-pane-header {
+  padding: 0.5rem 1rem;
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(44, 36, 24, 0.08);
+  flex-shrink: 0;
+}
+
+.se-editor-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.se-textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 0.8rem;
+  border: 1.5px solid rgba(44, 36, 24, 0.12);
+  border-radius: 8px;
+  background: rgba(44, 36, 24, 0.02);
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.se-textarea:focus {
+  border-color: var(--gold);
+}
+
+.se-textarea-label {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.se-textarea + .se-textarea-label {
+  margin-top: 1rem;
+}
+
+/* Preview pane */
+.se-preview {
+  overflow-y: auto;
+  padding: 1rem;
+  background: var(--bg);
+}
+
+/* Unsaved indicator */
+.se-unsaved {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+/* Status messages */
+.se-status {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+}
+
+.se-status-saved {
+  color: var(--green);
+}
+
+.se-status-error {
+  color: var(--red);
+}

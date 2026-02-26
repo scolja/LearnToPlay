@@ -1,0 +1,135 @@
+/* =====================================================================
+   Quiz Card — Mobile-friendly interactive quiz
+   ===================================================================== */
+
+.qc-card {
+  background: var(--bg-dark);
+  color: var(--text-light);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin: 1rem 0;
+}
+
+.qc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.qc-badge {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.qc-progress {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: rgba(245, 239, 224, 0.4);
+}
+
+.qc-question {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.qc-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.qc-option {
+  background: rgba(245, 239, 224, 0.06);
+  border: 1.5px solid rgba(245, 239, 224, 0.12);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  color: var(--text-light);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  min-height: 44px;
+  /* Touch target */
+  line-height: 1.4;
+}
+
+.qc-option:not(:disabled):active {
+  border-color: var(--gold);
+  background: rgba(201, 169, 78, 0.08);
+}
+
+.qc-correct {
+  border-color: var(--green) !important;
+  background: rgba(74, 124, 89, 0.2) !important;
+}
+
+.qc-wrong {
+  border-color: var(--red) !important;
+  background: rgba(185, 62, 62, 0.12) !important;
+  opacity: 0.6;
+}
+
+.qc-dim {
+  opacity: 0.3;
+}
+
+/* Feedback */
+.qc-feedback {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.qc-fb-correct {
+  background: rgba(74, 124, 89, 0.15);
+  color: #8fcfa0;
+}
+
+.qc-fb-wrong {
+  background: rgba(185, 62, 62, 0.12);
+  color: #e8a0a0;
+}
+
+/* Navigation between questions */
+.qc-nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.qc-next {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--gold);
+  color: var(--bg-dark);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.qc-next:active {
+  opacity: 0.8;
+}
+
+.qc-score {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-align: center;
+  width: 100%;
+}

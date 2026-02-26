@@ -1,0 +1,57 @@
+/* =====================================================================
+   Tip Card — Sidebar content on mobile (always visible)
+   ===================================================================== */
+
+.tc-card {
+  background: var(--bg-sidebar);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+/* Header — label row */
+.tc-header {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem 0;
+}
+
+.tc-label {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.tc-label-gold { color: #c9a94e; }
+.tc-label-red { color: #e87070; }
+.tc-label-green { color: #7cc98e; }
+.tc-label-blue { color: #7eaee0; }
+.tc-label-purple { color: #b899d4; }
+
+/* Body — always visible */
+.tc-body {
+  padding: 0.4rem 1rem 0.9rem;
+  color: var(--text-light);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.tc-body p {
+  margin-bottom: 0.5rem;
+}
+
+.tc-body p:last-child {
+  margin-bottom: 0;
+}
+
+.tc-body strong {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.tc-body em {
+  color: rgba(245, 239, 224, 0.7);
+}

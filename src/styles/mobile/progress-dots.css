@@ -1,0 +1,48 @@
+/* =====================================================================
+   Progress Dots — Section progress indicator
+   ===================================================================== */
+
+.pd-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0.5rem 1rem;
+  background: var(--bg);
+  flex-shrink: 0;
+}
+
+.pd-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(44, 36, 24, 0.15);
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pd-dot:active {
+  transform: scale(1.3);
+}
+
+.pd-active {
+  background: var(--gold);
+  width: 10px;
+  height: 10px;
+  box-shadow: 0 0 6px rgba(201, 169, 78, 0.4);
+}
+
+.pd-far {
+  width: 5px;
+  height: 5px;
+  opacity: 0.5;
+}
+
+.pd-ellipsis {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}

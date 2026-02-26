@@ -22,6 +22,18 @@
 @import '../styles/game-specific/vantage.css';
 @import '../styles/game-specific/dig-up.css';
 
+/* Mobile card viewer */
+@import '../styles/mobile/card-viewer.css';
+@import '../styles/mobile/section-card.css';
+@import '../styles/mobile/content-blocks.css';
+@import '../styles/mobile/tip-card.css';
+@import '../styles/mobile/quiz-card.css';
+@import '../styles/mobile/progress-dots.css';
+@import '../styles/mobile/glossary.css';
+@import '../styles/mobile/section-editor.css';
+@import '../styles/mobile/lightbox.css';
+@import '../styles/mobile/toc.css';
+
 /* Responsive & Editor */
 @import '../styles/responsive.css';
 @import '../styles/editor.css';

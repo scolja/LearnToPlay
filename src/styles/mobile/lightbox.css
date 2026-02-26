@@ -1,0 +1,81 @@
+/* =====================================================================
+   Lightbox — Fullscreen zoom overlay for images and SVG diagrams
+   ===================================================================== */
+
+.lb-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: lb-fade-in 0.15s ease;
+}
+
+@keyframes lb-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lb-close {
+  position: absolute;
+  top: max(0.75rem, env(safe-area-inset-top));
+  right: 0.75rem;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.lb-close:active {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.lb-content {
+  max-width: 95vw;
+  max-height: 85vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SVG diagrams in lightbox — fill available space */
+.lb-content svg {
+  width: 100%;
+  height: auto;
+  max-height: 85vh;
+  display: block;
+}
+
+/* Images in lightbox */
+.lb-content img {
+  max-width: 95vw;
+  max-height: 85vh;
+  object-fit: contain;
+  display: block;
+  border-radius: 4px;
+}
+
+/* Hint that diagram/images are tappable */
+.cb-diagram,
+.cb-grid-visual,
+.sc-body img {
+  cursor: zoom-in;
+}
+
+/* Pinch-zoom support on touch devices */
+.lb-content {
+  touch-action: pinch-zoom;
+}
