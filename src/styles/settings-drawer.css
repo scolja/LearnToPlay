@@ -27,6 +27,8 @@
 .sd-panel {
   width: 100%;
   max-width: 480px;
+  max-height: 85dvh;
+  overflow-y: auto;
   margin: 0 auto;
   background: var(--bg-dark);
   border-top-left-radius: 16px;
@@ -34,7 +36,7 @@
   padding: 1.25rem 1.5rem;
   padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
   animation: sd-slide-up 0.25s ease-out;
-  touch-action: none;
+  touch-action: pan-y;
 }
 
 /* Drag handle — pill at top of drawer */

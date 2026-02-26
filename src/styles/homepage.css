@@ -462,3 +462,54 @@ body:has(.hp-shell) .site-user-menu {
     border: 1px solid var(--gold);
   }
 }
+
+/* ===================== NATIVE APP OVERRIDE ===================== */
+/* When running inside the Android app (Capacitor), always show the
+   mobile layout — top bar, bottom nav, list rows — regardless of
+   screen width. This undoes the ≥768px desktop switchover above. */
+@media (min-width: 768px) {
+  html[data-native-app] body:has(.hp-shell) .site-user-menu {
+    display: none;
+  }
+  html[data-native-app] .hp-shell {
+    height: 100dvh;
+    overflow: hidden;
+  }
+  html[data-native-app] .hp-topbar {
+    display: flex;
+  }
+  html[data-native-app] .hp-shell .cv-bottombar {
+    display: flex;
+  }
+  html[data-native-app] .hp-hero-desktop {
+    display: none;
+  }
+  html[data-native-app] .hp-row-mobile {
+    display: flex !important;
+  }
+  html[data-native-app] .hp-card-desktop {
+    display: none;
+  }
+  html[data-native-app] .hp-section {
+    display: block;
+  }
+  html[data-native-app] .hp-search-wrap {
+    max-width: none;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid rgba(var(--text-rgb), 0.08);
+  }
+  html[data-native-app] .hp-content {
+    max-width: none;
+    padding: 0;
+    padding-bottom: 1rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  html[data-native-app] .hp-section-header {
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    font-size: 0.6rem;
+    padding: 0.7rem 1rem 0.35rem;
+  }
+}
