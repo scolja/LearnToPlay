@@ -80,6 +80,30 @@ body:has(.se-layout) .site-user-menu {
   padding: 1rem;
 }
 
+/* Slide-in animations for card transitions */
+.cv-slide-left {
+  animation: cv-slide-in-from-right 200ms ease-out;
+}
+.cv-slide-right {
+  animation: cv-slide-in-from-left 200ms ease-out;
+}
+
+@keyframes cv-slide-in-from-right {
+  from { transform: translateX(35%); opacity: 0; }
+  to   { transform: translateX(0);   opacity: 1; }
+}
+@keyframes cv-slide-in-from-left {
+  from { transform: translateX(-35%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cv-slide-left,
+  .cv-slide-right {
+    animation: none;
+  }
+}
+
 /* Section navigation */
 .cv-section-nav {
   display: flex;

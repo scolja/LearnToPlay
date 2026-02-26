@@ -15,10 +15,10 @@ interface CardViewerProps {
 export function CardViewer({ guide, sections, glossaryCount }: CardViewerProps) {
   const storageKey = `ltp-section-${guide.slug}`;
 
-  // Always start at 0 for SSR hydration; restore position client-side in useLayoutEffect
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isReady, setIsReady] = useState(false);
   const [tocOpen, setTocOpen] = useState(false);
+  const [slideDirection, setSlideDirection] = useState<'left' | 'right' | null>(null);
   const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -62,10 +62,10 @@ export function CardViewer({ guide, sections, glossaryCount }: CardViewerProps) 
 
   const goTo = useCallback((index: number) => {
     const clamped = Math.max(0, Math.min(index, total - 1));
+    if (clamped === currentIndex) return;
+    setSlideDirection(clamped > currentIndex ? 'left' : 'right');
     setCurrentIndex(clamped);
-    // Scroll to top of card
-    containerRef.current?.scrollTo({ top: 0, behavior: 'instant' });
-  }, [total]);
+  }, [total, currentIndex]);
 
   const goNext = useCallback(() => goTo(currentIndex + 1), [currentIndex, goTo]);
   const goPrev = useCallback(() => goTo(currentIndex - 1), [currentIndex, goTo]);
@@ -126,9 +126,11 @@ export function CardViewer({ guide, sections, glossaryCount }: CardViewerProps) 
       {/* Card content area */}
       <div
         ref={containerRef}
-        className="cv-content"
+        className={`cv-content${slideDirection ? ` cv-slide-${slideDirection}` : ''}`}
+        key={currentIndex}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        onAnimationEnd={() => setSlideDirection(null)}
       >
         <SectionCard section={section} />
       </div>
