@@ -1,0 +1,572 @@
+---
+title: "Learn to Play House of 1000 Corpses"
+subtitle: "A cooperative horror hunt by Nick Badagliacca"
+designer: "Nick Badagliacca"
+artist: "Dug Nation"
+publisher: "Trick or Treat Studios"
+publisherUrl: "https://trickortreatstudios.com"
+year: 2025
+players: "1-4"
+time: "60 min"
+age: "17+"
+bggUrl: "https://boardgamegeek.com/boardgame/411391/house-of-1000-corpses"
+heroGradient: "linear-gradient(135deg, #1a0a0a 0%, #2d1111 40%, #0d0d0d 100%)"
+glossary:
+  - term: "Action Chain"
+    definition: "The row of 5 card slots on your player mat. Cards cycle left-to-right; the further right a card sits, the more adrenaline it costs to use."
+    step: "Step 2"
+    searchTerms: "chain, action cards, slots, cycle"
+    group: "Core Mechanics"
+  - term: "Adrenaline Cubes"
+    definition: "Resource cubes on your player mat spent to perform actions. Each action type has its own row of cubes."
+    step: "Step 2"
+    searchTerms: "cubes, adrenaline, spend, resource"
+    group: "Core Mechanics"
+  - term: "Blood Meter"
+    definition: "The shared victory track. Advance it by killing or capturing victims. Fill it completely to win."
+    step: "Step 1"
+    searchTerms: "blood, meter, track, victory, win"
+    group: "Core Mechanics"
+  - term: "Search Cards"
+    definition: "Face-down cards placed in rooms during setup. Includes victims, items, conditions, barriers, and rabbits."
+    step: "Step 3"
+    searchTerms: "search, cards, deck, face-down, rooms"
+    group: "Cards"
+  - term: "Victims"
+    definition: "Characters hiding in the house. When revealed, they attempt to run. Kill or capture them to advance the blood meter."
+    step: "Step 3"
+    searchTerms: "victim, hiding, run, kill, capture"
+    group: "Cards"
+  - term: "Run Cards"
+    definition: "Cards drawn when victims are revealed or rabbits appear. They dictate how victims and Lt. Wydell move."
+    step: "Step 4"
+    searchTerms: "run, movement, escape, hide, front porch, back porch"
+    group: "Cards"
+  - term: "Trophy Cards"
+    definition: "Single-use bonus cards earned by killing victims. Provide action boosts or recovery benefits."
+    step: "Step 6"
+    searchTerms: "trophy, bonus, single-use, reward"
+    group: "Cards"
+  - term: "Items"
+    definition: "Equipment cards found during searches. One can be equipped at a time, providing ongoing action bonuses."
+    step: "Step 6"
+    searchTerms: "item, equip, equipment, bonus"
+    group: "Cards"
+  - term: "Conditions"
+    definition: "Negative search card effects that remove adrenaline cubes and clog your action chain."
+    step: "Step 3"
+    searchTerms: "condition, negative, penalty, clog"
+    group: "Cards"
+  - term: "Barriers"
+    definition: "Obstacles in rooms that block further searches until destroyed via a Kill action."
+    step: "Step 3"
+    searchTerms: "barrier, block, obstacle, destroy"
+    group: "Cards"
+  - term: "Rabbits"
+    definition: "Search cards that trigger a run card draw, activating ALL non-player characters on the board."
+    step: "Step 4"
+    searchTerms: "rabbit, trigger, run, activate"
+    group: "Cards"
+  - term: "Lt. Wydell"
+    definition: "The law enforcement antagonist. Players in his space can only take Move actions. He causes victims to escape and removes corpse tokens."
+    step: "Step 5"
+    searchTerms: "wydell, lieutenant, police, law, antagonist"
+    group: "Characters"
+  - term: "Corpse Tokens"
+    definition: "Placed on the board when you kill a victim. Each corpse in a space costs running victims 1 extra movement point."
+    step: "Step 3"
+    searchTerms: "corpse, token, slow, movement"
+    group: "Components"
+  - term: "Burning"
+    definition: "Removing an action card from your chain as a free action. Lets you move a cube between rows or use your character's special ability."
+    step: "Step 7"
+    searchTerms: "burn, discard, free action, special ability"
+    group: "Core Mechanics"
+  - term: "Recovery Round"
+    definition: "A maintenance phase between action rounds. Swap items, remove conditions, retrieve adrenaline cubes, and reset your action chain."
+    step: "Step 8"
+    searchTerms: "recovery, maintenance, reset, retrieve, swap"
+    group: "Game Structure"
+  - term: "Seed Deck"
+    definition: "A special 10-card deck used during setup to place one face-up card in each room."
+    step: "Step 10"
+    searchTerms: "seed, setup, deck, initial"
+    group: "Setup"
+  - term: "Front/Back Porch"
+    definition: "Exit spaces on the board. Victims who reach these escape the house. Players carrying captured victims must move here to deliver them and score."
+    step: "Step 4"
+    searchTerms: "porch, exit, escape, deliver, front, back"
+    group: "Board"
+  - term: "Initiative Track"
+    definition: "Determines turn order each action round. Players place initiative markers to set the sequence. Reestablished during each recovery round."
+    step: "Step 8"
+    searchTerms: "initiative, turn order, sequence, first"
+    group: "Game Structure"
+  - term: "Strength Value"
+    definition: "A number on victim and barrier cards. You must spend at least this many cubes to kill or capture them. Victims move this many spaces when running."
+    step: "Step 3"
+    searchTerms: "strength, value, number, power, cost"
+    group: "Core Mechanics"
+---
+
+<style>{`
+  :root {
+    --gold: #8b1a1a;
+    --accent: #8b1a1a;
+    --bg: #f0ebe0;
+    --bg-sidebar: #1a0a0a;
+    --bg-dark: #0d0808;
+  }
+  .rule-box {
+    border-color: var(--accent);
+    background: rgba(139,26,26,0.05);
+  }
+  .rule-box.danger {
+    border-color: var(--red);
+    background: rgba(185,62,62,0.04);
+  }
+  .side-card-label.gold { color: #d44; }
+  .step-tag { color: var(--accent); }
+  .flow .fa { color: var(--accent); }
+  .fb-gold { background: var(--accent); color: var(--bg); }
+  .fb-dark { background: var(--bg-dark); color: #d44; }
+  .eval-strip .es .es-letter { background: var(--accent); }
+`}</style>
+
+<StepRow step={1} title="The Goal" sidebar={<>
+  <SideCard label="Theme" color="gold">
+    <p>Based on Rob Zombie's 2003 horror film, you play the Firefly family — the <em>villains</em>. Your house is full of people who shouldn't have stopped for directions.</p>
+  </SideCard>
+  <SideCard label="If You Know Horrified…" color="blue">
+    <p>It's cooperative pick-up-and-deliver like <strong>Horrified</strong>, but reversed — you're the monsters doing the hunting. The action chain adds a resource puzzle on top.</p>
+  </SideCard>
+</>}>
+
+You are the Firefly family. Victims are hiding throughout your house, and you must hunt them down before the police arrive.
+
+Your shared objective is the **blood meter** — a victory track on the board. Every time you kill or capture a victim, the blood meter advances. Fill it completely and you win.
+
+You have **4 action rounds** to get the job done. If the blood meter isn't full by the end of round 4, you lose.
+
+<RuleBox>
+**You win by filling the blood meter before the end of round 4.** You lose if time runs out or if 3 victims escape the house.
+</RuleBox>
+
+</StepRow>
+
+<StepRow step={2} title="The Action Chain — Your Core Engine" sidebar={<>
+  <SideCard label="Key Insight" color="gold">
+    <p>The action chain is the heart of the game. Think of it as a conveyor belt — the card you just used goes to the far right, where it's most expensive. Plan your actions so high-priority moves stay cheap.</p>
+  </SideCard>
+  <SideCard label="Common Mistake" color="red">
+    <p>New players forget that the rightmost 4 slots have <strong>additional adrenaline costs</strong>. Using the same action twice in a row means paying extra the second time.</p>
+  </SideCard>
+</>}>
+
+Each player has a **player mat** with four action cards: **Move**, **Search**, **Kill**, and **Capture**. These cards sit in a row of 5 slots called the **action chain**.
+
+### How the Chain Works
+
+When you use an action card, you spend **adrenaline cubes** from the matching row on your mat. Then the card moves to the **rightmost position** in the chain, pushing other cards left.
+
+The catch: the further right a card sits, the **more cubes it costs** to use. Slots 2 through 5 each add an extra adrenaline cost on top of the base cost.
+
+This means repeating the same action back-to-back is expensive. Varying your actions keeps costs low.
+
+### Adrenaline Cubes
+
+Your player mat has **four rows of adrenaline cubes**, one per action type. When you spend cubes, they move to a "used" area. You get cubes back during **recovery rounds** between action rounds.
+
+<RuleBox>
+**The number of cubes you spend determines the power of your action.** Spend 3 cubes on Move to move 3 spaces. Spend 2 cubes on Search to reveal 2 cards. More cubes = more effect.
+</RuleBox>
+
+</StepRow>
+
+<StepRow step={3} title="The Four Actions" sidebar={<>
+  <SideCard label="Kill vs. Capture" color="gold">
+    <p><strong>Killing</strong> is instant, leaves a corpse roadblock, and advances the blood meter by 1. <strong>Capturing</strong> advances by the victim's <strong>strength value</strong> but requires escorting them off the board while they clog your chain.</p>
+  </SideCard>
+  <SideCard label="Common Mistake" color="red">
+    <p>You choose how many cubes to spend on Search, but you <strong>cannot spend more cubes than there are face-down cards</strong> in the room. If only 2 cards remain, you can spend 1 or 2 cubes — not 3.</p>
+  </SideCard>
+</>}>
+
+### Move
+
+Spend cubes to move your character up to that many spaces orthogonally through connected rooms. Solid walls are impassable; dotted lines between spaces are free to cross. You may stop short of your full movement.
+
+If you enter a space with a **face-up item**, you pick it up automatically.
+
+### Search
+
+Spend any number of cubes from your Search row to reveal that many face-down search cards in your current room. You cannot spend more cubes than there are face-down cards remaining. Resolve each revealed card in order:
+
+- **Victims** — Draw a **run card** immediately. The victim tries to escape or hide.
+- **Items** — Add to your hand, equip immediately, or leave face-up for another player.
+- **Conditions** — Remove adrenaline cubes from the matching row AND add the condition card to your action chain (clogging it up).
+- **Barriers** — Block further searches in this room until destroyed. Already-revealed barriers don't affect the current search.
+- **Rabbits** — Draw a run card. ALL non-player characters on the board activate.
+
+### Kill
+
+Spend cubes equal to or greater than a victim's **strength value** to kill them in your space. This advances the blood meter by 1 and awards you **trophy cards** equal to the victim's strength. A **corpse token** is placed on the board where the kill happened.
+
+You can also kill **barriers** using the same method (spend cubes ≥ barrier strength).
+
+### Capture
+
+Spend cubes equal to or greater than a victim's strength to capture them. The captured victim card goes **into your action chain**, taking up space and increasing future action costs. You must then **move off the board** via the front or back porch to deliver them, advancing the blood meter by the **victim's strength value** — far more than the 1 point from killing.
+
+<RuleBox danger>
+**Captured victims clog your action chain.** While carrying a captured victim, all your actions cost more because the victim card occupies a chain slot. Deliver them quickly.
+</RuleBox>
+
+<FlowDiagram steps={[
+  { label: "Search a Room", variant: "dark" },
+  { label: "Find a Victim", variant: "gold" },
+  { label: "Kill or Capture", variant: "dark" },
+  { label: "Blood Meter ↑", variant: "gold" }
+]} />
+
+</StepRow>
+
+<StepRow step={4} title="The Running Problem" sidebar={<>
+  <SideCard label="Corpse Strategy" color="green">
+    <p>Corpse tokens left on the board <strong>slow down running victims</strong> — each corpse in a space costs 1 extra movement point. Kill strategically to create roadblocks near exits.</p>
+  </SideCard>
+  <SideCard label="Common Mistake" color="red">
+    <p>Rabbits trigger ALL non-player characters, not just victims in your room. Every face-up victim on the board moves, plus Lt. Wydell. Rabbits are the most dangerous search card.</p>
+  </SideCard>
+</>}>
+
+Victims don't sit still. They **run** in three situations:
+
+1. When **revealed** during a search action
+2. When a **rabbit** card is drawn
+3. At the **end of each action round** (if any victims remain face-up on the board)
+
+### How Running Works
+
+Draw a **run card**. It lists character types from top to bottom — activate each in order. Each entry shows a **movement symbol**:
+
+- **Front Porch** — The victim moves toward the front exit
+- **Back Porch** — The victim moves toward the back exit
+- **Hide** — The victim moves to the nearest room with face-down cards and shuffles back in
+
+Victims move a number of spaces equal to their **strength value**. Each **corpse token** in a space costs them 1 extra movement point, slowing them down.
+
+<RuleBox danger>
+**If a victim reaches an exit space, they escape.** If 3 victims escape the house, the game is immediately over — you lose.
+</RuleBox>
+
+</StepRow>
+
+<StepRow step={5} title="Lt. Wydell — The Law Is Coming" sidebar={<>
+  <SideCard label="Beginner Mode" color="purple">
+    <p>Playing your first game? Use <strong>Beginner difficulty</strong>, which removes Lt. Wydell entirely. Learn the action chain and hunting mechanics first, then add him in for Normal mode.</p>
+  </SideCard>
+  <SideCard label="Common Mistake" color="red">
+    <p>Lt. Wydell <strong>ignores corpse tokens</strong> when moving. Only victims are slowed by corpses. Wydell walks right through your roadblocks.</p>
+  </SideCard>
+</>}>
+
+**Lt. Wydell** is the law enforcement antagonist hunting you while you hunt your victims. He moves based on **run cards** — the same cards that move victims.
+
+### Wydell's Movement
+
+Run cards include a Wydell entry showing a **lettered room**. On activation, Wydell moves to that room. Unlike victims, he **ignores corpse tokens**.
+
+### What Happens When Wydell Shows Up
+
+Any player sharing a space with Wydell can **only take Move actions** — no searching, killing, or capturing.
+
+When Wydell enters a space with:
+
+- A **face-up victim** → The victim immediately escapes (counts toward the 3-escape loss)
+- A **player carrying a captured victim** → The captured victim escapes
+- A **corpse token** → The corpse is flipped to its inactive side
+- A **barrier** → The barrier is immediately discarded
+- **Nothing special** → Wydell reveals the top search card and resolves it (conditions are discarded)
+
+<RuleBox>
+**Wydell forces you to move.** You cannot search, kill, or capture while sharing his space. Coordinate with your team to stay out of his path.
+</RuleBox>
+
+</StepRow>
+
+<MatchUp
+  title="Search Card Types"
+  description="Match each search card type to what happens when it's revealed."
+  pairs={[
+    { left: "Victim", right: "Draw a run card — victim tries to escape or hide" },
+    { left: "Item", right: "Add to hand, equip, or leave face-up for allies" },
+    { left: "Condition", right: "Lose adrenaline cubes and card clogs your action chain" },
+    { left: "Rabbit", right: "ALL non-player characters on the board activate" }
+  ]}
+  explanation="Victims and rabbits both trigger run cards, but rabbits activate everything on the board — making them the most dangerous search result. Conditions are the only card that directly hurts your action economy."
+/>
+
+<SpotTheError
+  title="Spot the Rule Violation"
+  scenario="During a 3-player game on Normal difficulty, the following actions occur:"
+  statements={[
+    { text: "Player A spends 3 Move cubes to move 2 spaces (stopping short of full movement)", isError: false, explanation: "you can always stop short of your full movement allowance" },
+    { text: "Player B searches a room with 2 face-down cards by spending 3 Search cubes", isError: true, explanation: "You cannot spend more Search cubes than there are face-down cards in the room. With only 2 cards remaining, the maximum spend is 2 cubes." },
+    { text: "Player C kills a victim with strength 2 by spending 2 Kill cubes", isError: false, explanation: "spending cubes equal to or greater than the victim's strength is correct for a kill" },
+    { text: "Player A trades a trophy card to Player B who is in a different room", isError: true, explanation: "Players must be in the same space to trade items and trophies." }
+  ]}
+/>
+
+<StepRow step={6} title="Items & Trophies" sidebar={<>
+  <SideCard label="Hand Management" color="green">
+    <p>Keep your hand lean. You have a limit of 5 cards — if you exceed it, you must discard immediately. Trophies are single-use, so spend them rather than hoarding.</p>
+  </SideCard>
+</>}>
+
+### Items
+
+Items are found during **search actions**. You may **equip one item** at a time on your player mat. Equipped items provide **ongoing bonuses** to specific action types — their bonus counts as additional cubes spent without actually spending them.
+
+You can only swap your equipped item during **recovery rounds**.
+
+### Trophies
+
+Trophy cards are earned by **killing victims** — you receive trophies equal to the victim's strength value. Trophies are **single-use** cards played from your hand during actions or recovery rounds, then discarded.
+
+### Hand Limit & Trading
+
+You may hold a maximum of **5 combined item and trophy cards**. If you exceed 5, discard down immediately.
+
+Players in the **same space** may freely trade items and trophies at any time.
+
+</StepRow>
+
+<StepRow step={7} title="Burning Action Cards" sidebar={<>
+  <SideCard label="Timing" color="gold">
+    <p>Burning is a <strong>free action</strong> — you can do it on anyone's turn, not just your own. Use it reactively when the board state changes unexpectedly.</p>
+  </SideCard>
+  <SideCard label="Like Discarding in Concordia" color="blue">
+    <p>If you've played <strong>Concordia</strong>, burning is similar to how playing a card removes it from your hand until you use your Tribune to recover. Here, burned cards return during recovery rounds.</p>
+  </SideCard>
+</>}>
+
+At **any time** — even during another player's turn — you may **burn** an action card from your chain. Remove it and flip it aside for the rest of the round.
+
+When you burn a card, choose one benefit:
+
+1. **Move one adrenaline cube** from any row to any other row on your mat
+2. **Use your character's special ability**
+
+Each Firefly family member has a unique special ability printed on their player mat. These abilities vary — some aid movement, others help with combat or searching. Check your mat to see what your character can do.
+
+Burned cards return to your chain during the next **recovery round**.
+
+<RuleBox>
+**Burning is free and available at any time.** It's your emergency valve — use it to redistribute cubes when you're running low on a critical action type, or to trigger your character's unique power.
+</RuleBox>
+
+</StepRow>
+
+<StepRow step={8} title="The Round Structure" sidebar={<>
+  <SideCard label="Pacing Tip" color="green">
+    <p>Rounds get harder as the game progresses. Early rounds are about searching and positioning. Later rounds are about executing kills and captures before time runs out.</p>
+  </SideCard>
+</>}>
+
+The game alternates between **action rounds** and **recovery rounds**.
+
+### Action Rounds (4 total)
+
+1. **Take turns** — Players act in initiative order. On your turn, you may take as many actions as you can afford. Pass when you're done (or out of cubes), and you're out for the round.
+2. **Check for game end** — If this is round 4 and the blood meter isn't full, you lose.
+3. **Running victims** — If it's not the final round, draw a run card for any face-up victims still on the board.
+4. **Advance round marker** — Move to the recovery round.
+
+### Recovery Rounds (3 total, between action rounds)
+
+<EvalStrip steps={[
+  { num: 1, label: "Swap Items" },
+  { num: 2, label: "Remove Conditions" },
+  { num: 3, label: "Retrieve Adrenaline" },
+  { num: 4, label: "Reset Action Chain" },
+  { num: 5, label: "Set Initiative" }
+]} />
+
+1. **Swap items** — Exchange your equipped item for one from your hand
+2. **Remove conditions** — Discard condition cards from your action chain
+3. **Retrieve adrenaline** — Calculate your recovery value (from mat, equipped item, and optionally-used trophies), then return that many cubes from used area to empty mat spaces
+4. **Reset action chain** — Retrieve burned cards, rearrange all action cards in any order
+5. **Set initiative** — Establish turn order for the upcoming action round
+
+</StepRow>
+
+<StepRow step={9} title="Difficulty Modes" sidebar={<>
+  <SideCard label="Recommendation" color="green">
+    <p>Start on <strong>Beginner</strong> for your first game. The action chain alone provides plenty of challenge. Add Wydell in your second game once the flow feels natural.</p>
+  </SideCard>
+</>}>
+
+The game includes three difficulty settings:
+
+**Beginner** — Lt. Wydell is removed entirely. Focus on learning the action chain, searching efficiently, and managing your adrenaline economy.
+
+**Normal** — Full rules including Lt. Wydell. The standard experience.
+
+**Nightmare** — A harder blood meter track requiring more kills and captures to fill. For experienced players who want a tighter challenge.
+
+### Solo & Player Count Rules
+
+The board is **dual-sided** to accommodate different player counts:
+
+<GameTable
+  headers={["Players", "Board Side", "Characters Controlled"]}
+  rows={[
+    ["1 player", "1–3 player side", "Control 3 characters"],
+    ["2 players", "2–4 player side", "Each controls 2 characters"],
+    ["3 players", "1–3 player side", "One character each"],
+    ["4 players", "2–4 player side", "One character each"]
+  ]}
+/>
+
+</StepRow>
+
+<KnowledgeCheck
+  title="Rules Check"
+  questions={[
+    {
+      question: "What happens when you use an action card?",
+      options: [
+        { text: "It's discarded permanently", correct: false },
+        { text: "It moves to the rightmost position in your action chain, making it more expensive next time", correct: true },
+        { text: "It stays in the same slot", correct: false },
+        { text: "It moves to the leftmost position", correct: false }
+      ],
+      correctFeedback: "Correct! Used action cards move to the right end of the chain, where they cost more adrenaline to use again.",
+      incorrectFeedback: "Not quite. When you use an action card, it moves to the rightmost position in your chain. The further right a card is, the more adrenaline cubes it costs."
+    },
+    {
+      question: "What causes an immediate loss?",
+      options: [
+        { text: "Any player running out of adrenaline cubes", correct: false },
+        { text: "Lt. Wydell entering a room with a player", correct: false },
+        { text: "3 victims escaping the house", correct: true },
+        { text: "A player's action chain becoming full", correct: false }
+      ],
+      correctFeedback: "Correct! If 3 victims escape through the front or back porch exits, the game ends immediately in a loss.",
+      incorrectFeedback: "Not quite. You lose immediately if 3 victims escape the house. Running out of cubes or encountering Wydell is bad but not an instant loss."
+    },
+    {
+      question: "What is the difference between killing and capturing a victim?",
+      options: [
+        { text: "Killing costs more adrenaline cubes", correct: false },
+        { text: "Killing advances the blood meter by 1 and drops a corpse; capturing advances by the victim's strength value but requires escorting them off the board", correct: true },
+        { text: "There is no difference — both advance the blood meter by 1", correct: false },
+        { text: "Capturing is free but killing costs cubes", correct: false }
+      ],
+      correctFeedback: "Correct! Killing is instant (blood meter +1, corpse token placed), but capturing advances the blood meter by the victim's full strength value — at the cost of clogging your action chain during escort.",
+      incorrectFeedback: "Killing is instant: blood meter +1, corpse token placed, trophy cards earned. Capturing clogs your action chain until you escort the victim off the board, but advances the blood meter by the victim's strength value — much more than killing."
+    }
+  ]}
+/>
+
+<SequenceSort
+  title="Action Round Sequence"
+  description="Put the action round phases in the correct order."
+  items={[
+    { text: "Players take turns in initiative order", position: 1 },
+    { text: "Check if the blood meter is full (game end check)", position: 2 },
+    { text: "Draw run cards for any remaining face-up victims", position: 3 },
+    { text: "Advance the round marker", position: 4 }
+  ]}
+  explanation="Each action round follows this strict sequence: players act, then check for victory, then victims try to run, then the round marker advances to the recovery phase."
+/>
+
+<StepRow step={10} title="Setup" sidebar={<>
+  <SideCard label="Common Mistake" color="red">
+    <p>The <strong>seed deck</strong> and <strong>main search deck</strong> are built separately during setup. Don't shuffle them together — the seed deck places one face-up card per room, while the main deck fills rooms with face-down cards.</p>
+  </SideCard>
+  <SideCard label="Setup Tip" color="green">
+    <p>When a victim appears from the seed deck during room setup, place a <strong>trophy card on top</strong> of that room's search stack. This is easy to forget.</p>
+  </SideCard>
+</>}>
+
+### Board Preparation
+
+1. Choose the correct board side for your player count (1–3 or 2–4)
+2. Place the **blood meter marker** at the start of its track
+3. Place the **round marker** on the first space (Albert Fish)
+4. Set the **corpse token pile** nearby
+5. Shuffle the **trophy deck** and **run deck** separately
+
+### Building the Search Decks
+
+Separate search cards into five types (victims, items, conditions, barriers, rabbits).
+
+**Seed Deck** (10 cards): 2 cheerleader victims + 2 items + 6 barriers
+
+**Main Search Deck** (30 cards): 9 remaining victims + 5 items + 6 conditions + 10 rabbits
+
+### Populating the Board
+
+1. Deal **3 face-down cards** from the main search deck into each lettered room (A–J)
+2. From the seed deck, place **1 card face-up** in each room on top of the face-down stack
+3. If the face-up card is a **victim**, place a **trophy card** on top of that room's stack
+4. Draw a **run card** to determine Lt. Wydell's starting position (skip in Beginner mode)
+
+### Player Setup
+
+Each player:
+1. Selects a **character** and takes the matching player mat, standee, and initiative marker
+2. Fills the mat with **adrenaline cubes**
+3. Receives **4 action cards** (Move, Search, Kill, Capture)
+4. Arranges action cards in preferred order in the chain
+5. Places initiative marker on the track to establish turn order
+
+</StepRow>
+
+<StepRow step={11} title="Complete Round Summary" fullWidth>
+
+<SummaryPanel items={[
+  { num: 1, text: "ACTION ROUND — Take turns in initiative order. Spend adrenaline cubes to Move, Search, Kill, or Capture. Pass when done." },
+  { num: 2, text: "GAME END CHECK — If round 4 is complete and blood meter isn't full, you lose. If 3 victims have escaped, you lose." },
+  { num: 3, text: "VICTIM RUN — Draw a run card for any face-up victims remaining on the board. Resolve movement for each." },
+  { num: 4, text: "RECOVERY ROUND — Swap items, remove conditions, retrieve adrenaline cubes, reset action chains, set new initiative order." },
+  { num: 5, text: "REPEAT — Advance round marker and begin the next action round. After round 4, the game ends." }
+]} />
+
+You're ready to play. Start on **Beginner** difficulty your first game, focus on learning the action chain rhythm, and remember — corpses are roadblocks, not just points.
+
+</StepRow>
+
+<ScenarioChallenge
+  title="The Wydell Dilemma"
+  scenario="You have a captured victim in your action chain and are 2 spaces from the back porch. Lt. Wydell is 1 space away from you, and a run card could move him into your space on another player's search. You have 4 adrenaline cubes left for Move."
+  choices={[
+    {
+      text: "Sprint to the porch immediately — spend 2 cubes on Move",
+      result: "You deliver the victim safely and advance the blood meter. The captured victim leaves your chain, freeing up space. Wydell can't intercept you.",
+      quality: "best"
+    },
+    {
+      text: "Stay and try to kill another victim in your room first",
+      result: "If another player's search triggers a run card, Wydell may enter your space. If he does, your captured victim immediately escapes — wasting the capture entirely and counting toward the 3-escape loss condition.",
+      quality: "suboptimal"
+    },
+    {
+      text: "Burn an action card to use your special ability before moving",
+      result: "Using your special might help, but it costs you a chain slot until recovery. If your ability doesn't directly aid escape, you're adding risk for marginal benefit when the safe play is clear.",
+      quality: "good"
+    }
+  ]}
+/>
+
+<Footnotes entries={[
+  { num: 1, text: "Official Rulebook — Trick or Treat Studios, available via Issuu.", url: "https://issuu.com/trickortreatstudios/docs/h1kc_ks_rulebook_pages" },
+  { num: 2, text: "BoardGameGeek page for House of 1000 Corpses.", url: "https://boardgamegeek.com/boardgame/411391/house-of-1000-corpses" },
+  { num: 3, text: "Trick or Treat Studios product page.", url: "https://trickortreatstudios.com/products/house-of-1000-corpses-game" },
+  { num: 4, text: "Kickstarter campaign page with component details.", url: "https://www.kickstarter.com/projects/trickortreatstudios/house-of-1000-corpses-the-game" },
+  { num: 5, text: "BGG rules discussion thread.", url: "https://boardgamegeek.com/thread/3471594/a-few-questions-maybe-condensed-concerns" }
+]} />
+
+<Footer game="House of 1000 Corpses" designer="Nick Badagliacca" publisher="Trick or Treat Studios" />
