@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useRef, useCallback, useEffect } from 'react';
-import Link from 'next/link';
 import type { RenderedSection, GuideMeta } from '@/lib/types';
 import { SectionCard } from './SectionCard';
 import { ProgressDots } from './ProgressDots';
 import { TableOfContents } from './TableOfContents';
+import { BottomNav } from './BottomNav';
 import { MobileControls } from '@/components/MobileControls';
 
 interface CardViewerProps {
@@ -196,11 +196,6 @@ export function CardViewer({ guide, sections }: CardViewerProps) {
     <div className={`cv-shell${isReady ? '' : ' cv-loading'}`}>
       {/* Top bar */}
       <header className="cv-topbar">
-        <Link href="/" className="cv-back" aria-label="Back to home">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </Link>
         <h1 className="cv-topbar-title">{guide.title}</h1>
         <div className="cv-topbar-actions">
           <MobileControls />
@@ -275,29 +270,7 @@ export function CardViewer({ guide, sections }: CardViewerProps) {
       </div>
 
       {/* Bottom tab bar */}
-      <nav className="cv-bottombar">
-        <Link href="/" className="cv-tab">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M3 12l9-8 9 8" />
-            <path d="M5 10v10h5v-6h4v6h5V10" />
-          </svg>
-          <span>Home</span>
-        </Link>
-        <Link href={`/games/${guide.slug}/learn`} className="cv-tab cv-tab-active">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
-            <path d="M4 19.5V5a2 2 0 012-2h14v14H6.5A2.5 2.5 0 004 19.5z" />
-          </svg>
-          <span>Learn</span>
-        </Link>
-        <Link href={`/games/${guide.slug}/glossary`} className="cv-tab" prefetch={true}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="11" cy="11" r="8" />
-            <path d="M21 21l-4.35-4.35" />
-          </svg>
-          <span>Glossary</span>
-        </Link>
-      </nav>
+      <BottomNav activeTab="learn" gameSlug={guide.slug} />
     </div>
   );
 }

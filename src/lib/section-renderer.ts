@@ -8,28 +8,36 @@ import type { ContentBlock, NoteCard, GuideSection, RenderedSection } from './ty
 export function preprocessTokens(markdown: string): string {
   let result = markdown;
 
-  // [Move]{.sk-move} → <span class="sk sk-move">Move</span>
-  result = result.replace(
-    /\[(\w+)\]\{\.sk-(\w+)\}/g,
-    '<span class="sk sk-$2">$1</span>'
-  );
-
-  // [?]{.die} → <span class="die die-challenge">?</span>
+  // Special: [?]{.die} → <span class="die die-challenge">?</span>
   result = result.replace(
     /\[\?\]\{\.die\}/g,
     '<span class="die die-challenge">?</span>'
   );
 
-  // [boost]{.boost} → <span class="boost"></span>
+  // Special: [boost]{.boost} → <span class="boost"></span>
   result = result.replace(
     /\[boost\]\{\.boost\}/g,
     '<span class="boost"></span>'
   );
 
-  // [⏱ time]{.tr-time} etc. → <span class="tr tr-time">⏱ time</span>
+  // Generic: [text]{.class-variant} → <span class="parent class-variant">text</span>
+  // If class contains a hyphen and the prefix is 2–3 chars, auto-add parent class
+  // e.g. [Move]{.sk-move} → <span class="sk sk-move">Move</span>
+  //      [KILL]{.act-kill} → <span class="act act-kill">KILL</span>
+  //      [☠]{.corpse}     → <span class="corpse">☠</span>
+  //      [WYDELL]{.wydell-badge} → <span class="wydell-badge">WYDELL</span>
   result = result.replace(
-    /\[([^\]]+)\]\{\.tr-(\w+)\}/g,
-    '<span class="tr tr-$2">$1</span>'
+    /\[([^\]]*)\]\{\.([\w-]+)\}/g,
+    (_, text, cls) => {
+      const hyphenIdx = cls.indexOf('-');
+      if (hyphenIdx > 0) {
+        const prefix = cls.substring(0, hyphenIdx);
+        if (prefix.length >= 2 && prefix.length <= 3) {
+          return `<span class="${prefix} ${cls}">${text}</span>`;
+        }
+      }
+      return `<span class="${cls}">${text}</span>`;
+    }
   );
 
   return result;

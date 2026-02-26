@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import type { GuideMeta } from '@/lib/types';
 import { MobileControls } from '@/components/MobileControls';
+import { BottomNav } from '@/components/mobile/BottomNav';
 
 interface HomePageContentProps {
   games: GuideMeta[];
@@ -107,7 +108,7 @@ export function HomePageContent({ games }: HomePageContentProps) {
               <section className="hp-section">
                 <h2 className="hp-section-header">New</h2>
                 {newGames.map(game => (
-                  <GameItem key={game.slug} game={game} isNew progress={progress[game.slug]} />
+                  <GameItem key={game.slug} game={game} progress={progress[game.slug]} />
                 ))}
               </section>
             )}
@@ -125,6 +126,9 @@ export function HomePageContent({ games }: HomePageContentProps) {
           </>
         )}
       </div>
+
+      {/* Mobile bottom nav */}
+      <BottomNav activeTab="home" />
     </div>
   );
 }
@@ -206,7 +210,10 @@ function MobileRow({ game, isNew, progress }: { game: GuideMeta; isNew?: boolean
             loading="lazy"
           />
         ) : (
-          <div className="hp-row-thumb hp-row-thumb-placeholder" />
+          <div // eslint-disable-line react/forbid-dom-props
+            className="hp-row-thumb hp-row-thumb-placeholder"
+            style={{ '--thumb-bg': game.heroGradient || undefined } as React.CSSProperties}
+          />
         )}
         {progress && (
           <div className="hp-row-progress-ring">

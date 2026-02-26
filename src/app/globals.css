@@ -29,6 +29,7 @@
 /* Game-specific tokens */
 @import '../styles/game-specific/vantage.css';
 @import '../styles/game-specific/dig-up.css';
+@import '../styles/game-specific/house-of-1000-corpses.css';
 
 /* Mobile card viewer */
 @import '../styles/mobile/card-viewer.css';

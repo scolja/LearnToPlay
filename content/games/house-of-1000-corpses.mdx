@@ -144,13 +144,45 @@ glossary:
 
 You are the Firefly family. Victims are hiding throughout your house, and you must hunt them down before the police arrive.
 
-Your shared objective is the **blood meter** — a victory track on the board. Every time you kill or capture a victim, the blood meter advances. Fill it completely and you win.
+Your shared objective is the **blood meter** <span className="blood"></span><span className="blood"></span><span className="blood"></span> — a victory track on the board. Every time you kill or capture a victim, the blood meter advances. Fill it completely and you win.
 
 You have **4 action rounds** to get the job done. If the blood meter isn't full by the end of round 4, you lose.
 
 <RuleBox>
-**You win by filling the blood meter before the end of round 4.** You lose if time runs out or if 3 victims escape the house.
+**You win by filling the blood meter** <span className="blood"></span> **before the end of round 4.** You lose if time runs out or if 3 victims escape the house.
 </RuleBox>
+
+<RawHTML html={`<div class="diagram" style="background:#1a0a0a;border-radius:10px;padding:1.5rem;margin:1rem 0;">
+  <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+    <text x="300" y="25" text-anchor="middle" fill="#d44" font-family="DM Sans,sans-serif" font-size="13" font-weight="700" letter-spacing="2" text-transform="uppercase">THE GAME AT A GLANCE</text>
+    <rect x="30" y="50" width="120" height="60" rx="8" fill="#2a2318" stroke="#4a7c59" stroke-width="1.5"/>
+    <text x="90" y="78" text-anchor="middle" fill="#7cc98e" font-family="DM Sans,sans-serif" font-size="11" font-weight="600">SEARCH</text>
+    <text x="90" y="96" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="10">Find victims</text>
+    <line x1="150" y1="80" x2="175" y2="80" stroke="#d44" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+    <rect x="175" y="50" width="120" height="60" rx="8" fill="#2a2318" stroke="#b93e3e" stroke-width="1.5"/>
+    <text x="235" y="78" text-anchor="middle" fill="#e87070" font-family="DM Sans,sans-serif" font-size="11" font-weight="600">KILL / CAPTURE</text>
+    <text x="235" y="96" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="10">Hunt them down</text>
+    <line x1="295" y1="80" x2="320" y2="80" stroke="#d44" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+    <rect x="320" y="50" width="120" height="60" rx="8" fill="#2a2318" stroke="#8b1a1a" stroke-width="2"/>
+    <text x="380" y="78" text-anchor="middle" fill="#d44" font-family="DM Sans,sans-serif" font-size="11" font-weight="600">BLOOD METER</text>
+    <text x="380" y="96" text-anchor="middle" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="10">Fill it to win!</text>
+    <rect x="470" y="50" width="100" height="60" rx="8" fill="#2a2318" stroke="rgba(245,239,224,0.15)" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="520" y="73" text-anchor="middle" fill="rgba(245,239,224,0.4)" font-family="DM Sans,sans-serif" font-size="10">Meanwhile...</text>
+    <text x="520" y="92" text-anchor="middle" fill="#7eaee0" font-family="DM Sans,sans-serif" font-size="10" font-weight="600">Victims RUN</text>
+    <text x="520" y="106" text-anchor="middle" fill="#e87070" font-family="DM Sans,sans-serif" font-size="9">3 escape = you lose</text>
+    <rect x="30" y="135" width="540" height="40" rx="6" fill="rgba(139,26,26,0.15)" stroke="#8b1a1a" stroke-width="1"/>
+    <text x="55" y="160" fill="#d44" font-family="DM Sans,sans-serif" font-size="11" font-weight="700">ROUNDS:</text>
+    <circle cx="130" cy="155" r="14" fill="#2a2318" stroke="#d44" stroke-width="1.5"/><text x="130" y="159" text-anchor="middle" fill="#d44" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">1</text>
+    <text x="160" y="159" fill="rgba(245,239,224,0.3)" font-family="DM Sans,sans-serif" font-size="12">→</text>
+    <circle cx="190" cy="155" r="14" fill="#2a2318" stroke="#d44" stroke-width="1.5"/><text x="190" y="159" text-anchor="middle" fill="#d44" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">2</text>
+    <text x="220" y="159" fill="rgba(245,239,224,0.3)" font-family="DM Sans,sans-serif" font-size="12">→</text>
+    <circle cx="250" cy="155" r="14" fill="#2a2318" stroke="#d44" stroke-width="1.5"/><text x="250" y="159" text-anchor="middle" fill="#d44" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">3</text>
+    <text x="280" y="159" fill="rgba(245,239,224,0.3)" font-family="DM Sans,sans-serif" font-size="12">→</text>
+    <circle cx="310" cy="155" r="14" fill="#8b1a1a" stroke="#d44" stroke-width="2"/><text x="310" y="159" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">4</text>
+    <text x="340" y="159" fill="rgba(245,239,224,0.5)" font-family="DM Sans,sans-serif" font-size="10" font-style="italic">FINAL</text>
+    <defs><marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#d44"/></marker></defs>
+  </svg>
+</div>`} />
 
 </StepRow>
 
@@ -163,22 +195,38 @@ You have **4 action rounds** to get the job done. If the blood meter isn't full 
   </SideCard>
 </>}>
 
-Each player has a **player mat** with four action cards: **Move**, **Search**, **Kill**, and **Capture**. These cards sit in a row of 5 slots called the **action chain**.
+Each player has a **player mat** with four action cards: <span className="act act-move">Move</span> <span className="act act-search">Search</span> <span className="act act-kill">Kill</span> <span className="act act-capture">Capture</span>. These cards sit in a row of 5 slots called the **action chain**.
 
 ### How the Chain Works
 
-When you use an action card, you spend **adrenaline cubes** from the matching row on your mat. Then the card moves to the **rightmost position** in the chain, pushing other cards left.
+When you use an action card, you spend **adrenaline cubes** <span className="adr"></span> from the matching row on your mat. Then the card moves to the **rightmost position** in the chain, pushing other cards left.
 
 The catch: the further right a card sits, the **more cubes it costs** to use. Slots 2 through 5 each add an extra adrenaline cost on top of the base cost.
+
+<RawHTML html={`<div class="diagram" style="background:#1a0a0a;border-radius:10px;padding:1.2rem;margin:1rem 0;">
+  <div style="text-align:center;margin-bottom:0.6rem;">
+    <span style="color:#d44;font-family:DM Sans,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;">Action Chain — 5 Slots</span>
+  </div>
+  <div class="chain-strip">
+    <div class="cs"><span class="cs-num">1</span>FREE<span class="cs-cost">+0 cubes</span></div>
+    <div class="cs"><span class="cs-num">2</span>CHEAP<span class="cs-cost">+1 cube</span></div>
+    <div class="cs"><span class="cs-num">3</span>NORMAL<span class="cs-cost">+2 cubes</span></div>
+    <div class="cs"><span class="cs-num">4</span>COSTLY<span class="cs-cost">+3 cubes</span></div>
+    <div class="cs cs-active"><span class="cs-num">5</span>PRICEY<span class="cs-cost">+4 cubes</span></div>
+  </div>
+  <div style="text-align:center;color:rgba(245,239,224,0.5);font-family:DM Sans,sans-serif;font-size:10px;margin-top:0.4rem;">
+    ← Cards shift left &nbsp;|&nbsp; Used card enters here →
+  </div>
+</div>`} />
 
 This means repeating the same action back-to-back is expensive. Varying your actions keeps costs low.
 
 ### Adrenaline Cubes
 
-Your player mat has **four rows of adrenaline cubes**, one per action type. When you spend cubes, they move to a "used" area. You get cubes back during **recovery rounds** between action rounds.
+Your player mat has **four rows of adrenaline cubes** <span className="adr"></span><span className="adr"></span><span className="adr"></span>, one per action type. When you spend cubes, they move to a "used" area. You get cubes back during **recovery rounds** between action rounds.
 
 <RuleBox>
-**The number of cubes you spend determines the power of your action.** Spend 3 cubes on Move to move 3 spaces. Spend 2 cubes on Search to reveal 2 cards. More cubes = more effect.
+**The number of cubes you spend determines the power of your action.** Spend 3 <span className="adr"></span> on <span className="act act-move">Move</span> to move 3 spaces. Spend 2 <span className="adr"></span> on <span className="act act-search">Search</span> to reveal 2 cards. More cubes = more effect.
 </RuleBox>
 
 </StepRow>
@@ -192,31 +240,31 @@ Your player mat has **four rows of adrenaline cubes**, one per action type. When
   </SideCard>
 </>}>
 
-### Move
+### <span className="act act-move">Move</span>
 
-Spend cubes to move your character up to that many spaces orthogonally through connected rooms. Solid walls are impassable; dotted lines between spaces are free to cross. You may stop short of your full movement.
+Spend <span className="adr"></span> cubes to move your character up to that many spaces orthogonally through connected rooms. Solid walls are impassable; dotted lines between spaces are free to cross. You may stop short of your full movement.
 
-If you enter a space with a **face-up item**, you pick it up automatically.
+If you enter a space with a **face-up item** <span className="sc sc-item">Item</span>, you pick it up automatically.
 
-### Search
+### <span className="act act-search">Search</span>
 
-Spend any number of cubes from your Search row to reveal that many face-down search cards in your current room. You cannot spend more cubes than there are face-down cards remaining. Resolve each revealed card in order:
+Spend any number of <span className="adr"></span> cubes from your Search row to reveal that many face-down search cards in your current room. You cannot spend more cubes than there are face-down cards remaining. Resolve each revealed card in order:
 
-- **Victims** — Draw a **run card** immediately. The victim tries to escape or hide.
-- **Items** — Add to your hand, equip immediately, or leave face-up for another player.
-- **Conditions** — Remove adrenaline cubes from the matching row AND add the condition card to your action chain (clogging it up).
-- **Barriers** — Block further searches in this room until destroyed. Already-revealed barriers don't affect the current search.
-- **Rabbits** — Draw a run card. ALL non-player characters on the board activate.
+- <span className="sc sc-victim">Victim</span> — Draw a **run card** immediately. The victim tries to escape or hide.
+- <span className="sc sc-item">Item</span> — Add to your hand, equip immediately, or leave face-up for another player.
+- <span className="sc sc-condition">Condition</span> — Remove adrenaline cubes from the matching row AND add the condition card to your action chain (clogging it up).
+- <span className="sc sc-barrier">Barrier</span> — Block further searches in this room until destroyed. Already-revealed barriers don't affect the current search.
+- <span className="sc sc-rabbit">Rabbit</span> — Draw a run card. ALL non-player characters on the board activate.
 
-### Kill
+### <span className="act act-kill">Kill</span>
 
-Spend cubes equal to or greater than a victim's **strength value** to kill them in your space. This advances the blood meter by 1 and awards you **trophy cards** equal to the victim's strength. A **corpse token** is placed on the board where the kill happened.
+Spend <span className="adr"></span> cubes equal to or greater than a victim's **strength value** <span className="str">2</span> to kill them in your space. This advances the blood meter <span className="blood"></span> by 1 and awards you **trophy cards** equal to the victim's strength. A **corpse token** <span className="corpse">☠</span> is placed on the board where the kill happened.
 
-You can also kill **barriers** using the same method (spend cubes ≥ barrier strength).
+You can also kill **barriers** <span className="sc sc-barrier">Barrier</span> using the same method (spend cubes ≥ barrier strength).
 
-### Capture
+### <span className="act act-capture">Capture</span>
 
-Spend cubes equal to or greater than a victim's strength to capture them. The captured victim card goes **into your action chain**, taking up space and increasing future action costs. You must then **move off the board** via the front or back porch to deliver them, advancing the blood meter by the **victim's strength value** — far more than the 1 point from killing.
+Spend <span className="adr"></span> cubes equal to or greater than a victim's strength to capture them. The captured victim card goes **into your action chain**, taking up space and increasing future action costs. You must then **move off the board** via the front or back porch to deliver them, advancing the blood meter <span className="blood"></span> by the **victim's strength value** — far more than the 1 point from killing.
 
 <RuleBox danger>
 **Captured victims clog your action chain.** While carrying a captured victim, all your actions cost more because the victim card occupies a chain slot. Deliver them quickly.
@@ -242,8 +290,8 @@ Spend cubes equal to or greater than a victim's strength to capture them. The ca
 
 Victims don't sit still. They **run** in three situations:
 
-1. When **revealed** during a search action
-2. When a **rabbit** card is drawn
+1. When **revealed** <span className="sc sc-victim">Victim</span> during a search action
+2. When a <span className="sc sc-rabbit">Rabbit</span> card is drawn
 3. At the **end of each action round** (if any victims remain face-up on the board)
 
 ### How Running Works
@@ -254,7 +302,22 @@ Draw a **run card**. It lists character types from top to bottom — activate ea
 - **Back Porch** — The victim moves toward the back exit
 - **Hide** — The victim moves to the nearest room with face-down cards and shuffles back in
 
-Victims move a number of spaces equal to their **strength value**. Each **corpse token** in a space costs them 1 extra movement point, slowing them down.
+Victims move a number of spaces equal to their **strength value** <span className="str">2</span>. Each **corpse token** <span className="corpse">☠</span> in a space costs them 1 extra movement point, slowing them down.
+
+<RawHTML html={`<div class="diagram" style="background:#1a0a0a;border-radius:10px;padding:1.2rem;margin:1rem 0;">
+  <svg viewBox="0 0 500 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+    <text x="250" y="18" text-anchor="middle" fill="#d44" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" letter-spacing="2">VICTIM RUNNING</text>
+    <rect x="20" y="35" width="80" height="50" rx="6" fill="#c0392b"/><text x="60" y="58" text-anchor="middle" fill="#fff" font-family="DM Sans,sans-serif" font-size="10" font-weight="600">VICTIM</text><text x="60" y="73" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="DM Sans,sans-serif" font-size="9">Strength 2</text>
+    <line x1="100" y1="60" x2="125" y2="60" stroke="#d44" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+    <rect x="125" y="35" width="100" height="50" rx="6" fill="#2a2318" stroke="rgba(245,239,224,0.15)" stroke-width="1"/>
+    <text x="175" y="55" text-anchor="middle" fill="#f5efe0" font-family="DM Sans,sans-serif" font-size="10" font-weight="600">Run Card</text>
+    <text x="175" y="73" text-anchor="middle" fill="rgba(245,239,224,0.4)" font-family="DM Sans,sans-serif" font-size="9">Direction + Speed</text>
+    <line x1="225" y1="48" x2="265" y2="38" stroke="#7cc98e" stroke-width="1.2"/><text x="320" y="38" text-anchor="middle" fill="#7cc98e" font-family="DM Sans,sans-serif" font-size="10">→ Front Porch (escape!)</text>
+    <line x1="225" y1="60" x2="265" y2="60" stroke="#7eaee0" stroke-width="1.2"/><text x="320" y="62" text-anchor="middle" fill="#7eaee0" font-family="DM Sans,sans-serif" font-size="10">→ Back Porch (escape!)</text>
+    <line x1="225" y1="72" x2="265" y2="82" stroke="#b899d4" stroke-width="1.2"/><text x="320" y="84" text-anchor="middle" fill="#b899d4" font-family="DM Sans,sans-serif" font-size="10">→ Hide (shuffle back in)</text>
+    <text x="250" y="112" text-anchor="middle" fill="rgba(245,239,224,0.35)" font-family="DM Sans,sans-serif" font-size="9" font-style="italic">Each ☠ corpse token in path costs victim 1 extra movement</text>
+  </svg>
+</div>`} />
 
 <RuleBox danger>
 **If a victim reaches an exit space, they escape.** If 3 victims escape the house, the game is immediately over — you lose.
@@ -271,22 +334,22 @@ Victims move a number of spaces equal to their **strength value**. Each **corpse
   </SideCard>
 </>}>
 
-**Lt. Wydell** is the law enforcement antagonist hunting you while you hunt your victims. He moves based on **run cards** — the same cards that move victims.
+<span className="wydell-badge">Lt. Wydell</span> is the law enforcement antagonist hunting you while you hunt your victims. He moves based on **run cards** — the same cards that move victims.
 
 ### Wydell's Movement
 
-Run cards include a Wydell entry showing a **lettered room**. On activation, Wydell moves to that room. Unlike victims, he **ignores corpse tokens**.
+Run cards include a Wydell entry showing a **lettered room**. On activation, <span className="wydell-badge">Wydell</span> moves to that room. Unlike victims, he **ignores corpse tokens** <span className="corpse">☠</span>.
 
 ### What Happens When Wydell Shows Up
 
-Any player sharing a space with Wydell can **only take Move actions** — no searching, killing, or capturing.
+Any player sharing a space with <span className="wydell-badge">Wydell</span> can **only take** <span className="act act-move">Move</span> **actions** — no searching, killing, or capturing.
 
 When Wydell enters a space with:
 
-- A **face-up victim** → The victim immediately escapes (counts toward the 3-escape loss)
+- A **face-up victim** <span className="sc sc-victim">Victim</span> → The victim immediately escapes (counts toward the 3-escape loss)
 - A **player carrying a captured victim** → The captured victim escapes
-- A **corpse token** → The corpse is flipped to its inactive side
-- A **barrier** → The barrier is immediately discarded
+- A **corpse token** <span className="corpse">☠</span> → The corpse is flipped to its inactive side
+- A **barrier** <span className="sc sc-barrier">Barrier</span> → The barrier is immediately discarded
 - **Nothing special** → Wydell reveals the top search card and resolves it (conditions are discarded)
 
 <RuleBox>
