@@ -3,6 +3,7 @@ import Script from 'next/script';
 import { Fraunces, Crimson_Pro, DM_Sans } from 'next/font/google';
 import { Providers } from '@/components/Providers';
 import { UserMenu } from '@/components/UserMenu';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import './globals.css';
 
 const fraunces = Fraunces({
@@ -57,11 +58,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${crimsonPro.variable} ${dmSans.variable}`}>
+    <html lang="en" data-theme="classic" suppressHydrationWarning
+          className={`${fraunces.variable} ${crimsonPro.variable} ${dmSans.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function(){try{var t=localStorage.getItem('ltp_theme');
+          if(t&&['classic','light','dark'].indexOf(t)!==-1){
+          document.documentElement.setAttribute('data-theme',t)}
+          var f=localStorage.getItem('ltp_font_size');
+          if(f&&['small','large','x-large'].indexOf(f)!==-1){
+          document.documentElement.setAttribute('data-font-size',f)}
+          }catch(e){}})();
+        `}} />
+      </head>
       <body>
         <Providers>
           <div className="site-user-menu">
-            <UserMenu />
+            <div className="site-controls">
+              <ThemeToggle />
+              <UserMenu />
+            </div>
           </div>
           {children}
         </Providers>

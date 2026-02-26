@@ -31,7 +31,7 @@
   font-size: 13px;
   color: var(--text-light);
   padding: 8px 14px;
-  border: 1px solid rgba(245,239,224,0.12);
+  border: 1px solid rgba(var(--text-light-rgb),0.12);
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s;
@@ -61,6 +61,6 @@
 .kc-fb.no { color: #e87070; }
 .kc-divider {
   height: 1px;
-  background: rgba(245,239,224,0.08);
+  background: rgba(var(--text-light-rgb),0.08);
   margin: 1.2rem 0;
 }

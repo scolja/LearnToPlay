@@ -3,7 +3,7 @@
 .mu-instruction {
   font-family: var(--font-ui);
   font-size: 12px;
-  color: rgba(245,239,224,0.5);
+  color: rgba(var(--text-light-rgb),0.5);
   margin-bottom: 0.8rem;
 }
 
@@ -22,7 +22,7 @@
 
 .mu-item {
   padding: 10px 14px;
-  border: 1px solid rgba(245,239,224,0.12);
+  border: 1px solid rgba(var(--text-light-rgb),0.12);
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s;
@@ -75,7 +75,7 @@
 .mu-line {
   width: 2px;
   height: 28px;
-  background: rgba(245,239,224,0.08);
+  background: rgba(var(--text-light-rgb),0.08);
   border-radius: 1px;
   transition: background 0.3s;
 }
@@ -96,7 +96,7 @@
   }
 
   .mu-left {
-    border-bottom: 1px solid rgba(245,239,224,0.08);
+    border-bottom: 1px solid rgba(var(--text-light-rgb),0.08);
     padding-bottom: 0.6rem;
     margin-bottom: 0.3rem;
   }

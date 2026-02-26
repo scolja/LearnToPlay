@@ -12,3 +12,14 @@ body {
 }
 
 strong { font-weight: 700; }
+
+/* Font size preference scaling */
+html[data-font-size="small"]   { font-size: 15px; }
+html[data-font-size="large"]   { font-size: 20px; }
+html[data-font-size="x-large"] { font-size: 22px; }
+
+@media (max-width: 600px) {
+  html[data-font-size="small"]   { font-size: 14px; }
+  html[data-font-size="large"]   { font-size: 18px; }
+  html[data-font-size="x-large"] { font-size: 20px; }
+}

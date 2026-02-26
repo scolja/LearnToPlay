@@ -32,7 +32,7 @@
 .mini-game-desc {
   font-family: var(--font-ui);
   font-size: 13px;
-  color: rgba(245,239,224,0.7);
+  color: rgba(var(--text-light-rgb),0.7);
   margin-bottom: 1rem;
   line-height: 1.5;
 }
@@ -63,7 +63,7 @@
 .mini-game-explanation {
   font-family: var(--font-ui);
   font-size: 13px;
-  color: rgba(245,239,224,0.85);
+  color: rgba(var(--text-light-rgb),0.85);
   background: rgba(201,169,78,0.08);
   border-left: 3px solid var(--gold);
   padding: 0.8rem 1rem;
@@ -83,7 +83,7 @@
 .mini-game-retry {
   font-family: var(--font-ui);
   font-size: 12px;
-  color: rgba(245,239,224,0.5);
+  color: rgba(var(--text-light-rgb),0.5);
   background: none;
   border: none;
   cursor: pointer;

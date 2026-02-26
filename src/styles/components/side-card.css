@@ -10,8 +10,8 @@
 }
 .side-card p { margin-bottom: 0.5rem; }
 .side-card p:last-child { margin-bottom: 0; }
-.side-card div { font-family: var(--font-ui); font-size: 0.88rem; line-height: 1.6; color: rgba(245,239,224,0.85); }
-.side-card div p { color: rgba(245,239,224,0.85); }
+.side-card div { font-family: var(--font-ui); font-size: 0.88rem; line-height: 1.6; color: rgba(var(--text-light-rgb),0.85); }
+.side-card div p { color: rgba(var(--text-light-rgb),0.85); }
 .side-card-label {
   font-size: 10px;
   font-weight: 700;
@@ -28,4 +28,4 @@
 
 .side-card a { color: var(--gold); }
 .side-card strong { color: var(--gold); font-weight: 600; }
-.side-card em { color: rgba(245,239,224,0.7); }
+.side-card em { color: rgba(var(--text-light-rgb),0.7); }

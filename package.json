@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev --port 5445 --experimental-https --webpack",
+    "dev:android": "next dev --port 5445 --hostname 0.0.0.0 --webpack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint ."
   },
   "dependencies": {
+    "@capacitor/android": "^8.1.0",
+    "@capacitor/core": "^8.1.0",
     "@codemirror/lang-html": "^6.4.11",
     "@codemirror/lang-markdown": "^6.5.0",
     "@codemirror/language": "^6.12.1",
@@ -30,6 +33,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@capacitor/cli": "^8.1.0",
     "@next/eslint-plugin-next": "^16.0.0",
     "@types/diff": "^7.0.2",
     "@types/mssql": "^9.1.9",

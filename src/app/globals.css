@@ -1,5 +1,6 @@
 /* Design System — barrel file */
 @import '../styles/variables.css';
+@import '../styles/themes.css';
 @import '../styles/reset.css';
 @import '../styles/hero.css';
 @import '../styles/layout.css';
@@ -40,7 +41,16 @@
 @import '../styles/mobile/section-editor.css';
 @import '../styles/mobile/lightbox.css';
 @import '../styles/mobile/toc.css';
+@import '../styles/mobile/skeleton.css';
+
+/* Theme toggle, settings & controls */
+@import '../styles/theme-toggle.css';
+@import '../styles/mobile-controls.css';
+@import '../styles/settings-drawer.css';
 
 /* Responsive & Editor */
 @import '../styles/responsive.css';
 @import '../styles/editor.css';
+
+/* Theme overrides (must be last for specificity) */
+@import '../styles/theme-overrides.css';

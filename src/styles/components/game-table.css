@@ -22,4 +22,4 @@
   vertical-align: top;
   font-size: 0.88rem;
 }
-.rtable tr:nth-child(even) td { background: rgba(44,36,24,0.02); }
+.rtable tr:nth-child(even) td { background: rgba(var(--text-rgb),0.02); }

@@ -1,0 +1,181 @@
+/* ===================== DARK THEME — Component Overrides ===================== */
+/* In dark mode, components that normally appear as dark blocks on a light page  */
+/* need --bg-elevated backgrounds to maintain visual contrast/hierarchy.         */
+
+/* Side cards */
+[data-theme="dark"] .side-card {
+  background: var(--bg-elevated);
+  border: 1px solid rgba(var(--text-light-rgb), 0.08);
+}
+
+/* Hero stays truly dark (full-width, visually distinct) */
+[data-theme="dark"] .hero-fade {
+  background: linear-gradient(
+    to bottom,
+    var(--bg-dark) 0%,
+    color-mix(in srgb, var(--bg-dark) 60%, var(--bg)) 40%,
+    var(--bg) 100%
+  );
+}
+
+/* Summary panel */
+[data-theme="dark"] .summary-panel {
+  background: var(--bg-elevated);
+  border: 1px solid rgba(var(--text-light-rgb), 0.06);
+}
+
+/* Knowledge check */
+[data-theme="dark"] .kcheck {
+  background: var(--bg-elevated);
+  border: 1px solid rgba(var(--text-light-rgb), 0.06);
+}
+
+/* Mini-games (sequence-sort, match-up, scenario-challenge, spot-the-error) */
+[data-theme="dark"] .mini-game {
+  background: var(--bg-elevated);
+  border: 1px solid rgba(var(--text-light-rgb), 0.06);
+}
+
+/* Diagrams & demos */
+[data-theme="dark"] .diagram,
+[data-theme="dark"] .demo {
+  background: var(--bg-elevated);
+  border: 1px solid rgba(var(--text-light-rgb), 0.06);
+}
+
+/* Flow diagram dark boxes */
+[data-theme="dark"] .fb-dark {
+  background: var(--bg-elevated);
+}
+
+/* Eval strip items */
+[data-theme="dark"] .es {
+  background: var(--bg-elevated);
+}
+
+/* Game tables — header rows */
+[data-theme="dark"] .rtable thead,
+[data-theme="dark"] .rtable th {
+  background: var(--bg-elevated);
+}
+[data-theme="dark"] .rtable tr:nth-child(even) td {
+  background: rgba(var(--text-light-rgb), 0.02);
+}
+
+/* Quick reference panel */
+[data-theme="dark"] .qref-toggle {
+  background: var(--bg-elevated);
+}
+[data-theme="dark"] .qref-toggle:hover {
+  background: var(--bg-sidebar);
+}
+[data-theme="dark"] .qref-panel {
+  background: var(--bg-elevated);
+}
+[data-theme="dark"] .qref-group-header {
+  background: var(--bg-elevated);
+}
+
+/* Photo block */
+[data-theme="dark"] .photo-block {
+  background: var(--bg-elevated);
+}
+[data-theme="dark"] .photo-caption {
+  background: rgba(var(--text-light-rgb), 0.04);
+}
+
+/* Rule boxes — subtle dark background */
+[data-theme="dark"] .rule-box {
+  background: rgba(var(--text-light-rgb), 0.03);
+}
+[data-theme="dark"] .rule-box.danger {
+  background: rgba(232, 112, 112, 0.08);
+}
+
+/* Footnotes toggle */
+[data-theme="dark"] .fn-toggle {
+  border-color: rgba(var(--text-light-rgb), 0.15);
+}
+
+/* --- Mobile: card viewer bars --- */
+[data-theme="dark"] .cv-topbar,
+[data-theme="dark"] .cv-bottombar {
+  background: var(--bg-dark);
+}
+[data-theme="dark"] .cv-nav-btn {
+  background: var(--bg-elevated);
+}
+
+/* --- Mobile: content blocks --- */
+[data-theme="dark"] .cb-table th {
+  background: var(--bg-elevated);
+}
+[data-theme="dark"] .cb-table tr:nth-child(even) td {
+  background: rgba(var(--text-light-rgb), 0.02);
+}
+[data-theme="dark"] .cb-flow-item {
+  background: var(--bg-elevated);
+}
+[data-theme="dark"] .cb-strip-item {
+  background: var(--bg-elevated);
+}
+[data-theme="dark"] .cb-diagram {
+  background: var(--bg-elevated);
+}
+[data-theme="dark"] .cb-callout {
+  background: rgba(var(--text-light-rgb), 0.03);
+}
+[data-theme="dark"] .cb-callout-danger {
+  background: rgba(232, 112, 112, 0.08);
+}
+
+/* --- Mobile: glossary --- */
+[data-theme="dark"] .gl-topbar {
+  background: var(--bg-dark);
+}
+
+/* --- Mobile: homepage topbar --- */
+[data-theme="dark"] .hp-topbar {
+  background: var(--bg-dark);
+}
+
+/* --- Search inputs --- */
+[data-theme="dark"] .hp-search {
+  border-color: rgba(var(--text-light-rgb), 0.12);
+  background: rgba(var(--text-light-rgb), 0.06);
+  color: var(--text);
+}
+[data-theme="dark"] .gl-search {
+  border-color: rgba(var(--text-light-rgb), 0.12);
+  background: rgba(var(--text-light-rgb), 0.06);
+  color: var(--text);
+}
+
+/* --- User menu & login --- */
+[data-theme="dark"] .user-menu {
+  background: var(--bg-elevated);
+}
+[data-theme="dark"] .user-menu-login {
+  background: var(--bg-elevated);
+}
+
+/* --- Login screen: desktop card --- */
+@media (min-width: 768px) {
+  [data-theme="dark"] .login-action {
+    background: var(--bg-elevated);
+    border-color: rgba(var(--text-light-rgb), 0.08);
+  }
+}
+
+
+/* ===================== LIGHT THEME — Minor Adjustments ===================== */
+/* The light theme mostly works via variable changes. Only gradient needs fix.  */
+
+[data-theme="light"] .hero-fade {
+  background: linear-gradient(
+    to bottom,
+    var(--bg-dark) 0%,
+    color-mix(in srgb, var(--bg-dark) 60%, var(--bg)) 40%,
+    var(--bg) 100%
+  );
+}

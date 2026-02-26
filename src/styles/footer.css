@@ -1,7 +1,7 @@
 /* ===================== FOOTER ===================== */
 footer {
   background: var(--bg-dark);
-  color: rgba(245,239,224,0.35);
+  color: rgba(var(--text-light-rgb),0.35);
   padding: 2rem;
   text-align: center;
   font-family: var(--font-ui);
@@ -21,7 +21,7 @@ footer a:hover { opacity: 1; }
   justify-content: center;
   gap: 0.5rem;
   margin-top: 1rem;
-  color: rgba(245,239,224,0.3);
+  color: rgba(var(--text-light-rgb),0.3);
   font-size: 12px;
   font-weight: 600;
 }

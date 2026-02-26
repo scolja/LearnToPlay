@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import type { GuideMeta } from '@/lib/types';
+import { MobileControls } from '@/components/MobileControls';
 
 interface HomePageContentProps {
   games: GuideMeta[];
@@ -62,6 +63,9 @@ export function HomePageContent({ games }: HomePageContentProps) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/icons/logo.svg" alt="L2P" className="hp-topbar-logo" />
         <h1 className="hp-topbar-title">Learn to Play</h1>
+        <div className="hp-topbar-actions">
+          <MobileControls />
+        </div>
       </header>
 
       {/* Desktop hero (hidden on mobile) */}

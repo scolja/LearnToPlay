@@ -35,6 +35,15 @@ body:has(.hp-shell) .site-user-menu {
   font-size: 1.05rem;
   font-weight: 700;
 }
+.hp-topbar-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+.hp-topbar .theme-toggle-btn {
+  width: 32px;
+  height: 32px;
+}
 
 /* Desktop hero: hidden on mobile */
 .hp-hero-desktop {
@@ -46,7 +55,7 @@ body:has(.hp-shell) .site-user-menu {
   padding: 0.6rem 1rem;
   background: var(--bg);
   flex-shrink: 0;
-  border-bottom: 1px solid rgba(44, 36, 24, 0.08);
+  border-bottom: 1px solid rgba(var(--text-rgb), 0.08);
 }
 .hp-search-inner {
   position: relative;
@@ -62,9 +71,9 @@ body:has(.hp-shell) .site-user-menu {
 .hp-search {
   width: 100%;
   padding: 0.5rem 0.8rem 0.5rem 2.2rem;
-  border: 1.5px solid rgba(44, 36, 24, 0.12);
+  border: 1.5px solid rgba(var(--text-rgb), 0.12);
   border-radius: 10px;
-  background: rgba(44, 36, 24, 0.03);
+  background: rgba(var(--text-rgb), 0.03);
   font-family: var(--font-ui);
   font-size: 0.85rem;
   color: var(--text);
@@ -120,7 +129,7 @@ body:has(.hp-shell) .site-user-menu {
   padding: 0.6rem 1rem;
   text-decoration: none;
   color: var(--text);
-  border-bottom: 1px solid rgba(44, 36, 24, 0.06);
+  border-bottom: 1px solid rgba(var(--text-rgb), 0.06);
   transition: background 0.1s;
   min-height: 56px;
 }
@@ -356,7 +365,7 @@ body:has(.hp-shell) .site-user-menu {
   .hp-card-subtitle {
     font-family: var(--font-ui);
     font-size: 0.85rem;
-    color: rgba(245, 239, 224, 0.6);
+    color: rgba(var(--text-light-rgb), 0.6);
     margin-bottom: 0.6rem;
     line-height: 1.5;
   }
@@ -372,11 +381,11 @@ body:has(.hp-shell) .site-user-menu {
     gap: 0.75rem;
     font-family: var(--font-ui);
     font-size: 11px;
-    color: rgba(245, 239, 224, 0.4);
+    color: rgba(var(--text-light-rgb), 0.4);
   }
   .hp-card-meta span {
     padding: 3px 8px;
-    border: 1px solid rgba(245, 239, 224, 0.1);
+    border: 1px solid rgba(var(--text-light-rgb), 0.1);
     border-radius: 4px;
   }
 
@@ -399,11 +408,11 @@ body:has(.hp-shell) .site-user-menu {
     font-weight: 500;
     text-decoration: none;
     transition: background 0.2s, color 0.2s;
-    background: rgba(245, 239, 224, 0.08);
-    color: rgba(245, 239, 224, 0.7);
+    background: rgba(var(--text-light-rgb), 0.08);
+    color: rgba(var(--text-light-rgb), 0.7);
   }
   .hp-card-btn:hover {
-    background: rgba(245, 239, 224, 0.15);
+    background: rgba(var(--text-light-rgb), 0.15);
     color: var(--text-light);
   }
   .hp-card-btn-learn {
@@ -425,7 +434,7 @@ body:has(.hp-shell) .site-user-menu {
   .hp-progress-bar {
     flex: 1;
     height: 4px;
-    background: rgba(245, 239, 224, 0.1);
+    background: rgba(var(--text-light-rgb), 0.1);
     border-radius: 2px;
     overflow: hidden;
   }
@@ -438,7 +447,7 @@ body:has(.hp-shell) .site-user-menu {
   .hp-progress-label {
     font-family: var(--font-ui);
     font-size: 0.65rem;
-    color: rgba(245, 239, 224, 0.45);
+    color: rgba(var(--text-light-rgb), 0.45);
     white-space: nowrap;
   }
 

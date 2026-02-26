@@ -14,12 +14,12 @@
   background: var(--bg-dark);
   color: var(--text-light);
   overflow-y: auto;
-  border-right: 1px solid rgba(245, 239, 224, 0.08);
+  border-right: 1px solid rgba(var(--text-light-rgb), 0.08);
 }
 
 .se-sidebar-header {
   padding: 1.2rem 1rem 0.8rem;
-  border-bottom: 1px solid rgba(245, 239, 224, 0.08);
+  border-bottom: 1px solid rgba(var(--text-light-rgb), 0.08);
 }
 
 .se-sidebar-title {
@@ -32,7 +32,7 @@
 .se-sidebar-subtitle {
   font-family: var(--font-ui);
   font-size: 0.7rem;
-  color: rgba(245, 239, 224, 0.4);
+  color: rgba(var(--text-light-rgb), 0.4);
 }
 
 .se-section-list {
@@ -47,11 +47,11 @@
   transition: background 0.1s, border-color 0.1s;
   font-family: var(--font-ui);
   font-size: 0.85rem;
-  color: rgba(245, 239, 224, 0.7);
+  color: rgba(var(--text-light-rgb), 0.7);
 }
 
 .se-section-item:hover {
-  background: rgba(245, 239, 224, 0.04);
+  background: rgba(var(--text-light-rgb), 0.04);
 }
 
 .se-section-item-active {
@@ -81,7 +81,7 @@
   align-items: center;
   gap: 1rem;
   padding: 0.75rem 1.5rem;
-  border-bottom: 1px solid rgba(44, 36, 24, 0.1);
+  border-bottom: 1px solid rgba(var(--text-rgb), 0.1);
   background: var(--bg);
   flex-shrink: 0;
 }
@@ -115,7 +115,7 @@
   gap: 1px;
   flex: 1;
   overflow: hidden;
-  background: rgba(44, 36, 24, 0.1);
+  background: rgba(var(--text-rgb), 0.1);
 }
 
 .se-pane {
@@ -133,7 +133,7 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   color: var(--text-muted);
-  border-bottom: 1px solid rgba(44, 36, 24, 0.08);
+  border-bottom: 1px solid rgba(var(--text-rgb), 0.08);
   flex-shrink: 0;
 }
 
@@ -147,9 +147,9 @@
   width: 100%;
   min-height: 200px;
   padding: 0.8rem;
-  border: 1.5px solid rgba(44, 36, 24, 0.12);
+  border: 1.5px solid rgba(var(--text-rgb), 0.12);
   border-radius: 8px;
-  background: rgba(44, 36, 24, 0.02);
+  background: rgba(var(--text-rgb), 0.02);
   font-family: 'Fira Code', 'Cascadia Code', monospace;
   font-size: 0.85rem;
   line-height: 1.6;

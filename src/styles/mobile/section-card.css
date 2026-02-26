@@ -61,7 +61,7 @@
 .sc-notes {
   margin-top: 1.5rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(44, 36, 24, 0.1);
+  border-top: 1px solid rgba(var(--text-rgb), 0.1);
 }
 
 .sc-notes-label {

@@ -29,20 +29,27 @@
   font-weight: 700;
 }
 
+.gl-topbar-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
 /* Search */
 .gl-search-wrap {
   padding: 0.75rem 1rem;
   background: var(--bg);
   flex-shrink: 0;
-  border-bottom: 1px solid rgba(44, 36, 24, 0.08);
+  border-bottom: 1px solid rgba(var(--text-rgb), 0.08);
 }
 
 .gl-search {
   width: 100%;
   padding: 0.6rem 0.9rem;
-  border: 1.5px solid rgba(44, 36, 24, 0.15);
+  border: 1.5px solid rgba(var(--text-rgb), 0.15);
   border-radius: 10px;
-  background: rgba(44, 36, 24, 0.03);
+  background: rgba(var(--text-rgb), 0.03);
   font-family: var(--font-ui);
   font-size: 0.9rem;
   color: var(--text);
@@ -86,7 +93,7 @@
 /* Entry */
 .gl-entry {
   padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(44, 36, 24, 0.06);
+  border-bottom: 1px solid rgba(var(--text-rgb), 0.06);
   cursor: pointer;
   transition: background 0.1s;
 }

@@ -71,6 +71,12 @@ body:has(.se-layout) .site-user-menu {
   text-overflow: ellipsis;
 }
 
+.cv-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
 /* Scrollable content area */
 .cv-content {
   flex: 1;
@@ -111,7 +117,7 @@ body:has(.se-layout) .site-user-menu {
   justify-content: space-between;
   padding: 0.5rem 1rem;
   background: var(--bg);
-  border-top: 1px solid rgba(44, 36, 24, 0.08);
+  border-top: 1px solid rgba(var(--text-rgb), 0.08);
   flex-shrink: 0;
 }
 
@@ -156,10 +162,10 @@ body:has(.se-layout) .site-user-menu {
 .cv-bottombar {
   display: flex;
   background: var(--bg-dark);
-  border-top: 1px solid rgba(245, 239, 224, 0.08);
+  border-top: 1px solid rgba(var(--text-light-rgb), 0.08);
   flex-shrink: 0;
   /* Safe area for home indicator */
-  padding-bottom: max(0.25rem, env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
 .cv-tab {
@@ -167,19 +173,19 @@ body:has(.se-layout) .site-user-menu {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.2rem;
-  padding: 0.5rem 0;
-  color: rgba(245, 239, 224, 0.4);
+  gap: 0.15rem;
+  padding: 0.35rem 0;
+  color: rgba(var(--text-light-rgb), 0.4);
   text-decoration: none;
   font-family: var(--font-ui);
   font-size: 0.65rem;
   font-weight: 600;
   transition: color 0.15s;
-  min-height: 50px;
+  min-height: 44px;
   justify-content: center;
 }
 .cv-tab:active {
-  color: rgba(245, 239, 224, 0.6);
+  color: rgba(var(--text-light-rgb), 0.6);
 }
 .cv-tab-active {
   color: var(--gold);
@@ -192,8 +198,8 @@ body:has(.se-layout) .site-user-menu {
   .cv-shell {
     max-width: 480px;
     margin: 0 auto;
-    border-left: 1px solid rgba(44, 36, 24, 0.1);
-    border-right: 1px solid rgba(44, 36, 24, 0.1);
+    border-left: 1px solid rgba(var(--text-rgb), 0.1);
+    border-right: 1px solid rgba(var(--text-rgb), 0.1);
   }
 }
 

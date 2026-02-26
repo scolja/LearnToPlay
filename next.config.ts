@@ -7,6 +7,11 @@ const contentDir = path.join(process.cwd(), 'content', 'games');
 const nextConfig: NextConfig = {
   output: 'standalone',
   trailingSlash: true,
+  experimental: {
+    staleTimes: {
+      dynamic: 3600, // cache visited pages client-side for 1 hour
+    },
+  },
   images: {
     unoptimized: true,
   },

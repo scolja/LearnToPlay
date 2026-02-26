@@ -3,7 +3,7 @@
 .ss-instruction {
   font-family: var(--font-ui);
   font-size: 12px;
-  color: rgba(245,239,224,0.5);
+  color: rgba(var(--text-light-rgb),0.5);
   margin-bottom: 0.8rem;
 }
 
@@ -18,7 +18,7 @@
   align-items: center;
   gap: 0.8rem;
   padding: 10px 14px;
-  border: 1px solid rgba(245,239,224,0.12);
+  border: 1px solid rgba(var(--text-light-rgb),0.12);
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s;
@@ -52,7 +52,7 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: rgba(245,239,224,0.08);
+  background: rgba(var(--text-light-rgb),0.08);
   font-weight: 700;
   font-size: 11px;
   color: var(--gold);

@@ -90,7 +90,7 @@
   padding: 4px;
 }
 .gc-char { background: var(--gold); color: var(--bg-dark); }
-.gc-empty { background: rgba(44,36,24,0.06); border: 1.5px dashed rgba(44,36,24,0.15); color: var(--text-muted); }
+.gc-empty { background: rgba(var(--text-rgb),0.06); border: 1.5px dashed rgba(var(--text-rgb),0.15); color: var(--text-muted); }
 .gc-filled { background: rgba(74,143,191,0.12); border: 1.5px solid rgba(74,143,191,0.25); color: #4a8fbf; }
 
 /* Turn strip */

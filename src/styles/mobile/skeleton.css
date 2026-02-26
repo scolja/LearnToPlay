@@ -1,0 +1,79 @@
+/* =====================================================================
+   Skeleton Loading States — Shimmer placeholders for loading.tsx
+   ===================================================================== */
+
+@keyframes skel-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skel-line {
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(var(--text-rgb), 0.06) 25%,
+    rgba(var(--text-rgb), 0.12) 50%,
+    rgba(var(--text-rgb), 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: skel-shimmer 1.5s ease-in-out infinite;
+}
+
+/* Glossary skeleton lines */
+.skel-input      { height: 38px; border-radius: 10px; }
+.skel-group-header { height: 12px; width: 30%; margin: 0.8rem 0 0.6rem; border-radius: 4px;
+  background: linear-gradient(90deg, rgba(201,169,78,0.1) 25%, rgba(201,169,78,0.2) 50%, rgba(201,169,78,0.1) 75%);
+  background-size: 200% 100%; animation: skel-shimmer 1.5s ease-in-out infinite; }
+.skel-term       { height: 14px; width: 40%; margin-bottom: 0.35rem; }
+.skel-def        { height: 12px; width: 90%; margin-bottom: 0.25rem; }
+.skel-def-short  { height: 12px; width: 55%; }
+
+/* Learn skeleton lines */
+.skel-title         { height: 16px; width: 60%; }
+.skel-counter-text  { height: 14px; width: 28px; }
+.skel-card-title    { height: 18px; width: 55%; margin-bottom: 1rem; }
+.skel-card-body     { height: 13px; width: 95%; margin-bottom: 0.5rem; }
+.skel-card-body-short { height: 13px; width: 65%; margin-bottom: 0.5rem; }
+.skel-spacer        { height: 1rem; }
+.skel-nav-label     { height: 11px; width: 80px; margin: 0 auto; }
+.skel-nav-btn       { opacity: 0.3; pointer-events: none; }
+
+/* Skeleton progress dots */
+.skel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.skel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(var(--text-rgb), 0.1);
+}
+.skel-dot:first-child {
+  width: 10px;
+  height: 10px;
+  background: rgba(201, 169, 78, 0.3);
+}
+
+/* Skeleton card container */
+.skel-card {
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: rgba(var(--text-rgb), 0.02);
+  border: 1px solid rgba(var(--text-rgb), 0.06);
+}
+
+/* Dark-theme adjustments for skeleton on dark backgrounds */
+.cv-topbar .skel-line,
+.gl-topbar .skel-line {
+  background: linear-gradient(
+    90deg,
+    rgba(var(--text-light-rgb), 0.08) 25%,
+    rgba(var(--text-light-rgb), 0.16) 50%,
+    rgba(var(--text-light-rgb), 0.08) 75%
+  );
+  background-size: 200% 100%;
+  animation: skel-shimmer 1.5s ease-in-out infinite;
+}

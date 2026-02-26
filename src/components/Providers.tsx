@@ -2,6 +2,8 @@
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider } from '@/lib/auth-context';
+import { ThemeProvider } from '@/lib/theme-context';
+import { SettingsProvider } from '@/lib/settings-context';
 import type { ReactNode } from 'react';
 
 export function Providers({ children }: { children: ReactNode }) {
@@ -10,7 +12,11 @@ export function Providers({ children }: { children: ReactNode }) {
   return (
     <GoogleOAuthProvider clientId={clientId}>
       <AuthProvider>
-        {children}
+        <ThemeProvider>
+          <SettingsProvider>
+            {children}
+          </SettingsProvider>
+        </ThemeProvider>
       </AuthProvider>
     </GoogleOAuthProvider>
   );

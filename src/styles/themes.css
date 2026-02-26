@@ -1,0 +1,61 @@
+/* ===================== THEME SYSTEM ===================== */
+/* Classic theme is the default — :root in variables.css defines those values. */
+/* These selectors override variables per theme.                              */
+
+/* --- RGB channels for rgba() usage across all themes --- */
+:root,
+[data-theme="classic"] {
+  --text-rgb: 44, 36, 24;
+  --text-light-rgb: 245, 239, 224;
+  --bg-elevated: var(--bg-sidebar);
+  --bg-surface: var(--bg);
+  --shadow-color: rgba(0, 0, 0, 0.12);
+}
+
+/* --- Light theme: clean white / gray --- */
+[data-theme="light"] {
+  --bg: #ffffff;
+  --bg-sidebar: #1e293b;
+  --bg-dark: #0f172a;
+  --text: #1e293b;
+  --text-light: #f8fafc;
+  --text-muted: rgba(30, 41, 59, 0.55);
+  --gold: #b8941f;
+  --red: #b93e3e;
+  --green: #4a7c59;
+  --blue: #4a6fa5;
+  --purple: #7a5195;
+  --orange: #c46a1a;
+  --yellow: #a88d1e;
+  --teal: #2e7a6a;
+  --border: rgba(30, 41, 59, 0.12);
+  --text-rgb: 30, 41, 59;
+  --text-light-rgb: 248, 250, 252;
+  --bg-elevated: var(--bg-sidebar);
+  --bg-surface: #f8fafc;
+  --shadow-color: rgba(0, 0, 0, 0.08);
+}
+
+/* --- Dark theme: deep navy-charcoal --- */
+[data-theme="dark"] {
+  --bg: #1a1a2e;
+  --bg-sidebar: #16213e;
+  --bg-dark: #0f0f23;
+  --text: #e2e8f0;
+  --text-light: #f1f5f9;
+  --text-muted: rgba(226, 232, 240, 0.5);
+  --gold: #d4b85a;
+  --red: #e87070;
+  --green: #7cc98e;
+  --blue: #7eaee0;
+  --purple: #b899d4;
+  --orange: #e8a060;
+  --yellow: #d4c44e;
+  --teal: #5cc4b0;
+  --border: rgba(226, 232, 240, 0.1);
+  --text-rgb: 226, 232, 240;
+  --text-light-rgb: 241, 245, 249;
+  --bg-elevated: #232946;
+  --bg-surface: #232946;
+  --shadow-color: rgba(0, 0, 0, 0.4);
+}
