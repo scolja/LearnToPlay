@@ -53,6 +53,8 @@ export interface GuideMeta {
   heroImage: string | null;
   customCss: string | null;
   createdAt: string;
+  sectionCount: number;
+  readMinutes: number;
 }
 
 export interface GuideSection {

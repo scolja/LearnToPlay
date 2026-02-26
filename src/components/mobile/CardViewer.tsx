@@ -25,7 +25,7 @@ export function CardViewer({ guide, sections, glossaryCount }: CardViewerProps) 
   const section = sections[currentIndex];
   const total = sections.length;
 
-  // On mount: restore from ?section= param or sessionStorage, then reveal
+  // On mount: restore from ?section= param or localStorage, then reveal
   useEffect(() => {
     let idx = 0;
 
@@ -40,7 +40,7 @@ export function CardViewer({ guide, sections, glossaryCount }: CardViewerProps) 
     } else {
       // Fall back to saved position
       try {
-        const saved = sessionStorage.getItem(storageKey);
+        const saved = localStorage.getItem(storageKey);
         if (saved !== null) {
           const parsed = parseInt(saved, 10);
           if (!isNaN(parsed) && parsed >= 0 && parsed < sections.length) {
@@ -57,7 +57,7 @@ export function CardViewer({ guide, sections, glossaryCount }: CardViewerProps) 
 
   // Persist current section so navigating to glossary and back restores position
   useEffect(() => {
-    try { sessionStorage.setItem(storageKey, String(currentIndex)); } catch { /* ignore */ }
+    try { localStorage.setItem(storageKey, String(currentIndex)); } catch { /* ignore */ }
   }, [storageKey, currentIndex]);
 
   const goTo = useCallback((index: number) => {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import type { GuideMeta } from '@/lib/types';
 
@@ -15,8 +15,31 @@ function isNewGame(createdAt: string): boolean {
   return created > twoWeeksAgo;
 }
 
+/** Read all ltp-section-* keys from localStorage to get per-game progress */
+function getProgressMap(games: GuideMeta[]): Record<string, { current: number; total: number }> {
+  const map: Record<string, { current: number; total: number }> = {};
+  try {
+    for (const g of games) {
+      const saved = localStorage.getItem(`ltp-section-${g.slug}`);
+      if (saved !== null) {
+        const idx = parseInt(saved, 10);
+        if (!isNaN(idx) && idx > 0 && g.sectionCount > 0) {
+          map[g.slug] = { current: idx, total: g.sectionCount };
+        }
+      }
+    }
+  } catch { /* localStorage unavailable */ }
+  return map;
+}
+
 export function HomePageContent({ games }: HomePageContentProps) {
   const [search, setSearch] = useState('');
+  const [progress, setProgress] = useState<Record<string, { current: number; total: number }>>({});
+
+  // Read progress from localStorage after mount (client-only)
+  useEffect(() => {
+    setProgress(getProgressMap(games));
+  }, [games]);
 
   const filtered = useMemo(() => {
     if (!search.trim()) return games;
@@ -80,7 +103,7 @@ export function HomePageContent({ games }: HomePageContentProps) {
               <section className="hp-section">
                 <h2 className="hp-section-header">New</h2>
                 {newGames.map(game => (
-                  <GameItem key={game.slug} game={game} isNew />
+                  <GameItem key={game.slug} game={game} isNew progress={progress[game.slug]} />
                 ))}
               </section>
             )}
@@ -91,7 +114,7 @@ export function HomePageContent({ games }: HomePageContentProps) {
                   <h2 className="hp-section-header">All Games</h2>
                 )}
                 {otherGames.map(game => (
-                  <GameItem key={game.slug} game={game} />
+                  <GameItem key={game.slug} game={game} progress={progress[game.slug]} />
                 ))}
               </section>
             )}
@@ -102,7 +125,13 @@ export function HomePageContent({ games }: HomePageContentProps) {
   );
 }
 
-function GameItem({ game, isNew }: { game: GuideMeta; isNew?: boolean }) {
+interface GameItemProps {
+  game: GuideMeta;
+  isNew?: boolean;
+  progress?: { current: number; total: number };
+}
+
+function GameItem({ game, isNew, progress }: GameItemProps) {
   return (
     <>
       {/* Mobile: tapping row goes straight to /learn */}
@@ -110,7 +139,7 @@ function GameItem({ game, isNew }: { game: GuideMeta; isNew?: boolean }) {
         href={`/games/${game.slug}/learn`}
         className="hp-row hp-row-mobile"
       >
-        <MobileRow game={game} isNew={isNew} />
+        <MobileRow game={game} isNew={isNew} progress={progress} />
       </Link>
 
       {/* Desktop: card with both Full Guide and Learn buttons */}
@@ -127,14 +156,32 @@ function GameItem({ game, isNew }: { game: GuideMeta; isNew?: boolean }) {
             {isNew && <span className="hp-badge-new">NEW</span>}
           </h2>
           {game.subtitle && <p className="hp-card-subtitle">{game.subtitle}</p>}
+          {game.readMinutes > 0 && (
+            <div className="hp-card-readtime">{game.readMinutes} min read</div>
+          )}
           <div className="hp-card-meta">
             <span>{game.players} Players</span>
             <span>{game.time}</span>
             <span>Ages {game.age}</span>
           </div>
+          {progress && (
+            <div className="hp-card-progress">
+              <div className="hp-progress-bar">
+                <div
+                  className="hp-progress-fill"
+                  style={{ width: `${Math.round((progress.current / progress.total) * 100)}%` }}
+                />
+              </div>
+              <span className="hp-progress-label">
+                {progress.current} / {progress.total} sections
+              </span>
+            </div>
+          )}
           <div className="hp-card-actions">
             <Link href={`/games/${game.slug}`} className="hp-card-btn">Full Guide</Link>
-            <Link href={`/games/${game.slug}/learn`} className="hp-card-btn hp-card-btn-learn">Learn</Link>
+            <Link href={`/games/${game.slug}/learn`} className="hp-card-btn hp-card-btn-learn">
+              {progress ? 'Resume' : 'Learn'}
+            </Link>
           </div>
         </div>
       </div>
@@ -142,29 +189,54 @@ function GameItem({ game, isNew }: { game: GuideMeta; isNew?: boolean }) {
   );
 }
 
-function MobileRow({ game, isNew }: { game: GuideMeta; isNew?: boolean }) {
+function MobileRow({ game, isNew, progress }: { game: GuideMeta; isNew?: boolean; progress?: { current: number; total: number } }) {
   return (
     <>
-      {game.heroImage ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={game.heroImage}
-          alt={`${game.title} art`}
-          className="hp-row-thumb"
-          loading="lazy"
-        />
-      ) : (
-        <div className="hp-row-thumb hp-row-thumb-placeholder" />
-      )}
+      <div className="hp-row-thumb-wrap">
+        {game.heroImage ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={game.heroImage}
+            alt={`${game.title} art`}
+            className="hp-row-thumb"
+            loading="lazy"
+          />
+        ) : (
+          <div className="hp-row-thumb hp-row-thumb-placeholder" />
+        )}
+        {progress && (
+          <div className="hp-row-progress-ring">
+            <svg viewBox="0 0 36 36" width="36" height="36">
+              <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(201,169,78,0.15)" strokeWidth="3" />
+              <circle
+                cx="18" cy="18" r="15.5" fill="none"
+                stroke="var(--gold)" strokeWidth="3"
+                strokeLinecap="round"
+                strokeDasharray={`${Math.round((progress.current / progress.total) * 97.4)} 97.4`}
+                transform="rotate(-90 18 18)"
+              />
+            </svg>
+          </div>
+        )}
+      </div>
       <div className="hp-row-info">
         <span className="hp-row-title">
           {game.title}
           {isNew && <span className="hp-badge-new">NEW</span>}
         </span>
-        <span className="hp-row-meta">
-          {game.players} Players &middot; {game.time} &middot; Ages {game.age}
-        </span>
+        {progress ? (
+          <span className="hp-row-resume">
+            Resume &middot; {progress.current}/{progress.total} sections
+          </span>
+        ) : (
+          <span className="hp-row-meta">
+            {game.players} Players &middot; {game.time}
+          </span>
+        )}
       </div>
+      {game.readMinutes > 0 && (
+        <span className="hp-row-time">{game.readMinutes} min</span>
+      )}
       <svg className="hp-row-chevron" width="16" height="16" viewBox="0 0 24 24"
            fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M9 6l6 6-6 6" />

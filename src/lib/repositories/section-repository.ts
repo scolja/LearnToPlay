@@ -10,14 +10,24 @@ export async function getGuideBySlug(slug: string): Promise<GuideMeta | null> {
   const result = await pool.request()
     .input('slug', sql.NVarChar, slug)
     .query<GuideMeta>(`
-      SELECT Id as id, Slug as slug, Title as title, Subtitle as subtitle,
-             Designer as designer, Artist as artist, Publisher as publisher,
-             PublisherUrl as publisherUrl, Year as year, Players as players,
-             Time as time, Age as age, BggUrl as bggUrl,
-             HeroGradient as heroGradient, HeroImage as heroImage,
-             CustomCss as customCss, CreatedAt as createdAt
-      FROM ltp.Guides
-      WHERE Slug = @slug AND IsDraft = 0
+      SELECT g.Id as id, g.Slug as slug, g.Title as title, g.Subtitle as subtitle,
+             g.Designer as designer, g.Artist as artist, g.Publisher as publisher,
+             g.PublisherUrl as publisherUrl, g.Year as year, g.Players as players,
+             g.Time as time, g.Age as age, g.BggUrl as bggUrl,
+             g.HeroGradient as heroGradient, g.HeroImage as heroImage,
+             g.CustomCss as customCss, g.CreatedAt as createdAt,
+             ISNULL(s.sectionCount, 0) as sectionCount,
+             ISNULL(CEILING(s.totalChars / 5.0 / 325.0), 0) as readMinutes
+      FROM ltp.Guides g
+      LEFT JOIN (
+        SELECT GuideId,
+               COUNT(*) as sectionCount,
+               SUM(LEN(Content) + LEN(ISNULL(Notes, ''))) as totalChars
+        FROM ltp.GuideSections
+        WHERE IsActive = 1
+        GROUP BY GuideId
+      ) s ON g.Id = s.GuideId
+      WHERE g.Slug = @slug AND g.IsDraft = 0
     `);
   return result.recordset[0] ?? null;
 }
@@ -26,15 +36,25 @@ export async function getAllGuides(): Promise<GuideMeta[]> {
   const pool = await getPool();
   const result = await pool.request()
     .query<GuideMeta>(`
-      SELECT Id as id, Slug as slug, Title as title, Subtitle as subtitle,
-             Designer as designer, Artist as artist, Publisher as publisher,
-             PublisherUrl as publisherUrl, Year as year, Players as players,
-             Time as time, Age as age, BggUrl as bggUrl,
-             HeroGradient as heroGradient, HeroImage as heroImage,
-             CustomCss as customCss, CreatedAt as createdAt
-      FROM ltp.Guides
-      WHERE IsDraft = 0
-      ORDER BY CreatedAt DESC, Title
+      SELECT g.Id as id, g.Slug as slug, g.Title as title, g.Subtitle as subtitle,
+             g.Designer as designer, g.Artist as artist, g.Publisher as publisher,
+             g.PublisherUrl as publisherUrl, g.Year as year, g.Players as players,
+             g.Time as time, g.Age as age, g.BggUrl as bggUrl,
+             g.HeroGradient as heroGradient, g.HeroImage as heroImage,
+             g.CustomCss as customCss, g.CreatedAt as createdAt,
+             ISNULL(s.sectionCount, 0) as sectionCount,
+             ISNULL(CEILING(s.totalChars / 5.0 / 325.0), 0) as readMinutes
+      FROM ltp.Guides g
+      LEFT JOIN (
+        SELECT GuideId,
+               COUNT(*) as sectionCount,
+               SUM(LEN(Content) + LEN(ISNULL(Notes, ''))) as totalChars
+        FROM ltp.GuideSections
+        WHERE IsActive = 1
+        GROUP BY GuideId
+      ) s ON g.Id = s.GuideId
+      WHERE g.IsDraft = 0
+      ORDER BY g.CreatedAt DESC, g.Title
     `);
   return result.recordset;
 }
