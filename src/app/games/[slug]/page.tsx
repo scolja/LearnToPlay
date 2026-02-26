@@ -1,61 +1,46 @@
 import { notFound } from 'next/navigation';
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import { getAllGameSlugs, getGameContent } from '@/lib/content';
-import { mdxComponents } from '@/components';
-import { Hero } from '@/components/Hero';
-import { QuickReference } from '@/components/QuickReference';
-import { Footer } from '@/components/Footer';
+import { getGuideBySlug, getSectionsByGuideSlug, getGlossaryByGuideSlug } from '@/lib/repositories/section-repository';
+import { getAllGuides } from '@/lib/repositories/section-repository';
+import { renderAllSections } from '@/lib/section-renderer';
+import { DesktopGuide } from '@/components/DesktopGuide';
 
 export const revalidate = 3600; // ISR: revalidate every hour as fallback
 
 export async function generateStaticParams() {
-  const slugs = await getAllGameSlugs();
-  return slugs.map(slug => ({ slug }));
+  const guides = await getAllGuides();
+  return guides.map(g => ({ slug: g.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  try {
-    const { frontmatter } = await getGameContent(slug);
-    return {
-      title: `${frontmatter.title} — Learn to Play`,
-      description: frontmatter.subtitle,
-    };
-  } catch {
-    return { title: 'Game Not Found' };
-  }
+  const guide = await getGuideBySlug(slug);
+  if (!guide) return { title: 'Game Not Found' };
+  return {
+    title: `${guide.title} — Learn to Play`,
+    description: guide.subtitle,
+  };
 }
 
 export default async function GamePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  let guide;
-  try {
-    guide = await getGameContent(slug);
-  } catch {
+  const [guide, sections, glossary] = await Promise.all([
+    getGuideBySlug(slug),
+    getSectionsByGuideSlug(slug),
+    getGlossaryByGuideSlug(slug),
+  ]);
+
+  if (!guide || sections.length === 0) {
     notFound();
   }
 
-  const { frontmatter, content } = guide;
+  const renderedSections = renderAllSections(sections);
 
   return (
-    <>
-      <Hero {...frontmatter} />
-      <div className="page-wrap">
-        <MDXRemote source={content} components={mdxComponents} />
-      </div>
-      {frontmatter.glossary && frontmatter.glossary.length > 0 && (
-        <QuickReference entries={frontmatter.glossary} />
-      )}
-      <Footer
-        title={frontmatter.title}
-        year={frontmatter.year}
-        designer={frontmatter.designer}
-        artist={frontmatter.artist}
-        publisher={frontmatter.publisher}
-        publisherUrl={frontmatter.publisherUrl}
-        bggUrl={frontmatter.bggUrl}
-      />
-    </>
+    <DesktopGuide
+      guide={guide}
+      sections={renderedSections}
+      glossary={glossary}
+    />
   );
 }

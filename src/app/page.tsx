@@ -1,10 +1,16 @@
 import Link from 'next/link';
-import { getAllGames } from '@/lib/content';
+import { getAllGuides } from '@/lib/repositories/section-repository';
+import type { GuideMeta } from '@/lib/types';
 
 export const revalidate = 3600; // ISR: revalidate every hour
 
 export default async function Home() {
-  const games = await getAllGames();
+  let games: GuideMeta[] = [];
+  try {
+    games = await getAllGuides();
+  } catch (err) {
+    console.error('[home] Failed to load guides from DB:', err);
+  }
 
   return (
     <div className="homepage">
@@ -18,25 +24,25 @@ export default async function Home() {
       <div className="page-wrap">
         {games.length > 0 ? (
           <div className="game-grid">
-            {games.map(({ slug, frontmatter }) => (
-              <div key={slug} className="game-card">
-                {frontmatter.heroImage && (
+            {games.map((guide) => (
+              <div key={guide.slug} className="game-card">
+                {guide.heroImage && (
                   <div className="game-card-image">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={frontmatter.heroImage} alt={`${frontmatter.title} box art`} />
+                    <img src={guide.heroImage} alt={`${guide.title} box art`} />
                   </div>
                 )}
                 <div className="game-card-body">
-                  <h2>{frontmatter.title}</h2>
-                  <p>{frontmatter.subtitle}</p>
+                  <h2>{guide.title}</h2>
+                  <p>{guide.subtitle}</p>
                   <div className="game-meta">
-                    <span>{frontmatter.players} Players</span>
-                    <span>{frontmatter.time}</span>
-                    <span>Ages {frontmatter.age}</span>
+                    <span>{guide.players} Players</span>
+                    <span>{guide.time}</span>
+                    <span>Ages {guide.age}</span>
                   </div>
                   <div className="game-card-actions">
-                    <Link href={`/games/${slug}`} className="game-card-btn">Full Guide</Link>
-                    <Link href={`/games/${slug}/learn`} className="game-card-btn game-card-btn-learn">Learn</Link>
+                    <Link href={`/games/${guide.slug}`} className="game-card-btn">Full Guide</Link>
+                    <Link href={`/games/${guide.slug}/learn`} className="game-card-btn game-card-btn-learn">Learn</Link>
                   </div>
                 </div>
               </div>
@@ -44,7 +50,7 @@ export default async function Home() {
           </div>
         ) : (
           <div className="empty-state">
-            <p>No guides yet. Add MDX files to <code>content/games/</code> to get started.</p>
+            <p>No guides available.</p>
           </div>
         )}
       </div>

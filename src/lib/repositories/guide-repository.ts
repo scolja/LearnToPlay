@@ -30,7 +30,7 @@ export async function getCurrentVersion(slug: string): Promise<DbGuideVersion | 
   const result = await pool.request()
     .input('slug', sql.NVarChar, slug)
     .query<DbGuideVersion>(`
-      SELECT * FROM ltp.GuideVersions
+      SELECT * FROM ltp.GuideVersions_MDX_Legacy
       WHERE Slug = @slug AND IsCurrent = 1
     `);
   return result.recordset[0] ?? null;
@@ -40,7 +40,7 @@ export async function getVersionById(id: string): Promise<DbGuideVersion | null>
   const pool = await getPool();
   const result = await pool.request()
     .input('id', sql.UniqueIdentifier, id)
-    .query<DbGuideVersion>('SELECT * FROM ltp.GuideVersions WHERE Id = @id');
+    .query<DbGuideVersion>('SELECT * FROM ltp.GuideVersions_MDX_Legacy WHERE Id = @id');
   return result.recordset[0] ?? null;
 }
 
@@ -54,7 +54,7 @@ export async function listVersions(slug: string): Promise<GuideVersionSummary[]>
         gv.IsPublished, gv.IsCurrent,
         u.DisplayName AS EditorName,
         u.ProfilePictureUrl AS EditorPicture
-      FROM ltp.GuideVersions gv
+      FROM ltp.GuideVersions_MDX_Legacy gv
       JOIN ltp.Users u ON u.Id = gv.EditedByUserId
       WHERE gv.Slug = @slug
       ORDER BY gv.VersionNumber DESC
@@ -67,7 +67,7 @@ export async function getNextVersionNumber(slug: string): Promise<number> {
   const result = await pool.request()
     .input('slug', sql.NVarChar, slug)
     .query<{ maxVer: number | null }>(`
-      SELECT MAX(VersionNumber) AS maxVer FROM ltp.GuideVersions WHERE Slug = @slug
+      SELECT MAX(VersionNumber) AS maxVer FROM ltp.GuideVersions_MDX_Legacy WHERE Slug = @slug
     `);
   return (result.recordset[0]?.maxVer ?? 0) + 1;
 }
@@ -93,7 +93,7 @@ export async function saveVersion(params: {
       await transaction.request()
         .input('slug', sql.NVarChar, params.slug)
         .query(`
-          UPDATE ltp.GuideVersions
+          UPDATE ltp.GuideVersions_MDX_Legacy
           SET IsCurrent = 0
           WHERE Slug = @slug AND IsCurrent = 1
         `);
@@ -110,7 +110,7 @@ export async function saveVersion(params: {
       .input('isPublished', sql.Bit, params.publish)
       .input('isCurrent', sql.Bit, params.publish)
       .query<DbGuideVersion>(`
-        INSERT INTO ltp.GuideVersions
+        INSERT INTO ltp.GuideVersions_MDX_Legacy
           (Slug, VersionNumber, Content, FrontmatterJson, EditedByUserId, EditSummary, ParentVersionId, IsPublished, IsCurrent)
         OUTPUT INSERTED.*
         VALUES (@slug, @versionNumber, @content, @frontmatterJson, @editedByUserId, @editSummary, @parentVersionId, @isPublished, @isCurrent)
@@ -127,14 +127,14 @@ export async function saveVersion(params: {
 export async function getAllDbSlugs(): Promise<string[]> {
   const pool = await getPool();
   const result = await pool.request()
-    .query<{ Slug: string }>('SELECT DISTINCT Slug FROM ltp.GuideVersions');
+    .query<{ Slug: string }>('SELECT DISTINCT Slug FROM ltp.GuideVersions_MDX_Legacy');
   return result.recordset.map(r => r.Slug);
 }
 
 export async function getAllCurrentGuides(): Promise<DbGuideVersion[]> {
   const pool = await getPool();
   const result = await pool.request()
-    .query<DbGuideVersion>('SELECT * FROM ltp.GuideVersions WHERE IsCurrent = 1');
+    .query<DbGuideVersion>('SELECT * FROM ltp.GuideVersions_MDX_Legacy WHERE IsCurrent = 1');
   return result.recordset;
 }
 

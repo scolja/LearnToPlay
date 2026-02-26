@@ -47,6 +47,11 @@ BoardGameTeacher/
 │       ├── content.ts                 # MDX file loading & frontmatter parsing
 │       └── types.ts                   # TypeScript interfaces
 │
+├── database/                          # SQL schema scripts (ltp schema)
+│   ├── schema-current.sql             # Full current-state DDL (source of truth)
+│   ├── 001_create_schema.sql          # Migration: Users, RefreshTokens, GuideVersions
+│   └── 002_create_section_schema.sql  # Migration: Guides, GuideSections, GlossaryEntries
+│
 ├── games/                             # Legacy standalone HTML guides (reference)
 │   └── [game-name]-learn.html
 │
@@ -64,6 +69,22 @@ BoardGameTeacher/
 - **TypeScript** for type safety
 - **Google Fonts** (Fraunces, Crimson Pro, DM Sans) loaded via `next/font/google`
 - No Tailwind — the design system CSS is comprehensive and self-contained
+- **SQL Server** database with `ltp` schema for guide storage and auth
+
+## Database Schema (`ltp` schema)
+
+All tables live under the `ltp` schema. See `database/schema-current.sql` for the full DDL.
+
+| Table | Purpose |
+|-------|---------|
+| `ltp.Users` | Authentication & identity (Google OAuth) |
+| `ltp.RefreshTokens` | JWT refresh token store |
+| `ltp.Guides` | Guide metadata (title, designer, publisher, hero image, etc.) |
+| `ltp.GuideSections` | Ordered content sections — markdown + JSON `DisplayData` bag |
+| `ltp.GlossaryEntries` | Searchable terms linked to guides and sections |
+| `ltp.GuideVersions_MDX_Legacy` | Legacy monolithic MDX versions (pre-section model) |
+
+Migration scripts in `database/` are numbered (`001_`, `002_`, ...) and represent the history of schema changes. The `schema-current.sql` file is the canonical reference for the deployed state.
 
 ## Key Conventions
 
