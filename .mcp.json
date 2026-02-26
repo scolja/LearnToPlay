@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "mssql": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "mcp-node-mssql"],
+      "env": {
+        "DB_HOST": "scolarodb.database.windows.net",
+        "DB_PORT": "1433",
+        "DB_USERNAME": "bgotyadmin",
+        "DB_PASSWORD": "BoardGameOfTheYear2024!",
+        "DB_DATABASE": "BGOTY",
+        "CONNECTION_TIMEOUT": "600000",
+        "REQUEST_TIMEOUT": "300000",
+        "DB_ENCRYPT": "true",
+        "DB_ENABLE_ARITH_ABORT": "true",
+        "DB_TRUST_SERVER_CERTIFICATE": "false",
+        "TRUSTED_CONNECTION": "false"
+      }
+    }
+  }
+}
