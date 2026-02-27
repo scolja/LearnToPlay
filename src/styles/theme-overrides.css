@@ -36,6 +36,20 @@
   border: 1px solid rgba(var(--text-light-rgb), 0.06);
 }
 
+/* Mini-game inner items — use darker bg for contrast against elevated container */
+[data-theme="dark"] .ss-item {
+  background: var(--bg-dark);
+}
+
+[data-theme="dark"] .ss-item.ss-dragging {
+  background: rgba(var(--gold-rgb), 0.08);
+}
+
+[data-theme="dark"] .sc-scenario,
+[data-theme="dark"] .se-scenario {
+  background: rgba(var(--text-light-rgb), 0.03);
+}
+
 /* Diagrams & demos */
 [data-theme="dark"] .diagram,
 [data-theme="dark"] .demo {

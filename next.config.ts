@@ -3,8 +3,13 @@ import path from 'path';
 import fs from 'fs';
 
 const contentDir = path.join(process.cwd(), 'content', 'games');
+const pkg = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
 
 const nextConfig: NextConfig = {
+  env: {
+    NEXT_PUBLIC_APP_VERSION: pkg.version,
+    NEXT_PUBLIC_APP_ENV: process.env.APP_ENV || process.env.NODE_ENV,
+  },
   output: 'standalone',
   trailingSlash: true,
   experimental: {

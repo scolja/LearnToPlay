@@ -321,6 +321,11 @@ export function SettingsDrawer({ open, onClose }: SettingsDrawerProps) {
             The quick brown fox jumps over the lazy dog.
           </p>
         </div>
+
+        {/* Version */}
+        <div className="sd-version">
+          v{process.env.NEXT_PUBLIC_APP_VERSION} · {process.env.NEXT_PUBLIC_APP_ENV}
+        </div>
       </div>
     </div>
   );

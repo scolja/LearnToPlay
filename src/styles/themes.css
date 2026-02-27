@@ -7,6 +7,10 @@
 [data-theme="classic"] {
   --text-rgb: 44, 36, 24;
   --text-light-rgb: 245, 239, 224;
+  --gold-rgb: 201, 169, 78;
+  --red-rgb: 185, 62, 62;
+  --green-rgb: 74, 124, 89;
+  --orange-rgb: 212, 128, 42;
   --bg-elevated: var(--bg-sidebar);
   --bg-surface: var(--bg);
   --shadow-color: rgba(0, 0, 0, 0.12);
@@ -31,6 +35,10 @@
   --border: rgba(30, 41, 59, 0.12);
   --text-rgb: 30, 41, 59;
   --text-light-rgb: 248, 250, 252;
+  --gold-rgb: 184, 148, 31;
+  --red-rgb: 185, 62, 62;
+  --green-rgb: 74, 124, 89;
+  --orange-rgb: 196, 106, 26;
   --bg-elevated: var(--bg-sidebar);
   --bg-surface: #f8fafc;
   --shadow-color: rgba(0, 0, 0, 0.08);
@@ -55,6 +63,10 @@
   --border: rgba(226, 232, 240, 0.1);
   --text-rgb: 226, 232, 240;
   --text-light-rgb: 241, 245, 249;
+  --gold-rgb: 212, 184, 90;
+  --red-rgb: 232, 112, 112;
+  --green-rgb: 124, 201, 142;
+  --orange-rgb: 232, 160, 96;
   --bg-elevated: #232946;
   --bg-surface: #232946;
   --shadow-color: rgba(0, 0, 0, 0.4);

@@ -297,3 +297,14 @@
   background: rgba(224, 112, 112, 0.1);
   border-radius: 6px;
 }
+
+/* Version footer */
+.sd-version {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  color: rgba(var(--text-light-rgb), 0.25);
+  text-align: center;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(var(--text-light-rgb), 0.06);
+}

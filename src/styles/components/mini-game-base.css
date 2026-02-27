@@ -13,45 +13,45 @@
   background: var(--bg-dark);
   color: var(--text-light);
   border-radius: 10px;
-  padding: 1.5rem;
-  margin: 2rem 0;
+  padding: 1rem;
+  margin: 1.25rem 0;
 }
 
 .mini-game h4 {
   font-family: var(--font-display);
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--gold);
-  margin: 0 0 0.3rem 0;
+  margin: 0 0 0.2rem 0;
 }
 
 .mini-game-type {
   font-family: var(--font-ui);
-  font-size: 9px;
+  font-size: 0.5625rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: rgba(201,169,78,0.5);
-  margin-bottom: 0.6rem;
+  color: rgba(var(--gold-rgb), 0.5);
+  margin-bottom: 0.4rem;
 }
 
 .mini-game-desc {
   font-family: var(--font-ui);
-  font-size: 13px;
-  color: rgba(var(--text-light-rgb),0.7);
-  margin-bottom: 1rem;
+  font-size: 0.8125rem;
+  color: rgba(var(--text-light-rgb), 0.7);
+  margin-bottom: 0.75rem;
   line-height: 1.5;
 }
 
 .mini-game-btn {
   font-family: var(--font-ui);
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
   background: transparent;
   color: var(--gold);
   border: 1.5px solid var(--gold);
   border-radius: 6px;
-  padding: 6px 18px;
+  padding: 0.375rem 1rem;
   cursor: pointer;
   transition: all 0.2s;
   min-height: 44px;
@@ -76,35 +76,35 @@
 
 .mini-game-explanation {
   font-family: var(--font-ui);
-  font-size: 13px;
-  color: rgba(var(--text-light-rgb),0.85);
-  background: rgba(201,169,78,0.08);
+  font-size: 0.8125rem;
+  color: rgba(var(--text-light-rgb), 0.85);
+  background: rgba(var(--gold-rgb), 0.08);
   border-left: 3px solid var(--gold);
-  padding: 0.8rem 1rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 0 6px 6px 0;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   line-height: 1.6;
   animation: mg-fade-in 0.3s ease;
 }
 
 .mini-game-success {
   font-family: var(--font-ui);
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: #7cc98e;
-  margin-top: 0.6rem;
+  color: var(--green);
+  margin-top: 0.5rem;
   animation: mg-fade-in 0.3s ease;
 }
 
 .mini-game-retry {
   font-family: var(--font-ui);
-  font-size: 12px;
-  color: rgba(var(--text-light-rgb),0.5);
+  font-size: 0.75rem;
+  color: rgba(var(--text-light-rgb), 0.5);
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
-  margin-top: 0.4rem;
+  margin-top: 0.3rem;
   text-decoration: underline;
   transition: color 0.2s;
 }

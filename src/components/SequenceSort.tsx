@@ -37,17 +37,17 @@ export function SequenceSort({ title = 'Put These in Order', description, items,
   const [checked, setChecked] = useState(false);
   const [solved, setSolved] = useState(false);
 
-  // Drag state
+  // Render state (drives re-renders & CSS classes)
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [overIndex, setOverIndex] = useState<number | null>(null);
+
+  // Refs for synchronous access in event handlers (avoids stale closures)
+  const dragIndexRef = useRef<number | null>(null);
+  const overIndexRef = useRef<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const dragStartY = useRef(0);
-  const dragCurrentY = useRef(0);
   const isDragging = useRef(false);
-
-  // Click-to-swap fallback
-  const [selected, setSelected] = useState<number | null>(null);
 
   const isCorrectPosition = useCallback((index: number): boolean => {
     return order[index].position === sorted[index].position;
@@ -55,31 +55,14 @@ export function SequenceSort({ title = 'Put These in Order', description, items,
 
   function handleCheck() {
     setChecked(true);
-    setSelected(null);
     const correct = order.every((item, i) => item.position === sorted[i].position);
     if (correct) setSolved(true);
   }
 
-  // --- Click-to-swap fallback ---
-  function handleTap(index: number) {
-    if (solved || isDragging.current) return;
-    if (selected === null) {
-      setSelected(index);
-      setChecked(false);
-    } else if (selected === index) {
-      setSelected(null);
-    } else {
-      const next = [...order];
-      [next[selected], next[index]] = [next[index], next[selected]];
-      setOrder(next);
-      setSelected(null);
-      setChecked(false);
-    }
-  }
-
-  // --- Touch drag-and-drop ---
-  const getItemIndexAtY = useCallback((clientY: number): number | null => {
+  // --- Item index from Y coordinate (skip the dragged item whose rect is shifted) ---
+  const getItemIndexAtY = useCallback((clientY: number, skipIndex: number): number | null => {
     for (let i = 0; i < itemRefs.current.length; i++) {
+      if (i === skipIndex) continue;
       const el = itemRefs.current[i];
       if (!el) continue;
       const rect = el.getBoundingClientRect();
@@ -90,93 +73,97 @@ export function SequenceSort({ title = 'Put These in Order', description, items,
     return null;
   }, []);
 
-  const handleDragStart = useCallback((index: number, clientY: number) => {
+  // --- Drag start (shared by touch & mouse) ---
+  const startDrag = useCallback((index: number, clientY: number) => {
     if (solved) return;
-    isDragging.current = false; // Will become true once threshold is exceeded
+    isDragging.current = false;
     dragStartY.current = clientY;
-    dragCurrentY.current = clientY;
+    dragIndexRef.current = index;
+    overIndexRef.current = index;
     setDragIndex(index);
     setOverIndex(index);
-    setSelected(null);
     setChecked(false);
   }, [solved]);
 
-  const handleDragMove = useCallback((clientY: number) => {
-    if (dragIndex === null) return;
+  // --- Drag move (shared by touch & mouse) ---
+  const moveDrag = useCallback((clientY: number) => {
+    const di = dragIndexRef.current;
+    if (di === null) return;
 
     const delta = Math.abs(clientY - dragStartY.current);
-    if (delta > 5) {
-      isDragging.current = true;
-    }
+    if (delta > 5) isDragging.current = true;
 
-    dragCurrentY.current = clientY;
-    const target = getItemIndexAtY(clientY);
-    if (target !== null && target !== overIndex) {
+    const target = getItemIndexAtY(clientY, di);
+    if (target !== null && target !== overIndexRef.current) {
+      overIndexRef.current = target;
       setOverIndex(target);
     }
 
-    // Apply transform to the dragged element
-    const el = itemRefs.current[dragIndex];
+    const el = itemRefs.current[di];
     if (el && isDragging.current) {
       const offset = clientY - dragStartY.current;
       el.style.transform = `translateY(${offset}px) scale(1.03)`;
       el.style.zIndex = '10';
     }
-  }, [dragIndex, overIndex, getItemIndexAtY]);
+  }, [getItemIndexAtY]);
 
-  const handleDragEnd = useCallback(() => {
-    if (dragIndex === null) return;
+  // --- Drag end (shared by touch & mouse) ---
+  const endDrag = useCallback(() => {
+    const di = dragIndexRef.current;
+    if (di === null) return;
 
-    // Reset transform on dragged element
-    const el = itemRefs.current[dragIndex];
+    // Reset transform
+    const el = itemRefs.current[di];
     if (el) {
       el.style.transform = '';
       el.style.zIndex = '';
     }
 
-    if (isDragging.current && overIndex !== null && overIndex !== dragIndex) {
-      // Reorder: move dragIndex item to overIndex position
-      const next = [...order];
-      const [moved] = next.splice(dragIndex, 1);
-      next.splice(overIndex, 0, moved);
-      setOrder(next);
+    if (isDragging.current) {
+      const oi = overIndexRef.current;
+      if (oi !== null && oi !== di) {
+        setOrder(prev => {
+          const next = [...prev];
+          const [moved] = next.splice(di, 1);
+          next.splice(oi, 0, moved);
+          return next;
+        });
+      }
     }
 
+    dragIndexRef.current = null;
+    overIndexRef.current = null;
     setDragIndex(null);
     setOverIndex(null);
     isDragging.current = false;
-  }, [dragIndex, overIndex, order]);
+  }, []);
 
-  // Touch event handlers
+  // --- Touch handlers ---
   const onTouchStart = useCallback((index: number) => (e: React.TouchEvent) => {
-    handleDragStart(index, e.touches[0].clientY);
-  }, [handleDragStart]);
+    startDrag(index, e.touches[0].clientY);
+  }, [startDrag]);
 
   const onTouchMove = useCallback((e: React.TouchEvent) => {
-    if (dragIndex === null) return;
+    if (dragIndexRef.current === null) return;
     e.preventDefault();
-    handleDragMove(e.touches[0].clientY);
-  }, [dragIndex, handleDragMove]);
+    moveDrag(e.touches[0].clientY);
+  }, [moveDrag]);
 
   const onTouchEnd = useCallback(() => {
-    handleDragEnd();
-  }, [handleDragEnd]);
+    endDrag();
+  }, [endDrag]);
 
-  // Mouse event handlers (for desktop testing)
+  // --- Mouse handlers (desktop) ---
   const onMouseDown = useCallback((index: number) => (e: React.MouseEvent) => {
     e.preventDefault();
-    handleDragStart(index, e.clientY);
-  }, [handleDragStart]);
+    startDrag(index, e.clientY);
+  }, [startDrag]);
 
   useEffect(() => {
     if (dragIndex === null) return;
 
-    const onMove = (e: MouseEvent) => {
-      handleDragMove(e.clientY);
-    };
-    const onUp = () => {
-      handleDragEnd();
-    };
+    const onMove = (e: MouseEvent) => moveDrag(e.clientY);
+    const onUp = () => endDrag();
 
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
@@ -184,7 +171,7 @@ export function SequenceSort({ title = 'Put These in Order', description, items,
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseup', onUp);
     };
-  }, [dragIndex, handleDragMove, handleDragEnd]);
+  }, [dragIndex, moveDrag, endDrag]);
 
   return (
     <div className="mini-game seqsort">
@@ -193,13 +180,12 @@ export function SequenceSort({ title = 'Put These in Order', description, items,
       {description && <div className="mini-game-desc">{description}</div>}
 
       <div className="ss-instruction">
-        {solved ? 'Correct order!' : 'Drag items to reorder, or tap two to swap.'}
+        {solved ? 'Correct order!' : 'Drag items into the correct order.'}
       </div>
 
       <div className="ss-items" ref={containerRef}>
         {order.map((item, i) => {
           let cls = 'ss-item';
-          if (selected === i) cls += ' ss-selected';
           if (dragIndex === i && isDragging.current) cls += ' ss-dragging';
           if (dragIndex !== null && overIndex === i && i !== dragIndex && isDragging.current) cls += ' ss-drop-target';
           if (checked && !solved) {
@@ -211,7 +197,6 @@ export function SequenceSort({ title = 'Put These in Order', description, items,
               key={item.position}
               ref={el => { itemRefs.current[i] = el; }}
               className={cls}
-              onClick={() => handleTap(i)}
               onTouchStart={onTouchStart(i)}
               onTouchMove={onTouchMove}
               onTouchEnd={onTouchEnd}
@@ -228,12 +213,12 @@ export function SequenceSort({ title = 'Put These in Order', description, items,
 
       <div className="ss-actions">
         {!solved && (
-          <button className="mini-game-btn" onClick={handleCheck} disabled={selected !== null || dragIndex !== null}>
+          <button className="mini-game-btn" onClick={handleCheck} disabled={dragIndex !== null}>
             Check Order
           </button>
         )}
         {checked && !solved && (
-          <span className="ss-hint">Items in red are in the wrong position. Drag or swap them and try again.</span>
+          <span className="ss-hint">Items in red are in the wrong position. Drag them and try again.</span>
         )}
       </div>
 

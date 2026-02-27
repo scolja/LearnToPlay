@@ -71,7 +71,8 @@ BoardGameTeacher/
     ├── create-guide.md                # /create-guide — Generate a new teaching page
     ├── review-guide.md                # /review-guide — Review an existing guide
     ├── research-game.md               # /research-game — Pre-research a game
-    └── check-style.md                 # /check-style — Validate style compliance
+    ├── check-style.md                 # /check-style — Validate style compliance
+    └── deploy-android.md              # /deploy-android — Build & install APK on phone
 ```
 
 ## Tech Stack
@@ -225,6 +226,14 @@ npm run dev          # Start dev server
 npm run build        # Build static site (outputs to out/)
 npm run lint         # Run ESLint
 ```
+
+### Versioning
+
+The app version is displayed in the Settings drawer (bottom). It shows `vX.Y.Z · environment` to identify which build is running on a device.
+
+- **Version source**: `package.json` `version` field, exposed at build time via `NEXT_PUBLIC_APP_VERSION` in `next.config.ts`
+- **Environment**: `NEXT_PUBLIC_APP_ENV`, defaults to `NODE_ENV` (`development` / `production`). Set `APP_ENV=staging` for staging builds.
+- **Bumping**: Run `npm version patch` (or `minor` / `major`) before deploying. This updates `package.json` and creates a git tag.
 
 ## Capacitor / Android Deployment
 
