@@ -22,18 +22,27 @@
 
 .mu-item {
   padding: 10px 14px;
-  border: 1px solid rgba(var(--text-light-rgb),0.12);
-  border-radius: 6px;
+  border: 1.5px solid rgba(var(--text-light-rgb),0.12);
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: border-color 0.2s, background 0.2s, color 0.2s, opacity 0.3s;
   font-family: var(--font-ui);
   font-size: 13px;
   color: var(--text-light);
   line-height: 1.4;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
 }
 
-.mu-item:hover {
+.mu-item:active {
   border-color: var(--gold);
+}
+
+@media (hover: hover) {
+  .mu-item:hover {
+    border-color: var(--gold);
+  }
 }
 
 .mu-item.mu-selected {
@@ -47,21 +56,24 @@
   background: rgba(74,124,89,0.15);
   color: #7cc98e;
   pointer-events: none;
+  animation: mg-fade-in 0.3s ease;
 }
 
 .mu-item.mu-wrong {
   border-color: var(--red);
   background: rgba(185,62,62,0.15);
   color: #e87070;
-  animation: mu-shake 0.4s ease;
+  animation: mu-shake 0.5s ease;
 }
 
 @keyframes mu-shake {
   0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-4px); }
-  40% { transform: translateX(4px); }
-  60% { transform: translateX(-3px); }
-  80% { transform: translateX(3px); }
+  15% { transform: translateX(-5px); }
+  30% { transform: translateX(5px); }
+  45% { transform: translateX(-4px); }
+  60% { transform: translateX(4px); }
+  75% { transform: translateX(-2px); }
+  90% { transform: translateX(2px); }
 }
 
 .mu-connector {
@@ -77,7 +89,7 @@
   height: 28px;
   background: rgba(var(--text-light-rgb),0.08);
   border-radius: 1px;
-  transition: background 0.3s;
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
 .mu-line.mu-line-active {
@@ -85,7 +97,8 @@
   box-shadow: 0 0 6px rgba(74,124,89,0.4);
 }
 
-@media (max-width: 600px) {
+/* Single-column at 480px instead of 600px to keep two-column on most phones */
+@media (max-width: 480px) {
   .mu-columns {
     grid-template-columns: 1fr;
     gap: 0.3rem;

@@ -48,6 +48,7 @@ body:has(.me-layout) .site-user-menu {
   flex-shrink: 0;
   /* Safe area for notched phones */
   padding-top: max(0.75rem, calc(env(safe-area-inset-top) + 0.4rem));
+  min-height: 3.5rem;
 }
 
 .cv-back {

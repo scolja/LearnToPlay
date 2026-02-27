@@ -60,6 +60,13 @@ BoardGameTeacher/
 ├── games/                             # Legacy standalone HTML guides (reference)
 │   └── [game-name]-learn.html
 │
+├── android/                           # Capacitor Android project (Android Studio)
+│   ├── app/                           # Android app module
+│   │   └── build/outputs/apk/        # Built APKs (learntoplay-debug.apk)
+│   └── capacitor.settings.gradle      # Capacitor Gradle settings
+│
+├── capacitor.config.ts                # Capacitor config (dev/prod server URLs)
+│
 └── .claude/commands/                  # Skills for creating and reviewing guides
     ├── create-guide.md                # /create-guide — Generate a new teaching page
     ├── review-guide.md                # /review-guide — Review an existing guide
@@ -75,6 +82,7 @@ BoardGameTeacher/
 - No Tailwind — the design system CSS is comprehensive and self-contained
 - **SQL Server** database with `ltp` schema for guide storage and auth
 - **marked** for server-side markdown → HTML rendering (section content is markdown, not MDX)
+- **Capacitor** for native Android app — wraps the Next.js site in a WebView
 
 ## Database Schema (`ltp` schema)
 
@@ -143,6 +151,10 @@ Section content supports these directive blocks (parsed by `section-renderer.ts`
 | `:::html-block` / `:::styled-block` | `htmlBlocks: string[]` | Raw HTML (indexed) |
 | `:::grid-visual` | `gridVisuals: string[]` | Grid layout HTML (indexed) |
 | `:::dice-roller` | — | Interactive dice roller |
+| `:::sequence-sort` | `sequenceSort: {title?, description?, items, explanation?}` | Drag-and-drop sequence ordering |
+| `:::spot-the-error` | `spotTheError: {title?, scenario, statements}` | Find the incorrect statement |
+| `:::scenario-challenge` | `scenarioChallenge: {title?, scenario, choices}` | Scenario-based multiple choice |
+| `:::match-up` | `matchUp: {title?, description?, pairs, explanation?}` | Match pairs (left ↔ right) |
 
 **Indexed directives:** Some directives (flow, diagram, html-block, grid-visual) support multiple instances per section. The Nth occurrence in content maps to the Nth entry in the corresponding DisplayData array.
 
@@ -213,6 +225,33 @@ npm run dev          # Start dev server
 npm run build        # Build static site (outputs to out/)
 npm run lint         # Run ESLint
 ```
+
+## Capacitor / Android Deployment
+
+The app is wrapped in a native Android shell via Capacitor. `capacitor.config.ts` controls the WebView target:
+
+- **Dev mode** (`CAP_DEV=1`): WebView points to `http://192.168.86.38:5445` (local network dev server)
+- **Production**: WebView points to `https://learntoplay.azurewebsites.net`
+
+### Deploy to Android phone (dev mode)
+
+```bash
+# 1. Start dev server (if not running)
+npm run dev:android          # port 5445, hostname 0.0.0.0
+
+# 2. Sync Capacitor with dev mode
+CAP_DEV=1 npx cap sync android
+
+# 3. Build the APK
+export JAVA_HOME="/c/Program Files/Android/Android Studio/jbr"
+export ANDROID_HOME="/c/Users/jason/AppData/Local/Android/Sdk"
+cd android && ./gradlew assembleDebug && cd ..
+
+# 4. Install on connected phone
+"$ANDROID_HOME/platform-tools/adb" install -r android/app/build/outputs/apk/debug/learntoplay-debug.apk
+```
+
+**Important:** The phone and dev machine must be on the same Wi-Fi network. The APK is named `learntoplay-debug.apk` (not `app-debug.apk`).
 
 ## Rules for Guide Content
 

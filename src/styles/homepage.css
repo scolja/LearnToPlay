@@ -24,16 +24,18 @@ body:has(.hp-shell) .site-user-menu {
   color: var(--text-light);
   flex-shrink: 0;
   padding-top: max(0.75rem, calc(env(safe-area-inset-top) + 0.4rem));
+  min-height: 3.5rem;
 }
 .hp-topbar-logo {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 8px;
 }
 .hp-topbar-title {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 700;
+  line-height: 1.2;
 }
 .hp-topbar-actions {
   margin-left: auto;

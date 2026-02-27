@@ -4,6 +4,10 @@ import { useState, useCallback } from 'react';
 import type { ContentBlock } from '@/lib/types';
 import { QuizCard } from './QuizCard';
 import { DiceRoller } from '../DiceRoller';
+import { SequenceSort } from '../SequenceSort';
+import { SpotTheError } from '../SpotTheError';
+import { ScenarioChallenge } from '../ScenarioChallenge';
+import { MatchUp } from '../MatchUp';
 import { Lightbox } from './Lightbox';
 
 interface ContentBlockRendererProps {
@@ -126,6 +130,18 @@ function ContentBlockInner({ block, onHtmlClick, onOpenLightbox }: ContentBlockI
 
     case 'dice-roller':
       return <DiceRoller />;
+
+    case 'sequence-sort':
+      return <SequenceSort items={block.items} title={block.title} description={block.description} explanation={block.explanation} />;
+
+    case 'spot-the-error':
+      return <SpotTheError scenario={block.scenario} statements={block.statements} title={block.title} />;
+
+    case 'scenario-challenge':
+      return <ScenarioChallenge scenario={block.scenario} choices={block.choices} title={block.title} />;
+
+    case 'match-up':
+      return <MatchUp pairs={block.pairs} title={block.title} description={block.description} explanation={block.explanation} />;
 
     case 'grid-visual':
       return (

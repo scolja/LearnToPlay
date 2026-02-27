@@ -1,12 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-
-interface ScenarioChoice {
-  text: string;
-  result: string;
-  quality: 'best' | 'good' | 'suboptimal';
-}
+import type { ScenarioChoice } from '@/lib/types';
 
 interface ScenarioChallengeProps {
   title?: string;

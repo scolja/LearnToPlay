@@ -27,14 +27,21 @@
 
 .se-stmt {
   padding: 10px 14px;
-  border: 1px solid rgba(var(--text-light-rgb),0.12);
-  border-radius: 6px;
+  border: 1.5px solid rgba(var(--text-light-rgb),0.12);
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: border-color 0.2s, background 0.2s, opacity 0.3s;
+  min-height: 44px;
 }
 
-.se-stmt:hover {
+.se-stmt:active {
   border-color: var(--gold);
+}
+
+@media (hover: hover) {
+  .se-stmt:hover {
+    border-color: var(--gold);
+  }
 }
 
 .se-stmt-text {
@@ -48,19 +55,19 @@
 .se-stmt.se-error-found {
   border-color: var(--red);
   background: rgba(185,62,62,0.12);
+  animation: mg-fade-in 0.3s ease;
 }
 
-/* Valid statement (shown after solve) */
+/* Valid statement — stronger eliminated state */
 .se-stmt.se-valid {
   border-color: var(--green);
-  background: rgba(74,124,89,0.08);
-  opacity: 0.7;
+  background: rgba(74,124,89,0.06);
+  opacity: 0.5;
 }
 
-/* Wrong pick flash */
-.se-stmt.se-wrong-pick {
-  border-color: var(--green);
-  background: rgba(74,124,89,0.1);
+.se-stmt.se-valid .se-stmt-text {
+  text-decoration: line-through;
+  text-decoration-color: rgba(124,201,142,0.4);
 }
 
 /* Feedback text */
@@ -71,6 +78,7 @@
   margin-top: 0.5rem;
   border-top: 1px solid rgba(var(--text-light-rgb),0.06);
   line-height: 1.5;
+  animation: mg-fade-in 0.3s ease;
 }
 
 .se-fb-error {

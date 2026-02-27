@@ -1,12 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-
-interface ErrorStatement {
-  text: string;
-  isError: boolean;
-  explanation: string;
-}
+import type { ErrorStatement } from '@/lib/types';
 
 interface SpotTheErrorProps {
   title?: string;
@@ -17,16 +12,16 @@ interface SpotTheErrorProps {
 export function SpotTheError({ title = 'Spot the Error', scenario, statements }: SpotTheErrorProps) {
   if (!statements || statements.length === 0) return null;
 
-  const [selected, setSelected] = useState<number | null>(null);
   const [solved, setSolved] = useState(false);
   const [cleared, setCleared] = useState<Set<number>>(new Set());
+
+  const checkedCount = cleared.size + (solved ? 1 : 0);
 
   function handleClick(index: number) {
     if (solved || cleared.has(index)) return;
 
     const stmt = statements[index];
     if (stmt.isError) {
-      setSelected(index);
       setSolved(true);
     } else {
       setCleared(prev => new Set(prev).add(index));
@@ -43,7 +38,7 @@ export function SpotTheError({ title = 'Spot the Error', scenario, statements }:
       <div className="se-instruction">
         {solved
           ? 'Error found!'
-          : 'One of these statements describes something that breaks a rule. Click it.'}
+          : `Tap the statement that breaks a rule. ${checkedCount > 0 ? `${checkedCount} of ${statements.length} checked.` : ''}`}
       </div>
 
       <div className="se-statements">
@@ -66,13 +61,13 @@ export function SpotTheError({ title = 'Spot the Error', scenario, statements }:
               <div className="se-stmt-text">{stmt.text}</div>
               {solved && (
                 <div className={`se-feedback ${stmt.isError ? 'se-fb-error' : 'se-fb-ok'}`}>
-                  {stmt.isError ? '✗ Rule violation: ' : '✓ This is fine — '}
+                  {stmt.isError ? '✗ Rule violation: ' : '✓ Correct — '}
                   {stmt.explanation}
                 </div>
               )}
               {isCleared && !solved && (
                 <div className="se-feedback se-fb-ok">
-                  ✓ This is actually correct — {stmt.explanation}
+                  ✓ This is correct — {stmt.explanation}
                 </div>
               )}
             </div>

@@ -128,7 +128,33 @@ export type ContentBlock =
   | { type: 'strip'; items: { num: number; label: string }[] }
   | { type: 'styled-html'; html: string }
   | { type: 'dice-roller' }
-  | { type: 'grid-visual'; html: string };
+  | { type: 'grid-visual'; html: string }
+  | { type: 'sequence-sort'; title?: string; description?: string; items: SequenceSortItem[]; explanation?: string }
+  | { type: 'spot-the-error'; title?: string; scenario: string; statements: ErrorStatement[] }
+  | { type: 'scenario-challenge'; title?: string; scenario: string; choices: ScenarioChoice[] }
+  | { type: 'match-up'; title?: string; description?: string; pairs: MatchPair[]; explanation?: string };
+
+export interface SequenceSortItem {
+  text: string;
+  position: number;
+}
+
+export interface ErrorStatement {
+  text: string;
+  isError: boolean;
+  explanation: string;
+}
+
+export interface ScenarioChoice {
+  text: string;
+  result: string;
+  quality: 'best' | 'good' | 'suboptimal';
+}
+
+export interface MatchPair {
+  left: string;
+  right: string;
+}
 
 export interface QuizQuestion {
   question: string;

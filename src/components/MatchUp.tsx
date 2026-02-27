@@ -1,11 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-
-interface MatchPair {
-  left: string;
-  right: string;
-}
+import type { MatchPair } from '@/lib/types';
 
 interface MatchUpProps {
   title?: string;
@@ -32,7 +28,8 @@ export function MatchUp({ title = 'Match the Pairs', description, pairs, explana
   const [matched, setMatched] = useState<Record<number, number>>({}); // leftIdx → rightIdx
   const [wrongFlash, setWrongFlash] = useState<number | null>(null);
 
-  const allMatched = Object.keys(matched).length === pairs.length;
+  const matchedCount = Object.keys(matched).length;
+  const allMatched = matchedCount === pairs.length;
 
   function handleLeftClick(leftIdx: number) {
     if (allMatched || matched[leftIdx] !== undefined) return;
@@ -57,7 +54,7 @@ export function MatchUp({ title = 'Match the Pairs', description, pairs, explana
       setTimeout(() => {
         setWrongFlash(null);
         setSelectedLeft(null);
-      }, 600);
+      }, 800);
     }
   }
 
@@ -74,7 +71,7 @@ export function MatchUp({ title = 'Match the Pairs', description, pairs, explana
       <div className="mu-instruction">
         {allMatched
           ? 'All pairs matched!'
-          : 'Click an item on the left, then click its match on the right.'}
+          : `Tap left, then tap its match on the right.${matchedCount > 0 ? ` ${matchedCount} of ${pairs.length} matched.` : ''}`}
       </div>
 
       <div className="mu-columns">

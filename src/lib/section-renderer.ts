@@ -1,5 +1,5 @@
 import { marked } from 'marked';
-import type { ContentBlock, NoteCard, GuideSection, RenderedSection } from './types';
+import type { ContentBlock, NoteCard, GuideSection, RenderedSection, SequenceSortItem, ErrorStatement, ScenarioChoice, MatchPair } from './types';
 
 // ---------------------------------------------------------------------------
 // Pre-process custom syntax before feeding to marked
@@ -54,9 +54,8 @@ function parseContentBlocks(
   const blocks: ContentBlock[] = [];
 
   // Split on directive markers: :::type\n...\n:::
-  // Use a greedy-enough pattern that won't match nested ::: — split on complete
-  // directive blocks delimited by ::: on their own lines or start/end of content.
-  const parts = markdown.split(/(:::[\w-]+\n[\s\S]*?\n:::)/);
+  // The \n? before closing ::: handles empty-body directives like :::quiz\n:::
+  const parts = markdown.split(/(:::[\w-]+\n[\s\S]*?\n?:::)/);
 
   let diagramIdx = 0;
   let flowIdx = 0;
@@ -147,6 +146,34 @@ function parseContentBlocks(
           if (styledBlocks && styledBlocks[styledHtmlIdx]) {
             blocks.push({ type: 'styled-html', html: styledBlocks[styledHtmlIdx] });
             styledHtmlIdx++;
+          }
+          break;
+        }
+        case 'sequence-sort': {
+          const data = displayData?.sequenceSort as { title?: string; description?: string; items: SequenceSortItem[]; explanation?: string } | undefined;
+          if (data?.items) {
+            blocks.push({ type: 'sequence-sort', title: data.title, description: data.description, items: data.items, explanation: data.explanation });
+          }
+          break;
+        }
+        case 'spot-the-error': {
+          const data = displayData?.spotTheError as { title?: string; scenario: string; statements: ErrorStatement[] } | undefined;
+          if (data?.statements) {
+            blocks.push({ type: 'spot-the-error', title: data.title, scenario: data.scenario, statements: data.statements });
+          }
+          break;
+        }
+        case 'scenario-challenge': {
+          const data = displayData?.scenarioChallenge as { title?: string; scenario: string; choices: ScenarioChoice[] } | undefined;
+          if (data?.choices) {
+            blocks.push({ type: 'scenario-challenge', title: data.title, scenario: data.scenario, choices: data.choices });
+          }
+          break;
+        }
+        case 'match-up': {
+          const data = displayData?.matchUp as { title?: string; description?: string; pairs: MatchPair[]; explanation?: string } | undefined;
+          if (data?.pairs) {
+            blocks.push({ type: 'match-up', title: data.title, description: data.description, pairs: data.pairs, explanation: data.explanation });
           }
           break;
         }
