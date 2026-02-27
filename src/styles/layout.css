@@ -27,7 +27,7 @@
 .main { min-width: 0; }
 .step-tag {
   font-family: var(--font-ui);
-  font-size: 10px;
+  font-size: 0.556rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -80,10 +80,10 @@
 .setup-list li::before {
   content: counter(setup);
   font-family: var(--font-ui);
-  font-size: 12px;
+  font-size: 0.667rem;
   font-weight: 700;
   color: var(--gold);
-  background: rgba(201,169,78,0.1);
+  background: rgba(var(--gold-rgb),0.1);
   border-radius: 50%;
   width: 24px;
   height: 24px;
@@ -103,7 +103,7 @@
 }
 .diagram-title {
   font-family: var(--font-ui);
-  font-size: 10px;
+  font-size: 0.556rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -120,7 +120,7 @@
 }
 .demo-title {
   font-family: var(--font-ui);
-  font-size: 10px;
+  font-size: 0.556rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -130,7 +130,7 @@
 }
 .demo-btn {
   font-family: var(--font-ui);
-  font-size: 13px;
+  font-size: 0.722rem;
   font-weight: 600;
   background: transparent;
   color: var(--gold);
@@ -146,7 +146,7 @@
 }
 .demo-result {
   font-family: var(--font-ui);
-  font-size: 13px;
+  font-size: 0.722rem;
   color: var(--text-light);
   margin-top: 0.8rem;
   min-height: 1.4rem;

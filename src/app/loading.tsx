@@ -1,6 +1,6 @@
 export default function HomeLoading() {
   return (
-    <div className="hp-shell">
+    <div className="hp-shell hp-loading">
       {/* Mobile top bar */}
       <header className="hp-topbar">
         {/* eslint-disable-next-line @next/next/no-img-element */}

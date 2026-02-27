@@ -44,6 +44,8 @@
 @import '../styles/mobile/lightbox.css';
 @import '../styles/mobile/toc.css';
 @import '../styles/mobile/skeleton.css';
+@import '../styles/mobile/download-bar.css';
+@import '../styles/mobile/downloads-page.css';
 
 /* Theme toggle, settings & controls */
 @import '../styles/theme-toggle.css';

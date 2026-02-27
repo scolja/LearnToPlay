@@ -24,11 +24,11 @@
   letter-spacing: 2px;
 }
 
-.tc-label-gold { color: #c9a94e; }
-.tc-label-red { color: #e87070; }
-.tc-label-green { color: #7cc98e; }
-.tc-label-blue { color: #7eaee0; }
-.tc-label-purple { color: #b899d4; }
+.tc-label-gold { color: var(--gold); }
+.tc-label-red { color: var(--red); }
+.tc-label-green { color: var(--green); }
+.tc-label-blue { color: var(--blue); }
+.tc-label-purple { color: var(--purple); }
 
 /* Body — always visible */
 .tc-body {

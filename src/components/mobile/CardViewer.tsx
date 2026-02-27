@@ -8,6 +8,7 @@ import { SectionCard } from './SectionCard';
 import { ProgressDots } from './ProgressDots';
 import { TableOfContents } from './TableOfContents';
 import { BottomNav } from './BottomNav';
+import { DownloadBar } from './DownloadBar';
 
 
 interface CardViewerProps {
@@ -264,6 +265,9 @@ export function CardViewer({ guide, sections }: CardViewerProps) {
           {currentIndex + 1}/{total}
         </button>
       </header>
+
+      {/* Offline download status */}
+      <DownloadBar slug={guide.slug} title={guide.title} heroImage={guide.heroImage} />
 
       {/* Highlight banner from glossary navigation */}
       {highlightTerm && (

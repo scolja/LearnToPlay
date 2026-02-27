@@ -58,16 +58,16 @@
   animation: mg-fade-in 0.3s ease;
 }
 
-/* Valid statement — stronger eliminated state */
+/* Valid statement — visually muted but feedback stays readable */
 .se-stmt.se-valid {
   border-color: var(--green);
   background: rgba(var(--green-rgb), 0.06);
-  opacity: 0.5;
 }
 
 .se-stmt.se-valid .se-stmt-text {
   text-decoration: line-through;
   text-decoration-color: rgba(var(--green-rgb), 0.4);
+  opacity: 0.5;
 }
 
 /* Feedback text */
@@ -81,10 +81,11 @@
   animation: mg-fade-in 0.3s ease;
 }
 
+/* Feedback text sits on dark bg in all themes — needs light-readable colors */
 .se-fb-error {
-  color: var(--red);
+  color: var(--red-on-dark);
 }
 
 .se-fb-ok {
-  color: var(--green);
+  color: var(--green-on-dark);
 }

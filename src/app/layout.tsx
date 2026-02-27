@@ -71,6 +71,8 @@ export default function RootLayout({
           var f=localStorage.getItem('ltp_font_size');
           if(f&&['small','large','x-large'].indexOf(f)!==-1){
           document.documentElement.setAttribute('data-font-size',f)}
+          if(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform()){
+          document.documentElement.setAttribute('data-native-app','')}
           }catch(e){}})();
         `}} />
       </head>

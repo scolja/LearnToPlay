@@ -60,7 +60,7 @@ body:has(.me-layout) .site-user-menu {
   transition: background 0.15s;
 }
 .cv-back:active {
-  background: rgba(201, 169, 78, 0.15);
+  background: rgba(var(--gold-rgb), 0.15);
 }
 
 .cv-topbar-title {
@@ -90,11 +90,11 @@ body:has(.me-layout) .site-user-menu {
   height: 32px;
   border-radius: 6px;
   color: var(--gold);
-  background: rgba(201, 169, 78, 0.12);
+  background: rgba(var(--gold-rgb), 0.12);
   transition: background 0.15s;
 }
 .cv-edit-btn:hover {
-  background: rgba(201, 169, 78, 0.25);
+  background: rgba(var(--gold-rgb), 0.25);
 }
 
 /* Highlight banner (from glossary jump) */
@@ -129,7 +129,7 @@ body:has(.me-layout) .site-user-menu {
   -webkit-tap-highlight-color: transparent;
 }
 .cv-hl-banner button:active {
-  background: rgba(201, 169, 78, 0.15);
+  background: rgba(var(--gold-rgb), 0.15);
 }
 
 /* Term highlighting marks */
@@ -139,12 +139,12 @@ mark.gl-hl {
   padding: 0.05em 0.25em;
   border-radius: 3px;
   font-weight: 700;
-  box-shadow: 0 0 0 2px var(--gold), 0 0 8px rgba(201, 169, 78, 0.5);
+  box-shadow: 0 0 0 2px var(--gold), 0 0 8px rgba(var(--gold-rgb), 0.5);
   animation: gl-hl-pulse 2s ease-in-out infinite;
 }
 @keyframes gl-hl-pulse {
-  0%, 100% { box-shadow: 0 0 0 2px var(--gold), 0 0 8px rgba(201, 169, 78, 0.5); }
-  50% { box-shadow: 0 0 0 3px var(--gold), 0 0 16px rgba(201, 169, 78, 0.8); }
+  0%, 100% { box-shadow: 0 0 0 2px var(--gold), 0 0 8px rgba(var(--gold-rgb), 0.5); }
+  50% { box-shadow: 0 0 0 3px var(--gold), 0 0 16px rgba(var(--gold-rgb), 0.8); }
 }
 
 /* Scrollable content area */
@@ -263,5 +263,26 @@ mark.gl-hl {
 }
 .cv-tab-active {
   color: var(--gold);
+}
+
+/* Tab icon wrapper for badge overlay */
+.cv-tab-icon-wrap {
+  position: relative;
+  display: inline-flex;
+}
+.cv-tab-badge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  min-width: 14px;
+  height: 14px;
+  padding: 0 3px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  line-height: 14px;
+  text-align: center;
+  background: var(--gold);
+  color: var(--bg-dark);
+  border-radius: 7px;
 }
 

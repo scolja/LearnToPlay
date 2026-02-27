@@ -13,7 +13,7 @@
 .side-card div { font-family: var(--font-ui); font-size: 0.88rem; line-height: 1.6; color: rgba(var(--text-light-rgb),0.85); }
 .side-card div p { color: rgba(var(--text-light-rgb),0.85); }
 .side-card-label {
-  font-size: 10px;
+  font-size: 0.556rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -21,10 +21,10 @@
   display: block;
 }
 .side-card-label.gold { color: var(--gold); }
-.side-card-label.red { color: #e87070; }
-.side-card-label.green { color: #7cc98e; }
-.side-card-label.blue { color: #7eaee0; }
-.side-card-label.purple { color: #b899d4; }
+.side-card-label.red { color: var(--red); }
+.side-card-label.green { color: var(--green); }
+.side-card-label.blue { color: var(--blue); }
+.side-card-label.purple { color: var(--purple); }
 
 .side-card a { color: var(--gold); }
 .side-card strong { color: var(--gold); font-weight: 600; }

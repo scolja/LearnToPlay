@@ -19,6 +19,8 @@
   --red-rgb: 185, 62, 62;
   --green-rgb: 74, 124, 89;
   --orange-rgb: 212, 128, 42;
+  --red-on-dark: #e87070;
+  --green-on-dark: #a0ddb0;
   --font-display: var(--font-fraunces), Georgia, serif;
   --font-body: var(--font-crimson-pro), Georgia, serif;
   --font-ui: var(--font-dm-sans), system-ui, sans-serif;

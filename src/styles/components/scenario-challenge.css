@@ -108,7 +108,7 @@
 
 .sc-badge.sc-good {
   background: rgba(var(--green-rgb), 0.2);
-  color: var(--green);
+  color: var(--green-on-dark);
 }
 
 .sc-badge.sc-suboptimal {

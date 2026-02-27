@@ -10,14 +10,14 @@
   padding: 0.45rem 0.9rem;
   border-radius: 6px;
   font-family: var(--font-ui);
-  font-size: 12px;
+  font-size: 0.667rem;
   font-weight: 600;
   white-space: nowrap;
 }
 .fb-dark { background: var(--bg-dark); color: var(--gold); }
 .fb-gold { background: var(--gold); color: var(--bg-dark); }
-.fb-red { background: var(--red); color: #fff; }
-.fb-green { background: var(--green); color: #fff; }
-.fb-blue { background: var(--blue); color: #fff; }
-.fb-teal { background: var(--teal); color: #fff; }
-.fa { color: var(--gold); font-weight: 700; font-family: var(--font-ui); font-size: 16px; }
+.fb-red { background: var(--red); color: var(--text-light); }
+.fb-green { background: var(--green); color: var(--text-light); }
+.fb-blue { background: var(--blue); color: var(--text-light); }
+.fb-teal { background: var(--teal); color: var(--text-light); }
+.fa { color: var(--gold); font-weight: 700; font-family: var(--font-ui); font-size: 0.889rem; }

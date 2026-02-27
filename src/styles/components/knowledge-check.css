@@ -28,7 +28,7 @@
 }
 .kc-opt {
   font-family: var(--font-ui);
-  font-size: 13px;
+  font-size: 0.722rem;
   color: var(--text-light);
   padding: 8px 14px;
   border: 1px solid rgba(var(--text-light-rgb),0.12);
@@ -39,26 +39,26 @@
 .kc-opt:hover { border-color: var(--gold); color: var(--gold); }
 .kc-opt.correct {
   border-color: var(--green);
-  background: rgba(74,124,89,0.2);
-  color: #7cc98e;
+  background: rgba(var(--green-rgb),0.2);
+  color: var(--green);
 }
 .kc-opt.wrong {
   border-color: var(--red);
-  background: rgba(185,62,62,0.15);
-  color: #e87070;
+  background: rgba(var(--red-rgb),0.15);
+  color: var(--red);
   opacity: 0.6;
 }
 .kc-opt.dim { opacity: 0.35; pointer-events: none; }
 .kc-fb {
   font-family: var(--font-ui);
-  font-size: 12px;
+  font-size: 0.667rem;
   line-height: 1.5;
   padding: 8px 0;
   display: none;
 }
 .kc-fb.show { display: block; }
-.kc-fb.yes { color: #7cc98e; }
-.kc-fb.no { color: #e87070; }
+.kc-fb.yes { color: var(--green); }
+.kc-fb.no { color: var(--red); }
 .kc-divider {
   height: 1px;
   background: rgba(var(--text-light-rgb),0.08);

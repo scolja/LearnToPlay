@@ -26,11 +26,6 @@ body:has(.hp-shell) .site-user-menu {
   padding-top: max(0.75rem, calc(env(safe-area-inset-top) + 0.4rem));
   min-height: 3.5rem;
 }
-.hp-topbar-logo {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-}
 .hp-topbar-title {
   font-family: var(--font-display);
   font-size: 1.1rem;
@@ -109,7 +104,7 @@ body:has(.hp-shell) .site-user-menu {
   letter-spacing: 2px;
   color: var(--gold);
   padding: 0.7rem 1rem 0.35rem;
-  border-bottom: 1px solid rgba(201, 169, 78, 0.15);
+  border-bottom: 1px solid rgba(var(--gold-rgb), 0.15);
   position: sticky;
   top: 0;
   background: var(--bg);
@@ -136,7 +131,7 @@ body:has(.hp-shell) .site-user-menu {
   min-height: 56px;
 }
 .hp-row:active {
-  background: rgba(201, 169, 78, 0.07);
+  background: rgba(var(--gold-rgb), 0.07);
 }
 
 .hp-row-thumb {
@@ -246,6 +241,27 @@ body:has(.hp-shell) .site-user-menu {
   font-size: 0.6rem;
   font-weight: 600;
   color: var(--gold);
+}
+
+/* ---- Offline badge on thumbnail ---- */
+.hp-row-offline-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 16px;
+  height: 16px;
+  background: var(--bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green, #6abf69);
+}
+
+/* ---- Unavailable row (offline + not downloaded) ---- */
+.hp-row-unavailable {
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 /* ---- Empty state ---- */
@@ -394,7 +410,7 @@ body:has(.hp-shell) .site-user-menu {
     display: flex;
     gap: 0.75rem;
     font-family: var(--font-ui);
-    font-size: 11px;
+    font-size: 0.611rem;
     color: rgba(var(--text-light-rgb), 0.4);
   }
   .hp-card-meta span {
@@ -434,7 +450,7 @@ body:has(.hp-shell) .site-user-menu {
     color: var(--bg-dark);
   }
   .hp-card-btn-learn:hover {
-    background: #d4b85a;
+    filter: brightness(1.1);
     color: var(--bg-dark);
   }
 
@@ -448,7 +464,7 @@ body:has(.hp-shell) .site-user-menu {
   .hp-progress-bar {
     flex: 1;
     height: 4px;
-    background: rgba(201, 169, 78, 0.35);
+    background: rgba(var(--gold-rgb), 0.35);
     border-radius: 2px;
     overflow: hidden;
   }
@@ -523,4 +539,9 @@ body:has(.hp-shell) .site-user-menu {
     font-size: 0.6rem;
     padding: 0.7rem 1rem 0.35rem;
   }
+}
+
+/* Hide skeleton loading state on native app — avoids flash before real content */
+html[data-native-app] .hp-loading {
+  display: none;
 }

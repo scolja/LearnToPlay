@@ -5,6 +5,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider } from '@/lib/auth-context';
 import { ThemeProvider } from '@/lib/theme-context';
 import { SettingsProvider } from '@/lib/settings-context';
+import { OfflineProvider } from '@/lib/offline-context';
 import { isNativePlatform } from '@/lib/capacitor';
 import type { ReactNode } from 'react';
 
@@ -22,7 +23,9 @@ export function Providers({ children }: { children: ReactNode }) {
     <AuthProvider>
       <ThemeProvider>
         <SettingsProvider>
-          {children}
+          <OfflineProvider>
+            {children}
+          </OfflineProvider>
         </SettingsProvider>
       </ThemeProvider>
     </AuthProvider>

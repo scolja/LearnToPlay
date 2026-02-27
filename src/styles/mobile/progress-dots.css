@@ -31,7 +31,7 @@
   background: var(--gold);
   width: 10px;
   height: 10px;
-  box-shadow: 0 0 6px rgba(201, 169, 78, 0.4);
+  box-shadow: 0 0 6px rgba(var(--gold-rgb), 0.4);
 }
 
 .pd-far {

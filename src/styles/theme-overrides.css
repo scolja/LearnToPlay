@@ -95,7 +95,8 @@
   background: var(--bg-elevated);
 }
 [data-theme="dark"] .photo-caption {
-  background: rgba(var(--text-light-rgb), 0.04);
+  color: rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.06);
 }
 
 /* Rule boxes — subtle dark background */

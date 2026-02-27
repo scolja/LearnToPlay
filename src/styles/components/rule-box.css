@@ -4,11 +4,11 @@
   border-radius: 10px;
   padding: 1rem 1.2rem;
   margin: 1rem 0;
-  background: rgba(201,169,78,0.05);
+  background: rgba(var(--gold-rgb),0.05);
 }
 .rule-box p { margin-bottom: 0.4rem; }
 .rule-box p:last-child { margin-bottom: 0; }
 .rule-box.danger {
   border-color: var(--red);
-  background: rgba(185,62,62,0.04);
+  background: rgba(var(--red-rgb),0.04);
 }

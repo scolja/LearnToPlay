@@ -93,7 +93,7 @@
 }
 
 .toc-item-active {
-  background: rgba(201, 169, 78, 0.08);
+  background: rgba(var(--gold-rgb), 0.08);
 }
 
 .toc-item-active .toc-item-num {

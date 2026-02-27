@@ -51,10 +51,11 @@
   color: var(--gold);
 }
 
+/* Text on dark bg — needs light-readable colors */
 .mu-item.mu-matched {
   border-color: var(--green);
   background: rgba(var(--green-rgb), 0.15);
-  color: var(--green);
+  color: var(--green-on-dark);
   pointer-events: none;
   animation: mg-fade-in 0.3s ease;
 }
@@ -62,7 +63,7 @@
 .mu-item.mu-wrong {
   border-color: var(--red);
   background: rgba(var(--red-rgb), 0.15);
-  color: var(--red);
+  color: var(--red-on-dark);
   animation: mu-shake 0.5s ease;
 }
 

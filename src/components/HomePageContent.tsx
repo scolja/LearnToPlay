@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import type { GuideMeta } from '@/lib/types';
 import { useAuth } from '@/lib/auth-context';
+import { useOffline } from '@/lib/offline-context';
 
 import { BottomNav } from '@/components/mobile/BottomNav';
 
@@ -39,6 +40,7 @@ export function HomePageContent({ games }: HomePageContentProps) {
   const [search, setSearch] = useState('');
   const [progress, setProgress] = useState<Record<string, { current: number; total: number }>>({});
   const { user } = useAuth();
+  const { guideStates, isOffline } = useOffline();
 
   // Read progress from localStorage (always) and server (when logged in)
   useEffect(() => {
@@ -96,8 +98,6 @@ export function HomePageContent({ games }: HomePageContentProps) {
     <div className="hp-shell">
       {/* Mobile top bar */}
       <header className="hp-topbar">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/icons/logo.svg" alt="L2P" className="hp-topbar-logo" />
         <h1 className="hp-topbar-title">Learn to Play</h1>
         <div className="hp-topbar-actions" />
       </header>
@@ -141,7 +141,7 @@ export function HomePageContent({ games }: HomePageContentProps) {
               <section className="hp-section">
                 <h2 className="hp-section-header">New</h2>
                 {newGames.map(game => (
-                  <GameItem key={game.slug} game={game} progress={progress[game.slug]} />
+                  <GameItem key={game.slug} game={game} progress={progress[game.slug]} isDownloaded={guideStates[game.slug] === 'downloaded'} isOffline={isOffline} />
                 ))}
               </section>
             )}
@@ -152,7 +152,7 @@ export function HomePageContent({ games }: HomePageContentProps) {
                   <h2 className="hp-section-header">All Games</h2>
                 )}
                 {otherGames.map(game => (
-                  <GameItem key={game.slug} game={game} progress={progress[game.slug]} />
+                  <GameItem key={game.slug} game={game} progress={progress[game.slug]} isDownloaded={guideStates[game.slug] === 'downloaded'} isOffline={isOffline} />
                 ))}
               </section>
             )}
@@ -170,17 +170,35 @@ interface GameItemProps {
   game: GuideMeta;
   isNew?: boolean;
   progress?: { current: number; total: number };
+  isDownloaded?: boolean;
+  isOffline?: boolean;
 }
 
-function GameItem({ game, isNew, progress }: GameItemProps) {
+function GameItem({ game, isNew, progress, isDownloaded, isOffline }: GameItemProps) {
+  const unavailable = isOffline && !isDownloaded;
+  const href = `/games/${game.slug}/learn`;
+
+  const handleMobileClick = (e: React.MouseEvent) => {
+    if (unavailable) {
+      e.preventDefault();
+      return;
+    }
+    // When offline, force full page navigation so SW can serve cached HTML
+    if (isOffline && isDownloaded) {
+      e.preventDefault();
+      window.location.href = href;
+    }
+  };
+
   return (
     <>
       {/* Mobile: tapping row goes straight to /learn */}
       <Link
-        href={`/games/${game.slug}/learn`}
-        className="hp-row hp-row-mobile"
+        href={href}
+        className={`hp-row hp-row-mobile${unavailable ? ' hp-row-unavailable' : ''}`}
+        onClick={handleMobileClick}
       >
-        <MobileRow game={game} isNew={isNew} progress={progress} />
+        <MobileRow game={game} isNew={isNew} progress={progress} isDownloaded={isDownloaded} />
       </Link>
 
       {/* Desktop: card with both Full Guide and Learn buttons */}
@@ -230,7 +248,7 @@ function GameItem({ game, isNew, progress }: GameItemProps) {
   );
 }
 
-function MobileRow({ game, isNew, progress }: { game: GuideMeta; isNew?: boolean; progress?: { current: number; total: number } }) {
+function MobileRow({ game, isNew, progress, isDownloaded }: { game: GuideMeta; isNew?: boolean; progress?: { current: number; total: number }; isDownloaded?: boolean }) {
   return (
     <>
       <div className="hp-row-thumb-wrap">
@@ -247,6 +265,13 @@ function MobileRow({ game, isNew, progress }: { game: GuideMeta; isNew?: boolean
             className="hp-row-thumb hp-row-thumb-placeholder"
             style={{ '--thumb-bg': game.heroGradient || undefined } as React.CSSProperties}
           />
+        )}
+        {isDownloaded && (
+          <span className="hp-row-offline-badge" title="Saved for offline">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+            </svg>
+          </span>
         )}
       </div>
       <div className="hp-row-info">

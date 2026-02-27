@@ -11,6 +11,8 @@
   --red-rgb: 185, 62, 62;
   --green-rgb: 74, 124, 89;
   --orange-rgb: 212, 128, 42;
+  --red-on-dark: #e87070;
+  --green-on-dark: #a0ddb0;
   --bg-elevated: var(--bg-sidebar);
   --bg-surface: var(--bg);
   --shadow-color: rgba(0, 0, 0, 0.12);
@@ -39,6 +41,8 @@
   --red-rgb: 185, 62, 62;
   --green-rgb: 74, 124, 89;
   --orange-rgb: 196, 106, 26;
+  --red-on-dark: #e87070;
+  --green-on-dark: #a0ddb0;
   --bg-elevated: var(--bg-sidebar);
   --bg-surface: #f8fafc;
   --shadow-color: rgba(0, 0, 0, 0.08);
@@ -67,6 +71,8 @@
   --red-rgb: 232, 112, 112;
   --green-rgb: 124, 201, 142;
   --orange-rgb: 232, 160, 96;
+  --red-on-dark: var(--red);
+  --green-on-dark: var(--green);
   --bg-elevated: #232946;
   --bg-surface: #232946;
   --shadow-color: rgba(0, 0, 0, 0.4);

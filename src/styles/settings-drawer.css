@@ -141,7 +141,7 @@
 }
 
 .sd-seg-active {
-  background: rgba(201, 169, 78, 0.15);
+  background: rgba(var(--gold-rgb), 0.15);
   color: var(--gold);
 }
 
@@ -291,10 +291,10 @@
 .sd-account-error {
   font-family: var(--font-ui);
   font-size: 0.75rem;
-  color: #e07070;
+  color: var(--red);
   text-align: center;
   padding: 0.4rem 0.5rem;
-  background: rgba(224, 112, 112, 0.1);
+  background: rgba(var(--red-rgb), 0.1);
   border-radius: 6px;
 }
 

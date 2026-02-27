@@ -16,7 +16,7 @@
   color: var(--gold);
   font-weight: 700;
   font-family: var(--font-ui);
-  font-size: 14px;
+  font-size: 0.778rem;
   min-width: 20px;
 }
 .sp-text {

@@ -1,7 +1,7 @@
 /* ===================== FOOTNOTES ===================== */
 .fn-ref {
   font-family: var(--font-ui);
-  font-size: 11px;
+  font-size: 0.611rem;
   font-weight: 600;
   color: var(--gold);
   cursor: pointer;
@@ -22,7 +22,7 @@
 .fn-section.open { max-height: 600px; }
 .fn-toggle {
   font-family: var(--font-ui);
-  font-size: 11px;
+  font-size: 0.611rem;
   color: var(--text-muted);
   background: none;
   border: 1px solid var(--border);
@@ -38,7 +38,7 @@
 }
 .fn-item {
   font-family: var(--font-ui);
-  font-size: 12px;
+  font-size: 0.667rem;
   color: var(--text-muted);
   line-height: 1.5;
   padding: 0.2rem 0;

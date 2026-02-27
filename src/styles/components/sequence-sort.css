@@ -110,14 +110,15 @@
   transition: background 0.2s, color 0.2s;
 }
 
+/* Num badge text sits on dark bg — needs light-readable colors */
 .ss-item.ss-correct .ss-num {
   background: rgba(var(--green-rgb), 0.3);
-  color: var(--green);
+  color: var(--green-on-dark);
 }
 
 .ss-item.ss-wrong .ss-num {
   background: rgba(var(--red-rgb), 0.25);
-  color: var(--red);
+  color: var(--red-on-dark);
 }
 
 .ss-text {
@@ -136,6 +137,6 @@
 .ss-hint {
   font-family: var(--font-ui);
   font-size: 0.75rem;
-  color: var(--red);
+  color: var(--red-on-dark);
   animation: mg-fade-in 0.3s ease;
 }

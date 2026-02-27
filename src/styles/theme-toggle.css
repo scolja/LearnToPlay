@@ -51,7 +51,7 @@
   background: transparent;
   color: var(--text-light);
   font-family: var(--font-ui);
-  font-size: 13px;
+  font-size: 0.722rem;
   cursor: pointer;
   border-radius: 7px;
   transition: background 0.15s;

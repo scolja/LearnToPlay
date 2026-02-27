@@ -12,12 +12,12 @@
   padding: 10px 8px;
   text-align: center;
   font-family: var(--font-ui);
-  font-size: 11px;
+  font-size: 0.611rem;
   color: var(--text-light);
 }
 .es-letter {
   display: block;
-  font-size: 16px;
+  font-size: 0.889rem;
   font-weight: 700;
   color: var(--gold);
   margin-bottom: 2px;
