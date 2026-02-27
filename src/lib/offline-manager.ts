@@ -30,9 +30,35 @@ let requestIdCounter = 0;
 class OfflineManager {
   private pending = new Map<string, PendingRequest>();
   private listening = false;
+  private swReady: boolean | null = null; // null = unknown, true/false = resolved
 
+  /** Check if the browser supports service workers */
   isAvailable(): boolean {
     return typeof window !== 'undefined' && 'serviceWorker' in navigator;
+  }
+
+  /**
+   * Wait for the SW to be ready (registered + controlling). Returns false if
+   * the SW cannot activate (e.g. insecure origin like http://10.0.2.2).
+   * Caches the result so subsequent calls are instant.
+   */
+  async waitForController(timeoutMs = 4000): Promise<boolean> {
+    if (this.swReady !== null) return this.swReady;
+    if (!this.isAvailable()) { this.swReady = false; return false; }
+    if (navigator.serviceWorker.controller) { this.swReady = true; return true; }
+
+    try {
+      await Promise.race([
+        navigator.serviceWorker.ready,
+        new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), timeoutMs)),
+      ]);
+      // ready resolved — wait one more tick for controller to populate
+      await new Promise((r) => setTimeout(r, 100));
+      this.swReady = !!navigator.serviceWorker.controller;
+    } catch {
+      this.swReady = false;
+    }
+    return this.swReady;
   }
 
   private ensureListener() {
@@ -95,7 +121,8 @@ class OfflineManager {
     heroImage: string | null,
     progressCb?: ProgressCallback
   ): Promise<{ success: boolean; error?: string }> {
-    if (!this.isAvailable()) return { success: false, error: 'Service worker unavailable' };
+    const ready = await this.waitForController();
+    if (!ready) return { success: false, error: 'Service worker unavailable' };
 
     // Request persistent storage on first download
     if (this.getDownloadedGuides().length === 0 && navigator.storage?.persist) {
@@ -116,7 +143,8 @@ class OfflineManager {
   }
 
   async removeGuide(slug: string): Promise<void> {
-    if (!this.isAvailable()) return;
+    const ready = await this.waitForController();
+    if (!ready) return;
     return new Promise((resolve, reject) => {
       const requestId = this.postMessage({ type: 'REMOVE_GUIDE', slug });
       this.pending.set(requestId, { resolve: resolve as (v: unknown) => void, reject });
@@ -124,7 +152,8 @@ class OfflineManager {
   }
 
   async validateGuide(slug: string): Promise<boolean> {
-    if (!this.isAvailable()) return false;
+    const ready = await this.waitForController();
+    if (!ready) return false;
     const result: { cached: boolean } = await new Promise((resolve, reject) => {
       const requestId = this.postMessage({ type: 'CHECK_GUIDE', slug });
       this.pending.set(requestId, { resolve: resolve as (v: unknown) => void, reject });

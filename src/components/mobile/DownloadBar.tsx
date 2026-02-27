@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useOffline } from '@/lib/offline-context';
+import { offlineManager } from '@/lib/offline-manager';
 
 interface DownloadBarProps {
   slug: string;
@@ -22,29 +23,23 @@ export function DownloadBar({ slug, title, heroImage }: DownloadBarProps) {
     ? Math.round((progress.loaded / progress.total) * 100)
     : 0;
 
-  // Auto-download when the learn page is opened (if not already cached)
+  // Auto-download when the learn page is opened (if not already cached).
+  // Uses waitForController() with a timeout so we don't hang forever on
+  // environments where the SW can't activate (e.g. HTTP on non-localhost).
   useEffect(() => {
-    if (triggered.current) return;
-    if (isDownloaded || isDownloading) return;
-    // Wait for SW controller to be ready
-    if (typeof window === 'undefined' || !('serviceWorker' in navigator)) return;
+    if (triggered.current || isDownloaded || isDownloading) return;
 
-    const tryDownload = () => {
-      if (navigator.serviceWorker.controller) {
+    let cancelled = false;
+    offlineManager.waitForController().then((ready) => {
+      if (cancelled || triggered.current) return;
+      if (ready) {
         triggered.current = true;
         downloadGuide(slug, title, heroImage);
       }
-    };
+      // If not ready, silently skip — SW not available on this origin
+    });
 
-    if (navigator.serviceWorker.controller) {
-      tryDownload();
-    } else {
-      // SW might not be active yet on first load — wait for it
-      navigator.serviceWorker.ready.then(() => {
-        // controller may still be null after ready, wait a tick
-        setTimeout(tryDownload, 100);
-      });
-    }
+    return () => { cancelled = true; };
   }, [slug, title, heroImage, isDownloaded, isDownloading, downloadGuide]);
 
   // Show "Saved" briefly when download completes
@@ -66,7 +61,10 @@ export function DownloadBar({ slug, title, heroImage }: DownloadBarProps) {
       {isDownloading && (
         <>
           <div className="dl-bar-track">
-            <div className="dl-bar-fill" style={{ width: `${pct}%` }} />
+            <div // eslint-disable-line react/forbid-dom-props
+              className="dl-bar-fill"
+              style={{ width: `${pct}%` }}
+            />
           </div>
           <span className="dl-bar-text">
             Saving for offline{progress && progress.total > 0 ? `\u2026 ${progress.loaded}/${progress.total}` : '\u2026'}
@@ -84,7 +82,7 @@ export function DownloadBar({ slug, title, heroImage }: DownloadBarProps) {
       {state === 'error' && (
         <span className="dl-bar-text dl-bar-text-error">
           Save failed
-          <button className="dl-bar-retry" onClick={() => downloadGuide(slug, title, heroImage)}>Retry</button>
+          <button type="button" className="dl-bar-retry" onClick={() => downloadGuide(slug, title, heroImage)}>Retry</button>
         </span>
       )}
     </div>
