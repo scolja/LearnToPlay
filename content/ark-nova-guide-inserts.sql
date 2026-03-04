@@ -27,7 +27,7 @@ INSERT INTO ltp.Guides (
     '14+',
     'https://boardgamegeek.com/boardgame/342942/ark-nova',
     'linear-gradient(135deg, #2d4a2e 0%, #1a3320 40%, #0f1f12 100%)',
-    NULL,
+    '/images/ark-nova/box-front.svg',
     ':root {
   --ark-green: #3a7d44;
   --ark-gold: #c9a94e;
@@ -748,3 +748,11 @@ VALUES
 -- Done! Guide has 15 sections and 25 glossary entries.
 SELECT 'Ark Nova guide created successfully' AS Result;
 SELECT @GuideId AS GuideId;
+
+-- ---------------------------------------------------------------------------
+-- Update HeroImage on an existing record (run if guide was already inserted
+-- with HeroImage = NULL)
+-- ---------------------------------------------------------------------------
+-- UPDATE ltp.Guides
+-- SET HeroImage = '/images/ark-nova/box-front.svg'
+-- WHERE Slug = 'ark-nova' AND HeroImage IS NULL;
