@@ -91,7 +91,7 @@ VALUES (@S2, @GuideId, 2, 'Your Action Cards',
 
 The five actions are:
 
-- [CARDS]{.act-cards} — Draw new zoo cards into your hand (always advances the break token by 2). Higher strength lets you draw more cards and keep more of them. At strength 5+ you can "snap" any card from the display
+- [CARDS]{.act-cards} — Draw new zoo cards into your hand (always advances the break token by 2). Higher strength lets you draw more cards and keep more of them. At strength 5+ you **must** "snap" a card from the display (this is mandatory, not optional)
 - [BUILD]{.act-build} — Construct enclosures and buildings on your zoo map
 - [ANIMALS]{.act-animals} — Place animal cards from your hand into enclosures
 - [ASSOCIATION]{.act-association} — Send workers to the association board
@@ -212,7 +212,7 @@ Animals belong to categories like [Bird]{.cat-bird}, [Herbivore]{.cat-herbivore}
 
 ### Releasing an Animal into the Wild
 
-Some card effects let you **release** an animal from your zoo. When you do, you lose Appeal equal to the animal''s printed value and must flip an occupied enclosure back to its empty side.
+Some card effects let you **release** an animal from your zoo. When you do, you **lose Appeal first** (equal to the animal''s printed value), then gain any conservation points. This order matters for game-end trigger timing. You must also flip an occupied enclosure back to its empty side.
 
 :::callout-danger
 **ERRATA (Versions 1.0 & 1.1):** The original rules gave conflicting instructions for which enclosure to flip when releasing an animal vs. moving one to a special enclosure. The corrected rule: **flip the smallest occupied enclosure that meets ALL the animal''s requirements** (size, water, and rock adjacency). If no such enclosure exists, flip the smallest one that meets the size requirement alone. Source: Feuerland Spiele Official FAQ.
@@ -341,6 +341,10 @@ When you support a project, place one of your **player tokens** (from the left e
 
 :::callout-danger
 **Repeat-task penalty:** If you already have a worker on a task section, using it again before the next break costs **2 workers** instead of 1. At Association strength 1, you cannot perform any task.
+:::
+
+:::callout
+**ERRATA (Official FAQ):** Bonuses earned mid-action **can** be used within that same action. Only the action''s strength and type are locked at the start. Example: on an Association action, you can first gain 2 Reputation (earning a new worker), then use that new worker for a second task — all in one action.
 :::',
 
 -- Notes
