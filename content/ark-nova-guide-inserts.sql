@@ -149,6 +149,10 @@ You **cannot** build on:
 **Kiosks must be at least 3 spaces apart from each other.** This is easy to forget and can ruin your placement plans.
 :::
 
+:::callout-danger
+**ERRATA (Official FAQ):** The "II" building restriction is enforced by your zoo plan, not just your action card. You **cannot build on "II" spaces even via a bonus tile or sponsor card** — only upgrading your Build action card unlocks them.
+:::
+
 ### Other Buildings
 
 - **Kiosks** (size 1) — Generate income during breaks: [1]{.money} for each adjacent occupied enclosure, pavilion, special enclosure, or unique building
@@ -162,6 +166,11 @@ Some spaces on your zoo map show a yellow bonus icon. When you cover these with 
 -- Notes
 '**[red] Common Mistake**
 Players often forget that buildings must be adjacent to existing ones — your zoo must stay connected. You can''t build an isolated enclosure across the map.
+
+---
+
+**[red] ERRATA: Map A (1st Printing)**
+The first printing of Map A is missing a Build II icon on a space in the top-left corner. Players could mistakenly build there before upgrading. If your box predates 12/2021, you have the affected map — mark the space manually.
 
 ---
 
@@ -269,11 +278,20 @@ This is a useful fallback when you need cash or want to trigger a break strategi
 
 :::callout
 **Sponsor cards don''t cost money — but they do require matching your action strength to their level.** Plan your action card positions to play valuable sponsors at the right time.
+:::
+
+:::callout-danger
+**ERRATA (Official FAQ):** Sponsor cards can **only** be played from your hand — never from the display. This applies even after upgrading your Sponsors action card to Level II.
 :::',
 
 -- Notes
 '**[gold] Key Concept**
 Sponsors provide the "engine" of your zoo — recurring income, icons for conservation, and end-game scoring. A well-timed sponsor can be worth more than an expensive animal.
+
+---
+
+**[red] ERRATA: Sponsors — Hand Only**
+The official FAQ clarifies: you may only play sponsor cards from your hand. This applies even with the upgraded Sponsors II card. Unlike Animals II, upgrading Sponsors does NOT unlock playing from the display.
 
 ---
 
@@ -305,7 +323,7 @@ When you gain a partner zoo, place it on your zoo map in the next empty partner 
 - A **continent icon** that counts toward conservation project conditions
 - A **cost reduction** of [3]{.money} for each matching continent icon when playing animal cards
 
-You can have up to **4 partner zoos** (there are 5 continents, so you must choose which 4 to pursue). The 3rd and 4th require your [ASSOCIATION]{.act-association} card to be upgraded to level II.
+You can have up to **4 partner zoos** (there are 5 continents, so you must choose which 4 to pursue). The 3rd and 4th require your [ASSOCIATION]{.act-association} card to be upgraded to level II — and this restriction is enforced by your zoo plan, not just the card. Even gaining a partner zoo via a bonus tile or sponsor card requires the upgrade.
 
 ### Universities
 
@@ -430,7 +448,7 @@ Since there are five action cards but at most four upgrades, at least one card s
 - [BUILD]{.act-build} II — Build **multiple** different buildings per action (total size ≤ strength). Unlocks Reptile House and Large Bird Aviary. Can build on "II" spaces
 - [ANIMALS]{.act-animals} II — Play animals from the **display** (within reputation range). Gain +1 Reputation at strength 5+
 - [CARDS]{.act-cards} II — Draw from the display within reputation range **and/or** from the deck. Snap at strength 3+ instead of 5+. *(Note: some printed cards are missing the word "and" — the correct text is "within reputation range and/or from the Deck OR snap")*
-- [SPONSORS]{.act-sponsors} II — Play **multiple** sponsor cards (total levels ≤ strength + 1). Can play from display
+- [SPONSORS]{.act-sponsors} II — Play **multiple** sponsor cards (total levels ≤ strength + 1). Sponsors are always played from hand — never from the display
 - [ASSOCIATION]{.act-association} II — Perform **multiple** different tasks. Can make donations. Can take 3rd/4th partner zoos
 
 ### X-Tokens
