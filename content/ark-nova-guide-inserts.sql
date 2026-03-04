@@ -407,9 +407,9 @@ Each action card has two sides: **Level I** (blue) and **Level II** (pink). Upgr
 You earn upgrades through four triggers:
 
 1. **Conservation track reaches space 2** — Upgrade a card OR activate an extra worker
-2. **Gaining your 2nd partner zoo**
-3. **Gaining your 2nd university**
-4. **Certain conservation project rewards**
+2. **Reputation track reaches space 5**
+3. **Gaining your 2nd partner zoo**
+4. **Gaining your 2nd university**
 
 Since there are five action cards but at most four upgrades, at least one card stays at Level I all game.
 
