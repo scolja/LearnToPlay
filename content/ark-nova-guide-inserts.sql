@@ -79,7 +79,7 @@ The dual-track scoring is directly inspired by Rajas of the Ganges — two marke
 Negative scores are completely normal for new players. Don''t panic — focus on learning the action system and the score will come.',
 
 -- DisplayData
-NULL);
+NULL, 1);
 
 
 -- Section 2: Your Action Cards
@@ -122,7 +122,7 @@ This is the heart of Ark Nova''s strategy. Every turn is a trade-off: use a weak
 New players confuse action card "position" with "level." The position (1–5) changes every turn as cards slide. The level (I or II) is a permanent upgrade that unlocks better abilities. They are different things.',
 
 -- DisplayData
-'{"flows":[["Use a Card","Card Goes to Slot 1","Left Cards Fill Gap","Unused Grow"]]}');
+'{"flows":[["Use a Card","Card Goes to Slot 1","Left Cards Fill Gap","Unused Grow"]]}', 1);
 
 
 -- Section 3: Building Your Zoo
@@ -178,7 +178,7 @@ The first printing of Map A is missing a Build II icon on a space in the top-lef
 Build kiosks early and surround them with different buildings. Each adjacent occupied enclosure, pavilion, or building earns you [1]{.money} per break — this income adds up fast.',
 
 -- DisplayData
-NULL);
+NULL, 1);
 
 
 -- Section 4: Bringing in Animals
@@ -233,7 +233,7 @@ The first two printings had inconsistent rules for flipping enclosures (glossary
 Place small, cheap animals early. A size-1 animal in a size-1 enclosure costs only [2]{.money} to build and perhaps [3]{.money}–[5]{.money} for the animal — and it advances your Appeal for better income at the next break.',
 
 -- DisplayData
-NULL);
+NULL, 1);
 
 
 -- Section 5: Reinforcement Break — Match Up (Actions)
@@ -246,7 +246,7 @@ VALUES (@S5, @GuideId, 5, 'Test Your Knowledge: Actions',
 -- Notes
 NULL,
 -- DisplayData
-'{"matchUp":{"title":"Match Each Action to Its Effect","description":"Connect each action card to what it does.","pairs":[{"left":"CARDS","right":"Draw new zoo cards into your hand"},{"left":"BUILD","right":"Construct enclosures and facilities on your zoo map"},{"left":"ANIMALS","right":"Play animal cards into enclosures"},{"left":"ASSOCIATION","right":"Send workers for partner zoos, universities, and conservation"},{"left":"SPONSORS","right":"Play sponsor cards for special abilities and bonuses"}],"explanation":"All five actions use the same slot mechanism — the card''s position (1–5) determines how powerful the action is. After use, the card returns to slot 1 and the others slide right."}}');
+'{"matchUp":{"title":"Match Each Action to Its Effect","description":"Connect each action card to what it does.","pairs":[{"left":"CARDS","right":"Draw new zoo cards into your hand"},{"left":"BUILD","right":"Construct enclosures and facilities on your zoo map"},{"left":"ANIMALS","right":"Play animal cards into enclosures"},{"left":"ASSOCIATION","right":"Send workers for partner zoos, universities, and conservation"},{"left":"SPONSORS","right":"Play sponsor cards for special abilities and bonuses"}],"explanation":"All five actions use the same slot mechanism — the card''s position (1–5) determines how powerful the action is. After use, the card returns to slot 1 and the others slide right."}}', 1);
 
 
 -- Section 6: Sponsors & Support
@@ -299,7 +299,7 @@ The official FAQ clarifies: you may only play sponsor cards from your hand. This
 The break-and-money alternative is not a waste of a turn. Sometimes pushing the break forward on your terms — when opponents aren''t ready — is a strong tactical move.',
 
 -- DisplayData
-NULL);
+NULL, 1);
 
 
 -- Section 7: The Association
@@ -362,7 +362,7 @@ Conservation projects are the primary path to conservation points. A zoo with hi
 Flip your Association card as your first upgrade. This unlocks donations (1 conservation point for a money payment) — a flexible way to push your conservation marker forward.',
 
 -- DisplayData
-'{"table":{"headers":["Strength","Task","Details"],"rows":[["2","Gain Reputation","Increase reputation by 2"],["3","Partner Zoo","Take a partner zoo from the board (one per continent)"],["4","University","Take a university — gain bonus icons and reputation"],["5","Conservation Project","Support an existing project or play a new one from hand"]]}}');
+'{"table":{"headers":["Strength","Task","Details"],"rows":[["2","Gain Reputation","Increase reputation by 2"],["3","Partner Zoo","Take a partner zoo from the board (one per continent)"],["4","University","Take a university — gain bonus icons and reputation"],["5","Conservation Project","Support an existing project or play a new one from hand"]]}}', 1);
 
 
 -- Section 8: Scoring Tracks & Reputation
@@ -413,7 +413,7 @@ Appeal earns money; Conservation earns victory. You need both — Appeal funds y
 Many players forget the Conservation space 10 rule: if nobody reaches 10 conservation by game end, ALL players must discard one of their two Final Scoring cards. This can cost 3–7 points.',
 
 -- DisplayData
-NULL);
+NULL, 1);
 
 
 -- Section 9: Reinforcement Break — Spot the Error
@@ -426,7 +426,7 @@ VALUES (@S9, @GuideId, 9, 'Spot the Zoo Mistake',
 -- Notes
 NULL,
 -- DisplayData
-'{"spotTheError":{"title":"Spot the Zoo Mistake","scenario":"It''s your turn. You have a size-3 enclosure adjacent to 1 water space. You want to play a Hippo card that requires a size-2 enclosure with 2 water adjacency. You have the money and meet all other conditions.","statements":[{"text":"You can play the Hippo because the enclosure (size 3) exceeds the animal''s size requirement (size 2)","isError":false,"explanation":"Correct — an enclosure can be larger than the animal''s minimum size requirement."},{"text":"You cannot play the Hippo because the enclosure is only adjacent to 1 water space, but the card requires 2 water adjacency","isError":false,"explanation":"Correct — each water icon on the card requires a separate water hex adjacent to the enclosure. Having 1 water hex next to a 2-water-area doesn''t count as 2."},{"text":"You can play the Hippo anyway because the water area has 2 connected water spaces, which satisfies the 2-water requirement","isError":true,"explanation":"This is the error. Water adjacency counts per individual hex touching the enclosure, not per connected water area. If only 1 water hex touches your enclosure, you have 1 water adjacency — even if that hex is part of a larger water feature."}]}}');
+'{"spotTheError":{"title":"Spot the Zoo Mistake","scenario":"It''s your turn. You have a size-3 enclosure adjacent to 1 water space. You want to play a Hippo card that requires a size-2 enclosure with 2 water adjacency. You have the money and meet all other conditions.","statements":[{"text":"You can play the Hippo because the enclosure (size 3) exceeds the animal''s size requirement (size 2)","isError":false,"explanation":"Correct — an enclosure can be larger than the animal''s minimum size requirement."},{"text":"You cannot play the Hippo because the enclosure is only adjacent to 1 water space, but the card requires 2 water adjacency","isError":false,"explanation":"Correct — each water icon on the card requires a separate water hex adjacent to the enclosure. Having 1 water hex next to a 2-water-area doesn''t count as 2."},{"text":"You can play the Hippo anyway because the water area has 2 connected water spaces, which satisfies the 2-water requirement","isError":true,"explanation":"This is the error. Water adjacency counts per individual hex touching the enclosure, not per connected water area. If only 1 water hex touches your enclosure, you have 1 water adjacency — even if that hex is part of a larger water feature."}]}}', 1);
 
 
 -- Section 10: Upgrading & X-Tokens
@@ -483,7 +483,7 @@ Some printings of the Cards action card are missing the word "and" on the upgrad
 If you upgrade an action card *during* an action (e.g., from a conservation milestone), the improved abilities are NOT available until your next action. However, the card counts as improved immediately for meeting card conditions. Source: Official FAQ.',
 
 -- DisplayData
-NULL);
+NULL, 1);
 
 
 -- Section 11: The Break
@@ -530,7 +530,7 @@ Workers only return during breaks — not after you use them. If you deploy your
 You can strategically trigger breaks by using the Sponsors break alternative or the Cards action. Forcing a break when opponents have full hands (causing them to discard) or when your income is high is a strong play.',
 
 -- DisplayData
-'{"strip":[{"num":1,"label":"Discard & Tokens"},{"num":2,"label":"Workers Return"},{"num":3,"label":"Refresh Display"},{"num":4,"label":"Income & Reset"}]}');
+'{"strip":[{"num":1,"label":"Discard & Tokens"},{"num":2,"label":"Workers Return"},{"num":3,"label":"Refresh Display"},{"num":4,"label":"Income & Reset"}]}', 1);
 
 
 -- Section 12: Game Arc & Endgame
@@ -590,7 +590,7 @@ The publisher announced a revised scoring system in 2023. Appeal + weighted Cons
 Don''t trigger the end too early. Once you cross markers, opponents get a final turn to catch up. It''s often better to build a large lead, then cross decisively — rather than barely crossing and hoping for the best.',
 
 -- DisplayData
-'{"flows":[["Markers Cross","Final Turns","Score Cards","Calculate VP"]]}');
+'{"flows":[["Markers Cross","Final Turns","Score Cards","Calculate VP"]]}', 1);
 
 
 -- Section 13: Reinforcement Break — Sequence Sort (Break Procedure)
@@ -603,7 +603,7 @@ VALUES (@S13, @GuideId, 13, 'Order the Break Steps',
 -- Notes
 NULL,
 -- DisplayData
-'{"sequenceSort":{"title":"Put the Break Steps in Order","description":"When a break is triggered, these steps happen in a specific sequence. Can you put them in the right order?","items":[{"text":"Discard down to hand limit (3 or 5 cards)","position":0},{"text":"Return temporary tokens (Multiplier, Venom, etc.) to supply","position":1},{"text":"All association workers return to notepads","position":2},{"text":"Replenish partner zoos and universities on the board","position":3},{"text":"Refresh the card display (discard bottom 2, slide down, refill)","position":4},{"text":"Collect income (Appeal-based money, kiosk income, card income)","position":5},{"text":"Reset break token to starting position","position":6}],"explanation":"The break sequence matters because workers must return before you can plan your next Association action, and income comes after the display refresh — so new cards are available when play resumes."}}');
+'{"sequenceSort":{"title":"Put the Break Steps in Order","description":"When a break is triggered, these steps happen in a specific sequence. Can you put them in the right order?","items":[{"text":"Discard down to hand limit (3 or 5 cards)","position":0},{"text":"Return temporary tokens (Multiplier, Venom, etc.) to supply","position":1},{"text":"All association workers return to notepads","position":2},{"text":"Replenish partner zoos and universities on the board","position":3},{"text":"Refresh the card display (discard bottom 2, slide down, refill)","position":4},{"text":"Collect income (Appeal-based money, kiosk income, card income)","position":5},{"text":"Reset break token to starting position","position":6}],"explanation":"The break sequence matters because workers must return before you can plan your next Association action, and income comes after the display refresh — so new cards are available when play resumes."}}', 1);
 
 
 -- Section 14: Setup
@@ -645,7 +645,7 @@ Animals starts in slot 1 deliberately — it''s your weakest action at the start
 Players forget they draw 8 cards and keep only 4 at the start. This initial draft is crucial — look for animals that match each other''s continent, a cheap early animal, and maybe a useful sponsor.',
 
 -- DisplayData
-NULL);
+NULL, 1);
 
 
 -- Section 15: Turn Summary
@@ -685,7 +685,7 @@ Your first few turns: Build a small enclosure → Place a cheap animal → Use C
 Check the glossary (bottom-right button) anytime you need a quick refresher on a term or rule.',
 
 -- DisplayData
-'{"htmlBlocks":["<div style=\"background:var(--bg-dark);color:var(--text-light);border-radius:10px;padding:1.3rem 1.5rem;\"><div style=\"display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.6rem;\"><span style=\"color:var(--gold);font-weight:700;font-family:var(--font-ui);\">1.</span><span><strong>Choose</strong> an action card from your slots (1–5)</span></div><div style=\"display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.6rem;\"><span style=\"color:var(--gold);font-weight:700;font-family:var(--font-ui);\">2.</span><span><strong>Optionally spend</strong> X-tokens to boost the action''s strength</span></div><div style=\"display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.6rem;\"><span style=\"color:var(--gold);font-weight:700;font-family:var(--font-ui);\">3.</span><span><strong>Execute</strong> the action at that strength</span></div><div style=\"display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.6rem;\"><span style=\"color:var(--gold);font-weight:700;font-family:var(--font-ui);\">4.</span><span><strong>Slide</strong> the used card to slot 1; shift others right</span></div><div style=\"display:flex;gap:0.8rem;align-items:baseline;\"><span style=\"color:var(--gold);font-weight:700;font-family:var(--font-ui);\">5.</span><span><strong>Replenish</strong> any display cards taken (at end of turn)</span></div></div>"]}');
+'{"htmlBlocks":["<div style=\"background:var(--bg-dark);color:var(--text-light);border-radius:10px;padding:1.3rem 1.5rem;\"><div style=\"display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.6rem;\"><span style=\"color:var(--gold);font-weight:700;font-family:var(--font-ui);\">1.</span><span><strong>Choose</strong> an action card from your slots (1–5)</span></div><div style=\"display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.6rem;\"><span style=\"color:var(--gold);font-weight:700;font-family:var(--font-ui);\">2.</span><span><strong>Optionally spend</strong> X-tokens to boost the action''s strength</span></div><div style=\"display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.6rem;\"><span style=\"color:var(--gold);font-weight:700;font-family:var(--font-ui);\">3.</span><span><strong>Execute</strong> the action at that strength</span></div><div style=\"display:flex;gap:0.8rem;align-items:baseline;margin-bottom:0.6rem;\"><span style=\"color:var(--gold);font-weight:700;font-family:var(--font-ui);\">4.</span><span><strong>Slide</strong> the used card to slot 1; shift others right</span></div><div style=\"display:flex;gap:0.8rem;align-items:baseline;\"><span style=\"color:var(--gold);font-weight:700;font-family:var(--font-ui);\">5.</span><span><strong>Replenish</strong> any display cards taken (at end of turn)</span></div></div>"]}', 1);
 
 
 -- ---------------------------------------------------------------------------
