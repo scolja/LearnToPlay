@@ -1,0 +1,249 @@
+/* ===================== ARK NOVA: GAME TOKENS ===================== */
+
+/* Action card tokens (3-char prefix "act" → auto-parent) */
+.act {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 4px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+  margin: 0 1px;
+  color: #fff;
+}
+.act-cards    { background: #5a8a3e; }
+.act-build    { background: #b8860b; }
+.act-animals  { background: #c05530; }
+.act-association { background: #4a6fa5; }
+.act-sponsors { background: #7a5195; }
+
+/* Icon tokens (2-char prefix "ic" → auto-parent) */
+.ic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 10px;
+  vertical-align: middle;
+  margin: 0 2px;
+  color: #fff;
+}
+.ic-appeal       { background: linear-gradient(135deg, #c9a94e, #d4b85a); color: #2c2418; }
+.ic-conservation { background: linear-gradient(135deg, #3a7d44, #4a9e56); }
+.ic-reputation   { background: linear-gradient(135deg, #4a6fa5, #5a82b8); }
+
+/* Resource tokens (standalone, no hyphen) */
+.money {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 50%;
+  background: #c9a94e;
+  color: #2c2418;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 10px;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+
+.xtoken {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  background: #1a1612;
+  color: #c9a94e;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 11px;
+  vertical-align: middle;
+  margin: 0 2px;
+  border: 1.5px solid #c9a94e;
+}
+
+/* Continent tags (3-char prefix "con" → auto-parent) */
+.con {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 3px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  vertical-align: middle;
+  margin: 0 1px;
+  color: #fff;
+}
+.con-europe  { background: #4a6fa5; }
+.con-asia    { background: #c05530; }
+.con-africa  { background: #b8860b; }
+.con-americas { background: #3a7d44; }
+.con-australia { background: #7a5195; }
+
+/* Animal category tags (3-char prefix "cat" → auto-parent) */
+.cat {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 3px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  vertical-align: middle;
+  margin: 0 1px;
+}
+.cat-bird      { background: #5a8a9e; color: #fff; }
+.cat-herbivore { background: #5a8a3e; color: #fff; }
+.cat-predator  { background: #b93e3e; color: #fff; }
+.cat-primate   { background: #8b6914; color: #fff; }
+.cat-reptile   { background: #5a7a5a; color: #fff; }
+.cat-bear      { background: #6b4226; color: #fff; }
+.cat-petting   { background: #d4802a; color: #fff; }
+
+/* Enclosure size indicator */
+.enc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: rgba(44,36,24,0.08);
+  border: 1.5px solid rgba(44,36,24,0.25);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 11px;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+
+/* Water and rock requirement indicators */
+.water {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4a8fbf, #6ab0e0);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 9px;
+  vertical-align: middle;
+  margin: 0 1px;
+}
+
+.rock {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7a7a6a, #999988);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 9px;
+  vertical-align: middle;
+  margin: 0 1px;
+}
+
+/* Break token */
+.brk {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #6b4226;
+  color: #f5efe0;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 10px;
+  vertical-align: middle;
+  margin: 0 2px;
+  border: 1.5px solid rgba(0,0,0,0.2);
+}
+
+/* Action card row visualization */
+.action-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3px;
+  margin: 1rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.action-row .ar {
+  background: var(--bg-dark);
+  color: var(--text-light);
+  text-align: center;
+  padding: 0.6rem 0.3rem;
+  font-family: var(--font-ui);
+  font-size: 9px;
+  line-height: 1.3;
+}
+.action-row .ar-num {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 2px;
+}
+.action-row .ar-label {
+  display: block;
+  font-size: 8px;
+  color: rgba(245,239,224,0.5);
+  margin-top: 2px;
+}
+.action-row .ar-active {
+  background: #3a7d44;
+}
+
+/* Worker token */
+.worker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 20px;
+  border-radius: 3px 3px 2px 2px;
+  background: #4a6fa5;
+  color: #fff;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 9px;
+  vertical-align: middle;
+  margin: 0 1px;
+}
