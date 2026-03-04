@@ -53,9 +53,12 @@ function parseContentBlocks(
 ): ContentBlock[] {
   const blocks: ContentBlock[] = [];
 
+  // Normalize \r\n → \n so directive regexes match regardless of DB line endings
+  const normalized = markdown.replace(/\r\n/g, '\n');
+
   // Split on directive markers: :::type\n...\n:::
   // The \n? before closing ::: handles empty-body directives like :::quiz\n:::
-  const parts = markdown.split(/(:::[\w-]+\n[\s\S]*?\n?:::)/);
+  const parts = normalized.split(/(:::[\w-]+\n[\s\S]*?\n?:::)/);
 
   let diagramIdx = 0;
   let flowIdx = 0;
@@ -204,8 +207,11 @@ function parseContentBlocks(
 function parseNotes(notesMarkdown: string | null): NoteCard[] {
   if (!notesMarkdown) return [];
 
+  // Normalize \r\n → \n so split/regex works regardless of DB line endings
+  const normalized = notesMarkdown.replace(/\r\n/g, '\n');
+
   const cards: NoteCard[] = [];
-  const sections = notesMarkdown.split(/\n---\n/);
+  const sections = normalized.split(/\n---\n/);
 
   for (const section of sections) {
     const trimmed = section.trim();
