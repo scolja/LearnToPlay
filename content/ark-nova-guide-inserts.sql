@@ -199,7 +199,15 @@ If you have a **partner zoo** matching the animal''s continent, the cost is redu
 
 ### Animal Categories
 
-Animals belong to categories like [Bird]{.cat-bird}, [Herbivore]{.cat-herbivore}, [Predator]{.cat-predator}, [Primate]{.cat-primate}, [Reptile]{.cat-reptile}, [Bear]{.cat-bear}, and [Petting]{.cat-petting}. Categories matter for card conditions and conservation projects.',
+Animals belong to categories like [Bird]{.cat-bird}, [Herbivore]{.cat-herbivore}, [Predator]{.cat-predator}, [Primate]{.cat-primate}, [Reptile]{.cat-reptile}, [Bear]{.cat-bear}, and [Petting]{.cat-petting}. Categories matter for card conditions and conservation projects.
+
+### Releasing an Animal into the Wild
+
+Some card effects let you **release** an animal from your zoo. When you do, you lose Appeal equal to the animal''s printed value and must flip an occupied enclosure back to its empty side.
+
+:::callout-danger
+**ERRATA (Versions 1.0 & 1.1):** The original rules gave conflicting instructions for which enclosure to flip when releasing an animal vs. moving one to a special enclosure. The corrected rule: **flip the smallest occupied enclosure that meets ALL the animal''s requirements** (size, water, and rock adjacency). If no such enclosure exists, flip the smallest one that meets the size requirement alone. Source: Feuerland Spiele Official FAQ.
+:::',
 
 -- Notes
 '**[gold] Key Concept**
@@ -207,8 +215,8 @@ Animals are your primary source of Appeal points — they draw visitors to your 
 
 ---
 
-**[red] Common Mistake**
-The enclosure''s water/rock requirement is about adjacency to the *map spaces*, not artwork on tiles. Each water or rock icon on the card requires a separate adjacent water or rock hex touching the enclosure.
+**[red] ERRATA: Release into the Wild**
+The first two printings had inconsistent rules for flipping enclosures (glossary vs. rulebook). The corrected rule is: always flip the **smallest** occupied enclosure meeting all the animal''s requirements. This applies both to releasing AND to moving animals into special enclosures.
 
 ---
 
@@ -367,6 +375,10 @@ Your **Conservation** marker advances when you support conservation projects and
 
 :::callout
 **The Conservation track milestones are crucial.** Reaching space 2 lets you upgrade an action card — a game-changing improvement. Push for it early.
+:::
+
+:::callout-danger
+**ERRATA — Track Caps (Official FAQ):** The tracks have maximum values: **113 Appeal** and **41 Conservation Points**. You cannot exceed these limits. Any gains beyond the cap are lost.
 :::',
 
 -- Notes
@@ -417,7 +429,7 @@ Since there are five action cards but at most four upgrades, at least one card s
 
 - [BUILD]{.act-build} II — Build **multiple** different buildings per action (total size ≤ strength). Unlocks Reptile House and Large Bird Aviary. Can build on "II" spaces
 - [ANIMALS]{.act-animals} II — Play animals from the **display** (within reputation range). Gain +1 Reputation at strength 5+
-- [CARDS]{.act-cards} II — Draw from the display within reputation range. Snap at strength 3+ instead of 5+
+- [CARDS]{.act-cards} II — Draw from the display within reputation range **and/or** from the deck. Snap at strength 3+ instead of 5+. *(Note: some printed cards are missing the word "and" — the correct text is "within reputation range and/or from the Deck OR snap")*
 - [SPONSORS]{.act-sponsors} II — Play **multiple** sponsor cards (total levels ≤ strength + 1). Can play from display
 - [ASSOCIATION]{.act-association} II — Perform **multiple** different tasks. Can make donations. Can take 3rd/4th partner zoos
 
@@ -440,13 +452,13 @@ Upgrades are one of the most impactful moments in the game. A Level II card is d
 
 ---
 
-**[red] Common Mistake**
-Players sometimes forget that the X-token action still requires moving a card to slot 1. You don''t just "take a token" — you must choose and move an action card, which affects your card positions for future turns.
+**[red] ERRATA: Cards II Printed Text**
+Some printings of the Cards action card are missing the word "and" on the upgraded side. It should read: "Draw cards within reputation range **and/or** from the Deck OR snap." You CAN mix display and deck draws in one action.
 
 ---
 
-**[green] Strategy Tip**
-Upgrade your Association card first. It unlocks donations (pay money for conservation points), the 3rd partner zoo, and multiple tasks per action — all of which accelerate your conservation engine.',
+**[green] ERRATA: Upgrading Mid-Action**
+If you upgrade an action card *during* an action (e.g., from a conservation milestone), the improved abilities are NOT available until your next action. However, the card counts as improved immediately for meeting card conditions. Source: Official FAQ.',
 
 -- DisplayData
 NULL);
@@ -535,11 +547,20 @@ The highest score wins. Tiebreaker: most conservation projects supported (count 
 
 :::callout-danger
 **You can end the game with a negative score.** If your markers haven''t crossed, your score is negative. This is normal for first games — aim to cross those markers!
+:::
+
+:::callout-danger
+**ERRATA — New Scoring System (2023 Update):** Feuerland Spiele announced a revised scoring method that is now used on Board Game Arena and the digital version. Under the new system, Appeal and Conservation are **added together** (with conservation points weighted more heavily) instead of being subtracted via the crossing-markers method. The new scoring is mathematically equivalent to the original + 100 points. Your first 10 Conservation Points are each worth 2 VP; each point after 10 is worth 3 VP. The game-end trigger becomes reaching 100 VP. Physical copies still use the original crossing-markers system — check which version your group is using.
 :::',
 
 -- Notes
 '**[gold] Key Concept**
 The game ends when ONE player crosses their markers — but all other players get one more turn. If you''re behind, you still have a chance. If you''re ahead, triggering the end denies opponents additional turns.
+
+---
+
+**[red] ERRATA: New Scoring (Digital/BGA)**
+The publisher announced a revised scoring system in 2023. Appeal + weighted Conservation are added together (instead of subtracted). This is live on Board Game Arena and the digital app. Physical copies still use the original crossing-markers method. Both produce equivalent results — the new system is simply more intuitive.
 
 ---
 
