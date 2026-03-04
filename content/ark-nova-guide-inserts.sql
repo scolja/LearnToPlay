@@ -70,8 +70,8 @@ Think of it like a tug-of-war between spectacle and science. Your zoo needs both
 
 ---
 
-**[blue] If You Know Terraforming Mars...**
-The dual-track scoring is similar to how TR and VP interact in Terraforming Mars — you need to advance on multiple fronts simultaneously, and one track alone won''t win the game.
+**[blue] If You Know Rajas of the Ganges...**
+The dual-track scoring is directly inspired by Rajas of the Ganges — two markers race toward each other from opposite ends of the track. When they cross, the game ends. The further past each other they are, the higher the score.
 
 ---
 
@@ -91,7 +91,7 @@ VALUES (@S2, @GuideId, 2, 'Your Action Cards',
 
 The five actions are:
 
-- [CARDS]{.act-cards} — Draw new zoo cards into your hand
+- [CARDS]{.act-cards} — Draw new zoo cards into your hand (always advances the break token by 2). Higher strength lets you draw more cards and keep more of them. At strength 5+ you can "snap" any card from the display
 - [BUILD]{.act-build} — Construct enclosures and buildings on your zoo map
 - [ANIMALS]{.act-animals} — Place animal cards from your hand into enclosures
 - [ASSOCIATION]{.act-association} — Send workers to the association board
@@ -99,7 +99,7 @@ The five actions are:
 
 ### The Slide Mechanism
 
-After you use a card, it moves to **slot 1** (the weakest position). All other cards slide right to fill the gap, moving them into higher-numbered (stronger) slots.
+After you use a card, it moves to **slot 1** (the weakest position). Cards that were to its **left** slide right to fill the gap, moving them into higher-numbered (stronger) slots. Cards to the right stay where they are.
 
 :::flow
 :::
@@ -107,14 +107,14 @@ After you use a card, it moves to **slot 1** (the weakest position). All other c
 This means the longer you wait to use an action, the stronger it becomes. A [BUILD]{.act-build} card in slot 5 lets you build a size-5 enclosure. The same card in slot 1 only allows a size-1 building.
 
 :::callout
-**After using a card, move it to slot 1 and slide the rest right.** The card''s position determines its strength — not any printed number on the card.
+**After using a card, move it to slot 1. Cards that were to its left slide right into higher slots.** Cards to the right stay put. The card''s slot position determines its strength — not any printed number.
 :::
 
 You do not take turns in rounds. Players simply alternate taking one action at a time until the game ends.',
 
 -- Notes
 '**[gold] Position = Power**
-This is the heart of Ark Nova''s strategy. Every turn is a trade-off: use a weak action now, or wait for it to power up? But waiting means your other actions get weaker as they slide left.
+This is the heart of Ark Nova''s strategy. Every turn is a trade-off: use a weak action now, or wait for it to power up? Using one action pushes it to slot 1, but only the cards that were below it shift up. Cards already in higher slots stay strong.
 
 ---
 
@@ -122,7 +122,7 @@ This is the heart of Ark Nova''s strategy. Every turn is a trade-off: use a weak
 New players confuse action card "position" with "level." The position (1–5) changes every turn as cards slide. The level (I or II) is a permanent upgrade that unlocks better abilities. They are different things.',
 
 -- DisplayData
-'{"flows":[["Use a Card","It Goes to Slot 1","Others Slide Right","Strength Grows"]]}');
+'{"flows":[["Use a Card","Card Goes to Slot 1","Left Cards Fill Gap","Unused Grow"]]}');
 
 
 -- Section 3: Building Your Zoo
@@ -151,7 +151,7 @@ You **cannot** build on:
 
 ### Other Buildings
 
-- **Kiosks** (size 1) — Generate income during breaks: [1]{.money} for each unique adjacent building
+- **Kiosks** (size 1) — Generate income during breaks: [1]{.money} for each adjacent occupied enclosure, pavilion, special enclosure, or unique building
 - **Pavilions** (size 1) — Grant +1 Appeal immediately when built
 - **Petting Zoo** (size 3) — Houses only Petting Zoo animals. One per zoo
 
@@ -166,7 +166,7 @@ Players often forget that buildings must be adjacent to existing ones — your z
 ---
 
 **[green] Strategy Tip**
-Build kiosks early and surround them with different buildings. Each adjacent unique building type earns you [1]{.money} per break — this income adds up fast.',
+Build kiosks early and surround them with different buildings. Each adjacent occupied enclosure, pavilion, or building earns you [1]{.money} per break — this income adds up fast.',
 
 -- DisplayData
 NULL);
@@ -177,7 +177,7 @@ DECLARE @S4 UNIQUEIDENTIFIER = NEWID();
 INSERT INTO ltp.GuideSections (Id, GuideId, SortOrder, Title, Content, Notes, DisplayData, IsActive)
 VALUES (@S4, @GuideId, 4, 'Bringing in Animals',
 -- Content
-'The [ANIMALS]{.act-animals} action lets you play animal cards from your hand into your zoo. The action''s strength determines how many animals you can play in one turn.
+'The [ANIMALS]{.act-animals} action lets you play animal cards from your hand into your zoo. At strength 1, you cannot play any animal. At strength 2–4, you play up to 1 animal. At strength 5, you can play up to 2.
 
 ### Playing an Animal
 
@@ -297,7 +297,7 @@ When you gain a partner zoo, place it on your zoo map in the next empty partner 
 - A **continent icon** that counts toward conservation project conditions
 - A **cost reduction** of [3]{.money} for each matching continent icon when playing animal cards
 
-You can have up to 4 partner zoos (one per continent). The 3rd and 4th require your [ASSOCIATION]{.act-association} card to be upgraded to level II.
+You can have up to **4 partner zoos** (there are 5 continents, so you must choose which 4 to pursue). The 3rd and 4th require your [ASSOCIATION]{.act-association} card to be upgraded to level II.
 
 ### Universities
 
@@ -311,6 +311,10 @@ When you support a project, place one of your **player tokens** (from the left e
 
 :::callout
 **Workers return to your supply only during breaks** — not immediately after use. Plan your worker deployment carefully across multiple turns.
+:::
+
+:::callout-danger
+**Repeat-task penalty:** If you already have a worker on a task section, using it again before the next break costs **2 workers** instead of 1. At Association strength 1, you cannot perform any task.
 :::',
 
 -- Notes
@@ -492,7 +496,7 @@ Workers only return during breaks — not after you use them. If you deploy your
 You can strategically trigger breaks by using the Sponsors break alternative or the Cards action. Forcing a break when opponents have full hands (causing them to discard) or when your income is high is a strong play.',
 
 -- DisplayData
-'{"strip":[{"num":1,"label":"Discard"},{"num":2,"label":"Tokens"},{"num":3,"label":"Workers"},{"num":4,"label":"Replenish"},{"num":5,"label":"Display"},{"num":6,"label":"Income"},{"num":7,"label":"Reset"}]}');
+'{"strip":[{"num":1,"label":"Discard & Tokens"},{"num":2,"label":"Workers Return"},{"num":3,"label":"Refresh Display"},{"num":4,"label":"Income & Reset"}]}');
 
 
 -- Section 12: Game Arc & Endgame
@@ -659,7 +663,7 @@ VALUES
 
 (@GuideId, @S3, 'Build Action', 'Construct enclosures, kiosks, and pavilions on your zoo map. Action strength = maximum building size. Costs 2 money per space.', 'build enclosure construct', 'Actions', 6),
 
-(@GuideId, @S4, 'Cards Action', 'Draw new zoo cards from the deck or display. Always advances the break token by 2 spaces.', 'cards draw snap hand', 'Actions', 7),
+(@GuideId, @S2, 'Cards Action', 'Draw new zoo cards from the deck or display. Always advances the break token by 2 spaces.', 'cards draw snap hand', 'Actions', 7),
 
 (@GuideId, @S1, 'Conservation Points', 'One of the two scoring tracks. Gained by supporting conservation projects and making donations. Must cross with Appeal for a positive score.', 'conservation track score projects', 'Tracks', 8),
 
